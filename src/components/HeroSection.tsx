@@ -29,15 +29,15 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        {/* Background image positioned on the right - larger and no glow */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3/5 lg:w-1/2 h-full hidden lg:block">
+        {/* Background image positioned on the right - larger and more prominent */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-4/5 md:w-3/5 lg:w-3/5 xl:w-1/2 h-full hidden md:block">
           <img
             src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
             alt=""
-            className="w-full h-full object-cover object-center opacity-85"
+            className="w-full h-full object-cover object-center opacity-90"
             style={{
-              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)',
-              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)'
+              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 100%)'
             }}
           />
         </div>
@@ -78,7 +78,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right side - Mobile photo for smaller screens */}
-          <div className="relative lg:hidden flex items-center justify-center">
+          <div className="relative md:hidden flex items-center justify-center">
             <img
               src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
               alt="Zyad Wael"
