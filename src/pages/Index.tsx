@@ -1,12 +1,44 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Navigation from '@/components/Navigation';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
+import SkillsSection from '@/components/SkillsSection';
+import ProjectsSection from '@/components/ProjectsSection';
+import ArticlesSection from '@/components/ArticlesSection';
+import ContactSection from '@/components/ContactSection';
+import SocialLinks from '@/components/SocialLinks';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen relative">
+      {/* Navigation */}
+      <Navigation />
+      
+      {/* Social Links */}
+      <SocialLinks />
+      
+      {/* Main Content */}
+      <main className="relative">
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ArticlesSection />
+        <ContactSection />
+      </main>
+      
+      {/* Footer */}
+      <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
+        <div className="container mx-auto text-center">
+          <p className="text-gray-400 mb-4">
+            Built with <span className="text-flutter-light-blue">💙</span> Flutter spirit by{' '}
+            <span className="text-flutter-teal font-semibold">Zyad Wael</span>
+          </p>
+          <p className="text-sm text-gray-500">
+            Copyright © 2025. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'mono': ['JetBrains Mono', 'monospace'],
+				'sans': ['Inter', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +66,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				flutter: {
+					blue: '#0175C2',
+					'light-blue': '#13B9FD',
+					teal: '#02D39A',
+					purple: '#5C6BC0',
+					'dark-blue': '#0A0E27',
 				}
+			},
+			backgroundImage: {
+				'flutter-gradient': 'linear-gradient(135deg, #0175C2 0%, #13B9FD 50%, #02D39A 100%)',
+				'dark-gradient': 'linear-gradient(135deg, #0A0E27 0%, #1A1B3A 50%, #2D3561 100%)',
+				'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+			},
+			backdropBlur: {
+				xs: '2px',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +104,30 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
+				'glow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.5' }
+				},
+				'typing': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' }
+				},
+				'blink': {
+					'0%, 50%': { opacity: '1' },
+					'51%, 100%': { opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
+				'typing': 'typing 3.5s steps(40, end), blink 0.75s step-end infinite',
 			}
 		}
 	},
