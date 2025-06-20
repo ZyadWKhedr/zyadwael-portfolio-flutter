@@ -1,5 +1,5 @@
 
-import { Github, Linkedin, Facebook } from 'lucide-react';
+import { Github, Linkedin, Facebook, Mail } from 'lucide-react';
 
 const SocialLinks = () => {
   const socialLinks = [
@@ -27,9 +27,15 @@ const SocialLinks = () => {
     },
     {
       name: 'Facebook',
-      url: 'https://www.facebook.com/zyad.elbendary',
+      url: 'https://www.facebook.com/profile.php?id=61573995256480',
       icon: Facebook,
       color: 'hover:text-blue-500'
+    },
+    {
+      name: 'Email',
+      url: 'mailto:ziad.w.khedr@gmail.com',
+      icon: Mail,
+      color: 'hover:text-red-400'
     }
   ];
 

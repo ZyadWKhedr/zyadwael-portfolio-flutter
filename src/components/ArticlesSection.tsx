@@ -6,39 +6,39 @@ import { ExternalLink } from 'lucide-react';
 const ArticlesSection = () => {
   const articles = [
     {
-      title: "Overfitting vs Underfitting",
-      description: "Deep dive into model performance optimization and finding the perfect balance in machine learning.",
-      readTime: "5 min read",
-      category: "Machine Learning",
-      gradient: "from-blue-500 to-purple-500"
-    },
-    {
-      title: "Data Structures with Java",
-      description: "Comprehensive guide to implementing and understanding fundamental data structures using Java.",
-      readTime: "8 min read",
-      category: "Programming",
-      gradient: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Fuzzy Logic (with Code)",
-      description: "Practical implementation of fuzzy logic systems with real-world examples and code samples.",
-      readTime: "7 min read",
-      category: "AI & Logic",
-      gradient: "from-pink-500 to-red-500"
-    },
-    {
-      title: "Genetic Algorithms Simplified",
-      description: "Breaking down genetic algorithms into digestible concepts with practical applications.",
-      readTime: "6 min read",
-      category: "Algorithms",
-      gradient: "from-red-500 to-orange-500"
-    },
-    {
-      title: "Flutter Localization (L10n)",
-      description: "Complete guide to implementing internationalization in Flutter applications for global reach.",
+      title: "Flutter Localization: How to Build Apps That Speak Everyone's Language",
+      description: "Comprehensive guide to implementing internationalization in Flutter applications for global reach and multilingual support.",
       readTime: "10 min read",
       category: "Flutter",
       gradient: "from-flutter-blue to-flutter-teal"
+    },
+    {
+      title: "Clean Architecture in Flutter: Why Your Code Needs to Be Organized",
+      description: "Learn how to structure your Flutter applications using clean architecture principles for maintainable and scalable code.",
+      readTime: "8 min read",
+      category: "Architecture",
+      gradient: "from-blue-500 to-purple-500"
+    },
+    {
+      title: "Integrating Gemini AI Chat with Flutter using Riverpod, Clean Architecture, and Dependency Injection",
+      description: "Step-by-step guide to building AI-powered chat applications in Flutter with modern state management and architectural patterns.",
+      readTime: "12 min read",
+      category: "AI & Flutter",
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "Understanding Data Structures with Java",
+      description: "Comprehensive guide to implementing and understanding fundamental data structures using Java programming language.",
+      readTime: "8 min read",
+      category: "Programming",
+      gradient: "from-pink-500 to-red-500"
+    },
+    {
+      title: "Fuzzy Logic: How Machines Think in Shades of Gray",
+      description: "Exploring fuzzy logic systems and their practical applications in artificial intelligence and decision-making processes.",
+      readTime: "7 min read",
+      category: "AI & Logic",
+      gradient: "from-red-500 to-orange-500"
     }
   ];
 
