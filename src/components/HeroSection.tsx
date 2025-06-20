@@ -29,15 +29,15 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        {/* Background image positioned on the right */}
-        <div className="absolute right-0 top-0 h-full w-1/2 lg:w-2/5 hidden lg:block">
+        {/* Background image positioned on the right - larger and no glow */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3/5 lg:w-1/2 h-full hidden lg:block">
           <img
             src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
             alt=""
             className="w-full h-full object-cover object-center opacity-85"
             style={{
-              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)',
-              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)'
+              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)'
             }}
           />
         </div>
@@ -70,7 +70,7 @@ const HeroSection = () => {
 
             <Button 
               size="lg" 
-              className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-flutter-blue/25"
+              className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-8 py-4 text-lg hover:shadow-flutter-blue/25"
             >
               <Download className="mr-2 h-5 w-5" />
               Download My CV
