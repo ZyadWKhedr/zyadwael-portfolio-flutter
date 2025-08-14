@@ -5,7 +5,7 @@ const SocialLinks = () => {
   const socialLinks = [
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/zyad-wael-a9035a275',
+      url: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
       icon: Linkedin,
       color: 'hover:text-blue-400'
     },
