@@ -9,11 +9,35 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: "Socket AI Real Time Chat App",
+      description: "Real-time chat application with AI integration and Node.js backend",
+      technologies: ["Node.js", "Socket.io", "AI Integration", "Real-time"],
+      features: ["Live messaging", "AI responses", "Socket connections", "Scalable backend"],
+      gradient: "from-flutter-blue to-flutter-light-blue",
+      icon: "💬"
+    },
+    {
+      title: "Abo-Riyad Restaurant App",
+      description: "Feature-rich restaurant and food delivery app with clean architecture",
+      technologies: ["Flutter", "Clean Architecture", "Google Maps", "REST API"],
+      features: ["Figma to Flutter", "Delivery tracking", "Menu management", "Order system"],
+      gradient: "from-flutter-light-blue to-flutter-teal",
+      icon: "🍽️"
+    },
+    {
+      title: "Gesture Volume Control",
+      description: "Mobile app that adjusts phone volume using hand gestures captured by PC camera",
+      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Package"],
+      features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
+      gradient: "from-flutter-teal to-flutter-purple",
+      icon: "👋"
+    },
+    {
       title: "My Pharmacist App",
       description: "A comprehensive pharmacy management app with AI chat capabilities",
       technologies: ["Flutter", "Firebase Auth", "Gemini AI", "SQLite"],
       features: ["Google Sign-In", "AI-powered chat", "Local storage", "Clean Architecture"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
+      gradient: "from-flutter-purple to-flutter-blue",
       icon: "💊"
     },
     {
@@ -21,7 +45,7 @@ const ProjectsSection = () => {
       description: "AI-driven meal suggestions built during internship at Cellula",
       technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
       features: ["AI recommendations", "Trello workflow", "Team collaboration", "MVVM pattern"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
+      gradient: "from-flutter-blue to-flutter-light-blue",
       icon: "🍽️"
     },
     {
@@ -29,16 +53,8 @@ const ProjectsSection = () => {
       description: "Smart weather application with AI-driven safety insights",
       technologies: ["Flutter", "Weather API", "AI Integration", "Material Design"],
       features: ["Real-time weather", "Safety recommendations", "Location services", "Responsive UI"],
-      gradient: "from-flutter-teal to-flutter-purple",
+      gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "🌤️"
-    },
-    {
-      title: "To-Do & Notes Apps",
-      description: "Productivity apps with local storage and clean architecture",
-      technologies: ["Flutter", "Hive", "SQLite", "MVVM"],
-      features: ["Local storage", "Responsive design", "MVVM architecture", "Material UI"],
-      gradient: "from-flutter-purple to-flutter-blue",
-      icon: "📝"
     }
   ];
 
