@@ -9,6 +9,15 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: "Realtime Chat App",
+      description: "Real-time messaging application built with WebSocket technology",
+      technologies: ["WebSocket", "Socket.io", "JavaScript", "Real-time"],
+      features: ["Live messaging", "Real-time communication", "Socket connections", "Instant messaging"],
+      gradient: "from-flutter-blue to-flutter-light-blue",
+      icon: "💬",
+      githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
+    },
+    {
       title: "Socket AI Real Time Chat App",
       description: "Real-time chat application with AI integration and Node.js backend",
       technologies: ["Node.js", "Socket.io", "AI Integration", "Real-time"],
@@ -85,9 +94,16 @@ const ProjectsSection = () => {
                     {project.icon}
                   </div>
                   <div className="flex space-x-2">
-                    <Button size="icon" variant="ghost" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Github className="h-4 w-4" />
-                    </Button>
+                    {project.githubUrl && (
+                      <Button 
+                        size="icon" 
+                        variant="ghost" 
+                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                      >
+                        <Github className="h-4 w-4" />
+                      </Button>
+                    )}
                     <Button size="icon" variant="ghost" className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <ExternalLink className="h-4 w-4" />
                     </Button>
