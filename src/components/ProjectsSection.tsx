@@ -18,14 +18,6 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
-      title: "Socket AI Real Time Chat App",
-      description: "Real-time chat application with AI integration and Node.js backend",
-      technologies: ["Node.js", "Socket.io", "AI Integration", "Real-time"],
-      features: ["Live messaging", "AI responses", "Socket connections", "Scalable backend"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
-      icon: "💬"
-    },
-    {
       title: "Abo-Riyad Restaurant App",
       description: "Feature-rich restaurant and food delivery app with clean architecture",
       technologies: ["Flutter", "Clean Architecture", "Google Maps", "REST API"],
