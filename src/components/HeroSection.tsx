@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Download } from 'lucide-react';
 
 const HeroSection = () => {
@@ -29,17 +29,15 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        {/* Background image positioned on the right - larger and more prominent */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-4/5 md:w-3/5 lg:w-3/5 xl:w-1/2 h-full hidden md:block">
-          <img
-            src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
-            alt=""
-            className="w-full h-full object-cover object-center opacity-90"
-            style={{
-              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 100%)',
-              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 100%)'
-            }}
-          />
+        {/* Avatar positioned on the right - desktop */}
+        <div className="absolute right-20 top-1/2 transform -translate-y-1/2 hidden md:block">
+          <Avatar className="w-80 h-80 lg:w-96 lg:h-96 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
+            <AvatarImage 
+              src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
+              alt="Zyad Wael"
+              className="object-cover"
+            />
+          </Avatar>
         </div>
 
         {/* Content grid */}
@@ -78,17 +76,15 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Right side - Mobile photo for smaller screens */}
+          {/* Right side - Mobile avatar for smaller screens */}
           <div className="relative md:hidden flex items-center justify-center">
-            <img
-              src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
-              alt="Zyad Wael"
-              className="w-80 h-80 object-cover rounded-2xl opacity-90"
-              style={{
-                maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
-                WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
-              }}
-            />
+            <Avatar className="w-64 h-64 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
+              <AvatarImage 
+                src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
+                alt="Zyad Wael"
+                className="object-cover"
+              />
+            </Avatar>
           </div>
 
           {/* Spacer for desktop layout */}
