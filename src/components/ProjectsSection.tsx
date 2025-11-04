@@ -28,7 +28,8 @@ const ProjectsSection = () => {
       features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
       gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "🐦",
-      storeLinks: { appStore: "#", playStore: "#" }
+      storeLinks: { appStore: "#", playStore: "#" },
+      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
     },
     {
       title: "Amoomy – Transportation & Logistics",
