@@ -9,6 +9,42 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: "Wofoodi – Fuel & Services Locator",
+      description: "Live location tracking app for nearest fuel stations with real-time pricing",
+      technologies: ["Flutter", "Google Maps API", "Firebase Auth", "RESTful API"],
+      features: ["Live location tracking", "Route navigation", "Real-time fuel prices", "Offline caching"],
+      gradient: "from-flutter-blue to-flutter-light-blue",
+      icon: "⛽",
+      storeLinks: { appStore: "#", playStore: "#" }
+    },
+    {
+      title: "Flappy Bird Clone",
+      description: "High-performance game clone with monetization via Google AdMob",
+      technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
+      features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
+      gradient: "from-flutter-light-blue to-flutter-teal",
+      icon: "🐦",
+      storeLinks: { appStore: "#", playStore: "#" }
+    },
+    {
+      title: "Amoomy – Transportation & Logistics",
+      description: "Full-featured logistics app with multi-role authentication system",
+      technologies: ["Flutter", "Firebase Auth", "RESTful APIs", "Provider"],
+      features: ["Apple & Google sign-in", "Order management", "Provider scheduling", "Clean Architecture"],
+      gradient: "from-flutter-teal to-flutter-purple",
+      icon: "🚚",
+      storeLinks: { appStore: "#", playStore: "#" }
+    },
+    {
+      title: "Meal Recommendation App",
+      description: "AI-powered meal planner developed during internship at Cellula Technologies",
+      technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
+      features: ["Personalized meal plans", "Team collaboration", "Trello workflow", "API integration"],
+      gradient: "from-flutter-purple to-flutter-blue",
+      icon: "🍽️",
+      storeLinks: { playStore: "#" }
+    },
+    {
       title: "Realtime Chat App",
       description: "Real-time messaging application built with WebSocket technology",
       technologies: ["WebSocket", "Socket.io", "JavaScript", "Real-time"],
@@ -18,44 +54,12 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
-      title: "Abo-Riyad Restaurant App",
-      description: "Feature-rich restaurant and food delivery app with clean architecture",
-      technologies: ["Flutter", "Clean Architecture", "Google Maps", "REST API"],
-      features: ["Figma to Flutter", "Delivery tracking", "Menu management", "Order system"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "🍽️"
-    },
-    {
       title: "Gesture Volume Control",
-      description: "Mobile app that adjusts phone volume using hand gestures captured by PC camera",
-      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Package"],
+      description: "Innovative app controlling phone volume using hand gestures via PC camera",
+      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Custom Package"],
       features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
-      gradient: "from-flutter-teal to-flutter-purple",
-      icon: "👋"
-    },
-    {
-      title: "My Pharmacist App",
-      description: "A comprehensive pharmacy management app with AI chat capabilities",
-      technologies: ["Flutter", "Firebase Auth", "Gemini AI", "SQLite"],
-      features: ["Google Sign-In", "AI-powered chat", "Local storage", "Clean Architecture"],
-      gradient: "from-flutter-purple to-flutter-blue",
-      icon: "💊"
-    },
-    {
-      title: "Meal Recommendation App",
-      description: "AI-driven meal suggestions built during internship at Cellula",
-      technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
-      features: ["AI recommendations", "Trello workflow", "Team collaboration", "MVVM pattern"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
-      icon: "🍽️"
-    },
-    {
-      title: "Weather App",
-      description: "Smart weather application with AI-driven safety insights",
-      technologies: ["Flutter", "Weather API", "AI Integration", "Material Design"],
-      features: ["Real-time weather", "Safety recommendations", "Location services", "Responsive UI"],
       gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "🌤️"
+      icon: "👋"
     }
   ];
 

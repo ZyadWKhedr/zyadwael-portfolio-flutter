@@ -7,29 +7,29 @@ const SkillsSection = () => {
       skills: ["Dart", "Java", "Python"]
     },
     {
-      title: "Mobile Development",
+      title: "Frameworks & Libraries",
       color: "from-flutter-light-blue to-flutter-teal",
-      skills: ["Flutter", "Firebase", "Supabase", "SQLite", "Hive"]
+      skills: ["Flutter", "Flame Game Engine"]
     },
     {
-      title: "State Management & APIs",
+      title: "State Management",
       color: "from-flutter-teal to-flutter-purple",
-      skills: ["Riverpod", "Provider", "RESTful APIs"]
+      skills: ["Riverpod", "Provider"]
     },
     {
-      title: "Tools & Design",
+      title: "Databases & Backend",
       color: "from-flutter-purple to-flutter-blue",
-      skills: ["Git", "GitHub", "Figma to Flutter"]
+      skills: ["Firebase", "Supabase", "SQLite", "RESTful APIs"]
     },
     {
-      title: "Data Science",
+      title: "Version Control",
       color: "from-blue-500 to-purple-500",
-      skills: ["Pandas", "NumPy", "SVM", "Regression"]
+      skills: ["Git", "GitHub"]
     },
     {
-      title: "Analytics & Visualization",
+      title: "Other Skills",
       color: "from-purple-500 to-pink-500",
-      skills: ["Streamlit", "Power BI"]
+      skills: ["Machine Learning Integration", "Computer Vision", "Google Maps API", "Google AdMob"]
     }
   ];
 

@@ -24,13 +24,18 @@ const AboutSection = () => {
             </div>
 
             <div className="glass p-8 rounded-2xl">
-              <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student & Community Leader</h3>
+              <p className="text-gray-300 leading-relaxed mb-4">
                 Currently studying Data Science at{' '}
                 <span className="text-flutter-purple font-semibold">Alexandria University</span> with a passion for{' '}
                 <span className="text-flutter-purple font-semibold">AI-powered applications</span>.
                 I love exploring the intersection of mobile development and artificial intelligence.
               </p>
+              <div className="mt-4 space-y-2 text-sm text-gray-400">
+                <p>🎯 <span className="text-flutter-teal">Head of Flutter Committee</span> – HackerRank Campus Club, AUFS</p>
+                <p>📚 <span className="text-flutter-teal">Member of Academic Committee</span> – SAFWA, FCDS</p>
+                <p>💻 <span className="text-flutter-teal">Flutter Coordinator</span> – HackerRank Campus Club, AUFS</p>
+              </div>
             </div>
           </div>
 
