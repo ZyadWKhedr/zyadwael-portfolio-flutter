@@ -29,7 +29,7 @@ const SkillsSection = () => {
     {
       title: "Other Skills",
       color: "from-purple-500 to-pink-500",
-      skills: ["Machine Learning Integration", "Computer Vision", "Google Maps API", "Google AdMob"]
+      skills: ["Machine Learning Integration", "Computer Vision", "Google Maps API", "Google AdMob", "n8n Automation"]
     }
   ];
 
