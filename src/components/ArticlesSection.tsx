@@ -6,6 +6,22 @@ import { ExternalLink } from 'lucide-react';
 const ArticlesSection = () => {
   const articles = [
     {
+      title: "Demystifying Socket.IO: Real-Time Communication with Flutter & Riverpod",
+      description: "Deep dive into implementing real-time communication in Flutter applications using Socket.IO and Riverpod state management.",
+      readTime: "10 min read",
+      category: "Flutter",
+      gradient: "from-flutter-blue to-flutter-teal",
+      url: "https://medium.com/stackademic/demystifying-socket-io-real-time-communication-with-flutter-riverpod-ad942fec44c2"
+    },
+    {
+      title: "Building a Real-Time ASL Detection App with Computer Vision and Machine Learning",
+      description: "Complete guide to creating an American Sign Language detection application using computer vision and ML models.",
+      readTime: "12 min read",
+      category: "AI & ML",
+      gradient: "from-flutter-teal to-flutter-purple",
+      url: "https://medium.com/ai-in-plain-english/building-a-real-time-asl-detection-app-with-computer-vision-and-machine-learning-a5f93416b87f"
+    },
+    {
       title: "Flutter Localization: How to Build Apps That Speak Everyone's Language",
       description: "Comprehensive guide to implementing internationalization in Flutter applications for global reach and multilingual support.",
       readTime: "10 min read",
@@ -68,7 +84,7 @@ const ArticlesSection = () => {
             <Card
               key={article.title}
               className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer"
-              onClick={() => window.open('https://medium.com/@ziad.w.khedr', '_blank')}
+              onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
