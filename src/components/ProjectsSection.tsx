@@ -68,6 +68,18 @@ const ProjectsSection = () => {
       features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
       gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "👋"
+    },
+    {
+      title: "Raval – Clothes Shopping",
+      description: "E-commerce app for easy and fast clothing shopping with order tracking",
+      technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
+      features: ["Category filtering", "Smart cart", "Order tracking", "Real-time order status"],
+      gradient: "from-flutter-purple to-flutter-blue",
+      icon: "👕",
+      storeLinks: {
+        appStore: "https://apps.apple.com/us/app/raval/id6756228964",
+        playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
+      }
     }
   ];
 
