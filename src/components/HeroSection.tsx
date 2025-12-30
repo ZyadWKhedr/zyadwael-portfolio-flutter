@@ -32,8 +32,8 @@ const HeroSection = () => {
         {/* Avatar positioned on the right - desktop */}
         <div className="absolute right-20 top-1/2 transform -translate-y-1/2 hidden md:block">
           <Avatar className="w-80 h-80 lg:w-96 lg:h-96 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
-            <AvatarImage 
-              src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
+            <AvatarImage
+              src="lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
               alt="Zyad Wael"
               className="object-cover"
             />
@@ -66,10 +66,10 @@ const HeroSection = () => {
               <span className="text-flutter-purple font-semibold">AI</span>."
             </p>
 
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-8 py-4 text-lg hover:shadow-flutter-blue/25"
-              onClick={() => window.open('/Zyad_Wael_CV.pdf', '_blank')}
+              onClick={() => window.open('Zyad_Wael_CV.pdf', '_blank')}
             >
               <Download className="mr-2 h-5 w-5" />
               Download My CV
@@ -79,8 +79,8 @@ const HeroSection = () => {
           {/* Right side - Mobile avatar for smaller screens */}
           <div className="relative md:hidden flex items-center justify-center">
             <Avatar className="w-64 h-64 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
-              <AvatarImage 
-                src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
+              <AvatarImage
+                src="lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png"
                 alt="Zyad Wael"
                 className="object-cover"
               />
