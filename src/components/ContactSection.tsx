@@ -1,10 +1,10 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Send, Loader2 } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 import { toast } from 'sonner';
-import { supabase } from '@/integrations/supabase/client';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -12,27 +12,12 @@ const ContactSection = () => {
     email: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData,
-      });
-
-      if (error) throw error;
-
-      toast.success("Message sent! I'll get back to you soon.");
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error: any) {
-      console.error('Error sending message:', error);
-      toast.error('Failed to send message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Here you would typically send the form data to a backend
+    toast.success('Message sent! I\'ll get back to you soon.');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -153,20 +138,10 @@ const ContactSection = () => {
 
               <Button 
                 type="submit" 
-                disabled={isSubmitting}
                 className="w-full bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold py-3"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
-                  </>
-                )}
+                <Send className="mr-2 h-4 w-4" />
+                Send Message
               </Button>
             </form>
           </div>
