@@ -78,7 +78,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:shadow-flutter-blue/25"
-                onClick={() => window.open('/Zyad_Wael_CV.pdf', '_blank')}
+                onClick={() => window.open('https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link', '_blank')}
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download My CV
