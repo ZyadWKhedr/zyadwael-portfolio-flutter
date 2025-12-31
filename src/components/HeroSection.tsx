@@ -48,9 +48,14 @@ const HeroSection = () => {
           {/* Left side - Text content */}
           <div className="space-y-6 md:space-y-8 text-center md:text-left flex-1">
             <div className="space-y-3 md:space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-flutter-blue via-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
-                Zyad Wael
-              </h1>
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-flutter-blue via-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
+                  Zyad Wael
+                </h1>
+                <span className="px-3 py-1 text-xs md:text-sm font-semibold bg-flutter-teal/20 text-flutter-teal rounded-full border border-flutter-teal/30">
+                  +1 Year Experience
+                </span>
+              </div>
               <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light">
                 Flutter Developer | Data Science Student
               </h2>
