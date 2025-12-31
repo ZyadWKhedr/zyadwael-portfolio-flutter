@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Download } from 'lucide-react';
+import zyadProfile from '@/assets/zyad-profile.png';
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
@@ -33,7 +34,7 @@ const HeroSection = () => {
         <div className="absolute right-20 top-1/2 transform -translate-y-1/2 hidden md:block">
           <Avatar className="w-80 h-80 lg:w-96 lg:h-96 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
             <AvatarImage 
-              src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
+              src={zyadProfile} 
               alt="Zyad Wael"
               className="object-cover"
             />
@@ -79,11 +80,11 @@ const HeroSection = () => {
           {/* Right side - Mobile avatar for smaller screens */}
           <div className="relative md:hidden flex items-center justify-center">
             <Avatar className="w-64 h-64 border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
-              <AvatarImage 
-                src="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" 
-                alt="Zyad Wael"
-                className="object-cover"
-              />
+            <AvatarImage 
+              src={zyadProfile} 
+              alt="Zyad Wael"
+              className="object-cover"
+            />
             </Avatar>
           </div>
 
