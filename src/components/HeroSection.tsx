@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Download } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
+import RiveIcon from './RiveIcon';
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
@@ -24,9 +24,24 @@ const HeroSection = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 lg:px-8 pt-20 md:pt-0">
       {/* Floating background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-20 h-20 bg-flutter-blue/20 rounded-full animate-float blur-sm"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-flutter-teal/20 rounded-full animate-float delay-1000 blur-sm"></div>
-        <div className="absolute bottom-40 left-20 w-24 h-24 bg-flutter-purple/20 rounded-full animate-float delay-2000 blur-sm"></div>
+        <div className="absolute top-20 left-10 opacity-40">
+          <RiveIcon 
+            src="https://public.rive.app/community/runtime-files/1044-2062-rocket.riv"
+            className="w-24 h-24"
+          />
+        </div>
+        <div className="absolute top-40 right-20 opacity-40">
+          <RiveIcon 
+            src="https://public.rive.app/community/runtime-files/1187-2327-light-bulb.riv"
+            className="w-20 h-20"
+          />
+        </div>
+        <div className="absolute bottom-40 left-20 opacity-40">
+          <RiveIcon 
+            src="https://public.rive.app/community/runtime-files/4770-9445-animated-icon-loading.riv"
+            className="w-28 h-28"
+          />
+        </div>
       </div>
 
       <div className="container mx-auto relative z-10">
