@@ -10,8 +10,7 @@ const LoadingScreen = ({ onLoadingComplete, minDuration = 2500 }: LoadingScreenP
   const [isExiting, setIsExiting] = useState(false);
 
   const { RiveComponent } = useRive({
-    src: 'https://cdn.rive.app/animations/vehicles.riv',
-    stateMachines: 'bumpy',
+    src: 'https://public.rive.app/community/runtime-files/4770-9445-animated-icon-loading.riv',
     autoplay: true,
   });
 
