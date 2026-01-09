@@ -1,3 +1,4 @@
+import RiveIcon from './RiveIcon';
 
 const AboutSection = () => {
   return (
@@ -12,7 +13,13 @@ const AboutSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="glass p-8 rounded-2xl">
+            <div className="glass p-8 rounded-2xl relative overflow-hidden">
+              <div className="absolute top-4 right-4 opacity-60">
+                <RiveIcon 
+                  src="https://public.rive.app/community/runtime-files/2195-4346-avatar-pack-use-case.riv"
+                  className="w-16 h-16"
+                />
+              </div>
               <h3 className="text-2xl font-semibold text-flutter-light-blue mb-4">Flutter Developer</h3>
               <p className="text-gray-300 leading-relaxed">
                 Experienced in building cross-platform apps using{' '}
@@ -23,7 +30,13 @@ const AboutSection = () => {
               </p>
             </div>
 
-            <div className="glass p-8 rounded-2xl">
+            <div className="glass p-8 rounded-2xl relative overflow-hidden">
+              <div className="absolute top-4 right-4 opacity-60">
+                <RiveIcon 
+                  src="https://public.rive.app/community/runtime-files/1187-2327-light-bulb.riv"
+                  className="w-14 h-14"
+                />
+              </div>
               <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student & Community Leader</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
                 Currently studying Data Science at{' '}
@@ -39,7 +52,13 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <div className="glass p-8 rounded-2xl">
+          <div className="glass p-8 rounded-2xl relative overflow-hidden">
+            <div className="absolute top-4 right-4 opacity-60">
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/1044-2062-rocket.riv"
+                className="w-20 h-20"
+              />
+            </div>
             <h3 className="text-2xl font-semibold text-flutter-light-blue mb-6">My Mission</h3>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
               I build <span className="text-flutter-teal font-semibold">scalable</span> and{' '}

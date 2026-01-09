@@ -1,3 +1,4 @@
+import RiveIcon from './RiveIcon';
 
 const SkillsSection = () => {
   const skillCategories = [
@@ -71,23 +72,38 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Floating skill icons */}
+        {/* Floating Rive animations */}
         <div className="relative mt-16 h-32 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center space-x-8 animate-float">
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl">
-              📱
+          <div className="absolute inset-0 flex items-center justify-center space-x-8">
+            <div className="animate-float">
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/2244-4463-animated-send-button.riv"
+                className="w-16 h-16"
+              />
             </div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-500">
-              🔥
+            <div className="animate-float" style={{ animationDelay: '500ms' }}>
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/1044-2062-rocket.riv"
+                className="w-16 h-16"
+              />
             </div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-1000">
-              🚀
+            <div className="animate-float" style={{ animationDelay: '1000ms' }}>
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/1187-2327-light-bulb.riv"
+                className="w-16 h-16"
+              />
             </div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-1500">
-              💎
+            <div className="animate-float" style={{ animationDelay: '1500ms' }}>
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/2195-4346-avatar-pack-use-case.riv"
+                className="w-16 h-16"
+              />
             </div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-2000">
-              🎯
+            <div className="animate-float" style={{ animationDelay: '2000ms' }}>
+              <RiveIcon 
+                src="https://public.rive.app/community/runtime-files/4770-9445-animated-icon-loading.riv"
+                className="w-16 h-16"
+              />
             </div>
           </div>
         </div>

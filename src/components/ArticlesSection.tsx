@@ -1,7 +1,7 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
+import RiveIcon from './RiveIcon';
 
 const ArticlesSection = () => {
   const articles = [
@@ -61,8 +61,14 @@ const ArticlesSection = () => {
   return (
     <section id="articles" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
+        <div className="text-center mb-16 relative">
+          <div className="absolute left-1/2 -translate-x-1/2 -top-4 opacity-50">
+            <RiveIcon 
+              src="https://public.rive.app/community/runtime-files/1187-2327-light-bulb.riv"
+              className="w-20 h-20"
+            />
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6 pt-12">
             Medium Articles
           </h2>
           <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
@@ -71,10 +77,10 @@ const ArticlesSection = () => {
           </p>
           <Button 
             variant="outline" 
-            className="mt-6 border-flutter-blue text-flutter-blue hover:bg-flutter-blue hover:text-white"
+            className="mt-6 border-flutter-blue text-flutter-blue hover:bg-flutter-blue hover:text-white group"
             onClick={() => window.open('https://medium.com/@ziad.w.khedr', '_blank')}
           >
-            <ExternalLink className="mr-2 h-4 w-4" />
+            <ExternalLink className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
             View All Articles
           </Button>
         </div>
@@ -83,9 +89,18 @@ const ArticlesSection = () => {
           {articles.map((article, index) => (
             <Card
               key={article.title}
-              className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer"
+              className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer relative overflow-hidden"
               onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
             >
+              {index === 0 && (
+                <div className="absolute top-2 right-2 opacity-40">
+                  <RiveIcon 
+                    src="https://public.rive.app/community/runtime-files/1044-2062-rocket.riv"
+                    className="w-12 h-12"
+                    playOnHover
+                  />
+                </div>
+              )}
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
@@ -109,7 +124,7 @@ const ArticlesSection = () => {
                     </div>
                     <span className="text-sm text-gray-400">Zyad Wael</span>
                   </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-flutter-light-blue transition-colors" />
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-flutter-light-blue group-hover:rotate-12 transition-all" />
                 </div>
               </CardContent>
             </Card>
