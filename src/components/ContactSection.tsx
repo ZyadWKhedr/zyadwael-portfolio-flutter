@@ -5,7 +5,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Mail, Send, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import RiveIcon from './RiveIcon';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -46,14 +45,8 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
-        <div className="text-center mb-16 relative">
-          <div className="absolute left-1/2 -translate-x-1/2 -top-4 opacity-50">
-            <RiveIcon 
-              src="https://public.rive.app/community/runtime-files/2244-4463-animated-send-button.riv"
-              className="w-20 h-20"
-            />
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6 pt-12">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
             Let's Build Together
           </h2>
           <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
@@ -65,13 +58,7 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="glass p-8 rounded-2xl relative overflow-hidden">
-              <div className="absolute top-4 right-4 opacity-50">
-                <RiveIcon 
-                  src="https://public.rive.app/community/runtime-files/2195-4346-avatar-pack-use-case.riv"
-                  className="w-14 h-14"
-                />
-              </div>
+            <div className="glass p-8 rounded-2xl">
               <h3 className="text-2xl font-semibold text-flutter-light-blue mb-6">Get In Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
@@ -91,13 +78,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="glass p-8 rounded-2xl relative overflow-hidden">
-              <div className="absolute top-4 right-4 opacity-50">
-                <RiveIcon 
-                  src="https://public.rive.app/community/runtime-files/1044-2062-rocket.riv"
-                  className="w-14 h-14"
-                />
-              </div>
+            <div className="glass p-8 rounded-2xl">
               <h3 className="text-xl font-semibold text-flutter-teal mb-4">What I Can Help With</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
@@ -121,13 +102,7 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="glass p-8 rounded-2xl relative overflow-hidden">
-            <div className="absolute top-4 right-4 opacity-40">
-              <RiveIcon 
-                src="https://public.rive.app/community/runtime-files/1187-2327-light-bulb.riv"
-                className="w-16 h-16"
-              />
-            </div>
+          <div className="glass p-8 rounded-2xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -179,7 +154,7 @@ const ContactSection = () => {
               <Button 
                 type="submit" 
                 disabled={isLoading}
-                className="w-full bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold py-3 disabled:opacity-50 disabled:hover:scale-100 group"
+                className="w-full bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold py-3 disabled:opacity-50 disabled:hover:scale-100"
               >
                 {isLoading ? (
                   <>
@@ -188,7 +163,7 @@ const ContactSection = () => {
                   </>
                 ) : (
                   <>
-                    <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <Send className="mr-2 h-4 w-4" />
                     Send Message
                   </>
                 )}
