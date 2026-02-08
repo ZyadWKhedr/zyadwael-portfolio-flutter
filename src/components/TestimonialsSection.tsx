@@ -4,11 +4,12 @@ import { Quote } from 'lucide-react';
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Add Name",
-      role: "Role / Position",
-      company: "Company Name",
-      quote: "Add your testimonial quote here. This could be a LinkedIn recommendation or a brief endorsement from a coworker, mentor, or client.",
-      avatar: "👤"
+      name: "Ali Khaled",
+      role: "UI/UX Designer",
+      company: "Xperience Software Solutions",
+      quote: "Working with Zyad has been a pleasure — his Flutter development skills are impressive, and he consistently delivers clean, maintainable, and well-structured code. His attention to detail and dedication to creating intuitive user experiences make collaboration seamless. I highly recommend him for any mobile app or software project.",
+      avatar: "👨‍💻",
+      linkedIn: "https://www.linkedin.com/in/alikhaled19/"
     },
     {
       name: "Add Name",
@@ -57,7 +58,10 @@ const TestimonialsSection = () => {
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4">
+                <div 
+                  className={`flex items-center gap-4 ${testimonial.linkedIn ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                  onClick={() => testimonial.linkedIn && window.open(testimonial.linkedIn, '_blank')}
+                >
                   <div className="text-3xl p-2 rounded-full bg-gradient-to-r from-flutter-blue to-flutter-teal bg-opacity-20">
                     {testimonial.avatar}
                   </div>
