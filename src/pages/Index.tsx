@@ -5,6 +5,7 @@ import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import PackagesSection from '@/components/PackagesSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
@@ -25,6 +26,7 @@ const Index = () => {
         <SkillsSection />
         <ProjectsSection />
         <PackagesSection />
+        <TestimonialsSection />
         <ArticlesSection />
         <ContactSection />
       </main>
