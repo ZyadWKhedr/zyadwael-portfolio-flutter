@@ -78,6 +78,14 @@ const ProjectsSection = () => {
       icon: "♟️"
     },
     {
+      title: "MazoMirror Photobooth",
+      description: "Desktop photobooth app with interactive filters and high-quality photo capture",
+      technologies: ["Flutter Desktop", "Multimedia", "Cross-platform", "Image Processing"],
+      features: ["Photo capture", "Interactive filters", "Real-time effects", "Intuitive UI"],
+      gradient: "from-flutter-blue to-flutter-purple",
+      icon: "📸"
+    },
+    {
       title: "Raval – Clothes Shopping",
       description: "E-commerce app for easy and fast clothing shopping with order tracking",
       technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
