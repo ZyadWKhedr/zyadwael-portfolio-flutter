@@ -70,6 +70,14 @@ const ProjectsSection = () => {
       icon: "👋"
     },
     {
+      title: "Grandmaster Chess",
+      description: "Professional tournament-style chess app with complete rules and move validation",
+      technologies: ["Flutter", "Clean Architecture", "Game Logic", "State Management"],
+      features: ["Move validation", "Check/checkmate detection", "Real-time board updates", "Tournament-style UI"],
+      gradient: "from-flutter-teal to-flutter-purple",
+      icon: "♟️"
+    },
+    {
       title: "Raval – Clothes Shopping",
       description: "E-commerce app for easy and fast clothing shopping with order tracking",
       technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
