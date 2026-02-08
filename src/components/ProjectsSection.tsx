@@ -9,6 +9,7 @@ const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const projects = [
+    // Live on App Store & Play Store
     {
       title: "Wofoodi – Fuel & Services Locator",
       description: "Live location tracking app for nearest fuel stations with real-time pricing",
@@ -20,16 +21,6 @@ const ProjectsSection = () => {
         appStore: "https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551", 
         playStore: "https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en" 
       }
-    },
-    {
-      title: "Flappy Bird Clone",
-      description: "High-performance game clone with monetization via Google AdMob",
-      technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
-      features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "🐦",
-      storeLinks: { appStore: "#", playStore: "#" },
-      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
     },
     {
       title: "Amoomy – Transportation & Logistics",
@@ -44,31 +35,18 @@ const ProjectsSection = () => {
       }
     },
     {
-      title: "Meal Recommendation App",
-      description: "AI-powered meal planner developed during internship at Cellula Technologies",
-      technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
-      features: ["Personalized meal plans", "Team collaboration", "Trello workflow", "API integration"],
+      title: "Raval – Clothes Shopping",
+      description: "E-commerce app for easy and fast clothing shopping with order tracking",
+      technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
+      features: ["Category filtering", "Smart cart", "Order tracking", "Real-time order status"],
       gradient: "from-flutter-purple to-flutter-blue",
-      icon: "🍽️",
-      storeLinks: { playStore: "#" }
+      icon: "👕",
+      storeLinks: {
+        appStore: "https://apps.apple.com/us/app/raval/id6756228964",
+        playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
+      }
     },
-    {
-      title: "Realtime Chat App",
-      description: "Real-time messaging application built with WebSocket technology",
-      technologies: ["WebSocket", "Socket.io", "JavaScript", "Real-time"],
-      features: ["Live messaging", "Real-time communication", "Socket connections", "Instant messaging"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
-      icon: "💬",
-      githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
-    },
-    {
-      title: "Gesture Volume Control",
-      description: "Innovative app controlling phone volume using hand gestures via PC camera",
-      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Custom Package"],
-      features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "👋"
-    },
+    // Complex technical projects
     {
       title: "Grandmaster Chess",
       description: "Professional tournament-style chess app with complete rules and move validation",
@@ -86,16 +64,39 @@ const ProjectsSection = () => {
       icon: "📸"
     },
     {
-      title: "Raval – Clothes Shopping",
-      description: "E-commerce app for easy and fast clothing shopping with order tracking",
-      technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
-      features: ["Category filtering", "Smart cart", "Order tracking", "Real-time order status"],
+      title: "Gesture Volume Control",
+      description: "Innovative app controlling phone volume using hand gestures via PC camera",
+      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Custom Package"],
+      features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
+      gradient: "from-flutter-light-blue to-flutter-teal",
+      icon: "👋"
+    },
+    // AI & Real-time projects
+    {
+      title: "Meal Recommendation App",
+      description: "AI-powered meal planner developed during internship at Cellula Technologies",
+      technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
+      features: ["Personalized meal plans", "Team collaboration", "Trello workflow", "API integration"],
       gradient: "from-flutter-purple to-flutter-blue",
-      icon: "👕",
-      storeLinks: {
-        appStore: "https://apps.apple.com/us/app/raval/id6756228964",
-        playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
-      }
+      icon: "🍽️"
+    },
+    {
+      title: "Realtime Chat App",
+      description: "Real-time messaging application built with WebSocket technology",
+      technologies: ["WebSocket", "Socket.io", "JavaScript", "Real-time"],
+      features: ["Live messaging", "Real-time communication", "Socket connections", "Instant messaging"],
+      gradient: "from-flutter-blue to-flutter-light-blue",
+      icon: "💬",
+      githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
+    },
+    {
+      title: "Flappy Bird Clone",
+      description: "High-performance game clone with monetization via Google AdMob",
+      technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
+      features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
+      gradient: "from-flutter-light-blue to-flutter-teal",
+      icon: "🐦",
+      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
     }
   ];
 
