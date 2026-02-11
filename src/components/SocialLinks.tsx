@@ -26,6 +26,16 @@ const SocialLinks = () => {
       color: 'hover:text-green-400'
     },
     {
+      name: 'Stack Overflow',
+      url: 'https://stackoverflow.com/users/24248795/zyad-wael-khedr',
+      icon: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+          <path d="M15 21H3v-8h2v6h10v-6h2v8zm-1.36-9.82l-1.13-1.48 6.27-4.79 1.13 1.48-6.27 4.79zm1.45 4.56L5.82 15l.27-1.97 9.27.74-.27 1.97zm.72-3.26l-8.98-2.1.46-1.93 8.98 2.1-.46 1.93zm1.81-3.39L10.4 5.18l.96-1.76 7.22 3.92-.96 1.75z"/>
+        </svg>
+      ),
+      color: 'hover:text-orange-400'
+    },
+    {
       name: 'Facebook',
       url: 'https://www.facebook.com/profile.php?id=61573995256480',
       icon: Facebook,
