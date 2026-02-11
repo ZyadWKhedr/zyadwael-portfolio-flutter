@@ -12,18 +12,20 @@ const TestimonialsSection = () => {
       linkedIn: "https://www.linkedin.com/in/alikhaled19/"
     },
     {
-      name: "Mohamed Hassan",
-      role: "Senior Software Engineer",
-      company: "TechVision Labs",
-      quote: "Zyad is one of the most talented Flutter developers I've worked with. His ability to translate complex UI designs into pixel-perfect, performant mobile apps is remarkable. He's a great team player who always goes the extra mile.",
-      avatar: "🧑‍💻"
+      name: "Ahmed Abd Alaziz",
+      role: "Flutter Developer",
+      company: "ZeroOneZ",
+      quote: "I had the pleasure of working with Ziad, and he is a dedicated and reliable professional. He is highly motivated, open to new ideas, and approaches challenges with a positive and flexible mindset. He is also a great team player and a pleasure to work with. I highly recommend him.",
+      avatar: "👨‍💻",
+      linkedIn: "https://www.linkedin.com/in/ahmed-abd-alaziz/"
     },
     {
-      name: "Sarah Ahmed",
-      role: "Project Manager",
-      company: "Digital Solutions Co.",
-      quote: "Zyad's technical expertise combined with his excellent communication skills made our project a huge success. He delivered ahead of schedule and the quality of his code exceeded our expectations. Would absolutely work with him again.",
-      avatar: "👩‍💼"
+      name: "Karim Balbaa",
+      role: "Head of Cyber Security Committee",
+      company: "HackerRank Campus Club",
+      quote: "Zyad consistently demonstrates exceptional technical skills and a strong ability to solve complex problems. His deep understanding of Flutter and mobile app development, combined with his creative approach, makes him a highly valuable asset to any team. Beyond his technical expertise, Zyad is a smart and quick learner who adapts to new challenges effortlessly.",
+      avatar: "🛡️",
+      linkedIn: "https://www.linkedin.com/in/karim-balbaa/"
     }
   ];
 
