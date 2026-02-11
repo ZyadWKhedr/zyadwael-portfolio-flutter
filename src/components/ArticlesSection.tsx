@@ -50,6 +50,14 @@ const ArticlesSection = () => {
       gradient: "from-pink-500 to-red-500"
     },
     {
+      title: "Software Craftsmanship: A Guide to Design Patterns in Dart & Flutter",
+      description: "A comprehensive guide to understanding and implementing design patterns in Dart and Flutter for writing clean, maintainable, and scalable code.",
+      readTime: "10 min read",
+      category: "Flutter",
+      gradient: "from-flutter-blue to-flutter-purple",
+      url: "https://medium.com/@ziad.w.khedr/software-craftsmanship-a-guide-to-design-patterns-in-dart-flutter-6011cb0f1b12"
+    },
+    {
       title: "Fuzzy Logic: How Machines Think in Shades of Gray",
       description: "Exploring fuzzy logic systems and their practical applications in artificial intelligence and decision-making processes.",
       readTime: "7 min read",
