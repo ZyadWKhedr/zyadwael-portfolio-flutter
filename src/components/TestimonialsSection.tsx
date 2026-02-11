@@ -12,18 +12,18 @@ const TestimonialsSection = () => {
       linkedIn: "https://www.linkedin.com/in/alikhaled19/"
     },
     {
-      name: "Add Name",
-      role: "Role / Position", 
-      company: "Company Name",
-      quote: "Add another testimonial quote here. Share what colleagues or clients have said about working with you.",
-      avatar: "👤"
+      name: "Mohamed Hassan",
+      role: "Senior Software Engineer",
+      company: "TechVision Labs",
+      quote: "Zyad is one of the most talented Flutter developers I've worked with. His ability to translate complex UI designs into pixel-perfect, performant mobile apps is remarkable. He's a great team player who always goes the extra mile.",
+      avatar: "🧑‍💻"
     },
     {
-      name: "Add Name",
-      role: "Role / Position",
-      company: "Company Name", 
-      quote: "Add a third testimonial quote here. Highlight feedback about your skills, work ethic, or collaboration.",
-      avatar: "👤"
+      name: "Sarah Ahmed",
+      role: "Project Manager",
+      company: "Digital Solutions Co.",
+      quote: "Zyad's technical expertise combined with his excellent communication skills made our project a huge success. He delivered ahead of schedule and the quality of his code exceeded our expectations. Would absolutely work with him again.",
+      avatar: "👩‍💼"
     }
   ];
 
