@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Share2, Check } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +42,31 @@ const Navigation = () => {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Zyad Wael - Portfolio',
+      text: 'Check out Zyad Wael\'s portfolio!',
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // User cancelled or error
+      }
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success('Link copied to clipboard!');
+    }
+  };
+
   return (
     <>
       {/* Desktop Navigation */}
       <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 hidden lg:block">
         <div className="glass px-8 py-4 rounded-full">
-          <ul className="flex space-x-8">
+          <ul className="flex items-center space-x-8">
             {navItems.map((item) => (
               <li key={item.name}>
                 <button
@@ -61,6 +81,15 @@ const Navigation = () => {
                 </button>
               </li>
             ))}
+            <li>
+              <button
+                onClick={handleShare}
+                className="text-gray-400 hover:text-flutter-light-blue transition-all duration-300"
+                title="Share portfolio"
+              >
+                <Share2 className="h-4 w-4" />
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
@@ -93,6 +122,15 @@ const Navigation = () => {
                     </button>
                   </li>
                 ))}
+                <li>
+                  <button
+                    onClick={handleShare}
+                    className="flex items-center gap-2 text-lg font-medium text-gray-400 hover:text-flutter-light-blue transition-all duration-300"
+                  >
+                    <Share2 className="h-5 w-5" />
+                    Share
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
