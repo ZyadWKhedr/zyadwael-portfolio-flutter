@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
+import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
 
 const ArticlesSection = () => {
   const articles = [
@@ -69,58 +70,59 @@ const ArticlesSection = () => {
   return (
     <section id="articles" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
             Medium Articles
           </h2>
           <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
-          <p className="text-gray-400 mt-6 text-lg">
+          <p className="text-muted-foreground mt-6 text-lg">
             Sharing knowledge through technical writing
           </p>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="mt-6 border-flutter-blue text-flutter-blue hover:bg-flutter-blue hover:text-white"
             onClick={() => window.open('https://medium.com/@ziad.w.khedr', '_blank')}
           >
             <ExternalLink className="mr-2 h-4 w-4" />
             View All Articles
           </Button>
-        </div>
+        </AnimatedSection>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article, index) => (
-            <Card
-              key={article.title}
-              className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer"
-              onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
-                    {article.category}
-                  </span>
-                  <span className="text-xs text-gray-400">{article.readTime}</span>
-                </div>
-                <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors">
-                  {article.title}
-                </CardTitle>
-                <CardDescription className="text-gray-300 line-clamp-3">
-                  {article.description}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
-                      <span className="text-xs font-bold text-white">ZW</span>
-                    </div>
-                    <span className="text-sm text-gray-400">Zyad Wael</span>
+            <AnimatedItem key={article.title} delay={index * 0.06}>
+              <Card
+                className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full"
+                onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
+              >
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
+                      {article.category}
+                    </span>
+                    <span className="text-xs text-foreground/50">{article.readTime}</span>
                   </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-flutter-light-blue transition-colors" />
-                </div>
-              </CardContent>
-            </Card>
+                  <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors">
+                    {article.title}
+                  </CardTitle>
+                  <CardDescription className="text-foreground/70 line-clamp-3">
+                    {article.description}
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">ZW</span>
+                      </div>
+                      <span className="text-sm text-foreground/60">Zyad Wael</span>
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-foreground/40 group-hover:text-flutter-light-blue transition-colors" />
+                  </div>
+                </CardContent>
+              </Card>
+            </AnimatedItem>
           ))}
         </div>
       </div>
