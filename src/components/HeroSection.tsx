@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Download } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
 
@@ -30,24 +31,29 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        {/* Content grid */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-          {/* Mobile avatar - shows first on mobile */}
-          <div className="md:hidden flex items-center justify-center mb-4">
+          {/* Mobile avatar */}
+          <motion.div
+            className="md:hidden flex items-center justify-center mb-4"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+          >
             <div className="relative">
               <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
-                <img 
-                  src={zyadProfile} 
-                  alt="Zyad Wael"
-                  className="w-full h-full object-cover object-top scale-125"
-                />
+                <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-125" />
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Left side - Text content */}
           <div className="space-y-6 md:space-y-8 text-center md:text-left flex-1">
-            <div className="space-y-3 md:space-y-4">
+            <motion.div
+              className="space-y-3 md:space-y-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+            >
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-flutter-blue via-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
                   Zyad Wael
@@ -59,45 +65,60 @@ const HeroSection = () => {
               <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light">
                 Flutter Developer | Data Science Student
               </h2>
-            </div>
+            </motion.div>
 
-            {/* Typing animation for skills */}
-            <div className="h-12 md:h-16 flex items-center justify-center md:justify-start">
+            <motion.div
+              className="h-12 md:h-16 flex items-center justify-center md:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
+            >
               <p className="text-base md:text-lg lg:text-xl font-mono text-flutter-light-blue transition-all duration-500">
                 {skills[currentSkill]}
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-400 leading-relaxed px-2 md:px-0">
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl text-gray-400 leading-relaxed px-2 md:px-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
+            >
               "Bridging App Performance & Intelligence with{' '}
               <span className="text-flutter-teal font-semibold">Flutter</span> and{' '}
               <span className="text-flutter-purple font-semibold">AI</span>."
-            </p>
+            </motion.p>
 
-            <div className="flex justify-center md:justify-start">
-              <Button 
-                size="lg" 
+            <motion.div
+              className="flex justify-center md:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.65 }}
+            >
+              <Button
+                size="lg"
                 className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:shadow-flutter-blue/25"
                 onClick={() => window.open('https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link', '_blank')}
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download My CV
               </Button>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right side - Desktop avatar */}
-          <div className="hidden md:flex items-center justify-center flex-shrink-0">
+          <motion.div
+            className="hidden md:flex items-center justify-center flex-shrink-0"
+            initial={{ opacity: 0, scale: 0.8, x: 40 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+          >
             <div className="relative">
               <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
-                <img 
-                  src={zyadProfile} 
-                  alt="Zyad Wael"
-                  className="w-full h-full object-cover object-top scale-110"
-                />
+                <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-110" />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
