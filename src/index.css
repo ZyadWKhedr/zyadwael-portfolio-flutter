@@ -55,8 +55,12 @@
 
   body {
     @apply bg-dark-gradient text-foreground font-sans;
-    background: linear-gradient(135deg, #0D0B2E 0%, #1A1040 40%, #2A1A4E 70%, #0D0B2E 100%);
+    background: linear-gradient(135deg, #0A0E27 0%, #1A1B3A 50%, #2D3561 100%);
     background-attachment: fixed;
+  }
+
+  body.ramadan-theme {
+    background: linear-gradient(135deg, #0D0B2E 0%, #1A1040 40%, #2A1A4E 70%, #0D0B2E 100%);
   }
 
   /* Glassmorphism utility classes */
@@ -87,11 +91,19 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #D4A017, #F0C040);
+    background: linear-gradient(135deg, #0175C2, #13B9FD);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #13B9FD, #02D39A);
+  }
+
+  body.ramadan-theme ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #D4A017, #F0C040);
+  }
+
+  body.ramadan-theme ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #F0C040, #FFD700);
   }
 }

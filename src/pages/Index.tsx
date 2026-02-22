@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -9,13 +10,24 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
-import RamadanDecorations from '@/components/RamadanDecorations';
+import RamadanDecorations, { isRamadan } from '@/components/RamadanDecorations';
 import RamadanBanner from '@/components/RamadanBanner';
 
 const Index = () => {
+  const ramadan = isRamadan();
+
+  useEffect(() => {
+    if (ramadan) {
+      document.body.classList.add('ramadan-theme');
+    } else {
+      document.body.classList.remove('ramadan-theme');
+    }
+    return () => document.body.classList.remove('ramadan-theme');
+  }, [ramadan]);
+
   return (
     <div className="min-h-screen relative">
-      {/* Ramadan Decorations */}
+      {/* Ramadan Decorations — only render during Ramadan */}
       <RamadanDecorations />
       <RamadanBanner />
 
@@ -40,12 +52,19 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
         <div className="container mx-auto text-center">
-          <p className="text-ramadan-gold/60 mb-4">
-            ✦ رمضان كريم ✦
-          </p>
+          {ramadan && (
+            <p className="text-ramadan-gold/60 mb-4">
+              ✦ رمضان كريم ✦
+            </p>
+          )}
           <p className="text-gray-400 mb-4">
-            Built with <span className="text-ramadan-gold">🌙</span> by{' '}
-            <span className="text-ramadan-amber font-semibold">Zyad Wael</span>
+            {ramadan ? (
+              <>Built with <span className="text-ramadan-gold">🌙</span> by{' '}
+              <span className="text-ramadan-amber font-semibold">Zyad Wael</span></>
+            ) : (
+              <>Built with <span className="text-flutter-light-blue">💙</span> Flutter spirit by{' '}
+              <span className="text-flutter-teal font-semibold">Zyad Wael</span></>
+            )}
           </p>
           <p className="text-sm text-gray-500">
             Copyright © 2025. All rights reserved.
