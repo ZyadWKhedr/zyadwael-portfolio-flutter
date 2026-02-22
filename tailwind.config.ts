@@ -73,6 +73,13 @@ export default {
 					teal: '#02D39A',
 					purple: '#5C6BC0',
 					'dark-blue': '#0A0E27',
+				},
+				ramadan: {
+					gold: '#D4A017',
+					amber: '#F0C040',
+					deep: '#0D0B2E',
+					plum: '#2A1A4E',
+					'warm-glow': '#FFD700',
 				}
 			},
 			backgroundImage: {
