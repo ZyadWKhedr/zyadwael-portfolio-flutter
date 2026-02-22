@@ -25,9 +25,9 @@ const HeroSection = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 lg:px-8 pt-20 md:pt-0">
       {/* Floating background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-20 h-20 bg-flutter-blue/20 rounded-full animate-float blur-sm"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-flutter-teal/20 rounded-full animate-float delay-1000 blur-sm"></div>
-        <div className="absolute bottom-40 left-20 w-24 h-24 bg-flutter-purple/20 rounded-full animate-float delay-2000 blur-sm"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-ramadan-gold/20 rounded-full animate-float blur-sm"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-ramadan-amber/20 rounded-full animate-float delay-1000 blur-sm"></div>
+        <div className="absolute bottom-40 left-20 w-24 h-24 bg-ramadan-plum/30 rounded-full animate-float delay-2000 blur-sm"></div>
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -40,7 +40,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
           >
             <div className="relative">
-              <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
+                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-ramadan-gold/30 shadow-2xl shadow-ramadan-gold/20">
                 <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-125" />
               </div>
             </div>
@@ -55,10 +55,10 @@ const HeroSection = () => {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
             >
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-flutter-blue via-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-ramadan-gold via-ramadan-amber to-ramadan-warm-glow bg-clip-text text-transparent">
                   Zyad Wael
                 </h1>
-                <span className="px-3 py-1 text-xs md:text-sm font-semibold bg-flutter-teal/20 text-flutter-teal rounded-full border border-flutter-teal/30">
+                <span className="px-3 py-1 text-xs md:text-sm font-semibold bg-ramadan-gold/20 text-ramadan-gold rounded-full border border-ramadan-gold/30">
                   +1 Year Experience
                 </span>
               </div>
@@ -73,7 +73,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
             >
-              <p className="text-base md:text-lg lg:text-xl font-mono text-flutter-light-blue transition-all duration-500">
+              <p className="text-base md:text-lg lg:text-xl font-mono text-ramadan-amber transition-all duration-500">
                 {skills[currentSkill]}
               </p>
             </motion.div>
@@ -85,8 +85,8 @@ const HeroSection = () => {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
             >
               "Bridging App Performance & Intelligence with{' '}
-              <span className="text-flutter-teal font-semibold">Flutter</span> and{' '}
-              <span className="text-flutter-purple font-semibold">AI</span>."
+              <span className="text-ramadan-gold font-semibold">Flutter</span> and{' '}
+              <span className="text-ramadan-plum font-semibold" style={{ color: '#9B59B6' }}>AI</span>."
             </motion.p>
 
             <motion.div
@@ -97,7 +97,7 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:shadow-flutter-blue/25"
+                className="bg-gradient-to-r from-ramadan-gold to-ramadan-amber hover:scale-105 transition-all duration-300 text-ramadan-deep font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:shadow-ramadan-gold/25"
                 onClick={() => window.open('https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link', '_blank')}
               >
                 <Download className="mr-2 h-5 w-5" />
@@ -114,7 +114,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
           >
             <div className="relative">
-              <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
+              <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-ramadan-gold/30 shadow-2xl shadow-ramadan-gold/20">
                 <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-110" />
               </div>
             </div>
