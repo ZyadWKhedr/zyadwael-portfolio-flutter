@@ -3,8 +3,20 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
-import { Apple } from 'lucide-react';
+import { Github, Apple } from 'lucide-react';
+import { useRive } from '@rive-app/react-canvas';
+
+const RiveIcon = ({ src, gradient }: { src: string; gradient: string }) => {
+  const { RiveComponent } = useRive({
+    src,
+    autoplay: true,
+  });
+  return (
+    <div className={`w-16 h-16 p-1 rounded-xl bg-gradient-to-r ${gradient} bg-opacity-20 overflow-hidden`}>
+      <RiveComponent />
+    </div>
+  );
+};
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -100,7 +112,8 @@ const ProjectsSection = () => {
       features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
       gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "🐦",
-      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
+      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird",
+      riveFile: "/flutter-bird.riv"
     }
   ];
 
@@ -130,9 +143,13 @@ const ProjectsSection = () => {
               <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
                 <CardHeader className="relative">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
-                      {project.icon}
-                    </div>
+                    {project.riveFile ? (
+                      <RiveIcon src={project.riveFile} gradient={project.gradient} />
+                    ) : (
+                      <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
+                        {project.icon}
+                      </div>
+                    )}
                     <div className="flex space-x-2">
                       {project.githubUrl && (
                         <Button 
