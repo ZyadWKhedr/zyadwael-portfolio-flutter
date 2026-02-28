@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Github, Apple } from 'lucide-react';
+import { Github, Apple, Linkedin } from 'lucide-react';
 import { useRive } from '@rive-app/react-canvas';
 
 const RiveIcon = ({ src, gradient }: { src: string; gradient: string }) => {
@@ -106,6 +106,15 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
+      title: "Omnitrix – Wear OS",
+      description: "Ben 10 Omnitrix replica built for Wear OS using Flutter CustomPainter with animated dial and alien selection",
+      technologies: ["Flutter", "Wear OS", "CustomPainter", "Animations"],
+      features: ["Rotating alien dial", "Custom watch face", "Smooth animations", "Wearable UI"],
+      gradient: "from-flutter-teal to-flutter-blue",
+      icon: "⌚",
+      linkedinUrl: "https://www.linkedin.com/posts/zyad-wael-a9035a275_flutter-wearos-custompainter-ugcPost-7433156022355095552-x-_t"
+    },
+    {
       title: "Flappy Bird Clone",
       description: "High-performance game clone with monetization via Google AdMob",
       technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
@@ -149,7 +158,21 @@ const ProjectsSection = () => {
                       <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
                         {project.icon}
                       </div>
-                    )}
+                      )}
+                      {project.linkedinUrl && (
+                        <Button 
+                          size="icon" 
+                          variant="ghost" 
+                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(project.linkedinUrl, '_blank');
+                          }}
+                          title="LinkedIn Post"
+                        >
+                          <Linkedin className="h-4 w-4" />
+                        </Button>
+                      )}
                     <div className="flex space-x-2">
                       {project.githubUrl && (
                         <Button 
