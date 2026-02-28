@@ -43,6 +43,8 @@ const HeroSection = () => {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
           >
             <div className="relative">
+              <div className="absolute inset-0 rounded-full animate-pulse-ring border-2 border-flutter-blue/20" style={{ transform: 'scale(1.15)' }} />
+              <div className="absolute inset-0 rounded-full animate-pulse-ring-delayed border border-flutter-teal/15" style={{ transform: 'scale(1.3)' }} />
               <div className={`w-48 h-48 rounded-full overflow-hidden border-4 shadow-2xl ${ramadan ? 'border-ramadan-gold/30 shadow-ramadan-gold/20' : 'border-flutter-blue/30 shadow-flutter-blue/20'}`}>
                 <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-125" />
               </div>
