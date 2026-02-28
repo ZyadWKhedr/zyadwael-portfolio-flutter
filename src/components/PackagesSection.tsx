@@ -43,10 +43,6 @@ const PackagesSection = () => {
                     <div className={`p-4 rounded-xl bg-gradient-to-r ${pkg.gradient} bg-opacity-20`}>
                       <Package className="h-8 w-8 text-flutter-light-blue" />
                     </div>
-                    <div className="flex items-center gap-2 text-flutter-teal">
-                      <Download className="h-4 w-4" />
-                      <span className="text-sm font-semibold">{pkg.stats}</span>
-                    </div>
                   </div>
                   <CardTitle className={`text-2xl bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>
                     {pkg.title}
