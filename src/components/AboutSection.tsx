@@ -28,7 +28,7 @@ const AboutSection = () => {
             </AnimatedItem>
 
             <AnimatedItem delay={0.2}>
-              <div className="glass p-8 rounded-2xl">
+               <div className="glass p-8 rounded-2xl glow-hover">
                 <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student & Community Leader</h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   Currently studying Data Science at{' '}
