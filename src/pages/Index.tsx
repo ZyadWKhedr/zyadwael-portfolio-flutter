@@ -29,6 +29,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
+      {/* Global floating particles */}
+      <FloatingParticles />
+
       {/* Ramadan Decorations — only render during Ramadan */}
       <RamadanDecorations />
       <RamadanBanner />
@@ -40,14 +43,21 @@ const Index = () => {
       <SocialLinks />
       
       {/* Main Content */}
-      <main className="relative">
+      <main className="relative z-10">
         <HeroSection />
+        <SectionDivider />
         <AboutSection />
+        <SectionDivider />
         <SkillsSection />
+        <SectionDivider />
         <ProjectsSection />
+        <SectionDivider />
         <PackagesSection />
+        <SectionDivider />
         <TestimonialsSection />
+        <SectionDivider />
         <ArticlesSection />
+        <SectionDivider />
         <ContactSection />
       </main>
       
