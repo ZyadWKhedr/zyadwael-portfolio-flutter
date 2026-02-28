@@ -46,7 +46,7 @@ const AboutSection = () => {
           </div>
 
           <AnimatedItem delay={0.3}>
-            <div className="glass p-8 rounded-2xl">
+            <div className="glass p-8 rounded-2xl glow-hover">
               <h3 className="text-2xl font-semibold text-flutter-light-blue mb-6">My Mission</h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 I build <span className="text-flutter-teal font-semibold">scalable</span> and{' '}

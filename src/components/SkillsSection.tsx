@@ -51,7 +51,7 @@ const SkillsSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <AnimatedItem key={category.title} delay={categoryIndex * 0.08}>
-              <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 group h-full">
+              <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 group h-full glow-hover">
                 <h3 className={`text-xl font-semibold mb-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
                   {category.title}
                 </h3>

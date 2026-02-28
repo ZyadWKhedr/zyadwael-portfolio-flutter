@@ -92,7 +92,7 @@ const ArticlesSection = () => {
           {articles.map((article, index) => (
             <AnimatedItem key={article.title} delay={index * 0.06}>
               <Card
-                className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full"
+                className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full glow-hover"
                 onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
               >
                 <CardHeader>
