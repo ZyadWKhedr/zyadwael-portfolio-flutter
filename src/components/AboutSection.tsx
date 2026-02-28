@@ -15,7 +15,7 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <AnimatedItem delay={0.1}>
-              <div className="glass p-8 rounded-2xl">
+               <div className="glass p-8 rounded-2xl glow-hover">
                 <h3 className="text-2xl font-semibold text-flutter-light-blue mb-4">Flutter Developer</h3>
                 <p className="text-gray-300 leading-relaxed">
                   Experienced in building cross-platform apps using{' '}
@@ -28,7 +28,7 @@ const AboutSection = () => {
             </AnimatedItem>
 
             <AnimatedItem delay={0.2}>
-              <div className="glass p-8 rounded-2xl">
+               <div className="glass p-8 rounded-2xl glow-hover">
                 <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student & Community Leader</h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   Currently studying Data Science at{' '}
@@ -46,7 +46,7 @@ const AboutSection = () => {
           </div>
 
           <AnimatedItem delay={0.3}>
-            <div className="glass p-8 rounded-2xl">
+            <div className="glass p-8 rounded-2xl glow-hover">
               <h3 className="text-2xl font-semibold text-flutter-light-blue mb-6">My Mission</h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 I build <span className="text-flutter-teal font-semibold">scalable</span> and{' '}
