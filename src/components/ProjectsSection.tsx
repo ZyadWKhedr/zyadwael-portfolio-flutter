@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Github, Apple } from 'lucide-react';
+import { Github, Apple, Linkedin } from 'lucide-react';
 import { useRive } from '@rive-app/react-canvas';
 
 const RiveIcon = ({ src, gradient }: { src: string; gradient: string }) => {
