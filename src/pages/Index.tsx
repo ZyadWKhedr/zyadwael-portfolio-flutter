@@ -12,6 +12,8 @@ import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
 import RamadanDecorations, { isRamadan } from '@/components/RamadanDecorations';
 import RamadanBanner from '@/components/RamadanBanner';
+import FloatingParticles from '@/components/FloatingParticles';
+import SectionDivider from '@/components/SectionDivider';
 
 const Index = () => {
   const ramadan = isRamadan();
