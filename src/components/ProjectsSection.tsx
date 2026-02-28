@@ -158,7 +158,21 @@ const ProjectsSection = () => {
                       <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
                         {project.icon}
                       </div>
-                    )}
+                      )}
+                      {project.linkedinUrl && (
+                        <Button 
+                          size="icon" 
+                          variant="ghost" 
+                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(project.linkedinUrl, '_blank');
+                          }}
+                          title="LinkedIn Post"
+                        >
+                          <Linkedin className="h-4 w-4" />
+                        </Button>
+                      )}
                     <div className="flex space-x-2">
                       {project.githubUrl && (
                         <Button 
