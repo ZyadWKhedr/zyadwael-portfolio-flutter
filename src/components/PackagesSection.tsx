@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Download, Package } from 'lucide-react';
+import { ExternalLink, Package } from 'lucide-react';
 import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
 
 const PackagesSection = () => {

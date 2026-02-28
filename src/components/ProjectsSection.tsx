@@ -106,6 +106,15 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
+      title: "Omnitrix – Wear OS",
+      description: "Ben 10 Omnitrix replica built for Wear OS using Flutter CustomPainter with animated dial and alien selection",
+      technologies: ["Flutter", "Wear OS", "CustomPainter", "Animations"],
+      features: ["Rotating alien dial", "Custom watch face", "Smooth animations", "Wearable UI"],
+      gradient: "from-flutter-teal to-flutter-blue",
+      icon: "⌚",
+      linkedinUrl: "https://www.linkedin.com/posts/zyad-wael-a9035a275_flutter-wearos-custompainter-ugcPost-7433156022355095552-x-_t"
+    },
+    {
       title: "Flappy Bird Clone",
       description: "High-performance game clone with monetization via Google AdMob",
       technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
