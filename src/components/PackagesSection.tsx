@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Package } from 'lucide-react';
+import { ExternalLink, Download, Package } from 'lucide-react';
 import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
 
 const PackagesSection = () => {
@@ -9,7 +9,7 @@ const PackagesSection = () => {
     {
       title: "Liquid Navbar",
       description: "A Flutter package that mimics iOS Liquid Glass effects in a custom navigation bar with smooth animations and easy customization.",
-      
+      stats: "400+ downloads",
       features: [
         "iOS Liquid Glass effects",
         "Smooth animations",
@@ -42,6 +42,10 @@ const PackagesSection = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div className={`p-4 rounded-xl bg-gradient-to-r ${pkg.gradient} bg-opacity-20`}>
                       <Package className="h-8 w-8 text-flutter-light-blue" />
+                    </div>
+                    <div className="flex items-center gap-2 text-flutter-teal">
+                      <Download className="h-4 w-4" />
+                      <span className="text-sm font-semibold">{pkg.stats}</span>
                     </div>
                   </div>
                   <CardTitle className={`text-2xl bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>

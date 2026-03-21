@@ -4,12 +4,9 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
-import { isRamadan } from './RamadanDecorations';
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
-  const ramadan = isRamadan();
-
   const skills = [
     'Flutter • Riverpod • Firebase',
     'Clean Architecture • AI • Streamlit',
@@ -28,9 +25,9 @@ const HeroSection = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 lg:px-8 pt-20 md:pt-0">
       {/* Floating background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className={`absolute top-20 left-10 w-20 h-20 rounded-full animate-float blur-sm ${ramadan ? 'bg-ramadan-gold/20' : 'bg-flutter-blue/20'}`}></div>
-        <div className={`absolute top-40 right-20 w-16 h-16 rounded-full animate-float delay-1000 blur-sm ${ramadan ? 'bg-ramadan-amber/20' : 'bg-flutter-teal/20'}`}></div>
-        <div className={`absolute bottom-40 left-20 w-24 h-24 rounded-full animate-float delay-2000 blur-sm ${ramadan ? 'bg-ramadan-plum/30' : 'bg-flutter-purple/20'}`}></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-flutter-blue/20 rounded-full animate-float blur-sm"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-flutter-teal/20 rounded-full animate-float delay-1000 blur-sm"></div>
+        <div className="absolute bottom-40 left-20 w-24 h-24 bg-flutter-purple/20 rounded-full animate-float delay-2000 blur-sm"></div>
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -43,9 +40,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
           >
             <div className="relative">
-              <div className="absolute inset-0 rounded-full animate-pulse-ring border-2 border-flutter-blue/20" style={{ transform: 'scale(1.15)' }} />
-              <div className="absolute inset-0 rounded-full animate-pulse-ring-delayed border border-flutter-teal/15" style={{ transform: 'scale(1.3)' }} />
-              <div className={`w-48 h-48 rounded-full overflow-hidden border-4 shadow-2xl ${ramadan ? 'border-ramadan-gold/30 shadow-ramadan-gold/20' : 'border-flutter-blue/30 shadow-flutter-blue/20'}`}>
+              <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
                 <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-125" />
               </div>
             </div>
@@ -60,10 +55,10 @@ const HeroSection = () => {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
             >
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <h1 className={`text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${ramadan ? 'from-ramadan-gold via-ramadan-amber to-ramadan-warm-glow' : 'from-flutter-blue via-flutter-light-blue to-flutter-teal'}`}>
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-flutter-blue via-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
                   Zyad Wael
                 </h1>
-                <span className={`px-3 py-1 text-xs md:text-sm font-semibold rounded-full border ${ramadan ? 'bg-ramadan-gold/20 text-ramadan-gold border-ramadan-gold/30' : 'bg-flutter-teal/20 text-flutter-teal border-flutter-teal/30'}`}>
+                <span className="px-3 py-1 text-xs md:text-sm font-semibold bg-flutter-teal/20 text-flutter-teal rounded-full border border-flutter-teal/30">
                   +1 Year Experience
                 </span>
               </div>
@@ -78,7 +73,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
             >
-              <p className={`text-base md:text-lg lg:text-xl font-mono transition-all duration-500 ${ramadan ? 'text-ramadan-amber' : 'text-flutter-light-blue'}`}>
+              <p className="text-base md:text-lg lg:text-xl font-mono text-flutter-light-blue transition-all duration-500">
                 {skills[currentSkill]}
               </p>
             </motion.div>
@@ -90,8 +85,8 @@ const HeroSection = () => {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
             >
               "Bridging App Performance & Intelligence with{' '}
-              <span className={`font-semibold ${ramadan ? 'text-ramadan-gold' : 'text-flutter-teal'}`}>Flutter</span> and{' '}
-              <span className={`font-semibold ${ramadan ? 'text-ramadan-plum' : 'text-flutter-purple'}`} style={ramadan ? { color: '#9B59B6' } : undefined}>AI</span>."
+              <span className="text-flutter-teal font-semibold">Flutter</span> and{' '}
+              <span className="text-flutter-purple font-semibold">AI</span>."
             </motion.p>
 
             <motion.div
@@ -102,7 +97,7 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                className={`hover:scale-105 transition-all duration-300 font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg ${ramadan ? 'bg-gradient-to-r from-ramadan-gold to-ramadan-amber text-ramadan-deep hover:shadow-ramadan-gold/25' : 'bg-flutter-gradient text-white hover:shadow-flutter-blue/25'}`}
+                className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:shadow-flutter-blue/25"
                 onClick={() => window.open('https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link', '_blank')}
               >
                 <Download className="mr-2 h-5 w-5" />
@@ -119,17 +114,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
           >
             <div className="relative">
-              <motion.div
-                className="absolute inset-0 rounded-full border-2 border-flutter-blue/20"
-                animate={{ scale: [1.05, 1.15, 1.05], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full border border-flutter-teal/15"
-                animate={{ scale: [1.1, 1.25, 1.1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              />
-              <div className={`w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 shadow-2xl ${ramadan ? 'border-ramadan-gold/30 shadow-ramadan-gold/20' : 'border-flutter-blue/30 shadow-flutter-blue/20'}`}>
+              <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-flutter-blue/30 shadow-2xl shadow-flutter-blue/20">
                 <img src={zyadProfile} alt="Zyad Wael" className="w-full h-full object-cover object-top scale-110" />
               </div>
             </div>

@@ -3,20 +3,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Github, Apple, Linkedin } from 'lucide-react';
-import { useRive } from '@rive-app/react-canvas';
-
-const RiveIcon = ({ src, gradient }: { src: string; gradient: string }) => {
-  const { RiveComponent } = useRive({
-    src,
-    autoplay: true,
-  });
-  return (
-    <div className={`w-16 h-16 p-1 rounded-xl bg-gradient-to-r ${gradient} bg-opacity-20 overflow-hidden`}>
-      <RiveComponent />
-    </div>
-  );
-};
+import { Github } from 'lucide-react';
+import { Apple } from 'lucide-react';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -106,23 +94,13 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
-      title: "Omnitrix – Wear OS",
-      description: "Ben 10 Omnitrix replica built for Wear OS using Flutter CustomPainter with animated dial and alien selection",
-      technologies: ["Flutter", "Wear OS", "CustomPainter", "Animations"],
-      features: ["Rotating alien dial", "Custom watch face", "Smooth animations", "Wearable UI"],
-      gradient: "from-flutter-teal to-flutter-blue",
-      icon: "⌚",
-      linkedinUrl: "https://www.linkedin.com/posts/zyad-wael-a9035a275_flutter-wearos-custompainter-ugcPost-7433156022355095552-x-_t"
-    },
-    {
       title: "Flappy Bird Clone",
       description: "High-performance game clone with monetization via Google AdMob",
       technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
       features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
       gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "🐦",
-      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird",
-      riveFile: "/flutter-bird.riv"
+      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
     }
   ];
 
@@ -152,27 +130,9 @@ const ProjectsSection = () => {
               <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
                 <CardHeader className="relative">
                   <div className="flex items-center justify-between mb-4">
-                    {project.riveFile ? (
-                      <RiveIcon src={project.riveFile} gradient={project.gradient} />
-                    ) : (
-                      <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
-                        {project.icon}
-                      </div>
-                      )}
-                      {project.linkedinUrl && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.linkedinUrl, '_blank');
-                          }}
-                          title="LinkedIn Post"
-                        >
-                          <Linkedin className="h-4 w-4" />
-                        </Button>
-                      )}
+                    <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
+                      {project.icon}
+                    </div>
                     <div className="flex space-x-2">
                       {project.githubUrl && (
                         <Button 

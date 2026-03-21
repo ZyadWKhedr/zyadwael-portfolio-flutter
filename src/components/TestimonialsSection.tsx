@@ -47,7 +47,7 @@ const TestimonialsSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <AnimatedItem key={index} delay={index * 0.1}>
-              <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full glow-hover">
+              <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full">
                 <CardContent className="p-8">
                   <div className="absolute top-4 right-4 opacity-20">
                     <Quote className="h-12 w-12 text-flutter-teal" />
