@@ -12,6 +12,22 @@ const ProjectsSection = () => {
   const projects = [
     // Live on App Store & Play Store
     {
+      title: "Payss – Social Loyalty Ecosystem",
+      description: "Engineered the consumer-facing Flutter app for a social loyalty platform, integrating seamlessly with a Web Merchant Dashboard and a separate Merchant App to deliver real-time rewards and discovery.",
+      technologies: ["Flutter", "REST APIs", "Real-time Sync", "QR Scanner", "Google Maps"],
+      features: [
+        "Built social feed with live merchant 'vibes'",
+        "Implemented QR scanner for instant points",
+        "Integrated smart map with filtering",
+        "Delivered Guest Mode, OTP Login & Dark Mode"
+      ],
+      gradient: "from-flutter-purple to-flutter-teal",
+      icon: "💳",
+      storeLinks: {
+        playStore: "https://play.google.com/store/apps/details?id=com.payss.app"
+      }
+    },
+    {
       title: "Wofoodi – Fuel & Services Locator",
       description: "Live location tracking app for nearest fuel stations with real-time pricing",
       technologies: ["Flutter", "Google Maps API", "Firebase Auth", "RESTful API"],
