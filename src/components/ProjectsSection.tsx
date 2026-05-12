@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { Apple } from 'lucide-react';
+import payssIcon from '@/assets/payss-icon.png';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
