@@ -24,7 +24,8 @@ const ProjectsSection = () => {
       gradient: "from-flutter-purple to-flutter-teal",
       icon: "💳",
       storeLinks: {
-        playStore: "https://play.google.com/store/apps/details?id=com.payss.app"
+        playStore: "https://play.google.com/store/apps/details?id=com.payss.app",
+        appStore: "https://apps.apple.com/eg/app/payss/id6767013931"
       }
     },
     {
