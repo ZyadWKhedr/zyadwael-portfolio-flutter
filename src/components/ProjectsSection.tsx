@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { Apple } from 'lucide-react';
+import payssIcon from '@/assets/payss-icon.png';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -23,6 +24,7 @@ const ProjectsSection = () => {
       ],
       gradient: "from-flutter-purple to-flutter-teal",
       icon: "💳",
+      iconImage: payssIcon,
       storeLinks: {
         playStore: "https://play.google.com/store/apps/details?id=com.payss.app",
         appStore: "https://apps.apple.com/eg/app/payss/id6767013931"
@@ -147,8 +149,12 @@ const ProjectsSection = () => {
               <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
                 <CardHeader className="relative">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`text-4xl p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20`}>
-                      {project.icon}
+                    <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20 flex items-center justify-center`}>
+                      {project.iconImage ? (
+                        <img src={project.iconImage} alt={`${project.title} logo`} className="h-12 w-12 rounded-lg object-cover" />
+                      ) : (
+                        <span className="text-4xl">{project.icon}</span>
+                      )}
                     </div>
                     <div className="flex space-x-2">
                       {project.githubUrl && (
