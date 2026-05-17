@@ -195,7 +195,7 @@ const ProjectsSection = () => {
                         <Button 
                           size="icon" 
                           variant="ghost" 
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="transition-opacity"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open(project.storeLinks.playStore, '_blank');
@@ -211,7 +211,7 @@ const ProjectsSection = () => {
                         <Button 
                           size="icon" 
                           variant="ghost" 
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="transition-opacity"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open(project.storeLinks.appStore, '_blank');
