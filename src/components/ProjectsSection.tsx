@@ -94,6 +94,7 @@ const ProjectsSection = () => {
       features: ["Move validation", "Check/checkmate detection", "Real-time board updates", "Tournament-style UI"],
       gradient: "from-flutter-teal to-flutter-purple",
       icon: "♟️",
+      iconImage: chessIcon,
       storeLinks: {
         playStore: "https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess"
       }
