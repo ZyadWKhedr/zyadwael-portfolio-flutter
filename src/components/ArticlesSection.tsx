@@ -56,7 +56,7 @@ const ArticlesSection = () => {
       readTime: "10 min read",
       category: "Flutter",
       gradient: "from-flutter-blue to-flutter-purple",
-      url: "https://medium.com/@ziad.w.khedr/software-craftsmanship-a-guide-to-design-patterns-in-dart-flutter-6011cb0f1b12"
+      url: "https://medium.com/stackademic/software-craftsmanship-a-guide-to-design-patterns-in-dart-flutter-6011cb0f1b12"
     },
     {
       title: "Fuzzy Logic: How Machines Think in Shades of Gray",
