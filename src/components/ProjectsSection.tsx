@@ -6,6 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { Apple } from 'lucide-react';
 import payssIcon from '@/assets/payss-icon.png';
+import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
+import amoomyIcon from '@/assets/amoomy-icon.png';
+import ravalIcon from '@/assets/raval-icon.png';
+import chessIcon from '@/assets/chess-icon.png';
+import clipflowIcon from '@/assets/clipflow-icon.png';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
