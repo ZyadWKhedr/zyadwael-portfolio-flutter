@@ -42,6 +42,7 @@ const ProjectsSection = () => {
       features: ["Live location tracking", "Route navigation", "Real-time fuel prices", "Offline caching"],
       gradient: "from-flutter-blue to-flutter-light-blue",
       icon: "⛽",
+      iconImage: wofoodiIcon,
       storeLinks: { 
         appStore: "https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551", 
         playStore: "https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en" 
@@ -54,6 +55,7 @@ const ProjectsSection = () => {
       features: ["Apple & Google sign-in", "Order management", "Provider scheduling", "Clean Architecture"],
       gradient: "from-flutter-teal to-flutter-purple",
       icon: "🚚",
+      iconImage: amoomyIcon,
       storeLinks: { 
         appStore: "https://apps.apple.com/eg/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564", 
         playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en" 
@@ -66,9 +68,22 @@ const ProjectsSection = () => {
       features: ["Category filtering", "Smart cart", "Order tracking", "Real-time order status"],
       gradient: "from-flutter-purple to-flutter-blue",
       icon: "👕",
+      iconImage: ravalIcon,
       storeLinks: {
         appStore: "https://apps.apple.com/us/app/raval/id6756228964",
         playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
+      }
+    },
+    {
+      title: "ClipFlow – Clipboard Manager",
+      description: "macOS clipboard manager that organizes your copy history into smart, searchable flows",
+      technologies: ["Swift", "macOS", "AppKit", "SwiftUI"],
+      features: ["Clipboard history", "Smart search", "Quick paste shortcuts", "Native macOS experience"],
+      gradient: "from-flutter-blue to-flutter-purple",
+      icon: "📋",
+      iconImage: clipflowIcon,
+      storeLinks: {
+        appStore: "https://apps.apple.com/eg/app/clipflow-clipboard-manager/id6767848683?mt=12"
       }
     },
     // Complex technical projects
