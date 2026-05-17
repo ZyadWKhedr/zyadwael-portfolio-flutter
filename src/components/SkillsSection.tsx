@@ -6,17 +6,17 @@ const SkillsSection = () => {
     {
       title: "Programming Languages",
       color: "from-flutter-blue to-flutter-light-blue",
-      skills: ["Dart", "Java", "Python"]
+      skills: ["Dart", "Swift", "Java", "Python"]
     },
     {
       title: "Frameworks & Libraries",
       color: "from-flutter-light-blue to-flutter-teal",
-      skills: ["Flutter", "Flame Game Engine"]
+      skills: ["Flutter", "SwiftUI", "Flame Game Engine"]
     },
     {
       title: "State Management",
       color: "from-flutter-teal to-flutter-purple",
-      skills: ["Riverpod", "Provider"]
+      skills: ["Riverpod", "Provider", "Bloc/Cubit"]
     },
     {
       title: "Databases & Backend",
