@@ -5,12 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { Apple } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
 import amoomyIcon from '@/assets/amoomy-icon.png';
 import ravalIcon from '@/assets/raval-icon.png';
 import chessIcon from '@/assets/chess-icon.png';
 import clipflowIcon from '@/assets/clipflow-icon.png';
+
+type ProjectCategory = 'mobile' | 'desktop' | 'ai';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
