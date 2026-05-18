@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import TicTacToeGame from './TicTacToeGame';
-import AnimatedSection from './AnimatedSection';
+import { AnimatedSection } from './AnimatedSection';
 
 const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'MinMax Algorithm'];
 
