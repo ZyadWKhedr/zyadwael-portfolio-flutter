@@ -5,12 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { Apple } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
 import amoomyIcon from '@/assets/amoomy-icon.png';
 import ravalIcon from '@/assets/raval-icon.png';
 import chessIcon from '@/assets/chess-icon.png';
 import clipflowIcon from '@/assets/clipflow-icon.png';
+
+type ProjectCategory = 'mobile' | 'desktop' | 'ai';
 
 const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -30,6 +33,7 @@ const ProjectsSection = () => {
       gradient: "from-flutter-purple to-flutter-teal",
       icon: "💳",
       iconImage: payssIcon,
+      category: 'mobile' as ProjectCategory,
       storeLinks: {
         playStore: "https://play.google.com/store/apps/details?id=com.payss.app",
         appStore: "https://apps.apple.com/eg/app/payss/id6767013931"
@@ -43,6 +47,7 @@ const ProjectsSection = () => {
       gradient: "from-flutter-blue to-flutter-light-blue",
       icon: "⛽",
       iconImage: wofoodiIcon,
+      category: 'mobile' as ProjectCategory,
       storeLinks: { 
         appStore: "https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551", 
         playStore: "https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en" 
@@ -56,6 +61,7 @@ const ProjectsSection = () => {
       gradient: "from-flutter-teal to-flutter-purple",
       icon: "🚚",
       iconImage: amoomyIcon,
+      category: 'mobile' as ProjectCategory,
       storeLinks: { 
         appStore: "https://apps.apple.com/eg/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564", 
         playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en" 
@@ -69,6 +75,7 @@ const ProjectsSection = () => {
       gradient: "from-flutter-purple to-flutter-blue",
       icon: "👕",
       iconImage: ravalIcon,
+      category: 'mobile' as ProjectCategory,
       storeLinks: {
         appStore: "https://apps.apple.com/us/app/raval/id6756228964",
         playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
@@ -82,11 +89,11 @@ const ProjectsSection = () => {
       gradient: "from-flutter-blue to-flutter-purple",
       icon: "📋",
       iconImage: clipflowIcon,
+      category: 'desktop' as ProjectCategory,
       storeLinks: {
         appStore: "https://apps.apple.com/eg/app/clipflow-clipboard-manager/id6767848683?mt=12"
       }
     },
-    // Complex technical projects
     {
       title: "Grandmaster Chess",
       description: "Professional tournament-style chess app with complete rules and move validation",
@@ -95,6 +102,7 @@ const ProjectsSection = () => {
       gradient: "from-flutter-teal to-flutter-purple",
       icon: "♟️",
       iconImage: chessIcon,
+      category: 'mobile' as ProjectCategory,
       storeLinks: {
         playStore: "https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess"
       }
@@ -105,7 +113,8 @@ const ProjectsSection = () => {
       technologies: ["Flutter Desktop", "Multimedia", "Cross-platform", "Image Processing"],
       features: ["Photo capture", "Interactive filters", "Real-time effects", "Intuitive UI"],
       gradient: "from-flutter-blue to-flutter-purple",
-      icon: "📸"
+      icon: "📸",
+      category: 'desktop' as ProjectCategory,
     },
     {
       title: "Gesture Volume Control",
@@ -113,16 +122,17 @@ const ProjectsSection = () => {
       technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Custom Package"],
       features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
       gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "👋"
+      icon: "👋",
+      category: 'desktop' as ProjectCategory,
     },
-    // AI & Real-time projects
     {
       title: "Meal Recommendation App",
       description: "AI-powered meal planner developed during internship at Cellula Technologies",
       technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
       features: ["Personalized meal plans", "Team collaboration", "Trello workflow", "API integration"],
       gradient: "from-flutter-purple to-flutter-blue",
-      icon: "🍽️"
+      icon: "🍽️",
+      category: 'ai' as ProjectCategory,
     },
     {
       title: "Realtime Chat App",
@@ -131,6 +141,7 @@ const ProjectsSection = () => {
       features: ["Live messaging", "Real-time communication", "Socket connections", "Instant messaging"],
       gradient: "from-flutter-blue to-flutter-light-blue",
       icon: "💬",
+      category: 'ai' as ProjectCategory,
       githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
     },
     {
@@ -140,9 +151,125 @@ const ProjectsSection = () => {
       features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
       gradient: "from-flutter-light-blue to-flutter-teal",
       icon: "🐦",
+      category: 'mobile' as ProjectCategory,
       githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
     }
   ];
+
+  const categories: { id: ProjectCategory | 'all'; label: string }[] = [
+    { id: 'all', label: 'All' },
+    { id: 'mobile', label: 'iOS & Android' },
+    { id: 'desktop', label: 'macOS & Desktop' },
+    { id: 'ai', label: 'AI & Realtime' },
+  ];
+
+  const renderGrid = (items: typeof projects) => (
+    <div className="grid md:grid-cols-2 gap-8">
+      {items.map((project, index) => (
+        <motion.div
+          key={project.title}
+          whileHover={{ scale: 1.04, y: -6 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          onMouseEnter={() => setHoveredProject(index)}
+          onMouseLeave={() => setHoveredProject(null)}
+        >
+          <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
+            <CardHeader className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20 flex items-center justify-center`}>
+                  {project.iconImage ? (
+                    <img src={project.iconImage} alt={`${project.title} logo`} className="h-12 w-12 rounded-lg object-cover" />
+                  ) : (
+                    <span className="text-4xl">{project.icon}</span>
+                  )}
+                </div>
+                <div className="flex space-x-2">
+                  {project.githubUrl && (
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(project.githubUrl, '_blank');
+                      }}
+                    >
+                      <Github className="h-4 w-4" />
+                    </Button>
+                  )}
+                  {project.storeLinks?.playStore && project.storeLinks.playStore !== "#" && (
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(project.storeLinks.playStore, '_blank');
+                      }}
+                      title="Google Play"
+                    >
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                      </svg>
+                    </Button>
+                  )}
+                  {project.storeLinks?.appStore && project.storeLinks.appStore !== "#" && (
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(project.storeLinks.appStore, '_blank');
+                      }}
+                      title="App Store"
+                    >
+                      <Apple className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+              <CardTitle className={`text-xl bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
+                {project.title}
+              </CardTitle>
+              <CardDescription className="text-foreground/70">
+                {project.description}
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-flutter-light-blue mb-3">Technologies</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 glass-strong rounded-full text-xs font-mono text-foreground/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                <h4 className="text-sm font-semibold text-flutter-teal mb-3">Key Features</h4>
+                <ul className="space-y-1">
+                  {project.features.map((feature) => (
+                    <li key={feature} className="text-sm text-foreground/60 flex items-center">
+                      <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      ))}
+    </div>
+  );
 
   return (
     <section id="projects" className="py-20 px-4 lg:px-8">
@@ -157,113 +284,26 @@ const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              whileHover={{ scale: 1.04, y: -6 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
-                <CardHeader className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20 flex items-center justify-center`}>
-                      {project.iconImage ? (
-                        <img src={project.iconImage} alt={`${project.title} logo`} className="h-12 w-12 rounded-lg object-cover" />
-                      ) : (
-                        <span className="text-4xl">{project.icon}</span>
-                      )}
-                    </div>
-                    <div className="flex space-x-2">
-                      {project.githubUrl && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.githubUrl, '_blank');
-                          }}
-                        >
-                          <Github className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {project.storeLinks?.playStore && project.storeLinks.playStore !== "#" && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.storeLinks.playStore, '_blank');
-                          }}
-                          title="Google Play"
-                        >
-                          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                          </svg>
-                        </Button>
-                      )}
-                      {project.storeLinks?.appStore && project.storeLinks.appStore !== "#" && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.storeLinks.appStore, '_blank');
-                          }}
-                          title="App Store"
-                        >
-                          <Apple className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                  <CardTitle className={`text-xl bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-foreground/70">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
+        <Tabs defaultValue="all" className="w-full">
+          <TabsList className="mx-auto mb-10 flex flex-wrap justify-center gap-2 bg-transparent h-auto p-0">
+            {categories.map((cat) => (
+              <TabsTrigger
+                key={cat.id}
+                value={cat.id}
+                className="glass-strong rounded-full px-5 py-2 text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-flutter-blue data-[state=active]:to-flutter-teal data-[state=active]:text-white"
+              >
+                {cat.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-                <CardContent>
-                  {/* Technologies */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-flutter-light-blue mb-3">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 glass-strong rounded-full text-xs font-mono text-foreground/70"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className={`transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                    <h4 className="text-sm font-semibold text-flutter-teal mb-3">Key Features</h4>
-                    <ul className="space-y-1">
-                      {project.features.map((feature) => (
-                        <li key={feature} className="text-sm text-foreground/60 flex items-center">
-                          <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+          <TabsContent value="all">{renderGrid(projects)}</TabsContent>
+          {categories.filter(c => c.id !== 'all').map((cat) => (
+            <TabsContent key={cat.id} value={cat.id}>
+              {renderGrid(projects.filter(p => p.category === cat.id))}
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
