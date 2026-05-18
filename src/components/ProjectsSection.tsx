@@ -284,113 +284,26 @@ const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              whileHover={{ scale: 1.04, y: -6 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
-                <CardHeader className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20 flex items-center justify-center`}>
-                      {project.iconImage ? (
-                        <img src={project.iconImage} alt={`${project.title} logo`} className="h-12 w-12 rounded-lg object-cover" />
-                      ) : (
-                        <span className="text-4xl">{project.icon}</span>
-                      )}
-                    </div>
-                    <div className="flex space-x-2">
-                      {project.githubUrl && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.githubUrl, '_blank');
-                          }}
-                        >
-                          <Github className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {project.storeLinks?.playStore && project.storeLinks.playStore !== "#" && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.storeLinks.playStore, '_blank');
-                          }}
-                          title="Google Play"
-                        >
-                          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                          </svg>
-                        </Button>
-                      )}
-                      {project.storeLinks?.appStore && project.storeLinks.appStore !== "#" && (
-                        <Button 
-                          size="icon" 
-                          variant="ghost" 
-                          className="transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(project.storeLinks.appStore, '_blank');
-                          }}
-                          title="App Store"
-                        >
-                          <Apple className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                  <CardTitle className={`text-xl bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-foreground/70">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
+        <Tabs defaultValue="all" className="w-full">
+          <TabsList className="mx-auto mb-10 flex flex-wrap justify-center gap-2 bg-transparent h-auto p-0">
+            {categories.map((cat) => (
+              <TabsTrigger
+                key={cat.id}
+                value={cat.id}
+                className="glass-strong rounded-full px-5 py-2 text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-flutter-blue data-[state=active]:to-flutter-teal data-[state=active]:text-white"
+              >
+                {cat.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-                <CardContent>
-                  {/* Technologies */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-flutter-light-blue mb-3">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 glass-strong rounded-full text-xs font-mono text-foreground/70"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className={`transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                    <h4 className="text-sm font-semibold text-flutter-teal mb-3">Key Features</h4>
-                    <ul className="space-y-1">
-                      {project.features.map((feature) => (
-                        <li key={feature} className="text-sm text-foreground/60 flex items-center">
-                          <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+          <TabsContent value="all">{renderGrid(projects)}</TabsContent>
+          {categories.filter(c => c.id !== 'all').map((cat) => (
+            <TabsContent key={cat.id} value={cat.id}>
+              {renderGrid(projects.filter(p => p.category === cat.id))}
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
