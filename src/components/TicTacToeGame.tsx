@@ -57,14 +57,43 @@ function bestMove(board: Board, ai: Player, human: Player): number {
   return move;
 }
 
+const STORAGE_KEY = 'ttt-stats';
+
+function loadStats(): Stats {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* empty */ }
+  return { wins: 0, draws: 0, losses: 0 };
+}
+
+function saveStats(s: Stats) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch { /* empty */ }
+}
+
 const TicTacToeGame = () => {
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+  const [stats, setStats] = useState<Stats>(loadStats);
+  const [resultAnim, setResultAnim] = useState<string | null>(null);
   const human: Player = 'X';
   const ai: Player = 'O';
 
   const { winner, line } = checkWinner(board);
   const gameOver = winner !== null;
+
+  useEffect(() => {
+    if (!gameOver) return;
+    if (winner === human) {
+      setStats((prev) => { const next = { ...prev, wins: prev.wins + 1 }; saveStats(next); setResultAnim('win'); return next; });
+    } else if (winner === ai) {
+      setStats((prev) => { const next = { ...prev, losses: prev.losses + 1 }; saveStats(next); setResultAnim('loss'); return next; });
+    } else if (winner === 'draw') {
+      setStats((prev) => { const next = { ...prev, draws: prev.draws + 1 }; saveStats(next); setResultAnim('draw'); return next; });
+    }
+    const t = setTimeout(() => setResultAnim(null), 1200);
+    return () => clearTimeout(t);
+  }, [gameOver, winner]);
 
   const reset = useCallback(() => {
     setBoard(Array(9).fill(null));
