@@ -30,9 +30,6 @@ const FeaturedProjectSection = () => {
           <h2 className="text-4xl lg:text-5xl font-bold text-white">
             Try it. <span className="text-flutter-teal">Live.</span>
           </h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto">
-            A real, playable demo embedded right in the page — not a screenshot.
-          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
