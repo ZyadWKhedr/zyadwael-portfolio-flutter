@@ -133,6 +133,26 @@ const TicTacToeGame = () => {
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
+      {/* Counters */}
+      <div className="flex items-center gap-3 w-full">
+        {[
+          { label: 'Wins', value: stats.wins, Icon: Trophy, color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
+          { label: 'Draws', value: stats.draws, Icon: Minus, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
+          { label: 'Losses', value: stats.losses, Icon: Skull, color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20' },
+        ].map(({ label, value, Icon, color, bg, border }) => (
+          <motion.div
+            key={label}
+            animate={resultAnim && label.toLowerCase().includes(resultAnim === 'win' ? 'win' : resultAnim === 'loss' ? 'loss' : 'draw') ? { scale: [1, 1.15, 1] } : {}}
+            transition={{ duration: 0.4 }}
+            className={`flex-1 flex flex-col items-center py-2 rounded-xl border ${border} ${bg} backdrop-blur-sm`}
+          >
+            <Icon className={`w-3.5 h-3.5 ${color} mb-0.5`} />
+            <span className={`text-lg font-bold ${color} leading-none`}>{value}</span>
+            <span className="text-[10px] uppercase tracking-wider text-gray-400 mt-0.5">{label}</span>
+          </motion.div>
+        ))}
+      </div>
+
       <div className="text-center">
         <p className="text-xs uppercase tracking-widest text-flutter-light-blue/70">Tic Tac Toe</p>
         <p className="text-sm font-medium text-white mt-1 min-h-[1.25rem]">{status}</p>
