@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw, Trophy, Minus, Skull } from 'lucide-react';
+import { RotateCcw, Trophy, Minus, Skull, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type Player = 'X' | 'O' | null;
@@ -134,17 +134,18 @@ const TicTacToeGame = () => {
   return (
     <div className="w-full flex flex-col items-center gap-4">
       {/* Counters */}
-      <div className="flex items-center gap-3 w-full">
+      <div className="grid grid-cols-4 gap-2 w-full">
         {[
-          { label: 'Wins', value: stats.wins, Icon: Trophy, color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
-          { label: 'Draws', value: stats.draws, Icon: Minus, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
-          { label: 'Losses', value: stats.losses, Icon: Skull, color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20' },
-        ].map(({ label, value, Icon, color, bg, border }) => (
+          { label: 'Total', value: stats.wins + stats.draws + stats.losses, Icon: Gamepad2, color: 'text-flutter-light-blue', bg: 'bg-flutter-light-blue/10', border: 'border-flutter-light-blue/20', key: 'total' },
+          { label: 'Wins', value: stats.wins, Icon: Trophy, color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', key: 'win' },
+          { label: 'Draws', value: stats.draws, Icon: Minus, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', key: 'draw' },
+          { label: 'Losses', value: stats.losses, Icon: Skull, color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', key: 'loss' },
+        ].map(({ label, value, Icon, color, bg, border, key }) => (
           <motion.div
             key={label}
-            animate={resultAnim && label.toLowerCase().includes(resultAnim === 'win' ? 'win' : resultAnim === 'loss' ? 'loss' : 'draw') ? { scale: [1, 1.15, 1] } : {}}
+            animate={resultAnim && (key === resultAnim || key === 'total') ? { scale: [1, 1.15, 1] } : {}}
             transition={{ duration: 0.4 }}
-            className={`flex-1 flex flex-col items-center py-2 rounded-xl border ${border} ${bg} backdrop-blur-sm`}
+            className={`flex flex-col items-center py-2 rounded-xl border ${border} ${bg} backdrop-blur-sm`}
           >
             <Icon className={`w-3.5 h-3.5 ${color} mb-0.5`} />
             <span className={`text-lg font-bold ${color} leading-none`}>{value}</span>
