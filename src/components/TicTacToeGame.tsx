@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, Trophy, Minus, Skull } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type Player = 'X' | 'O' | null;
 type Board = Player[];
+type Stats = { wins: number; draws: number; losses: number };
 
 const WINS = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
