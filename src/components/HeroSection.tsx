@@ -37,10 +37,9 @@ const HeroSection = () => {
     >
       {/* Dotted background */}
       <div
-        className="absolute inset-0 opacity-[0.15] pointer-events-none"
+        className="absolute inset-0 opacity-[0.18] pointer-events-none"
         style={{
-          backgroundImage:
-            'radial-gradient(circle, hsl(var(--flutter-light-blue) / 0.4) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(19,185,253,0.5) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }}
       />
