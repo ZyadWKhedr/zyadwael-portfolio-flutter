@@ -66,21 +66,28 @@ const Navigation = () => {
       {/* Desktop Navigation */}
       <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 hidden lg:block">
         <div className="glass px-8 py-4 rounded-full">
-          <ul className="flex items-center space-x-8">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <button
-                  onClick={() => handleNavClick(item.href)}
-                  className={`text-sm font-medium transition-all duration-300 ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-flutter-light-blue'
-                      : 'text-gray-400 hover:text-flutter-light-blue'
-                  }`}
-                >
-                  {item.name}
-                </button>
-              </li>
-            ))}
+          <ul className="flex items-center space-x-7">
+            {navItems.map((item, idx) => {
+              const isActive = activeSection === item.href.substring(1);
+              return (
+                <li key={item.name}>
+                  <button
+                    onClick={() => handleNavClick(item.href)}
+                    className={`group relative flex items-center gap-1.5 text-sm font-medium transition-all duration-300 ${
+                      isActive ? 'text-flutter-light-blue' : 'text-gray-400 hover:text-flutter-light-blue'
+                    }`}
+                  >
+                    <span className={`text-[10px] font-mono tracking-wider ${isActive ? 'text-flutter-teal' : 'text-gray-500'}`}>
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span>{item.name}</span>
+                    {isActive && (
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-gradient-to-r from-flutter-blue to-flutter-teal rounded-full" />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
             <li>
               <button
                 onClick={handleShare}
