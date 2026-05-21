@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import TicTacToeGame from './TicTacToeGame';
+import GamesCarousel from './GamesCarousel';
 import { AnimatedSection } from './AnimatedSection';
 
-const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'MinMax Algorithm'];
+const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'MinMax Algorithm', 'Supabase'];
+
 
 const FeaturedProjectSection = () => {
   return (
@@ -50,9 +51,10 @@ const FeaturedProjectSection = () => {
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-10" />
 
                   {/* App content */}
-                  <div className="pt-10 pb-6 px-6 h-full flex flex-col justify-center">
-                    <TicTacToeGame />
+                  <div className="pt-10 pb-6 px-4 h-full flex flex-col justify-center">
+                    <GamesCarousel />
                   </div>
+
                 </div>
               </div>
 
@@ -70,17 +72,18 @@ const FeaturedProjectSection = () => {
             className="space-y-6"
           >
             <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
-              Tic Tac Toe vs. an{' '}
+              Play vs. an{' '}
               <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
                 Unbeatable AI
               </span>
             </h3>
 
             <p className="text-gray-300 leading-relaxed">
-              A polished Flutter game built around the classic <span className="text-flutter-light-blue font-medium">MinMax</span> algorithm.
-              The AI evaluates every possible future move to choose the optimal play — meaning the best you can do is draw.
-              Rendered here as a real interactive demo with smooth state transitions and tactile animations.
+              Two polished Flutter-inspired games — <span className="text-flutter-light-blue font-medium">Tic Tac Toe</span> powered by the MinMax algorithm,
+              and a smooth <span className="text-flutter-teal font-medium">Snake</span> classic. Every play is saved globally,
+              so your stats follow you across devices and visits.
             </p>
+
 
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
@@ -95,10 +98,10 @@ const FeaturedProjectSection = () => {
 
             <ul className="space-y-2 text-sm text-gray-400">
               {[
+                'Swipe left/right between Tic Tac Toe & Snake',
+                'Persistent global stats — synced via Supabase',
                 'Recursive MinMax with full game-tree search',
-                'Real-time game state with win-line highlighting',
                 'Spring animations & haptic-feel interactions',
-                'Material 3 design language',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="text-flutter-teal mt-1">▹</span>
@@ -106,6 +109,7 @@ const FeaturedProjectSection = () => {
                 </li>
               ))}
             </ul>
+
           </motion.div>
         </div>
       </AnimatedSection>
