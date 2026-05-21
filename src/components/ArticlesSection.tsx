@@ -1,10 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
-import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { AnimatedSection } from '@/components/AnimatedSection';
+import { useRef } from 'react';
 
 type ArticleCategory = 'flutter' | 'ai' | 'programming';
+
 
 const ArticlesSection = () => {
   const articles = [
@@ -77,57 +78,15 @@ const ArticlesSection = () => {
     }
   ];
 
-  const tabs: { id: ArticleCategory | 'all'; label: string }[] = [
-    { id: 'all', label: 'All' },
-    { id: 'flutter', label: 'Flutter' },
-    { id: 'ai', label: 'AI & ML' },
-    { id: 'programming', label: 'Programming' },
-  ];
-
-  const renderGrid = (items: typeof articles) => (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map((article, index) => (
-        <AnimatedItem key={article.title} delay={index * 0.06}>
-          <Card
-            className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full"
-            onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
-          >
-            <CardHeader>
-              <div className="flex items-center justify-between mb-4">
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
-                  {article.category}
-                </span>
-                <span className="text-xs text-foreground/50">{article.readTime}</span>
-              </div>
-              <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors">
-                {article.title}
-              </CardTitle>
-              <CardDescription className="text-foreground/70 line-clamp-3">
-                {article.description}
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
-                    <span className="text-xs font-bold text-white">ZW</span>
-                  </div>
-                  <span className="text-sm text-foreground/60">Zyad Wael</span>
-                </div>
-                <ExternalLink className="h-4 w-4 text-foreground/40 group-hover:text-flutter-light-blue transition-colors" />
-              </div>
-            </CardContent>
-          </Card>
-        </AnimatedItem>
-      ))}
-    </div>
-  );
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: number) => {
+    scrollerRef.current?.scrollBy({ left: dir * 360, behavior: 'smooth' });
+  };
 
   return (
     <section id="articles" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
             Medium Articles
           </h2>
@@ -145,29 +104,70 @@ const ArticlesSection = () => {
           </Button>
         </AnimatedSection>
 
-        <Tabs defaultValue="all" className="w-full">
-          <TabsList className="mx-auto mb-10 flex flex-wrap justify-center gap-2 bg-transparent h-auto p-0">
-            {tabs.map((t) => (
-              <TabsTrigger
-                key={t.id}
-                value={t.id}
-                className="glass-strong rounded-full px-5 py-2 text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-flutter-blue data-[state=active]:to-flutter-teal data-[state=active]:text-white"
-              >
-                {t.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <AnimatedSection>
+          <div className="relative">
+            <button
+              onClick={() => scrollBy(-1)}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
 
-          <TabsContent value="all">{renderGrid(articles)}</TabsContent>
-          {tabs.filter(t => t.id !== 'all').map((t) => (
-            <TabsContent key={t.id} value={t.id}>
-              {renderGrid(articles.filter(a => a.group === t.id))}
-            </TabsContent>
-          ))}
-        </Tabs>
+            <div
+              ref={scrollerRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 scroll-smooth"
+              style={{ scrollbarWidth: 'thin' }}
+            >
+              {articles.map((article) => (
+                <div key={article.title} className="snap-start shrink-0 w-[85%] sm:w-[360px]">
+                  <Card
+                    className="glass border-0 hover:scale-[1.02] transition-all duration-300 group cursor-pointer h-full"
+                    onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
+                  >
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
+                          {article.category}
+                        </span>
+                        <span className="text-xs text-foreground/50">{article.readTime}</span>
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors line-clamp-2">
+                        {article.title}
+                      </CardTitle>
+                      <CardDescription className="text-foreground/70 line-clamp-3">
+                        {article.description}
+                      </CardDescription>
+                    </CardHeader>
+
+                    <CardContent>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
+                            <span className="text-xs font-bold text-white">ZW</span>
+                          </div>
+                          <span className="text-sm text-foreground/60">Zyad Wael</span>
+                        </div>
+                        <ExternalLink className="h-4 w-4 text-foreground/40 group-hover:text-flutter-light-blue transition-colors" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
 };
 
 export default ArticlesSection;
+
