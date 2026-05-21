@@ -7,10 +7,11 @@ import zyadProfile from '@/assets/zyad-profile.png';
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
   const skills = [
+    'Software Engineer',
+    'Mobile Applications Developer',
     'Flutter Developer',
     'Data Science Student',
     'AI Enthusiast',
-    'Mobile Engineer',
   ];
 
   useEffect(() => {
