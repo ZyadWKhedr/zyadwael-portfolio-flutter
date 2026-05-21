@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -8,25 +7,17 @@ import FeaturedProjectSection from '@/components/FeaturedProjectSection';
 import PackagesSection from '@/components/PackagesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
-import PlanningSection from '@/components/PlanningSection';
-import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
-import CursorParticles from '@/components/CursorParticles';
+import MedusaeBackground from '@/components/MedusaeBackground';
 
 const Index = () => {
   return (
     <div className="min-h-screen relative">
-      {/* Cursor-reactive particle background */}
-      <CursorParticles />
-
-      {/* Navigation */}
+      <MedusaeBackground />
       <Navigation />
-      
-      {/* Social Links */}
       <SocialLinks />
-      
-      {/* Main Content */}
+
       <main className="relative z-10">
         <HeroSection />
         <AboutSection />
@@ -36,12 +27,9 @@ const Index = () => {
         <PackagesSection />
         <TestimonialsSection />
         <ArticlesSection />
-        <PlanningSection />
-        <FaqSection />
         <ContactSection />
       </main>
-      
-      {/* Footer */}
+
       <footer className="py-12 px-4 lg:px-8 border-t border-gray-800 relative z-10">
         <div className="container mx-auto text-center">
           <p className="text-gray-400 mb-4">
@@ -58,4 +46,3 @@ const Index = () => {
 };
 
 export default Index;
-
