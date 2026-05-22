@@ -1,8 +1,7 @@
-
-import { useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
+import Marquee from '@/components/Marquee';
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -32,11 +31,6 @@ const TestimonialsSection = () => {
     }
   ];
 
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scrollBy = (dir: number) => {
-    scrollerRef.current?.scrollBy({ left: dir * 380, behavior: 'smooth' });
-  };
-
   return (
     <section id="testimonials" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
@@ -51,56 +45,35 @@ const TestimonialsSection = () => {
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="relative">
-            <button
-              onClick={() => scrollBy(-1)}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            <div
-              ref={scrollerRef}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 scroll-smooth"
-              style={{ scrollbarWidth: 'thin' }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="snap-start shrink-0 w-[88%] sm:w-[380px]">
-                  <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full">
-                    <CardContent className="p-8">
-                      <div className="absolute top-4 right-4 opacity-20">
-                        <Quote className="h-12 w-12 text-flutter-teal" />
+          <Marquee duration={50} gap={24} className="-mx-4 px-4 py-4">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="w-[340px] sm:w-[380px] shrink-0">
+                <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full">
+                  <CardContent className="p-8">
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <Quote className="h-12 w-12 text-flutter-teal" />
+                    </div>
+                    <p className="text-foreground/70 leading-relaxed mb-6 italic relative z-10 line-clamp-6">
+                      "{testimonial.quote}"
+                    </p>
+                    <div
+                      className={`flex items-center gap-4 ${testimonial.linkedIn ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                      onClick={() => testimonial.linkedIn && window.open(testimonial.linkedIn, '_blank')}
+                    >
+                      <div className="text-3xl p-2 rounded-full bg-gradient-to-r from-flutter-blue to-flutter-teal bg-opacity-20">
+                        {testimonial.avatar}
                       </div>
-                      <p className="text-foreground/70 leading-relaxed mb-6 italic relative z-10 line-clamp-6">
-                        "{testimonial.quote}"
-                      </p>
-                      <div
-                        className={`flex items-center gap-4 ${testimonial.linkedIn ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
-                        onClick={() => testimonial.linkedIn && window.open(testimonial.linkedIn, '_blank')}
-                      >
-                        <div className="text-3xl p-2 rounded-full bg-gradient-to-r from-flutter-blue to-flutter-teal bg-opacity-20">
-                          {testimonial.avatar}
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-flutter-light-blue">{testimonial.name}</h4>
-                          <p className="text-sm text-foreground/60">{testimonial.role}</p>
-                          <p className="text-xs text-flutter-teal">{testimonial.company}</p>
-                        </div>
+                      <div>
+                        <h4 className="font-semibold text-flutter-light-blue">{testimonial.name}</h4>
+                        <p className="text-sm text-foreground/60">{testimonial.role}</p>
+                        <p className="text-xs text-flutter-teal">{testimonial.company}</p>
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </Marquee>
         </AnimatedSection>
       </div>
     </section>
@@ -108,4 +81,3 @@ const TestimonialsSection = () => {
 };
 
 export default TestimonialsSection;
-

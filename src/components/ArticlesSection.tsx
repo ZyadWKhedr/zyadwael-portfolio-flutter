@@ -1,8 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
-import { useRef } from 'react';
+import Marquee from '@/components/Marquee';
 
 type ArticleCategory = 'flutter' | 'ai' | 'programming';
 
@@ -78,11 +78,6 @@ const ArticlesSection = () => {
     }
   ];
 
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scrollBy = (dir: number) => {
-    scrollerRef.current?.scrollBy({ left: dir * 360, behavior: 'smooth' });
-  };
-
   return (
     <section id="articles" className="py-20 px-4 lg:px-8">
       <div className="container mx-auto">
@@ -105,64 +100,43 @@ const ArticlesSection = () => {
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="relative">
-            <button
-              onClick={() => scrollBy(-1)}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-white hover:text-flutter-light-blue hover:scale-110 transition-all"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+          <Marquee duration={60} gap={24} className="-mx-4 px-4 py-4">
+            {articles.map((article) => (
+              <div key={article.title} className="w-[320px] sm:w-[360px] shrink-0">
+                <Card
+                  className="glass border-0 hover:scale-[1.02] transition-all duration-300 group cursor-pointer h-full"
+                  onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
+                >
+                  <CardHeader>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
+                        {article.category}
+                      </span>
+                      <span className="text-xs text-foreground/50">{article.readTime}</span>
+                    </div>
+                    <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors line-clamp-2">
+                      {article.title}
+                    </CardTitle>
+                    <CardDescription className="text-foreground/70 line-clamp-3">
+                      {article.description}
+                    </CardDescription>
+                  </CardHeader>
 
-            <div
-              ref={scrollerRef}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 scroll-smooth"
-              style={{ scrollbarWidth: 'thin' }}
-            >
-              {articles.map((article) => (
-                <div key={article.title} className="snap-start shrink-0 w-[85%] sm:w-[360px]">
-                  <Card
-                    className="glass border-0 hover:scale-[1.02] transition-all duration-300 group cursor-pointer h-full"
-                    onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
-                  >
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${article.gradient} bg-clip-text text-transparent bg-white/10`}>
-                          {article.category}
-                        </span>
-                        <span className="text-xs text-foreground/50">{article.readTime}</span>
-                      </div>
-                      <CardTitle className="text-lg group-hover:text-flutter-light-blue transition-colors line-clamp-2">
-                        {article.title}
-                      </CardTitle>
-                      <CardDescription className="text-foreground/70 line-clamp-3">
-                        {article.description}
-                      </CardDescription>
-                    </CardHeader>
-
-                    <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
-                            <span className="text-xs font-bold text-white">ZW</span>
-                          </div>
-                          <span className="text-sm text-foreground/60">Zyad Wael</span>
+                  <CardContent>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-8 bg-flutter-gradient rounded-full flex items-center justify-center">
+                          <span className="text-xs font-bold text-white">ZW</span>
                         </div>
-                        <ExternalLink className="h-4 w-4 text-foreground/40 group-hover:text-flutter-light-blue transition-colors" />
+                        <span className="text-sm text-foreground/60">Zyad Wael</span>
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
+                      <ExternalLink className="h-4 w-4 text-foreground/40 group-hover:text-flutter-light-blue transition-colors" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </Marquee>
         </AnimatedSection>
       </div>
     </section>
@@ -170,4 +144,3 @@ const ArticlesSection = () => {
 };
 
 export default ArticlesSection;
-
