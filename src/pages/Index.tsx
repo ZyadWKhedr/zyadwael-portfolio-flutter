@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -9,16 +10,18 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
-import MedusaeBackground from '@/components/MedusaeBackground';
 
 const Index = () => {
   return (
     <div className="min-h-screen relative">
-      <MedusaeBackground />
+      {/* Navigation */}
       <Navigation />
+      
+      {/* Social Links */}
       <SocialLinks />
-
-      <main className="relative z-10">
+      
+      {/* Main Content */}
+      <main className="relative">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -29,8 +32,9 @@ const Index = () => {
         <ArticlesSection />
         <ContactSection />
       </main>
-
-      <footer className="py-12 px-4 lg:px-8 border-t border-gray-800 relative z-10">
+      
+      {/* Footer */}
+      <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
         <div className="container mx-auto text-center">
           <p className="text-gray-400 mb-4">
             Built with <span className="text-flutter-light-blue">💙</span> Flutter spirit by{' '}
