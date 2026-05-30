@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Trophy, Minus, Skull, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { fetchGameTotals, recordPlay, type GameTotals } from '@/lib/gameStats';
 
 type Player = 'X' | 'O' | null;
 type Board = Player[];
+type Stats = { wins: number; draws: number; losses: number };
 
 const WINS = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -27,6 +27,7 @@ function minimax(board: Board, isMax: boolean, ai: Player, human: Player): numbe
   if (winner === ai) return 10;
   if (winner === human) return -10;
   if (winner === 'draw') return 0;
+
   let best = isMax ? -Infinity : Infinity;
   for (let i = 0; i < 9; i++) {
     if (!board[i]) {
@@ -47,32 +48,49 @@ function bestMove(board: Board, ai: Player, human: Player): number {
       board[i] = ai;
       const score = minimax(board, false, ai, human);
       board[i] = null;
-      if (score > best) { best = score; move = i; }
+      if (score > best) {
+        best = score;
+        move = i;
+      }
     }
   }
   return move;
 }
 
+const STORAGE_KEY = 'ttt-stats';
+
+function loadStats(): Stats {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* empty */ }
+  return { wins: 0, draws: 0, losses: 0 };
+}
+
+function saveStats(s: Stats) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch { /* empty */ }
+}
+
 const TicTacToeGame = () => {
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-  const [totals, setTotals] = useState<GameTotals>({ total: 0, wins: 0, losses: 0, draws: 0, topScore: 0 });
+  const [stats, setStats] = useState<Stats>(loadStats);
   const [resultAnim, setResultAnim] = useState<string | null>(null);
-  const recordedRef = useRef(false);
   const human: Player = 'X';
   const ai: Player = 'O';
 
   const { winner, line } = checkWinner(board);
   const gameOver = winner !== null;
 
-  useEffect(() => { fetchGameTotals('tictactoe').then(setTotals); }, []);
-
   useEffect(() => {
-    if (!gameOver || recordedRef.current) return;
-    recordedRef.current = true;
-    const result = winner === human ? 'win' : winner === ai ? 'loss' : 'draw';
-    setResultAnim(result);
-    recordPlay('tictactoe', result).then(() => fetchGameTotals('tictactoe').then(setTotals));
+    if (!gameOver) return;
+    if (winner === human) {
+      setStats((prev) => { const next = { ...prev, wins: prev.wins + 1 }; saveStats(next); setResultAnim('win'); return next; });
+    } else if (winner === ai) {
+      setStats((prev) => { const next = { ...prev, losses: prev.losses + 1 }; saveStats(next); setResultAnim('loss'); return next; });
+    } else if (winner === 'draw') {
+      setStats((prev) => { const next = { ...prev, draws: prev.draws + 1 }; saveStats(next); setResultAnim('draw'); return next; });
+    }
     const t = setTimeout(() => setResultAnim(null), 1200);
     return () => clearTimeout(t);
   }, [gameOver, winner]);
@@ -80,7 +98,6 @@ const TicTacToeGame = () => {
   const reset = useCallback(() => {
     setBoard(Array(9).fill(null));
     setIsPlayerTurn(true);
-    recordedRef.current = false;
   }, []);
 
   const handleClick = (i: number) => {
@@ -108,18 +125,21 @@ const TicTacToeGame = () => {
 
   const status = winner === 'draw'
     ? "It's a draw!"
-    : winner === human ? 'You win!'
-    : winner === ai ? 'AI wins!'
-    : isPlayerTurn ? 'Your turn (X)' : 'AI thinking…';
+    : winner === human
+      ? 'You win!'
+      : winner === ai
+        ? 'AI wins!'
+        : isPlayerTurn ? 'Your turn (X)' : 'AI thinking…';
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
+      {/* Counters */}
       <div className="grid grid-cols-4 gap-2 w-full">
         {[
-          { label: 'Total', value: totals.total, Icon: Gamepad2, color: 'text-flutter-light-blue', bg: 'bg-flutter-light-blue/10', border: 'border-flutter-light-blue/20', key: 'total' },
-          { label: 'Wins',  value: totals.wins,  Icon: Trophy,   color: 'text-emerald-400',        bg: 'bg-emerald-500/10',        border: 'border-emerald-500/20',        key: 'win' },
-          { label: 'Draws', value: totals.draws, Icon: Minus,    color: 'text-amber-400',          bg: 'bg-amber-500/10',          border: 'border-amber-500/20',          key: 'draw' },
-          { label: 'Losses',value: totals.losses,Icon: Skull,    color: 'text-rose-400',           bg: 'bg-rose-500/10',           border: 'border-rose-500/20',           key: 'loss' },
+          { label: 'Total', value: stats.wins + stats.draws + stats.losses, Icon: Gamepad2, color: 'text-flutter-light-blue', bg: 'bg-flutter-light-blue/10', border: 'border-flutter-light-blue/20', key: 'total' },
+          { label: 'Wins', value: stats.wins, Icon: Trophy, color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', key: 'win' },
+          { label: 'Draws', value: stats.draws, Icon: Minus, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', key: 'draw' },
+          { label: 'Losses', value: stats.losses, Icon: Skull, color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', key: 'loss' },
         ].map(({ label, value, Icon, color, bg, border, key }) => (
           <motion.div
             key={label}
