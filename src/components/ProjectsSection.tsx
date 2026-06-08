@@ -1,10 +1,8 @@
-
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
-import { Apple } from 'lucide-react';
+import { Github, Apple, ArrowUpRight, Plus } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
@@ -15,145 +13,168 @@ import clipflowIcon from '@/assets/clipflow-icon.png';
 
 type ProjectCategory = 'mobile' | 'desktop' | 'ai';
 
-const ProjectsSection = () => {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+type Project = {
+  title: string;
+  problem: string;
+  description: string;
+  technologies: string[];
+  features: string[];
+  gradient: string;
+  icon: string;
+  iconImage?: string;
+  category: ProjectCategory;
+  storeLinks?: { playStore?: string; appStore?: string };
+  githubUrl?: string;
+};
 
-  const projects = [
-    // Live on App Store & Play Store
+const ProjectsSection = () => {
+  const [active, setActive] = useState<Project | null>(null);
+  const [showAll, setShowAll] = useState<Record<string, boolean>>({});
+
+  const projects: Project[] = [
     {
-      title: "Payss – Social Loyalty Ecosystem",
-      description: "Engineered the consumer-facing Flutter app for a social loyalty platform, integrating seamlessly with a Web Merchant Dashboard and a separate Merchant App to deliver real-time rewards and discovery.",
-      technologies: ["Flutter", "REST APIs", "Real-time Sync", "QR Scanner", "Google Maps"],
+      title: 'Payss',
+      problem: 'Turning everyday purchases into instant, social rewards.',
+      description:
+        "Consumer Flutter app for a social loyalty platform — connecting shoppers, merchants and a web dashboard with real-time rewards and discovery.",
+      technologies: ['Flutter', 'REST APIs', 'Realtime', 'QR Scanner', 'Google Maps'],
       features: [
-        "Built social feed with live merchant 'vibes'",
-        "Implemented QR scanner for instant points",
-        "Integrated smart map with filtering",
-        "Delivered Guest Mode, OTP Login & Dark Mode"
+        "Social feed with live merchant 'vibes'",
+        'QR scanner for instant points',
+        'Smart map with filtering',
+        'Guest Mode, OTP login & Dark Mode',
       ],
-      gradient: "from-flutter-purple to-flutter-teal",
-      icon: "💳",
+      gradient: 'from-flutter-purple to-flutter-teal',
+      icon: '💳',
       iconImage: payssIcon,
-      category: 'mobile' as ProjectCategory,
+      category: 'mobile',
       storeLinks: {
-        playStore: "https://play.google.com/store/apps/details?id=com.payss.app",
-        appStore: "https://apps.apple.com/eg/app/payss/id6767013931"
-      }
+        playStore: 'https://play.google.com/store/apps/details?id=com.payss.app',
+        appStore: 'https://apps.apple.com/eg/app/payss/id6767013931',
+      },
     },
     {
-      title: "Wofoodi – Fuel & Services Locator",
-      description: "Live location tracking app for nearest fuel stations with real-time pricing",
-      technologies: ["Flutter", "Google Maps API", "Firebase Auth", "RESTful API"],
-      features: ["Live location tracking", "Route navigation", "Real-time fuel prices", "Offline caching"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
-      icon: "⛽",
+      title: 'Wofoodi',
+      problem: 'Helping drivers find the nearest fuel at the right price — fast.',
+      description: 'Live location tracking app for nearest fuel stations with real-time pricing.',
+      technologies: ['Flutter', 'Google Maps', 'Firebase Auth', 'REST API'],
+      features: ['Live location tracking', 'Route navigation', 'Real-time fuel prices', 'Offline caching'],
+      gradient: 'from-flutter-blue to-flutter-light-blue',
+      icon: '⛽',
       iconImage: wofoodiIcon,
-      category: 'mobile' as ProjectCategory,
-      storeLinks: { 
-        appStore: "https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551", 
-        playStore: "https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en" 
-      }
+      category: 'mobile',
+      storeLinks: {
+        appStore: 'https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551',
+        playStore: 'https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en',
+      },
     },
     {
-      title: "Amoomy – Transportation & Logistics",
-      description: "Full-featured logistics app with multi-role authentication system",
-      technologies: ["Flutter", "Firebase Auth", "RESTful APIs", "Provider"],
-      features: ["Apple & Google sign-in", "Order management", "Provider scheduling", "Clean Architecture"],
-      gradient: "from-flutter-teal to-flutter-purple",
-      icon: "🚚",
+      title: 'Amoomy',
+      problem: 'Simplifying heavy-transport logistics for clients & providers.',
+      description: 'Full-featured logistics app with multi-role authentication system.',
+      technologies: ['Flutter', 'Firebase Auth', 'REST APIs', 'Provider'],
+      features: ['Apple & Google sign-in', 'Order management', 'Provider scheduling', 'Clean Architecture'],
+      gradient: 'from-flutter-teal to-flutter-purple',
+      icon: '🚚',
       iconImage: amoomyIcon,
-      category: 'mobile' as ProjectCategory,
-      storeLinks: { 
-        appStore: "https://apps.apple.com/eg/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564", 
-        playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en" 
-      }
+      category: 'mobile',
+      storeLinks: {
+        appStore:
+          'https://apps.apple.com/eg/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564',
+        playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en',
+      },
     },
     {
-      title: "Raval – Clothes Shopping",
-      description: "E-commerce app for easy and fast clothing shopping with order tracking",
-      technologies: ["Flutter", "RESTful API", "Clean Architecture", "Provider"],
-      features: ["Category filtering", "Smart cart", "Order tracking", "Real-time order status"],
-      gradient: "from-flutter-purple to-flutter-blue",
-      icon: "👕",
+      title: 'Raval',
+      problem: 'Making clothes shopping effortless from browse to delivery.',
+      description: 'E-commerce app for easy and fast clothing shopping with order tracking.',
+      technologies: ['Flutter', 'REST API', 'Clean Architecture', 'Provider'],
+      features: ['Category filtering', 'Smart cart', 'Order tracking', 'Real-time order status'],
+      gradient: 'from-flutter-purple to-flutter-blue',
+      icon: '👕',
       iconImage: ravalIcon,
-      category: 'mobile' as ProjectCategory,
+      category: 'mobile',
       storeLinks: {
-        appStore: "https://apps.apple.com/us/app/raval/id6756228964",
-        playStore: "https://play.google.com/store/apps/details?id=com.zeroonez.raval"
-      }
+        appStore: 'https://apps.apple.com/us/app/raval/id6756228964',
+        playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.raval',
+      },
     },
     {
-      title: "ClipFlow – Clipboard Manager",
-      description: "macOS clipboard manager that organizes your copy history into smart, searchable flows",
-      technologies: ["Swift", "macOS", "AppKit", "SwiftUI"],
-      features: ["Clipboard history", "Smart search", "Quick paste shortcuts", "Native macOS experience"],
-      gradient: "from-flutter-blue to-flutter-purple",
-      icon: "📋",
+      title: 'ClipFlow',
+      problem: 'Bringing order to chaotic copy-paste workflows on macOS.',
+      description: 'macOS clipboard manager that organizes your copy history into smart, searchable flows.',
+      technologies: ['Swift', 'macOS', 'AppKit', 'SwiftUI'],
+      features: ['Clipboard history', 'Smart search', 'Quick paste shortcuts', 'Native macOS experience'],
+      gradient: 'from-flutter-blue to-flutter-purple',
+      icon: '📋',
       iconImage: clipflowIcon,
-      category: 'desktop' as ProjectCategory,
-      storeLinks: {
-        appStore: "https://apps.apple.com/eg/app/clipflow-clipboard-manager/id6767848683?mt=12"
-      }
+      category: 'desktop',
+      storeLinks: { appStore: 'https://apps.apple.com/eg/app/clipflow-clipboard-manager/id6767848683?mt=12' },
     },
     {
-      title: "Grandmaster Chess",
-      description: "Professional tournament-style chess app with complete rules and move validation",
-      technologies: ["Flutter", "Clean Architecture", "Game Logic", "State Management"],
-      features: ["Move validation", "Check/checkmate detection", "Real-time board updates", "Tournament-style UI"],
-      gradient: "from-flutter-teal to-flutter-purple",
-      icon: "♟️",
+      title: 'Grandmaster Chess',
+      problem: 'A polished, tournament-grade chess experience on mobile.',
+      description: 'Professional tournament-style chess app with complete rules and move validation.',
+      technologies: ['Flutter', 'Clean Architecture', 'Game Logic', 'State Management'],
+      features: ['Move validation', 'Check/checkmate detection', 'Real-time board updates', 'Tournament-style UI'],
+      gradient: 'from-flutter-teal to-flutter-purple',
+      icon: '♟️',
       iconImage: chessIcon,
-      category: 'mobile' as ProjectCategory,
-      storeLinks: {
-        playStore: "https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess"
-      }
+      category: 'mobile',
+      storeLinks: { playStore: 'https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess' },
     },
     {
-      title: "MazoMirror Photobooth",
-      description: "Desktop photobooth app with interactive filters and high-quality photo capture",
-      technologies: ["Flutter Desktop", "Multimedia", "Cross-platform", "Image Processing"],
-      features: ["Photo capture", "Interactive filters", "Real-time effects", "Intuitive UI"],
-      gradient: "from-flutter-blue to-flutter-purple",
-      icon: "📸",
-      category: 'desktop' as ProjectCategory,
+      title: 'MazoMirror Photobooth',
+      problem: 'Delivering an event-ready photobooth on any desktop.',
+      description: 'Desktop photobooth app with interactive filters and high-quality photo capture.',
+      technologies: ['Flutter Desktop', 'Multimedia', 'Cross-platform', 'Image Processing'],
+      features: ['Photo capture', 'Interactive filters', 'Real-time effects', 'Intuitive UI'],
+      gradient: 'from-flutter-blue to-flutter-purple',
+      icon: '📸',
+      category: 'desktop',
     },
     {
-      title: "Gesture Volume Control",
-      description: "Innovative app controlling phone volume using hand gestures via PC camera",
-      technologies: ["Flutter", "Computer Vision", "Gesture Recognition", "Custom Package"],
-      features: ["Hand gesture detection", "Distance mapping", "Reusable package", "Volume control"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "👋",
-      category: 'desktop' as ProjectCategory,
+      title: 'Gesture Volume Control',
+      problem: 'Controlling devices hands-free using just a camera.',
+      description: 'Innovative app controlling phone volume using hand gestures via PC camera.',
+      technologies: ['Flutter', 'Computer Vision', 'Gesture Recognition', 'Custom Package'],
+      features: ['Hand gesture detection', 'Distance mapping', 'Reusable package', 'Volume control'],
+      gradient: 'from-flutter-light-blue to-flutter-teal',
+      icon: '👋',
+      category: 'desktop',
     },
     {
-      title: "Meal Recommendation App",
-      description: "AI-powered meal planner developed during internship at Cellula Technologies",
-      technologies: ["Flutter", "Gemini AI", "Clean Architecture", "Git"],
-      features: ["Personalized meal plans", "Team collaboration", "Trello workflow", "API integration"],
-      gradient: "from-flutter-purple to-flutter-blue",
-      icon: "🍽️",
-      category: 'ai' as ProjectCategory,
+      title: 'Meal Recommendation App',
+      problem: 'Personalized meal plans powered by generative AI.',
+      description: 'AI-powered meal planner developed during internship at Cellula Technologies.',
+      technologies: ['Flutter', 'Gemini AI', 'Clean Architecture', 'Git'],
+      features: ['Personalized meal plans', 'Team collaboration', 'Trello workflow', 'API integration'],
+      gradient: 'from-flutter-purple to-flutter-blue',
+      icon: '🍽️',
+      category: 'ai',
     },
     {
-      title: "Realtime Chat App",
-      description: "Real-time messaging application built with WebSocket technology",
-      technologies: ["WebSocket", "Socket.io", "JavaScript", "Real-time"],
-      features: ["Live messaging", "Real-time communication", "Socket connections", "Instant messaging"],
-      gradient: "from-flutter-blue to-flutter-light-blue",
-      icon: "💬",
-      category: 'ai' as ProjectCategory,
-      githubUrl: "https://github.com/ZyadWKhedr/Chat-App"
+      title: 'Realtime Chat App',
+      problem: 'Real-time messaging with sub-second delivery.',
+      description: 'Real-time messaging application built with WebSocket technology.',
+      technologies: ['WebSocket', 'Socket.io', 'JavaScript', 'Realtime'],
+      features: ['Live messaging', 'Real-time communication', 'Socket connections', 'Instant messaging'],
+      gradient: 'from-flutter-blue to-flutter-light-blue',
+      icon: '💬',
+      category: 'ai',
+      githubUrl: 'https://github.com/ZyadWKhedr/Chat-App',
     },
     {
-      title: "Flappy Bird Clone",
-      description: "High-performance game clone with monetization via Google AdMob",
-      technologies: ["Flutter", "Flame Engine", "Google AdMob", "Local Storage"],
-      features: ["60 FPS gameplay", "Banner & interstitial ads", "High-score tracking", "Smooth animations"],
-      gradient: "from-flutter-light-blue to-flutter-teal",
-      icon: "🐦",
-      category: 'mobile' as ProjectCategory,
-      githubUrl: "https://github.com/ZyadWKhedr/Flapper-Bird"
-    }
+      title: 'Flappy Bird Clone',
+      problem: 'Game development with monetization, end-to-end.',
+      description: 'High-performance game clone with monetization via Google AdMob.',
+      technologies: ['Flutter', 'Flame Engine', 'Google AdMob', 'Local Storage'],
+      features: ['60 FPS gameplay', 'Banner & interstitial ads', 'High-score tracking', 'Smooth animations'],
+      gradient: 'from-flutter-light-blue to-flutter-teal',
+      icon: '🐦',
+      category: 'mobile',
+      githubUrl: 'https://github.com/ZyadWKhedr/Flapper-Bird',
+    },
   ];
 
   const categories: { id: ProjectCategory | 'all'; label: string }[] = [
@@ -163,126 +184,147 @@ const ProjectsSection = () => {
     { id: 'ai', label: 'AI & Realtime' },
   ];
 
-  const renderGrid = (items: typeof projects) => (
-    <div className="grid md:grid-cols-2 gap-8">
-      {items.map((project, index) => (
+  const INITIAL = 6;
+
+  const renderGrid = (items: Project[], tabId: string) => {
+    const expanded = !!showAll[tabId];
+    const visible = expanded ? items : items.slice(0, INITIAL);
+    const remaining = items.length - visible.length;
+
+    return (
+      <>
         <motion.div
-          key={project.title}
-          whileHover={{ scale: 1.04, y: -6 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          onMouseEnter={() => setHoveredProject(index)}
-          onMouseLeave={() => setHoveredProject(null)}
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
         >
-          <Card className="glass border-0 group cursor-pointer overflow-hidden h-full">
-            <CardHeader className="relative">
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-20 flex items-center justify-center`}>
-                  {project.iconImage ? (
-                    <img src={project.iconImage} alt={`${project.title} logo`} className="h-12 w-12 rounded-lg object-cover" />
-                  ) : (
-                    <span className="text-4xl">{project.icon}</span>
-                  )}
-                </div>
-                <div className="flex space-x-2">
-                  {project.githubUrl && (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="transition-opacity"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(project.githubUrl, '_blank');
-                      }}
-                    >
-                      <Github className="h-4 w-4" />
-                    </Button>
-                  )}
-                  {project.storeLinks?.playStore && project.storeLinks.playStore !== "#" && (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="transition-opacity"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(project.storeLinks.playStore, '_blank');
-                      }}
-                      title="Google Play"
-                    >
-                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                      </svg>
-                    </Button>
-                  )}
-                  {project.storeLinks?.appStore && project.storeLinks.appStore !== "#" && (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="transition-opacity"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(project.storeLinks.appStore, '_blank');
-                      }}
-                      title="App Store"
-                    >
-                      <Apple className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
-              </div>
-              <CardTitle className={`text-xl bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
-                {project.title}
-              </CardTitle>
-              <CardDescription className="text-foreground/70">
-                {project.description}
-              </CardDescription>
-            </CardHeader>
+          <AnimatePresence mode="popLayout">
+            {visible.map((project, index) => (
+              <motion.button
+                layout
+                key={project.title}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: 'easeOut' }}
+                whileHover={{ y: -6 }}
+                onClick={() => setActive(project)}
+                className="group text-left glass rounded-2xl overflow-hidden border border-white/5 hover:border-flutter-light-blue/30 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50"
+              >
+                {/* Thumbnail */}
+                <div className={`relative aspect-[16/10] bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage:
+                        'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                      backgroundSize: '18px 18px',
+                    }}
+                  />
+                  <motion.div
+                    whileHover={{ scale: 1.08, rotate: -2 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    {project.iconImage ? (
+                      <img
+                        src={project.iconImage}
+                        alt={`${project.title} logo`}
+                        className="h-20 w-20 md:h-24 md:w-24 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/20"
+                      />
+                    ) : (
+                      <span className="text-6xl md:text-7xl drop-shadow-lg">{project.icon}</span>
+                    )}
+                  </motion.div>
 
-            <CardContent>
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-flutter-light-blue mb-3">Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 glass-strong rounded-full text-xs font-mono text-foreground/70"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                  {/* Category badge */}
+                  <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
+                    {project.category === 'mobile' ? 'Mobile' : project.category === 'desktop' ? 'Desktop' : 'AI'}
+                  </span>
 
-              <div className={`transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                <h4 className="text-sm font-semibold text-flutter-teal mb-3">Key Features</h4>
-                <ul className="space-y-1">
-                  {project.features.map((feature) => (
-                    <li key={feature} className="text-sm text-foreground/60 flex items-center">
-                      <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
+                  {/* Hover arrow */}
+                  <div className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    <ArrowUpRight className="h-4 w-4 text-white" />
+                  </div>
+                </div>
+
+                {/* Body — compact */}
+                <div className="p-4 md:p-5">
+                  <h3 className="text-base md:text-lg font-semibold text-white group-hover:text-flutter-light-blue transition-colors line-clamp-1">
+                    {project.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm text-gray-400 leading-snug line-clamp-2 min-h-[2.5rem]">
+                    {project.problem}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 rounded-full text-[10px] font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono text-gray-400 bg-white/5">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.button>
+            ))}
+          </AnimatePresence>
         </motion.div>
-      ))}
-    </div>
-  );
+
+        {remaining > 0 && (
+          <div className="flex justify-center mt-10">
+            <Button
+              variant="outline"
+              onClick={() => setShowAll((s) => ({ ...s, [tabId]: true }))}
+              className="rounded-full border-flutter-light-blue/30 bg-white/5 hover:bg-flutter-light-blue/10 text-white px-6"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Show {remaining} more project{remaining > 1 ? 's' : ''}
+            </Button>
+          </div>
+        )}
+        {expanded && items.length > INITIAL && (
+          <div className="flex justify-center mt-10">
+            <Button
+              variant="ghost"
+              onClick={() => setShowAll((s) => ({ ...s, [tabId]: false }))}
+              className="rounded-full text-gray-400 hover:text-white"
+            >
+              Show less
+            </Button>
+          </div>
+        )}
+      </>
+    );
+  };
 
   return (
-    <section id="projects" className="py-20 px-4 lg:px-8">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
-            Featured Projects
+    <section id="projects" className="py-20 px-4 lg:px-8 relative">
+      <div className="container mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <span className="inline-block text-[11px] font-semibold tracking-[0.2em] uppercase text-flutter-teal mb-3">
+            What I Build
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-4">
+            Problems I Solve
           </h2>
-          <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
-          <p className="text-muted-foreground mt-6 text-lg">
-            Mobile applications that showcase my development expertise
+          <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full" />
+          <p className="text-muted-foreground mt-6 text-base md:text-lg max-w-2xl mx-auto">
+            Shipped products across mobile, desktop & AI — each built to solve a real,
+            human problem with clean architecture and craft.
           </p>
-        </div>
+        </motion.div>
 
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="mx-auto mb-10 flex flex-wrap justify-center gap-2 bg-transparent h-auto p-0">
@@ -297,14 +339,108 @@ const ProjectsSection = () => {
             ))}
           </TabsList>
 
-          <TabsContent value="all">{renderGrid(projects)}</TabsContent>
-          {categories.filter(c => c.id !== 'all').map((cat) => (
-            <TabsContent key={cat.id} value={cat.id}>
-              {renderGrid(projects.filter(p => p.category === cat.id))}
-            </TabsContent>
-          ))}
+          <TabsContent value="all">{renderGrid(projects, 'all')}</TabsContent>
+          {categories
+            .filter((c) => c.id !== 'all')
+            .map((cat) => (
+              <TabsContent key={cat.id} value={cat.id}>
+                {renderGrid(projects.filter((p) => p.category === cat.id), cat.id)}
+              </TabsContent>
+            ))}
         </Tabs>
       </div>
+
+      {/* Detail dialog */}
+      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+        <DialogContent className="glass-strong border-flutter-light-blue/20 max-w-2xl">
+          {active && (
+            <>
+              <div className={`relative -mx-6 -mt-6 aspect-[16/8] bg-gradient-to-br ${active.gradient} rounded-t-lg overflow-hidden`}>
+                <div
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                    backgroundSize: '18px 18px',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {active.iconImage ? (
+                    <img
+                      src={active.iconImage}
+                      alt={active.title}
+                      className="h-24 w-24 md:h-28 md:w-28 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20"
+                    />
+                  ) : (
+                    <span className="text-7xl">{active.icon}</span>
+                  )}
+                </div>
+              </div>
+              <DialogHeader className="mt-4">
+                <DialogTitle className="text-2xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
+                  {active.title}
+                </DialogTitle>
+                <DialogDescription className="text-flutter-teal font-medium">
+                  {active.problem}
+                </DialogDescription>
+              </DialogHeader>
+
+              <p className="text-sm text-gray-300 leading-relaxed">{active.description}</p>
+
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-flutter-light-blue mb-2">
+                  Technologies
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {active.technologies.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 rounded-full text-xs font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-flutter-teal mb-2">
+                  Key Features
+                </h4>
+                <ul className="space-y-1.5">
+                  {active.features.map((f) => (
+                    <li key={f} className="text-sm text-gray-300 flex items-start">
+                      <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2 mt-2 flex-shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-wrap gap-2 pt-2">
+                {active.githubUrl && (
+                  <Button variant="outline" size="sm" onClick={() => window.open(active.githubUrl, '_blank')}>
+                    <Github className="h-4 w-4 mr-2" /> GitHub
+                  </Button>
+                )}
+                {active.storeLinks?.playStore && (
+                  <Button variant="outline" size="sm" onClick={() => window.open(active.storeLinks!.playStore, '_blank')}>
+                    <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                    </svg>
+                    Google Play
+                  </Button>
+                )}
+                {active.storeLinks?.appStore && (
+                  <Button variant="outline" size="sm" onClick={() => window.open(active.storeLinks!.appStore, '_blank')}>
+                    <Apple className="h-4 w-4 mr-2" /> App Store
+                  </Button>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
