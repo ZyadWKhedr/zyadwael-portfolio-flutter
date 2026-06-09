@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
-import { Github, Apple, ArrowUpRight, Plus } from 'lucide-react';
+import { Github, Apple, ArrowUpRight, Plus, Brain, Cog, TrendingUp } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useIsMobile } from '@/hooks/use-mobile';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
 import amoomyIcon from '@/assets/amoomy-icon.png';
@@ -19,6 +21,7 @@ type Project = {
   description: string;
   technologies: string[];
   features: string[];
+  bullets: { edge: string; tech: string; impact: string };
   gradient: string;
   icon: string;
   iconImage?: string;
