@@ -85,9 +85,9 @@ const ArticlesSection = () => {
   ];
 
   const renderGrid = (items: typeof articles) => (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map((article, index) => (
-        <AnimatedItem key={article.title} delay={index * 0.06}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.slice(0, 999).map((article, index) => (
+        <AnimatedItem key={article.title} delay={index * 0.06} className={index >= 2 ? 'hidden md:block' : ''}>
           <Card
             className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full"
             onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
