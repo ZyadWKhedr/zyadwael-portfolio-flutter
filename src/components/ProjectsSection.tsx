@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
-import { Github, Apple, ArrowUpRight, Plus } from 'lucide-react';
+import { Github, Apple, ArrowUpRight, Plus, Brain, Cog, TrendingUp } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useIsMobile } from '@/hooks/use-mobile';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
 import amoomyIcon from '@/assets/amoomy-icon.png';
@@ -19,6 +21,7 @@ type Project = {
   description: string;
   technologies: string[];
   features: string[];
+  bullets: { edge: string; tech: string; impact: string };
   gradient: string;
   icon: string;
   iconImage?: string;
@@ -30,6 +33,7 @@ type Project = {
 const ProjectsSection = () => {
   const [active, setActive] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});
+  const isMobile = useIsMobile();
 
   const projects: Project[] = [
     {
@@ -44,6 +48,11 @@ const ProjectsSection = () => {
         'Smart map with filtering',
         'Guest Mode, OTP login & Dark Mode',
       ],
+      bullets: {
+        edge: 'Loyalty that feels social — instant rewards from every scan.',
+        tech: 'Flutter + Realtime APIs, QR + Google Maps with offline-safe caching.',
+        impact: 'Connects shoppers and merchants in one tap.',
+      },
       gradient: 'from-flutter-purple to-flutter-teal',
       icon: '💳',
       iconImage: payssIcon,
@@ -59,6 +68,11 @@ const ProjectsSection = () => {
       description: 'Live location tracking app for nearest fuel stations with real-time pricing.',
       technologies: ['Flutter', 'Google Maps', 'Firebase Auth', 'REST API'],
       features: ['Live location tracking', 'Route navigation', 'Real-time fuel prices', 'Offline caching'],
+      bullets: {
+        edge: 'Finds the cheapest fuel within seconds of opening the app.',
+        tech: 'Flutter, Google Maps SDK, Firebase Auth, live REST sync.',
+        impact: 'Live in two GCC markets with growing daily usage.',
+      },
       gradient: 'from-flutter-blue to-flutter-light-blue',
       icon: '⛽',
       iconImage: wofoodiIcon,
@@ -74,6 +88,11 @@ const ProjectsSection = () => {
       description: 'Full-featured logistics app with multi-role authentication system.',
       technologies: ['Flutter', 'Firebase Auth', 'REST APIs', 'Provider'],
       features: ['Apple & Google sign-in', 'Order management', 'Provider scheduling', 'Clean Architecture'],
+      bullets: {
+        edge: 'One app for clients, drivers and ops — no friction.',
+        tech: 'Flutter + Provider, Apple/Google sign-in, Clean Architecture.',
+        impact: 'Streamlined heavy-transport bookings end-to-end.',
+      },
       gradient: 'from-flutter-teal to-flutter-purple',
       icon: '🚚',
       iconImage: amoomyIcon,
@@ -90,6 +109,11 @@ const ProjectsSection = () => {
       description: 'E-commerce app for easy and fast clothing shopping with order tracking.',
       technologies: ['Flutter', 'REST API', 'Clean Architecture', 'Provider'],
       features: ['Category filtering', 'Smart cart', 'Order tracking', 'Real-time order status'],
+      bullets: {
+        edge: 'Browse → checkout → track in under three taps.',
+        tech: 'Flutter + REST, Provider state, Clean Architecture layers.',
+        impact: 'Live retail app shipping orders daily.',
+      },
       gradient: 'from-flutter-purple to-flutter-blue',
       icon: '👕',
       iconImage: ravalIcon,
@@ -105,6 +129,11 @@ const ProjectsSection = () => {
       description: 'macOS clipboard manager that organizes your copy history into smart, searchable flows.',
       technologies: ['Swift', 'macOS', 'AppKit', 'SwiftUI'],
       features: ['Clipboard history', 'Smart search', 'Quick paste shortcuts', 'Native macOS experience'],
+      bullets: {
+        edge: 'Never lose a copied snippet — searchable, organized history.',
+        tech: 'Native Swift + SwiftUI on macOS with AppKit hooks.',
+        impact: 'Shipped on the Mac App Store.',
+      },
       gradient: 'from-flutter-blue to-flutter-purple',
       icon: '📋',
       iconImage: clipflowIcon,
@@ -117,6 +146,11 @@ const ProjectsSection = () => {
       description: 'Professional tournament-style chess app with complete rules and move validation.',
       technologies: ['Flutter', 'Clean Architecture', 'Game Logic', 'State Management'],
       features: ['Move validation', 'Check/checkmate detection', 'Real-time board updates', 'Tournament-style UI'],
+      bullets: {
+        edge: 'Tournament-grade chess with full rule validation.',
+        tech: 'Flutter with custom game-logic engine and reactive state.',
+        impact: 'Polished mobile experience on Google Play.',
+      },
       gradient: 'from-flutter-teal to-flutter-purple',
       icon: '♟️',
       iconImage: chessIcon,
@@ -129,6 +163,11 @@ const ProjectsSection = () => {
       description: 'Desktop photobooth app with interactive filters and high-quality photo capture.',
       technologies: ['Flutter Desktop', 'Multimedia', 'Cross-platform', 'Image Processing'],
       features: ['Photo capture', 'Interactive filters', 'Real-time effects', 'Intuitive UI'],
+      bullets: {
+        edge: 'Event-ready photobooth that runs on any laptop.',
+        tech: 'Flutter Desktop with real-time image processing pipeline.',
+        impact: 'Deployed live at events with zero crash reports.',
+      },
       gradient: 'from-flutter-blue to-flutter-purple',
       icon: '📸',
       category: 'desktop',
@@ -139,6 +178,11 @@ const ProjectsSection = () => {
       description: 'Innovative app controlling phone volume using hand gestures via PC camera.',
       technologies: ['Flutter', 'Computer Vision', 'Gesture Recognition', 'Custom Package'],
       features: ['Hand gesture detection', 'Distance mapping', 'Reusable package', 'Volume control'],
+      bullets: {
+        edge: 'Hands-free device control using only a webcam.',
+        tech: 'Flutter + computer vision pipeline, packaged as reusable plugin.',
+        impact: 'Open-source package adopted by other developers.',
+      },
       gradient: 'from-flutter-light-blue to-flutter-teal',
       icon: '👋',
       category: 'desktop',
@@ -149,6 +193,11 @@ const ProjectsSection = () => {
       description: 'AI-powered meal planner developed during internship at Cellula Technologies.',
       technologies: ['Flutter', 'Gemini AI', 'Clean Architecture', 'Git'],
       features: ['Personalized meal plans', 'Team collaboration', 'Trello workflow', 'API integration'],
+      bullets: {
+        edge: 'Personalized meal plans generated by Gemini AI.',
+        tech: 'Flutter + Gemini API integrated via Clean Architecture.',
+        impact: 'Built during internship at Cellula Technologies.',
+      },
       gradient: 'from-flutter-purple to-flutter-blue',
       icon: '🍽️',
       category: 'ai',
@@ -159,6 +208,11 @@ const ProjectsSection = () => {
       description: 'Real-time messaging application built with WebSocket technology.',
       technologies: ['WebSocket', 'Socket.io', 'JavaScript', 'Realtime'],
       features: ['Live messaging', 'Real-time communication', 'Socket connections', 'Instant messaging'],
+      bullets: {
+        edge: 'Sub-second delivery — chat that actually feels live.',
+        tech: 'WebSocket + Socket.io with reconnection and presence.',
+        impact: 'Reference architecture for real-time apps.',
+      },
       gradient: 'from-flutter-blue to-flutter-light-blue',
       icon: '💬',
       category: 'ai',
@@ -170,6 +224,11 @@ const ProjectsSection = () => {
       description: 'High-performance game clone with monetization via Google AdMob.',
       technologies: ['Flutter', 'Flame Engine', 'Google AdMob', 'Local Storage'],
       features: ['60 FPS gameplay', 'Banner & interstitial ads', 'High-score tracking', 'Smooth animations'],
+      bullets: {
+        edge: '60 FPS gameplay with monetization baked in.',
+        tech: 'Flutter Flame engine with Google AdMob integration.',
+        impact: 'End-to-end shipped game, AdMob-verified.',
+      },
       gradient: 'from-flutter-light-blue to-flutter-teal',
       icon: '🐦',
       category: 'mobile',
@@ -374,99 +433,144 @@ const ProjectsSection = () => {
         </Tabs>
       </div>
 
-      {/* Detail dialog */}
-      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent className="glass-strong border-flutter-light-blue/20 max-w-2xl">
-          {active && (
-            <>
-              <div className={`relative -mx-6 -mt-6 aspect-[16/8] bg-gradient-to-br ${active.gradient} rounded-t-lg overflow-hidden`}>
-                <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-                    backgroundSize: '18px 18px',
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {active.iconImage ? (
-                    <img
-                      src={active.iconImage}
-                      alt={active.title}
-                      className="h-24 w-24 md:h-28 md:w-28 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20"
-                    />
-                  ) : (
-                    <span className="text-7xl">{active.icon}</span>
-                  )}
-                </div>
-              </div>
-              <DialogHeader className="mt-4">
-                <DialogTitle className="text-2xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
-                  {active.title}
-                </DialogTitle>
-                <DialogDescription className="text-flutter-teal font-medium">
-                  {active.problem}
-                </DialogDescription>
-              </DialogHeader>
-
-              <p className="text-sm text-gray-300 leading-relaxed">{active.description}</p>
-
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-flutter-light-blue mb-2">
-                  Technologies
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {active.technologies.map((t) => (
-                    <span
-                      key={t}
-                      className="px-3 py-1 rounded-full text-xs font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-flutter-teal mb-2">
-                  Key Features
-                </h4>
-                <ul className="space-y-1.5">
-                  {active.features.map((f) => (
-                    <li key={f} className="text-sm text-gray-300 flex items-start">
-                      <span className="w-1.5 h-1.5 bg-flutter-teal rounded-full mr-2 mt-2 flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-wrap gap-2 pt-2">
-                {active.githubUrl && (
-                  <Button variant="outline" size="sm" onClick={() => window.open(active.githubUrl, '_blank')}>
-                    <Github className="h-4 w-4 mr-2" /> GitHub
-                  </Button>
-                )}
-                {active.storeLinks?.playStore && (
-                  <Button variant="outline" size="sm" onClick={() => window.open(active.storeLinks!.playStore, '_blank')}>
-                    <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                    </svg>
-                    Google Play
-                  </Button>
-                )}
-                {active.storeLinks?.appStore && (
-                  <Button variant="outline" size="sm" onClick={() => window.open(active.storeLinks!.appStore, '_blank')}>
-                    <Apple className="h-4 w-4 mr-2" /> App Store
-                  </Button>
+      {/* Detail — Drawer on mobile, Dialog on desktop */}
+      {active && !isMobile && (
+        <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+          <DialogContent className="glass-strong border-flutter-light-blue/20 max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className={`relative -mx-6 -mt-6 aspect-[16/8] bg-gradient-to-br ${active.gradient} rounded-t-lg overflow-hidden`}>
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                  backgroundSize: '18px 18px',
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                {active.iconImage ? (
+                  <img src={active.iconImage} alt={active.title} className="h-28 w-28 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20" />
+                ) : (
+                  <span className="text-7xl">{active.icon}</span>
                 )}
               </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+            </div>
+            <DialogHeader className="mt-4">
+              <DialogTitle className="text-2xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
+                {active.title}
+              </DialogTitle>
+              <DialogDescription className="text-flutter-teal font-medium">
+                {active.problem}
+              </DialogDescription>
+            </DialogHeader>
+            <ProjectBody project={active} />
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {active && isMobile && (
+        <Drawer open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+          <DrawerContent className="glass-strong border-flutter-light-blue/20 max-h-[92vh]">
+            <div className={`relative aspect-[16/7] bg-gradient-to-br ${active.gradient} overflow-hidden`}>
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                  backgroundSize: '18px 18px',
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                {active.iconImage ? (
+                  <img src={active.iconImage} alt={active.title} className="h-20 w-20 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20" />
+                ) : (
+                  <span className="text-6xl">{active.icon}</span>
+                )}
+              </div>
+            </div>
+            <DrawerHeader className="text-left">
+              <DrawerTitle className="text-xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
+                {active.title}
+              </DrawerTitle>
+              <DrawerDescription className="text-flutter-teal font-medium text-sm">
+                {active.problem}
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="px-4 pb-6 overflow-y-auto">
+              <ProjectBody project={active} />
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
     </section>
   );
 };
+
+const ProjectBody = ({ project }: { project: Project }) => (
+  <div className="space-y-5">
+    {/* 3-bullet formula */}
+    <div className="space-y-2.5">
+      <BulletRow icon={Brain} color="text-flutter-purple" label="AI Edge" text={project.bullets.edge} />
+      <BulletRow icon={Cog} color="text-flutter-light-blue" label="Tech Engine" text={project.bullets.tech} />
+      <BulletRow icon={TrendingUp} color="text-flutter-teal" label="Impact" text={project.bullets.impact} />
+    </div>
+
+    <div>
+      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-flutter-light-blue mb-2">
+        Stack
+      </h4>
+      <div className="flex flex-wrap gap-1.5">
+        {project.technologies.map((t) => (
+          <span
+            key={t}
+            className="px-2.5 py-0.5 rounded-full text-[11px] font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div className="flex flex-wrap gap-2 pt-1">
+      {project.githubUrl && (
+        <Button variant="outline" size="sm" onClick={() => window.open(project.githubUrl, '_blank')}>
+          <Github className="h-4 w-4 mr-2" /> GitHub
+        </Button>
+      )}
+      {project.storeLinks?.playStore && (
+        <Button variant="outline" size="sm" onClick={() => window.open(project.storeLinks!.playStore, '_blank')}>
+          <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+          </svg>
+          Google Play
+        </Button>
+      )}
+      {project.storeLinks?.appStore && (
+        <Button variant="outline" size="sm" onClick={() => window.open(project.storeLinks!.appStore, '_blank')}>
+          <Apple className="h-4 w-4 mr-2" /> App Store
+        </Button>
+      )}
+    </div>
+  </div>
+);
+
+const BulletRow = ({
+  icon: Icon,
+  color,
+  label,
+  text,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  label: string;
+  text: string;
+}) => (
+  <div className="flex gap-3 items-start rounded-xl border border-white/5 bg-white/[0.02] p-3">
+    <div className={`shrink-0 h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center ${color}`}>
+      <Icon className="h-4 w-4" />
+    </div>
+    <div className="min-w-0">
+      <div className={`text-[10px] font-bold uppercase tracking-wider ${color}`}>{label}</div>
+      <p className="text-sm text-gray-300 leading-snug mt-0.5">{text}</p>
+    </div>
+  </div>
+);
 
 export default ProjectsSection;
