@@ -195,10 +195,12 @@ const ProjectsSection = () => {
       <>
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {visible.map((project, index) => (
+            {visible.map((project, index) => {
+              const isAI = project.category === 'ai';
+              return (
               <motion.button
                 layout
                 key={project.title}
@@ -207,11 +209,22 @@ const ProjectsSection = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: 'easeOut' }}
                 whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => setActive(project)}
-                className="group text-left glass rounded-2xl overflow-hidden border border-white/5 hover:border-flutter-light-blue/30 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50"
+                className={`relative group text-left glass rounded-2xl overflow-hidden border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50 ${
+                  isAI
+                    ? 'border-flutter-purple/30 hover:border-flutter-purple/60 shadow-[0_0_24px_-8px_rgba(168,85,247,0.4)]'
+                    : 'border-white/5 hover:border-flutter-light-blue/30'
+                }`}
               >
+                {/* AI neural glow */}
+                {isAI && (
+                  <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                       style={{ background: 'radial-gradient(120% 60% at 50% 0%, rgba(168,85,247,0.25), transparent 60%)' }} />
+                )}
+
                 {/* Thumbnail */}
-                <div className={`relative aspect-[16/10] bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+                <div className={`relative aspect-[16/11] bg-gradient-to-br ${project.gradient} overflow-hidden`}>
                   <div
                     className="absolute inset-0 opacity-20"
                     style={{
@@ -229,33 +242,44 @@ const ProjectsSection = () => {
                       <img
                         src={project.iconImage}
                         alt={`${project.title} logo`}
-                        className="h-20 w-20 md:h-24 md:w-24 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/20"
+                        className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/20"
                       />
                     ) : (
-                      <span className="text-6xl md:text-7xl drop-shadow-lg">{project.icon}</span>
+                      <span className="text-4xl sm:text-6xl md:text-7xl drop-shadow-lg">{project.icon}</span>
                     )}
                   </motion.div>
 
-                  {/* Category badge */}
-                  <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
-                    {project.category === 'mobile' ? 'Mobile' : project.category === 'desktop' ? 'Desktop' : 'AI'}
-                  </span>
+                  {/* AI badge with pulse */}
+                  {isAI && (
+                    <span className="absolute top-2 left-2 inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-flutter-purple to-flutter-blue text-white shadow-lg shadow-flutter-purple/40">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                      </span>
+                      AI
+                    </span>
+                  )}
+                  {!isAI && (
+                    <span className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
+                      {project.category === 'mobile' ? 'Mobile' : 'Desktop'}
+                    </span>
+                  )}
 
-                  {/* Hover arrow */}
-                  <div className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                  {/* Hover arrow — hidden on mobile */}
+                  <div className="hidden sm:flex absolute top-3 right-3 h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     <ArrowUpRight className="h-4 w-4 text-white" />
                   </div>
                 </div>
 
-                {/* Body — compact */}
-                <div className="p-4 md:p-5">
-                  <h3 className="text-base md:text-lg font-semibold text-white group-hover:text-flutter-light-blue transition-colors line-clamp-1">
+                {/* Body — ultra compact on mobile */}
+                <div className="p-3 sm:p-4 md:p-5">
+                  <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white group-hover:text-flutter-light-blue transition-colors line-clamp-1">
                     {project.title}
                   </h3>
-                  <p className="mt-1.5 text-sm text-gray-400 leading-snug line-clamp-2 min-h-[2.5rem]">
+                  <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm text-gray-400 leading-snug line-clamp-2 sm:min-h-[2.5rem]">
                     {project.problem}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
+                  <div className="mt-2 sm:mt-3 hidden sm:flex flex-wrap gap-1.5">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span
                         key={tech}
@@ -272,7 +296,7 @@ const ProjectsSection = () => {
                   </div>
                 </div>
               </motion.button>
-            ))}
+            );})}
           </AnimatePresence>
         </motion.div>
 

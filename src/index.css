@@ -104,3 +104,13 @@
     animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
   }
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

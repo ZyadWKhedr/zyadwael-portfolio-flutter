@@ -44,7 +44,36 @@ const TestimonialsSection = () => {
           </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Mobile: horizontal snap carousel */}
+        <div className="md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 scrollbar-hide">
+          {testimonials.map((t, i) => (
+            <AnimatedItem key={i} delay={i * 0.1}>
+              <Card className="glass border-0 snap-center shrink-0 w-[82vw] max-w-sm overflow-hidden relative">
+                <CardContent className="p-6">
+                  <Quote className="h-8 w-8 text-flutter-teal/30 mb-2" />
+                  <p className="text-sm text-foreground/80 leading-relaxed mb-4 italic line-clamp-4">
+                    "{t.quote}"
+                  </p>
+                  <div
+                    className={`flex items-center gap-3 ${t.linkedIn ? 'cursor-pointer' : ''}`}
+                    onClick={() => t.linkedIn && window.open(t.linkedIn, '_blank')}
+                  >
+                    <div className="text-2xl p-1.5 rounded-full bg-gradient-to-r from-flutter-blue/30 to-flutter-teal/30">
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-flutter-light-blue">{t.name}</h4>
+                      <p className="text-[11px] text-flutter-teal">{t.company}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </AnimatedItem>
+          ))}
+        </div>
+
+        {/* Desktop: grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <AnimatedItem key={index} delay={index * 0.1}>
               <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full">

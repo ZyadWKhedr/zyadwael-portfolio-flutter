@@ -85,9 +85,9 @@ const ArticlesSection = () => {
   ];
 
   const renderGrid = (items: typeof articles) => (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map((article, index) => (
-        <AnimatedItem key={article.title} delay={index * 0.06}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.slice(0, 999).map((article, index) => (
+        <AnimatedItem key={article.title} delay={index * 0.06} className={index >= 2 ? 'hidden md:block' : ''}>
           <Card
             className="glass border-0 hover:scale-105 transition-all duration-300 group cursor-pointer h-full"
             onClick={() => window.open(article.url || 'https://medium.com/@ziad.w.khedr', '_blank')}
@@ -121,6 +121,14 @@ const ArticlesSection = () => {
           </Card>
         </AnimatedItem>
       ))}
+      {items.length > 2 && (
+        <button
+          onClick={() => window.open('https://medium.com/@ziad.w.khedr', '_blank')}
+          className="md:hidden flex items-center justify-center gap-2 text-flutter-light-blue font-medium text-sm py-3 rounded-xl border border-flutter-light-blue/20 bg-flutter-light-blue/5 hover:bg-flutter-light-blue/10 transition-colors"
+        >
+          View all {items.length} on Medium <ExternalLink className="h-4 w-4" />
+        </button>
+      )}
     </div>
   );
 
