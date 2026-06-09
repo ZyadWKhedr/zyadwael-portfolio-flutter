@@ -33,6 +33,7 @@ type Project = {
 const ProjectsSection = () => {
   const [active, setActive] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});
+  const isMobile = useIsMobile();
 
   const projects: Project[] = [
     {
