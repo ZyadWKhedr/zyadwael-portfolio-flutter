@@ -121,6 +121,14 @@ const ArticlesSection = () => {
           </Card>
         </AnimatedItem>
       ))}
+      {items.length > 2 && (
+        <button
+          onClick={() => window.open('https://medium.com/@ziad.w.khedr', '_blank')}
+          className="md:hidden flex items-center justify-center gap-2 text-flutter-light-blue font-medium text-sm py-3 rounded-xl border border-flutter-light-blue/20 bg-flutter-light-blue/5 hover:bg-flutter-light-blue/10 transition-colors"
+        >
+          View all {items.length} on Medium <ExternalLink className="h-4 w-4" />
+        </button>
+      )}
     </div>
   );
 
