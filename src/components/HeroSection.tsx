@@ -61,7 +61,7 @@ const HeroSection = () => {
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
                 </span>
                 <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-300">
-                  Available
+                  Available for projects
                 </span>
               </div>
               <h1 className="text-2xl font-bold leading-tight">
