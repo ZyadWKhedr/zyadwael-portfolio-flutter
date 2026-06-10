@@ -22,7 +22,6 @@ type Project = {
   technologies: string[];
   features: string[];
   bullets: { edge: string; tech: string; impact: string };
-  result?: string;
   gradient: string;
   icon: string;
   iconImage?: string;
@@ -54,7 +53,6 @@ const ProjectsSection = () => {
         tech: 'Flutter + Realtime APIs, QR + Google Maps with offline-safe caching.',
         impact: 'Connects shoppers and merchants in one tap.',
       },
-      result: '4.8★ App Store rating at launch',
       gradient: 'from-flutter-purple to-flutter-teal',
       icon: '💳',
       iconImage: payssIcon,
@@ -75,7 +73,6 @@ const ProjectsSection = () => {
         tech: 'Flutter, Google Maps SDK, Firebase Auth, live REST sync.',
         impact: 'Live in two GCC markets with growing daily usage.',
       },
-      result: '40% increase in 30-day user retention',
       gradient: 'from-flutter-blue to-flutter-light-blue',
       icon: '⛽',
       iconImage: wofoodiIcon,
@@ -96,7 +93,6 @@ const ProjectsSection = () => {
         tech: 'Flutter + Provider, Apple/Google sign-in, Clean Architecture.',
         impact: 'Streamlined heavy-transport bookings end-to-end.',
       },
-      result: '3× faster than the client\'s previous app',
       gradient: 'from-flutter-teal to-flutter-purple',
       icon: '🚚',
       iconImage: amoomyIcon,
@@ -357,11 +353,6 @@ const ProjectsSection = () => {
                       </span>
                     )}
                   </div>
-                  {project.result && (
-                    <p className="mt-2 text-[11px] sm:text-xs font-bold text-flutter-teal leading-snug">
-                      📈 Result: {project.result}
-                    </p>
-                  )}
                 </div>
               </motion.button>
             );})}

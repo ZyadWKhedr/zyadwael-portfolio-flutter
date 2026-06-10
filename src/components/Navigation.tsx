@@ -97,14 +97,6 @@ const Navigation = () => {
                 <Share2 className="h-4 w-4" />
               </button>
             </li>
-            <li>
-              <button
-                onClick={() => handleNavClick('#contact')}
-                className="ml-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-flutter-gradient text-white shadow-md shadow-flutter-blue/30 hover:scale-105 transition-transform"
-              >
-                Hire Me →
-              </button>
-            </li>
           </ul>
         </div>
       </nav>
