@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile AI Dev · Promo Animatic</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'Syne',sans-serif;}
+
+#stage{
+  position:relative;
+  width:100%;
+  height:100%;
+  background:#000;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Phone frame wrapper — 9:16 */
+#phone{
+  position:relative;
+  width:min(390px, 90vw);
+  height:min(844px, calc(90vw * 844/390));
+  background:#000;
+  border-radius:44px;
+  overflow:hidden;
+  box-shadow:0 0 0 2px #1a1a1a, 0 0 80px rgba(0,180,255,0.15);
+}
+
+/* All scenes */
+.scene{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.scene.active{opacity:1;pointer-events:all;}
+
+/* ── SCENE 1: Black cursor ── */
+#s1{background:#000;}
+#cursor{
+  font-family:'Space Mono',monospace;
+  font-size:48px;
+  color:#fff;
+  animation:blink 0.6s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Shatter overlay */
+#shatter{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* ── SCENE 2: Neural network ── */
+#s2{background:#000;}
+#s2 canvas{position:absolute;inset:0;}
+#s2-text{
+  position:absolute;
+  bottom:18%;
+  text-align:center;
+  z-index:10;
+}
+.big-line{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,10vw,52px);
+  color:#fff;
+  letter-spacing:3px;
+  display:block;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.4s, transform 0.4s;
+}
+.big-line.show{opacity:1;transform:translateY(0);}
+.big-line.blue{color:#00c2ff;}
+
+/* ── SCENE 3: Split screen ── */
+#s3{background:#000;flex-direction:row;gap:0;}
+.split-half{
+  flex:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  position:relative;
+}
+.split-half.bad{background:#0a0a0a;border-right:1px solid #111;}
+.split-half.good{background:#020d14;}
+.split-label{
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.split-label.bad-l{color:#ff4444;}
+.split-label.good-l{color:#00c2ff;}
+.mock-screen{
+  width:80%;
+  background:#111;
+  border-radius:12px;
+  padding:12px;
+  border:1px solid #222;
+}
+.mock-row{height:8px;background:#222;border-radius:4px;margin-bottom:8px;}
+.spinner{
+  width:32px;height:32px;
+  border:3px solid #222;
+  border-top-color:#555;
+  border-radius:50%;
+  margin:12px auto;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-bar{
+  height:8px;
+  background:linear-gradient(90deg,#00c2ff,#0066ff);
+  border-radius:4px;
+  margin-bottom:8px;
+  animation:aiload 1.5s ease-in-out infinite;
+  transform-origin:left;
+}
+@keyframes aiload{0%,100%{opacity:0.7}50%{opacity:1}}
+.verdict{
+  position:absolute;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:80px;
+  opacity:0;
+  transform:scale(1.5);
+  transition:opacity 0.3s,transform 0.3s;
+}
+.verdict.show{opacity:1;transform:scale(1);}
+.verdict.x{color:#ff3333;top:20%;}
+.verdict.check{color:#00c2ff;top:20%;}
+.s3-caption{
+  position:absolute;
+  bottom:12%;
+  left:50%;transform:translateX(-50%);
+  text-align:center;
+  width:90%;
+  z-index:20;
+}
+
+/* ── SCENE 4: Orbiting features ── */
+#s4{background:#000;}
+#orbit-ring{
+  position:absolute;
+  width:260px;height:260px;
+  border:1px dashed rgba(0,194,255,0.2);
+  border-radius:50%;
+  animation:rotatering 8s linear infinite;
+}
+@keyframes rotatering{to{transform:rotate(360deg)}}
+.orbit-card{
+  position:absolute;
+  background:rgba(0,194,255,0.08);
+  border:1px solid rgba(0,194,255,0.3);
+  border-radius:10px;
+  padding:6px 10px;
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  color:#00c2ff;
+  letter-spacing:1px;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity 0.4s;
+}
+.orbit-card.show{opacity:1;}
+#phone-glow{
+  position:absolute;
+  width:80px;height:140px;
+  border:2px solid rgba(0,194,255,0.5);
+  border-radius:14px;
+  background:rgba(0,194,255,0.05);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 40px rgba(0,194,255,0.2);
+}
+.phone-dot{width:8px;height:8px;border-radius:50%;background:#00c2ff;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:0.5}}
+
+/* ── SCENE 5: Stat cards ── */
+#s5{background:#000;}
+.stat-cards{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:85%;
+}
+.stat-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(0,194,255,0.2);
+  border-radius:16px;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  opacity:0;
+  transform:translateX(-30px);
+  transition:opacity 0.5s,transform 0.5s;
+}
+.stat-card.show{opacity:1;transform:translateX(0);}
+.stat-label{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;}
+.stat-number{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#00c2ff;letter-spacing:2px;}
+
+/* ── SCENE 6: Tech badges ── */
+#s6{background:#000;flex-wrap:wrap;padding:30px;gap:10px;align-content:center;}
+.tech-badge{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,194,255,0.25);
+  border-radius:20px;
+  padding:7px 16px;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  color:#00c2ff;
+  letter-spacing:1px;
+  opacity:0;
+  transform:scale(0.5);
+  transition:opacity 0.3s,transform 0.3s;
+}
+.tech-badge.show{opacity:1;transform:scale(1);}
+
+/* ── SCENE 7: CTA ── */
+#s7{background:#000;}
+#cta-phone{
+  width:140px;height:240px;
+  border:2px solid rgba(0,194,255,0.4);
+  border-radius:22px;
+  background:rgba(0,194,255,0.03);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  margin-bottom:32px;
+  animation:ctapulse 2s ease-in-out infinite;
+}
+@keyframes ctapulse{0%,100%{box-shadow:0 0 20px rgba(0,194,255,0.1)}50%{box-shadow:0 0 60px rgba(0,194,255,0.4)}}
+.cta-cursor{
+  font-family:'Space Mono',monospace;
+  font-size:20px;color:#00c2ff;
+  animation:blink 0.7s step-end infinite;
+}
+.cta-lines{text-align:center;z-index:10;}
+.cta-line{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,8vw,38px);
+  letter-spacing:3px;
+  color:#fff;
+  display:block;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 0.5s,transform 0.5s;
+  line-height:1.1;
+}
+.cta-line.show{opacity:1;transform:translateY(0);}
+.cta-line.accent{color:#00c2ff;}
+.dm-pill{
+  margin-top:24px;
+  background:rgba(0,194,255,0.1);
+  border:1px solid #00c2ff;
+  border-radius:30px;
+  padding:12px 28px;
+  font-family:'Space Mono',monospace;
+  font-size:12px;
+  color:#00c2ff;
+  letter-spacing:2px;
+  opacity:0;
+  transition:opacity 0.5s;
+  text-align:center;
+}
+.dm-pill.show{opacity:1;}
+.portfolio-link{
+  margin-top:10px;
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:1px;
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.portfolio-link.show{opacity:1;}
+
+/* ── Shared text utils ── */
+.scene-caption{
+  position:absolute;
+  bottom:13%;
+  text-align:center;
+  width:90%;
+  z-index:20;
+  padding:0 10px;
+}
+.caption-main{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(22px,6vw,30px);
+  color:#fff;
+  letter-spacing:3px;
+  display:block;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity 0.4s,transform 0.4s;
+  line-height:1.1;
+}
+.caption-main.show{opacity:1;transform:translateY(0);}
+.caption-sub{
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  color:rgba(0,194,255,0.7);
+  letter-spacing:2px;
+  display:block;
+  margin-top:6px;
+  opacity:0;
+  transition:opacity 0.4s 0.2s;
+}
+.caption-sub.show{opacity:1;}
+
+/* ── Progress bar ── */
+#progress{
+  position:absolute;
+  bottom:0;left:0;
+  height:3px;
+  background:linear-gradient(90deg,#00c2ff,#0044ff);
+  width:0%;
+  transition:width 0.1s linear;
+  z-index:100;
+  border-radius:0 2px 2px 0;
+}
+
+/* ── Scene label ── */
+#scene-label{
+  position:absolute;
+  top:20px;left:50%;transform:translateX(-50%);
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.2);
+  text-transform:uppercase;
+  z-index:100;
+  transition:opacity 0.3s;
+}
+
+/* ── Controls ── */
+#controls{
+  position:absolute;
+  bottom:16px;
+  left:50%;transform:translateX(-50%);
+  display:flex;gap:12px;
+  z-index:200;
+}
+.ctrl-btn{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:#fff;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  padding:8px 18px;
+  border-radius:20px;
+  cursor:pointer;
+  letter-spacing:1px;
+  transition:background 0.2s,border-color 0.2s;
+}
+.ctrl-btn:hover{background:rgba(0,194,255,0.15);border-color:rgba(0,194,255,0.5);}
+#timecode{
+  position:absolute;
+  top:20px;right:20px;
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  color:rgba(255,255,255,0.2);
+  z-index:100;
+}
+
+/* particle canvas */
+#particle-canvas{position:absolute;inset:0;z-index:0;}
+
+/* Scanline overlay */
+#scanlines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+  pointer-events:none;z-index:50;
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="phone">
+
+    <!-- Scene 1: Hook cursor -->
+    <div class="scene active" id="s1">
+      <span id="cursor">_</span>
+      <div id="shatter"></div>
+    </div>
+
+    <!-- Scene 2: Neural network + "Apps that think" -->
+    <div class="scene" id="s2">
+      <canvas id="neural-canvas"></canvas>
+      <div id="s2-text">
+        <span class="big-line" id="l1">I DON'T JUST</span>
+        <span class="big-line" id="l2">BUILD APPS.</span>
+        <span class="big-line blue" id="l3">I BUILD APPS</span>
+        <span class="big-line blue" id="l4">THAT THINK.</span>
+      </div>
+    </div>
+
+    <!-- Scene 3: Split screen -->
+    <div class="scene" id="s3">
+      <div class="split-half bad">
+        <span class="split-label bad-l">Traditional</span>
+        <div class="mock-screen">
+          <div class="mock-row" style="width:80%"></div>
+          <div class="mock-row" style="width:60%"></div>
+          <div class="spinner"></div>
+          <div class="mock-row" style="width:50%"></div>
+        </div>
+        <div class="verdict x" id="x-mark">✕</div>
+      </div>
+      <div class="split-half good">
+        <span class="split-label good-l">AI-Powered</span>
+        <div class="mock-screen" style="background:#071520;border-color:#003344;">
+          <div class="ai-bar" style="width:90%"></div>
+          <div class="ai-bar" style="width:70%;animation-delay:0.2s"></div>
+          <div class="ai-bar" style="width:80%;animation-delay:0.4s"></div>
+          <div class="ai-bar" style="width:55%;animation-delay:0.6s"></div>
+        </div>
+        <div class="verdict check" id="check-mark">✓</div>
+      </div>
+      <div class="s3-caption">
+        <span class="caption-main" id="s3c1">STOP BUILDING APPS THAT REACT.</span>
+        <span class="caption-main" id="s3c2">BUILD APPS THAT PREDICT.</span>
+      </div>
+    </div>
+
+    <!-- Scene 4: Orbiting AI features -->
+    <div class="scene" id="s4">
+      <div id="orbit-ring">
+        <div class="orbit-card" id="oc1" style="top:-16px;left:50%;transform:translateX(-50%)">VOICE AI</div>
+        <div class="orbit-card" id="oc2" style="right:-36px;top:50%;transform:translateY(-50%)">VISION AI</div>
+        <div class="orbit-card" id="oc3" style="bottom:-16px;left:50%;transform:translateX(-50%)">PREDICTIVE AI</div>
+        <div class="orbit-card" id="oc4" style="left:-48px;top:50%;transform:translateY(-50%)">LLM CORE</div>
+      </div>
+      <div id="phone-glow">
+        <div class="phone-dot"></div>
+      </div>
+      <div class="scene-caption">
+        <span class="caption-main" id="s4c1">ALL NATIVE.</span>
+        <span class="caption-main" id="s4c2">ALL FAST.</span>
+        <span class="caption-sub show">Every platform. Every AI layer.</span>
+      </div>
+    </div>
+
+    <!-- Scene 5: Stat cards -->
+    <div class="scene" id="s5">
+      <div style="position:absolute;top:16%;text-align:center;">
+        <span class="caption-main show" style="opacity:1;transform:none;font-size:14px;color:rgba(255,255,255,0.4);font-family:'Space Mono',monospace;letter-spacing:2px;">THE NUMBERS DON'T LIE</span>
+      </div>
+      <div class="stat-cards">
+        <div class="stat-card" id="sc1">
+          <span class="stat-label">AI APPS SHIPPED</span>
+          <span class="stat-number" id="n1">0</span>
+        </div>
+        <div class="stat-card" id="sc2">
+          <span class="stat-label">ACTIVE USERS</span>
+          <span class="stat-number" id="n2">0</span>
+        </div>
+        <div class="stat-card" id="sc3">
+          <span class="stat-label">APP STORE RATING</span>
+          <span class="stat-number" id="n3">0.0★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 6: Tech badges -->
+    <div class="scene" id="s6">
+      <div style="position:absolute;top:12%;text-align:center;width:100%;">
+        <span class="caption-main show" style="opacity:1;transform:none;font-size:13px;color:rgba(255,255,255,0.3);font-family:'Space Mono',monospace;letter-spacing:2px;">EVERY TOOL. ONE DEVELOPER.</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0 20px;margin-top:40px;">
+        <span class="tech-badge" id="tb0">Flutter</span>
+        <span class="tech-badge" id="tb1">React Native</span>
+        <span class="tech-badge" id="tb2">Swift</span>
+        <span class="tech-badge" id="tb3">Kotlin</span>
+        <span class="tech-badge" id="tb4">OpenAI API</span>
+        <span class="tech-badge" id="tb5">LangChain</span>
+        <span class="tech-badge" id="tb6">Firebase</span>
+        <span class="tech-badge" id="tb7">TensorFlow</span>
+        <span class="tech-badge" id="tb8">AWS Amplify</span>
+        <span class="tech-badge" id="tb9">Supabase</span>
+      </div>
+    </div>
+
+    <!-- Scene 7: CTA -->
+    <div class="scene" id="s7">
+      <div id="cta-phone">
+        <div class="cta-cursor">_</div>
+      </div>
+      <div class="cta-lines">
+        <span class="cta-line" id="cl1">YOU HAVE</span>
+        <span class="cta-line" id="cl2">THE IDEA.</span>
+        <span class="cta-line accent" id="cl3">I HAVE</span>
+        <span class="cta-line accent" id="cl4">THE CODE.</span>
+      </div>
+      <div class="dm-pill" id="dm-pill">DM "APP" TO START YOUR PROJECT →</div>
+      <div class="portfolio-link" id="port-link">LINK IN BIO · PORTFOLIO ↗</div>
+    </div>
+
+    <!-- Particle canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Scanlines -->
+    <div id="scanlines"></div>
+
+    <!-- Progress -->
+    <div id="progress"></div>
+
+    <!-- Scene label -->
+    <div id="scene-label">PHASE 1 · HOOK</div>
+    <div id="timecode">0:00</div>
+
+  </div>
+
+  <!-- Controls outside phone -->
+  <div id="controls">
+    <button class="ctrl-btn" id="btn-play">▶ PLAY</button>
+    <button class="ctrl-btn" id="btn-restart">↺ RESTART</button>
+  </div>
+</div>
+
+<script>
+const phone = document.getElementById('phone');
+const W = () => phone.offsetWidth;
+const H = () => phone.offsetHeight;
+
+// ── Particle system ──
+const pcanvas = document.getElementById('particle-canvas');
+const pctx = pcanvas.getContext('2d');
+let particles = [];
+function resizePC(){pcanvas.width=W();pcanvas.height=H();}
+resizePC();
+
+function spawnParticles(n=30){
+  for(let i=0;i<n;i++){
+    particles.push({
+      x:Math.random()*W(),y:Math.random()*H(),
+      vx:(Math.random()-0.5)*0.6,vy:(Math.random()-0.5)*0.6,
+      r:Math.random()*1.5+0.5,
+      alpha:Math.random()*0.4+0.1,
+      color:Math.random()>0.5?'0,194,255':'100,150,255'
+    });
+  }
+}
+function drawParticles(){
+  pctx.clearRect(0,0,W(),H());
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W();if(p.x>W())p.x=0;
+    if(p.y<0)p.y=H();if(p.y>H())p.y=0;
+    pctx.beginPath();
+    pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pctx.fillStyle=`rgba(${p.color},${p.alpha})`;
+    pctx.fill();
+  });
+  // connect nearby
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<60){
+        pctx.beginPath();
+        pctx.moveTo(particles[i].x,particles[i].y);
+        pctx.lineTo(particles[j].x,particles[j].y);
+        pctx.strokeStyle=`rgba(0,194,255,${0.08*(1-d/60)})`;
+        pctx.lineWidth=0.5;
+        pctx.stroke();
+      }
+    }
+  }
+}
+spawnParticles(40);
+function animParticles(){drawParticles();requestAnimationFrame(animParticles);}
+animParticles();
+
+// ── Neural canvas (scene 2) ──
+const nc = document.getElementById('neural-canvas');
+const nctx = nc.getContext('2d');
+let nodes=[];
+function resizeNC(){nc.width=W();nc.height=H();}
+resizeNC();
+function initNodes(){
+  nodes=[];
+  const cx=W()/2,cy=H()/2;
+  for(let i=0;i<30;i++){
+    const angle=Math.random()*Math.PI*2;
+    const dist=Math.random()*160;
+    nodes.push({x:cx+Math.cos(angle)*dist,y:cy+Math.sin(angle)*dist,
+      vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,
+      alpha:0,targetAlpha:Math.random()*0.8+0.2});
+  }
+}
+initNodes();
+let nodesActive=false;
+function activateNodes(){
+  nodesActive=true;
+  nodes.forEach((n,i)=>{setTimeout(()=>{n.alpha=n.targetAlpha;},i*60);});
+}
+function drawNeural(){
+  nctx.clearRect(0,0,W(),H());
+  // connections
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){
+        nctx.beginPath();
+        nctx.moveTo(nodes[i].x,nodes[i].y);
+        nctx.lineTo(nodes[j].x,nodes[j].y);
+        nctx.strokeStyle=`rgba(0,194,255,${Math.min(nodes[i].alpha,nodes[j].alpha)*0.3*(1-d/90)})`;
+        nctx.lineWidth=0.8;
+        nctx.stroke();
+      }
+    }
+    nodes[i].x+=nodes[i].vx;nodes[i].y+=nodes[i].vy;
+    const cx=W()/2,cy=H()/2;
+    const dx=nodes[i].x-cx,dy=nodes[i].y-cy;
+    if(Math.sqrt(dx*dx+dy*dy)>200){nodes[i].vx*=-1;nodes[i].vy*=-1;}
+  }
+  // dots
+  nodes.forEach(n=>{
+    nctx.beginPath();
+    nctx.arc(n.x,n.y,3,0,Math.PI*2);
+    nctx.fillStyle=`rgba(0,194,255,${n.alpha})`;
+    nctx.fill();
+    nctx.beginPath();
+    nctx.arc(n.x,n.y,6,0,Math.PI*2);
+    nctx.fillStyle=`rgba(0,194,255,${n.alpha*0.15})`;
+    nctx.fill();
+  });
+  requestAnimationFrame(drawNeural);
+}
+drawNeural();
+
+// ── Scene management ──
+const scenes=['s1','s2','s3','s4','s5','s6','s7'];
+const labels=['PHASE 1 · HOOK','PHASE 1 · HOOK','PHASE 2 · BUILD','PHASE 2 · BUILD','PHASE 3 · PROOF','PHASE 3 · PROOF','PHASE 4 · CTA'];
+let currentScene=0;
+let playing=false;
+let timeout=null;
+let startTime=null;
+const TOTAL_DURATION=57000;
+
+function showScene(idx){
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  document.getElementById(scenes[idx]).classList.add('active');
+  document.getElementById('scene-label').textContent=labels[idx];
+  currentScene=idx;
+}
+
+function updateTimecode(ms){
+  const s=Math.floor(ms/1000);
+  const m=Math.floor(s/60);
+  const ss=String(s%60).padStart(2,'0');
+  document.getElementById('timecode').textContent=`0:${ss}`;
+  document.getElementById('progress').style.width=(ms/TOTAL_DURATION*100)+'%';
+}
+
+// Counter animation
+function animateCount(el,target,suffix,duration){
+  const start=performance.now();
+  function step(now){
+    const p=Math.min((now-start)/duration,1);
+    const val=Math.floor(p*target);
+    el.textContent=(suffix==='★')?val.toFixed(1)+'★':val+(suffix||'');
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// Scene-specific entry animations
+function enterScene(idx){
+  if(idx===0){
+    // cursor + shatter
+    setTimeout(()=>{
+      const s=document.getElementById('shatter');
+      s.style.transition='opacity 0.1s';
+      s.style.opacity='1';
+      setTimeout(()=>{s.style.opacity='0';},150);
+    },1800);
+  }
+  if(idx===1){
+    activateNodes();
+    const lines=['l1','l2','l3','l4'];
+    lines.forEach((id,i)=>{
+      setTimeout(()=>{document.getElementById(id).classList.add('show');},300+i*300);
+    });
+  }
+  if(idx===2){
+    setTimeout(()=>{document.getElementById('x-mark').classList.add('show');},600);
+    setTimeout(()=>{document.getElementById('check-mark').classList.add('show');},900);
+    setTimeout(()=>{document.getElementById('s3c1').classList.add('show');},1200);
+    setTimeout(()=>{document.getElementById('s3c2').classList.add('show');},1700);
+  }
+  if(idx===3){
+    ['oc1','oc2','oc3','oc4'].forEach((id,i)=>{
+      setTimeout(()=>{document.getElementById(id).classList.add('show');},300+i*250);
+    });
+    setTimeout(()=>{document.getElementById('s4c1').classList.add('show');},1200);
+    setTimeout(()=>{document.getElementById('s4c2').classList.add('show');},1600);
+  }
+  if(idx===4){
+    setTimeout(()=>{
+      const sc1=document.getElementById('sc1');
+      sc1.classList.add('show');
+      animateCount(document.getElementById('n1'),12,'+',(timeout?800:800));
+    },400);
+    setTimeout(()=>{
+      document.getElementById('sc2').classList.add('show');
+      animateCount(document.getElementById('n2'),50000,'K',1000);
+    },900);
+    setTimeout(()=>{
+      document.getElementById('sc3').classList.add('show');
+      // rating
+      const el=document.getElementById('n3');
+      let v=0;const target=4.9;const dur=1000;const st=performance.now();
+      function step(now){const p=Math.min((now-st)/dur,1);el.textContent=(p*target).toFixed(1)+'★';if(p<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    },1400);
+  }
+  if(idx===5){
+    for(let i=0;i<10;i++){
+      setTimeout(()=>{document.getElementById('tb'+i).classList.add('show');},200+i*120);
+    }
+  }
+  if(idx===6){
+    setTimeout(()=>{document.getElementById('cl1').classList.add('show');},300);
+    setTimeout(()=>{document.getElementById('cl2').classList.add('show');},700);
+    setTimeout(()=>{document.getElementById('cl3').classList.add('show');},1300);
+    setTimeout(()=>{document.getElementById('cl4').classList.add('show');},1700);
+    setTimeout(()=>{document.getElementById('dm-pill').classList.add('show');},2400);
+    setTimeout(()=>{document.getElementById('port-link').classList.add('show');},2900);
+  }
+}
+
+// Reset scene state
+function resetScene(idx){
+  if(idx===1){['l1','l2','l3','l4'].forEach(id=>document.getElementById(id).classList.remove('show'));}
+  if(idx===2){
+    ['x-mark','check-mark','s3c1','s3c2'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  }
+  if(idx===3){
+    ['oc1','oc2','oc3','oc4','s4c1','s4c2'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  }
+  if(idx===4){
+    ['sc1','sc2','sc3'].forEach(id=>document.getElementById(id).classList.remove('show'));
+    document.getElementById('n1').textContent='0';
+    document.getElementById('n2').textContent='0';
+    document.getElementById('n3').textContent='0.0★';
+  }
+  if(idx===5){for(let i=0;i<10;i++)document.getElementById('tb'+i).classList.remove('show');}
+  if(idx===6){
+    ['cl1','cl2','cl3','cl4','dm-pill','port-link'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  }
+}
+
+// Timeline (ms offsets)
+const timeline=[
+  {t:0,scene:0},
+  {t:2500,scene:1},
+  {t:8000,scene:2},
+  {t:16000,scene:3},
+  {t:23500,scene:4},
+  {t:33000,scene:5},
+  {t:42000,scene:6},
+];
+
+let timeouts=[];
+function clearAll(){timeouts.forEach(clearTimeout);timeouts=[];}
+
+function startPlayback(){
+  clearAll();
+  const st=performance.now();
+  // Reset all
+  for(let i=0;i<7;i++)resetScene(i);
+  showScene(0);
+  enterScene(0);
+
+  timeline.forEach((ev,i)=>{
+    const tid=setTimeout(()=>{
+      showScene(ev.scene);
+      enterScene(ev.scene);
+    },ev.t);
+    timeouts.push(tid);
+  });
+
+  // Timecode
+  function tick(){
+    const elapsed=Math.min(performance.now()-st,TOTAL_DURATION);
+    updateTimecode(elapsed);
+    if(elapsed<TOTAL_DURATION&&playing)requestAnimationFrame(tick);
+    else if(elapsed>=TOTAL_DURATION){
+      playing=false;
+      document.getElementById('btn-play').textContent='▶ PLAY';
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+document.getElementById('btn-play').addEventListener('click',function(){
+  if(!playing){
+    playing=true;
+    this.textContent='⏸ PAUSE';
+    startPlayback();
+  } else {
+    playing=false;
+    this.textContent='▶ PLAY';
+    clearAll();
+  }
+});
+
+document.getElementById('btn-restart').addEventListener('click',function(){
+  playing=true;
+  document.getElementById('btn-play').textContent='⏸ PAUSE';
+  clearAll();
+  document.getElementById('progress').style.width='0%';
+  startPlayback();
+});
+
+// Initial state
+showScene(0);
+updateTimecode(0);
+</script>
+</body>
+</html>

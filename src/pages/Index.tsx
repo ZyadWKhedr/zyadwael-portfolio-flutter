@@ -10,6 +10,9 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
+import PromoReelSection from '@/components/PromoReelSection';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -23,20 +26,32 @@ const Index = () => {
       {/* Main Content */}
       <main className="relative">
         <HeroSection />
+        <PromoReelSection />
+        <TestimonialsSection />
         <AboutSection />
         <SkillsSection />
         <FeaturedProjectSection />
         <ProjectsSection />
         <PackagesSection />
-        <TestimonialsSection />
         <ArticlesSection />
         <ContactSection />
       </main>
       
       {/* Footer */}
       <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
-        <div className="container mx-auto text-center">
-          <p className="text-gray-400 mb-4">
+        <div className="container mx-auto text-center space-y-4">
+          <p className="text-sm text-flutter-teal font-medium">
+            2 project slots open this month.
+          </p>
+          <Button
+            onClick={() => window.open('https://calendly.com', '_blank')}
+            size="lg"
+            className="bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 py-5 rounded-full shadow-lg shadow-flutter-blue/30"
+          >
+            Book a Free Call
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+          <p className="text-gray-400 pt-4">
             Built with <span className="text-flutter-light-blue">💙</span> Flutter spirit by{' '}
             <span className="text-flutter-teal font-semibold">Zyad Wael</span>
           </p>
