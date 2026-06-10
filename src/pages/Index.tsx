@@ -1,5 +1,6 @@
 
 import Navigation from '@/components/Navigation';
+import AntigravityBackground from '@/components/AntigravityBackground';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
@@ -14,6 +15,7 @@ import SocialLinks from '@/components/SocialLinks';
 const Index = () => {
   return (
     <div className="min-h-screen relative">
+      <AntigravityBackground />
       {/* Navigation */}
       <Navigation />
       
