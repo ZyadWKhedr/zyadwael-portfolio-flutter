@@ -61,7 +61,7 @@ const HeroSection = () => {
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
                 </span>
                 <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-300">
-                  Available for projects
+                  Available
                 </span>
               </div>
               <h1 className="text-2xl font-bold leading-tight">
@@ -141,18 +141,6 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Tagline below name (mobile) — col-span-4 */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.22 }}
-            className="col-span-4 row-span-1 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl px-4 flex items-center"
-          >
-            <p className="text-[12px] text-white/90 font-medium leading-snug">
-              I build cross-platform AI-powered apps that ship fast and scale further.
-            </p>
-          </motion.div>
-
           {/* CTA row — col-span-4 */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -161,11 +149,18 @@ const HeroSection = () => {
             className="col-span-4 row-span-1 flex gap-2"
           >
             <Button
-              onClick={() => window.open('https://calendly.com', '_blank')}
+              onClick={() => scrollTo('#projects')}
               className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
             >
-              Book a Free Call
+              View Work
               <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+            <Button
+              onClick={() => scrollTo('#contact')}
+              variant="outline"
+              className="rounded-2xl border-white/15 bg-white/5 text-white"
+            >
+              <Mail className="h-4 w-4" />
             </Button>
             <Button
               onClick={() =>
@@ -231,15 +226,6 @@ const HeroSection = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-base md:text-lg text-white/90 font-medium leading-relaxed max-w-lg"
-            >
-              I build cross-platform AI-powered apps that ship fast and scale further.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
               className="text-base md:text-lg text-gray-400 leading-relaxed max-w-lg"
             >
@@ -280,19 +266,20 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                onClick={() => window.open('https://calendly.com', '_blank')}
+                onClick={() => scrollTo('#projects')}
                 className="group bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 py-5 rounded-full shadow-lg shadow-flutter-blue/30"
               >
-                Book a Free Call
+                View My Work
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => scrollTo('#projects')}
+                onClick={() => scrollTo('#contact')}
                 className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white font-semibold px-6 py-5 rounded-full"
               >
-                View My Work
+                <Mail className="mr-2 h-4 w-4" />
+                Contact Me
               </Button>
               <Button
                 size="lg"
