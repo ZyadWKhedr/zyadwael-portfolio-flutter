@@ -22,6 +22,7 @@ type Project = {
   technologies: string[];
   features: string[];
   bullets: { edge: string; tech: string; impact: string };
+  result?: string;
   gradient: string;
   icon: string;
   iconImage?: string;
