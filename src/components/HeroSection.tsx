@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, ArrowRight, Sparkles, Zap, Brain, Smartphone } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
+import Phone3D from '@/components/Phone3D';
+import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
+
+const CV_URL =
+  'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
+
+const openCv = (location: string) => {
+  trackEvent(AnalyticsEvents.CvDownload, { location });
+  window.open(CV_URL, '_blank');
+};
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
@@ -163,12 +173,7 @@ const HeroSection = () => {
               <Mail className="h-4 w-4" />
             </Button>
             <Button
-              onClick={() =>
-                window.open(
-                  'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link',
-                  '_blank',
-                )
-              }
+              onClick={() => openCv('hero_mobile')}
               variant="outline"
               className="rounded-2xl border-white/15 bg-white/5 text-white"
             >
@@ -284,12 +289,7 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="ghost"
-                onClick={() =>
-                  window.open(
-                    'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link',
-                    '_blank',
-                  )
-                }
+                onClick={() => openCv('hero_desktop')}
                 className="text-flutter-light-blue hover:bg-flutter-light-blue/10 rounded-full px-4"
               >
                 <Download className="mr-2 h-4 w-4" />
@@ -349,6 +349,16 @@ const HeroSection = () => {
               >
                 <span className="text-flutter-purple text-sm">▲</span>
                 <span className="text-[11px] font-bold text-white">AI-Native</span>
+              </motion.div>
+
+              {/* Floating 3D phone — mobile-developer signature */}
+              <motion.div
+                initial={{ opacity: 0, x: 40, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.6, ease: 'easeOut' }}
+                className="hidden lg:block absolute -right-28 xl:-right-36 bottom-0 z-20"
+              >
+                <Phone3D size="md" />
               </motion.div>
             </div>
           </motion.div>

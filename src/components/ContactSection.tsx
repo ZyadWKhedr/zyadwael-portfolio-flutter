@@ -7,6 +7,7 @@ import { Mail, Send, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
+import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,10 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    trackEvent(AnalyticsEvents.ContactSubmit, {
+      has_name: !!formData.name,
+      message_length: formData.message.length,
+    });
 
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
@@ -27,10 +32,12 @@ const ContactSection = () => {
 
       if (error) throw error;
 
+      trackEvent(AnalyticsEvents.ContactSuccess, { message_length: formData.message.length });
       toast.success("Message sent! I'll get back to you soon.");
       setFormData({ name: '', email: '', message: '' });
     } catch (error: any) {
       console.error('Error sending message:', error);
+      trackEvent(AnalyticsEvents.ContactError, { reason: error?.message ?? 'unknown' });
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsLoading(false);
