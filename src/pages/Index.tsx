@@ -10,6 +10,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import ContactSection from '@/components/ContactSection';
 import SocialLinks from '@/components/SocialLinks';
+import AiAssistant from '@/components/AiAssistant';
 
 const Index = () => {
   return (
@@ -32,6 +33,9 @@ const Index = () => {
         <ArticlesSection />
         <ContactSection />
       </main>
+
+      <AiAssistant />
+      
       
       {/* Footer */}
       <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
