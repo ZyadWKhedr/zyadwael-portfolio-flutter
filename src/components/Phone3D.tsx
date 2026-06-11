@@ -213,6 +213,7 @@ const Phone3D = ({ className = '', size = 'md' }: Props) => {
             />
           </div>
         </div>
+        </motion.div>
       </motion.div>
     </div>
   );
