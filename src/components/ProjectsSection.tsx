@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Github, Apple, ArrowUpRight, Plus, Brain, Cog, TrendingUp } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
 import payssIcon from '@/assets/payss-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.jpg';
 import amoomyIcon from '@/assets/amoomy-icon.png';
@@ -269,7 +270,13 @@ const ProjectsSection = () => {
                 transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: 'easeOut' }}
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => setActive(project)}
+                onClick={() => {
+                  trackEvent(AnalyticsEvents.ProjectOpen, {
+                    project: project.title,
+                    category: project.category,
+                  });
+                  setActive(project);
+                }}
                 className={`relative group text-left glass rounded-2xl overflow-hidden border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50 ${
                   isAI
                     ? 'border-flutter-purple/30 hover:border-flutter-purple/60 shadow-[0_0_24px_-8px_rgba(168,85,247,0.4)]'
