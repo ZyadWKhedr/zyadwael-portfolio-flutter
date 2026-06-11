@@ -173,12 +173,7 @@ const HeroSection = () => {
               <Mail className="h-4 w-4" />
             </Button>
             <Button
-              onClick={() =>
-                window.open(
-                  'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link',
-                  '_blank',
-                )
-              }
+              onClick={() => openCv('hero_mobile')}
               variant="outline"
               className="rounded-2xl border-white/15 bg-white/5 text-white"
             >
@@ -294,12 +289,7 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="ghost"
-                onClick={() =>
-                  window.open(
-                    'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link',
-                    '_blank',
-                  )
-                }
+                onClick={() => openCv('hero_desktop')}
                 className="text-flutter-light-blue hover:bg-flutter-light-blue/10 rounded-full px-4"
               >
                 <Download className="mr-2 h-4 w-4" />
