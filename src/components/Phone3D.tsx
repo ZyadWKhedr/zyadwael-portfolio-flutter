@@ -1,10 +1,20 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import { Smartphone, Brain, Zap, Sparkles } from 'lucide-react';
 
 /**
- * Pure CSS-3D animated phone mockup. No three.js dependency.
- * Floats, rotates in 3D and shows a faux "mobile app" screen — fitting for
- * a mobile developer portfolio.
+ * Pure CSS-3D animated phone mockup.
+ * - Idle float + rotation loop.
+ * - Pointer-driven tilt (desktop hover).
+ * - Scroll-driven parallax tilt (works on mobile without expensive listeners).
+ * - Respects prefers-reduced-motion.
  */
 type Props = {
   className?: string;
@@ -19,24 +29,81 @@ const SIZES = {
 
 const Phone3D = ({ className = '', size = 'md' }: Props) => {
   const s = SIZES[size];
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
+
+  // Pointer tilt (desktop) — raw values, smoothed with springs
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const tiltY = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.4 });
+  const tiltX = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.4 });
+
+  // Scroll parallax — uses passive scroll listener inside framer-motion.
+  // Tracks the phone's offset within the viewport.
+  const { scrollYProgress } = useScroll({
+    target: wrapRef,
+    offset: ['start end', 'end start'],
+  });
+  const scrollTiltY = useTransform(scrollYProgress, [0, 1], [-18, 18]);
+  const scrollFloatY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const smoothScrollTiltY = useSpring(scrollTiltY, { stiffness: 80, damping: 20 });
+  const smoothScrollFloatY = useSpring(scrollFloatY, { stiffness: 60, damping: 20 });
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (prefersReduced || e.pointerType === 'touch') return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    pointerX.set(px * 30); // rotateY
+    pointerY.set(-py * 20); // rotateX
+  };
+
+  const handlePointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
     <div
+      ref={wrapRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className={`relative ${className}`}
       style={{ perspective: '1400px', width: s.w, height: s.h }}
       aria-hidden="true"
     >
       <motion.div
-        initial={{ rotateY: -25, rotateX: 8, y: 0 }}
-        animate={{
-          rotateY: [-25, -10, -25],
-          rotateX: [8, -4, 8],
-          y: [0, -14, 0],
-        }}
+        initial={{ rotateY: -15, rotateX: 6 }}
+        animate={
+          prefersReduced
+            ? undefined
+            : {
+                rotateY: [-15, -5, -15],
+                rotateX: [6, -2, 6],
+              }
+        }
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ transformStyle: 'preserve-3d', width: s.w, height: s.h }}
-        className="relative"
+        style={{
+          transformStyle: 'preserve-3d',
+          width: s.w,
+          height: s.h,
+          rotateY: prefersReduced ? 0 : (tiltY as unknown as number),
+          rotateX: prefersReduced ? 0 : (tiltX as unknown as number),
+          y: prefersReduced ? 0 : (smoothScrollFloatY as unknown as number),
+        }}
+        className="relative will-change-transform"
       >
+        {/* Inner layer carries scroll-driven extra rotation (additive) */}
+        <motion.div
+          style={{
+            transformStyle: 'preserve-3d',
+            width: '100%',
+            height: '100%',
+            rotateY: prefersReduced ? 0 : (smoothScrollTiltY as unknown as number),
+          }}
+          className="relative"
+        >
+
         {/* Soft floor glow */}
         <div
           className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-10 rounded-full blur-2xl bg-flutter-purple/40"
