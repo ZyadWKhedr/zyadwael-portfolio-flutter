@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, ArrowRight, Sparkles, Zap, Brain, Smartphone } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
+import Phone3D from '@/components/Phone3D';
+import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
+
+const CV_URL =
+  'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
+
+const openCv = (location: string) => {
+  trackEvent(AnalyticsEvents.CvDownload, { location });
+  window.open(CV_URL, '_blank');
+};
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
