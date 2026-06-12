@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import TicTacToeGame from './TicTacToeGame';
+import InteractivePhone from './InteractivePhone';
 import { AnimatedSection } from './AnimatedSection';
 
-const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'MinMax Algorithm'];
+const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'Interactive 3D'];
 
 const FeaturedProjectSection = () => {
   return (
