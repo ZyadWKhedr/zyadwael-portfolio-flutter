@@ -43,6 +43,7 @@ const APPS: { id: Exclude<AppId, 'home'>; label: string; icon: any; bg: string }
 
 const InteractivePhone = () => {
   const prefersReduced = useReducedMotion();
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none), (pointer: coarse)').matches;
   const wrapRef = useRef<HTMLDivElement>(null);
   const [app, setApp] = useState<AppId>('home');
   const [time, setTime] = useState(() => new Date());
