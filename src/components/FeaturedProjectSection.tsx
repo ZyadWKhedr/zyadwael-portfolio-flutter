@@ -53,16 +53,18 @@ const FeaturedProjectSection = () => {
             className="space-y-6"
           >
             <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
-              Tic Tac Toe vs. an{' '}
+              A live iPhone, built in{' '}
               <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
-                Unbeatable AI
+                React
               </span>
+              .
             </h3>
 
             <p className="text-gray-300 leading-relaxed">
-              A polished Flutter game built around the classic <span className="text-flutter-light-blue font-medium">MinMax</span> algorithm.
-              The AI evaluates every possible future move to choose the optimal play — meaning the best you can do is draw.
-              Rendered here as a real interactive demo with smooth state transitions and tactile animations.
+              This isn't a screenshot — it's a real, draggable phone. Tilt it with your finger,
+              open apps from the home screen, play an unbeatable <span className="text-flutter-light-blue font-medium">Tic Tac Toe</span> AI,
+              test your reflexes, or jump straight into chatting with my AI assistant.
+              It's a taste of how I think about mobile UX.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -78,10 +80,10 @@ const FeaturedProjectSection = () => {
 
             <ul className="space-y-2 text-sm text-gray-400">
               {[
-                'Recursive MinMax with full game-tree search',
-                'Real-time game state with win-line highlighting',
-                'Spring animations & haptic-feel interactions',
-                'Material 3 design language',
+                'Drag to tilt · scroll parallax · haptic feedback',
+                'Multiple in-phone apps: games, analytics, AI',
+                'Unbeatable MinMax Tic Tac Toe inside',
+                'Reflex test — try to beat your best ms',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="text-flutter-teal mt-1">▹</span>
