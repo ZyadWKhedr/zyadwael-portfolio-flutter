@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, ArrowRight, Sparkles, Zap, Brain, Smartphone } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
-import Phone3D from '@/components/Phone3D';
+
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
 
 const CV_URL =
@@ -349,16 +349,6 @@ const HeroSection = () => {
               >
                 <span className="text-flutter-purple text-sm">▲</span>
                 <span className="text-[11px] font-bold text-white">AI-Native</span>
-              </motion.div>
-
-              {/* Floating 3D phone — mobile-developer signature */}
-              <motion.div
-                initial={{ opacity: 0, x: 40, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.6, ease: 'easeOut' }}
-                className="hidden lg:block absolute -right-28 xl:-right-36 bottom-0 z-20"
-              >
-                <Phone3D size="md" />
               </motion.div>
             </div>
           </motion.div>
