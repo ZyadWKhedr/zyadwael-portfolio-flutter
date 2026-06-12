@@ -120,16 +120,16 @@ const InteractivePhone = () => {
       style={{ perspective: 1400 }}
     >
       <motion.div
-        drag={!prefersReduced}
+        drag={!prefersReduced && !isTouch}
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragElastic={0.18}
-        onPan={onPan}
-        onPanEnd={onPanEnd}
+        onPan={isTouch ? undefined : onPan}
+        onPanEnd={isTouch ? undefined : onPanEnd}
         onPointerMove={onPointerMove}
         onPointerLeave={onPanEnd}
         style={{
-          rotateY: springY,
-          rotateX: springX,
+          rotateY: isTouch ? -8 : springY,
+          rotateX: isTouch ? 4 : springX,
           y: prefersReduced ? 0 : scrollFloat,
           transformStyle: 'preserve-3d',
           touchAction: 'pan-y',
