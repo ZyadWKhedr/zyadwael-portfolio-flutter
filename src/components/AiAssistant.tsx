@@ -8,10 +8,18 @@ import { trackEvent } from '@/lib/analytics';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
-const SUGGESTIONS = [
+const STARTER_REPLIES = [
   'What does Zyad build?',
-  'Has he shipped AI apps?',
-  'I want to hire him for a project',
+  'Show his best AI project',
+  'Tech stack & strengths',
+  'I want to hire him',
+];
+
+const FOLLOWUP_REPLIES = [
+  'Tell me more',
+  'How much would it cost?',
+  'How long would it take?',
+  'Connect me with Zyad',
 ];
 
 const AiAssistant = () => {
