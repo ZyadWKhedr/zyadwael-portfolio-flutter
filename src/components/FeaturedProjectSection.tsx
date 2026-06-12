@@ -41,24 +41,7 @@ const FeaturedProjectSection = () => {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="flex justify-center"
           >
-            <div className="relative">
-              {/* Phone frame */}
-              <div className="relative w-[280px] h-[580px] rounded-[3rem] bg-gradient-to-b from-gray-800 to-gray-900 p-3 shadow-2xl shadow-flutter-blue/30 border border-white/10">
-                {/* Screen */}
-                <div className="relative w-full h-full rounded-[2.3rem] bg-gradient-to-b from-flutter-dark-blue via-[#0a1628] to-flutter-dark-blue overflow-hidden border border-white/5">
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-10" />
-
-                  {/* App content */}
-                  <div className="pt-10 pb-6 px-6 h-full flex flex-col justify-center">
-                    <TicTacToeGame />
-                  </div>
-                </div>
-              </div>
-
-              {/* Reflection */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-flutter-teal/20 via-transparent to-flutter-purple/20 rounded-[3.5rem] blur-2xl -z-10" />
-            </div>
+            <InteractivePhone />
           </motion.div>
 
           {/* Details */}
