@@ -151,7 +151,7 @@ const AiAssistant = () => {
                   <div className="text-sm font-semibold text-white">Zyad's AI Assistant</div>
                   <div className="flex items-center gap-1.5 text-[11px] text-flutter-light-blue">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Powered by Lovable AI
+                    Online · Trained on Zyad's work
                   </div>
                 </div>
               </div>
