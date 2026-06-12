@@ -188,16 +188,19 @@ const AiAssistant = () => {
                 </div>
               )}
 
-              {messages.length === 1 && !loading && (
-                <div className="pt-2 flex flex-wrap gap-2">
-                  {SUGGESTIONS.map((s) => (
-                    <button
+              {!loading && (
+                <div className="pt-1 flex flex-wrap gap-2">
+                  {(messages.length === 1 ? STARTER_REPLIES : FOLLOWUP_REPLIES).map((s) => (
+                    <motion.button
                       key={s}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => send(s)}
                       className="text-[11px] px-3 py-1.5 rounded-full border border-flutter-light-blue/30 bg-white/[0.04] text-flutter-light-blue hover:bg-flutter-light-blue/10 transition-colors"
                     >
                       {s}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               )}
