@@ -29,12 +29,12 @@ const AboutSection = () => {
 
             <AnimatedItem delay={0.2}>
               <div className="glass p-8 rounded-2xl">
-                <h3 className="text-2xl font-semibold text-flutter-purple mb-4">Data Science Student & Community Leader</h3>
+                <h3 className="text-2xl font-semibold text-flutter-purple mb-4">AI Integration & Community Leader</h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  Currently studying Data Science at{' '}
-                  <span className="text-flutter-purple font-semibold">Alexandria University</span> with a passion for{' '}
-                  <span className="text-flutter-purple font-semibold">AI-powered applications</span>.
-                  I love exploring the intersection of mobile development and artificial intelligence.
+                  I help startups and product teams launch Flutter apps with{' '}
+                  <span className="text-flutter-purple font-semibold">clean code</span>,{' '}
+                  <span className="text-flutter-purple font-semibold">AI features</span>, and zero mess.
+                  My data-science background means I can build the ML layer too — one developer, full stack.
                 </p>
                 <div className="mt-4 space-y-2 text-sm text-gray-400">
                   <p>🎯 <span className="text-flutter-teal">Head of Flutter Committee</span> – HackerRank Campus Club, AUFS</p>

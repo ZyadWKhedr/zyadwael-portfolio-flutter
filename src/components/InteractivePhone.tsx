@@ -2,12 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import {
   motion,
   AnimatePresence,
-  useMotionValue,
   useReducedMotion,
   useSpring,
   useScroll,
   useTransform,
-  type PanInfo,
 } from 'framer-motion';
 import {
   Gamepad2,
@@ -53,28 +51,11 @@ const InteractivePhone = () => {
     return () => clearInterval(t);
   }, []);
 
-  // Drag tilt
-  const rotY = useMotionValue(-8);
-  const rotX = useMotionValue(4);
-  const springY = useSpring(rotY, { stiffness: 120, damping: 14, mass: 0.5 });
-  const springX = useSpring(rotX, { stiffness: 120, damping: 14, mass: 0.5 });
-
-  // Scroll parallax (mobile-friendly)
+  // Subtle scroll float only — no tilt, no drag
   const { scrollYProgress } = useScroll({ target: wrapRef, offset: ['start end', 'end start'] });
-  const scrollFloat = useSpring(useTransform(scrollYProgress, [0, 1], [30, -30]), {
+  const scrollFloat = useSpring(useTransform(scrollYProgress, [0, 1], [20, -20]), {
     stiffness: 60, damping: 18,
   });
-
-  const onPan = (_: unknown, info: PanInfo) => {
-    if (prefersReduced) return;
-    rotY.set(Math.max(-25, Math.min(25, -8 + info.offset.x * 0.15)));
-    rotX.set(Math.max(-20, Math.min(20, 4 - info.offset.y * 0.12)));
-  };
-  const onPanEnd = () => {
-    rotY.set(-8);
-    rotX.set(4);
-    haptic(8);
-  };
 
   const openApp = (id: AppId) => {
     haptic([8, 30, 14]);
@@ -96,7 +77,6 @@ const InteractivePhone = () => {
   const openAiAssistant = () => {
     haptic(15);
     trackEvent('phone_open_ai_assistant', {});
-    // Try clicking the floating launcher
     const btn = document.querySelector('[aria-label="Open AI assistant"]') as HTMLButtonElement | null;
     btn?.click();
   };
@@ -107,22 +87,12 @@ const InteractivePhone = () => {
     <div
       ref={wrapRef}
       className="relative select-none"
-      style={{ perspective: 1400 }}
     >
       <motion.div
-        drag={!prefersReduced && !isTouch}
-        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        dragElastic={0.18}
-        onPan={isTouch ? undefined : onPan}
-        onPanEnd={isTouch ? undefined : onPanEnd}
         style={{
-          rotateY: isTouch ? -8 : springY,
-          rotateX: isTouch ? 4 : springX,
           y: prefersReduced ? 0 : scrollFloat,
-          transformStyle: 'preserve-3d',
-          touchAction: 'pan-y',
         }}
-        className="relative w-[280px] h-[580px] cursor-grab active:cursor-grabbing will-change-transform"
+        className="relative w-[280px] h-[580px] will-change-transform"
       >
         {/* Floor glow */}
         <div
@@ -196,14 +166,13 @@ const InteractivePhone = () => {
         </div>
       </motion.div>
 
-      {/* Drag hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 1, 0] }}
         transition={{ duration: 4, delay: 1, repeat: Infinity, repeatDelay: 6 }}
         className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-widest text-flutter-light-blue/70"
       >
-        Drag · Tap apps
+        Tap an app
       </motion.div>
     </div>
   );
