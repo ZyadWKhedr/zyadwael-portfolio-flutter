@@ -413,16 +413,46 @@ const ReactionGame = () => {
 };
 
 const PRODUCTS = [
-  { id: 1, name: 'Air Runner X', category: 'Sneakers', price: 129, rating: 4.8, color: 'from-blue-500 to-indigo-600' },
-  { id: 2, name: 'Urban Hoodie', category: 'Clothing', price: 79,  rating: 4.6, color: 'from-rose-500 to-pink-600' },
-  { id: 3, name: 'Slim Chinos',  category: 'Clothing', price: 59,  rating: 4.5, color: 'from-amber-500 to-orange-600' },
-  { id: 4, name: 'Classic Cap',  category: 'Accessories', price: 34, rating: 4.9, color: 'from-emerald-500 to-teal-600' },
+  { id: 1, name: 'Air Runner X',   category: 'Sneakers',    price: 129, rating: 4.8, color: 'from-blue-500 to-indigo-600' },
+  { id: 2, name: 'Urban Hoodie',   category: 'Clothing',    price: 79,  rating: 4.6, color: 'from-rose-500 to-pink-600' },
+  { id: 3, name: 'Slim Chinos',    category: 'Clothing',    price: 59,  rating: 4.5, color: 'from-amber-500 to-orange-600' },
+  { id: 4, name: 'Classic Cap',    category: 'Accessories', price: 34,  rating: 4.9, color: 'from-emerald-500 to-teal-600' },
+  { id: 5, name: 'Leather Wallet', category: 'Accessories', price: 49,  rating: 4.7, color: 'from-yellow-600 to-amber-700' },
+  { id: 6, name: 'Sport Watch',    category: 'Accessories', price: 199, rating: 4.9, color: 'from-slate-500 to-zinc-700' },
 ];
 
+const CATEGORIES = ['All', 'Sneakers', 'Clothing', 'Accessories'];
+
+const BANNERS = [
+  { label: 'New Arrivals', sub: 'Fresh drops this week', color: 'from-flutter-blue to-flutter-purple' },
+  { label: 'Up to 40% Off', sub: 'Limited time deals', color: 'from-rose-500 to-pink-600' },
+  { label: 'Free Shipping', sub: 'On orders over $99', color: 'from-emerald-500 to-teal-600' },
+];
+
+type ShopScreen = 'splash' | 'home' | 'detail' | 'cart' | 'settings';
+
 const ShopApp = () => {
+  const [screen, setScreen] = useState<ShopScreen>('splash');
+  const [navTab, setNavTab] = useState<'home' | 'cart' | 'settings'>('home');
   const [selected, setSelected] = useState<typeof PRODUCTS[0] | null>(null);
   const [cart, setCart] = useState<number[]>([]);
   const [added, setAdded] = useState(false);
+  const [activeCat, setActiveCat] = useState('All');
+  const [bannerIdx, setBannerIdx] = useState(0);
+
+  // Splash → home after 1.8s
+  useEffect(() => {
+    if (screen === 'splash') {
+      const t = setTimeout(() => setScreen('home'), 1800);
+      return () => clearTimeout(t);
+    }
+  }, [screen]);
+
+  // Auto-rotate banner
+  useEffect(() => {
+    const t = setInterval(() => setBannerIdx((i) => (i + 1) % BANNERS.length), 2500);
+    return () => clearInterval(t);
+  }, []);
 
   const addToCart = (id: number) => {
     haptic([10, 20, 10]);
@@ -431,104 +461,339 @@ const ShopApp = () => {
     setTimeout(() => setAdded(false), 1200);
   };
 
+  const removeFromCart = (id: number) => {
+    setCart((c) => { const i = c.indexOf(id); return i > -1 ? [...c.slice(0, i), ...c.slice(i + 1)] : c; });
+  };
+
+  const switchTab = (tab: 'home' | 'cart' | 'settings') => {
+    haptic(8);
+    setNavTab(tab);
+    setScreen(tab === 'home' ? 'home' : tab);
+    setSelected(null);
+  };
+
+  const cartProducts = cart.map((id) => PRODUCTS.find((p) => p.id === id)!).filter(Boolean);
+  const cartTotal = cartProducts.reduce((s, p) => s + p.price, 0);
+  const filtered = activeCat === 'All' ? PRODUCTS : PRODUCTS.filter((p) => p.category === activeCat);
+
+  // ── Splash ──
+  if (screen === 'splash') return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-[#0A0E27] to-[#1a1040]"
+    >
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+        className="flex flex-col items-center gap-3"
+      >
+        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-2xl shadow-rose-500/40">
+          <ShoppingBag className="h-8 w-8 text-white" />
+        </div>
+        <div className="text-white font-bold text-lg tracking-wide">StyleShop</div>
+        <div className="text-gray-400 text-[11px]">Premium fashion store</div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="absolute bottom-16 flex gap-1"
+      >
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+            className="h-1.5 w-1.5 rounded-full bg-rose-400"
+          />
+        ))}
+      </motion.div>
+    </motion.div>
+  );
+
   return (
-    <AnimatePresence mode="wait">
-      {selected ? (
-        <motion.div
-          key="detail"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.22 }}
-          className="px-4 flex flex-col gap-3"
-        >
-          <button
-            onClick={() => setSelected(null)}
-            className="flex items-center gap-0.5 text-flutter-light-blue text-xs font-medium"
-          >
-            <ChevronLeft className="h-4 w-4" /> Back
-          </button>
-          <div className={`h-36 rounded-2xl bg-gradient-to-br ${selected.color} flex items-center justify-center`}>
-            <ShoppingBag className="h-16 w-16 text-white/80" />
-          </div>
-          <div>
-            <div className="text-[10px] uppercase tracking-wider text-gray-400">{selected.category}</div>
-            <div className="text-base font-bold text-white mt-0.5">{selected.name}</div>
-            <div className="flex items-center gap-1 mt-1">
-              <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
-              <span className="text-[11px] text-amber-400 font-semibold">{selected.rating}</span>
-              <span className="text-[10px] text-gray-400 ml-1">· 240 reviews</span>
-            </div>
-          </div>
-          <p className="text-[11px] text-gray-300 leading-snug">
-            Premium quality, built to last. Designed for everyday comfort with a modern aesthetic.
-          </p>
-          <div className="flex items-center justify-between mt-1">
-            <div className="text-xl font-bold text-white">${selected.price}</div>
-            <motion.button
-              whileTap={{ scale: 0.94 }}
-              onClick={() => addToCart(selected.id)}
-              className="px-4 py-2 rounded-xl bg-flutter-gradient text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg shadow-flutter-blue/30"
+    <div className="flex-1 flex flex-col overflow-hidden">
+      {/* Screen content */}
+      <div className="flex-1 overflow-y-auto scrollbar-hide">
+        <AnimatePresence mode="wait">
+
+          {/* ── Home ── */}
+          {screen === 'home' && (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col gap-3 pb-2"
             >
-              {added ? (
-                <><Sparkles className="h-3.5 w-3.5" /> Added!</>
-              ) : (
-                <><ShoppingBag className="h-3.5 w-3.5" /> Add to cart</>
-              )}
-            </motion.button>
-          </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          key="grid"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="px-4 flex flex-col gap-3"
-        >
-          <div className="flex items-center justify-between">
-            <div className="text-[10px] uppercase tracking-wider text-gray-400">4 items</div>
-            <div className="relative">
-              <ShoppingBag className="h-4 w-4 text-flutter-light-blue" />
-              {cart.length > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-rose-500 text-[8px] font-bold text-white flex items-center justify-center">
-                  {cart.length}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {PRODUCTS.map((p, i) => (
-              <motion.button
-                key={p.id}
-                onClick={() => setSelected(p)}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
-                className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] text-left"
-              >
-                <div className={`h-20 bg-gradient-to-br ${p.color} flex items-center justify-center`}>
-                  <ShoppingBag className="h-8 w-8 text-white/80" />
+              {/* Header */}
+              <div className="px-4 pt-1 flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] text-gray-400">Welcome back</div>
+                  <div className="text-sm font-bold text-white">StyleShop ✦</div>
                 </div>
-                <div className="p-2">
-                  <div className="text-[10px] text-gray-400">{p.category}</div>
-                  <div className="text-[11px] font-semibold text-white leading-tight">{p.name}</div>
-                  <div className="flex items-center justify-between mt-1">
-                    <span className="text-[11px] font-bold text-flutter-light-blue">${p.price}</span>
-                    <div className="flex items-center gap-0.5">
-                      <Star className="h-2.5 w-2.5 text-amber-400 fill-amber-400" />
-                      <span className="text-[9px] text-amber-400">{p.rating}</span>
+                <div className="relative" onClick={() => switchTab('cart')}>
+                  <ShoppingBag className="h-5 w-5 text-flutter-light-blue cursor-pointer" />
+                  {cart.length > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-rose-500 text-[8px] font-bold text-white flex items-center justify-center">
+                      {cart.length}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Banner */}
+              <div className="px-4">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={bannerIdx}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className={`h-20 rounded-2xl bg-gradient-to-r ${BANNERS[bannerIdx].color} p-4 flex flex-col justify-center`}
+                  >
+                    <div className="text-white font-bold text-sm">{BANNERS[bannerIdx].label}</div>
+                    <div className="text-white/70 text-[10px] mt-0.5">{BANNERS[bannerIdx].sub}</div>
+                  </motion.div>
+                </AnimatePresence>
+                <div className="flex justify-center gap-1 mt-2">
+                  {BANNERS.map((_, i) => (
+                    <div key={i} className={`h-1 rounded-full transition-all ${i === bannerIdx ? 'w-4 bg-flutter-light-blue' : 'w-1.5 bg-white/20'}`} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Categories */}
+              <div className="px-4 flex gap-2 overflow-x-auto scrollbar-hide">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCat(cat)}
+                    className={`shrink-0 px-3 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                      activeCat === cat
+                        ? 'bg-flutter-light-blue text-white border-flutter-light-blue'
+                        : 'border-white/15 text-gray-400 bg-white/5'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* Products grid */}
+              <div className="px-4 grid grid-cols-2 gap-2">
+                {filtered.map((p, i) => (
+                  <motion.button
+                    key={p.id}
+                    onClick={() => { setSelected(p); setScreen('detail'); }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] text-left"
+                  >
+                    <div className={`h-20 bg-gradient-to-br ${p.color} flex items-center justify-center`}>
+                      <ShoppingBag className="h-8 w-8 text-white/80" />
                     </div>
-                  </div>
+                    <div className="p-2">
+                      <div className="text-[10px] text-gray-400">{p.category}</div>
+                      <div className="text-[11px] font-semibold text-white leading-tight">{p.name}</div>
+                      <div className="flex items-center justify-between mt-1">
+                        <span className="text-[11px] font-bold text-flutter-light-blue">${p.price}</span>
+                        <div className="flex items-center gap-0.5">
+                          <Star className="h-2.5 w-2.5 text-amber-400 fill-amber-400" />
+                          <span className="text-[9px] text-amber-400">{p.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* ── Product detail ── */}
+          {screen === 'detail' && selected && (
+            <motion.div
+              key="detail"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.22 }}
+              className="px-4 flex flex-col gap-3"
+            >
+              <button
+                onClick={() => setScreen('home')}
+                className="flex items-center gap-0.5 text-flutter-light-blue text-xs font-medium"
+              >
+                <ChevronLeft className="h-4 w-4" /> Back
+              </button>
+              <div className={`h-36 rounded-2xl bg-gradient-to-br ${selected.color} flex items-center justify-center`}>
+                <ShoppingBag className="h-16 w-16 text-white/80" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-gray-400">{selected.category}</div>
+                <div className="text-base font-bold text-white mt-0.5">{selected.name}</div>
+                <div className="flex items-center gap-1 mt-1">
+                  <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
+                  <span className="text-[11px] text-amber-400 font-semibold">{selected.rating}</span>
+                  <span className="text-[10px] text-gray-400 ml-1">· 240 reviews</span>
                 </div>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+              </div>
+              <p className="text-[11px] text-gray-300 leading-snug">
+                Premium quality, built to last. Designed for everyday comfort with a modern aesthetic.
+              </p>
+              <div className="flex items-center justify-between mt-1">
+                <div className="text-xl font-bold text-white">${selected.price}</div>
+                <motion.button
+                  whileTap={{ scale: 0.94 }}
+                  onClick={() => addToCart(selected.id)}
+                  className="px-4 py-2 rounded-xl bg-flutter-gradient text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg shadow-flutter-blue/30"
+                >
+                  {added ? (
+                    <><Sparkles className="h-3.5 w-3.5" /> Added!</>
+                  ) : (
+                    <><ShoppingBag className="h-3.5 w-3.5" /> Add to cart</>
+                  )}
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* ── Cart ── */}
+          {screen === 'cart' && (
+            <motion.div
+              key="cart"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="px-4 flex flex-col gap-3"
+            >
+              <div className="text-sm font-bold text-white pt-1">My Cart</div>
+              {cartProducts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center gap-2 py-10">
+                  <ShoppingBag className="h-10 w-10 text-white/20" />
+                  <div className="text-[11px] text-gray-400">Cart is empty</div>
+                </div>
+              ) : (
+                <>
+                  {cartProducts.map((p, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      className="flex items-center gap-3 rounded-xl p-2 bg-white/[0.05] border border-white/10"
+                    >
+                      <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center shrink-0`}>
+                        <ShoppingBag className="h-5 w-5 text-white/80" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[11px] font-semibold text-white truncate">{p.name}</div>
+                        <div className="text-[10px] text-flutter-light-blue font-bold">${p.price}</div>
+                      </div>
+                      <button onClick={() => removeFromCart(p.id)} className="text-gray-500 hover:text-rose-400 text-xs">✕</button>
+                    </motion.div>
+                  ))}
+                  <div className="rounded-xl p-3 bg-white/[0.05] border border-white/10 flex items-center justify-between">
+                    <div className="text-[11px] text-gray-400">Total</div>
+                    <div className="text-sm font-bold text-white">${cartTotal}</div>
+                  </div>
+                  <motion.button
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full py-2.5 rounded-xl bg-flutter-gradient text-white text-xs font-semibold shadow-lg shadow-flutter-blue/30"
+                  >
+                    Checkout · ${cartTotal}
+                  </motion.button>
+                </>
+              )}
+            </motion.div>
+          )}
+
+          {/* ── Settings ── */}
+          {screen === 'settings' && (
+            <motion.div
+              key="settings"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="px-4 flex flex-col gap-3"
+            >
+              <div className="text-sm font-bold text-white pt-1">Settings</div>
+              {/* Profile card */}
+              <div className="rounded-2xl p-4 bg-white/[0.05] border border-white/10 flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-flutter-gradient flex items-center justify-center shrink-0">
+                  <span className="text-white font-bold text-sm">ZW</span>
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white">Zyad Wael</div>
+                  <div className="text-[10px] text-gray-400">zyad@example.com</div>
+                  <div className="text-[9px] text-flutter-teal mt-0.5 font-medium">Premium member</div>
+                </div>
+              </div>
+              {/* Settings items */}
+              {[
+                { label: 'Edit Profile', icon: '👤' },
+                { label: 'Notifications', icon: '🔔' },
+                { label: 'Payment Methods', icon: '💳' },
+                { label: 'Order History', icon: '📦' },
+                { label: 'Help & Support', icon: '💬' },
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  className="flex items-center gap-3 rounded-xl p-3 bg-white/[0.04] border border-white/10 text-left hover:bg-white/[0.07] transition-colors"
+                >
+                  <span className="text-sm">{item.icon}</span>
+                  <span className="text-[12px] text-white/90 font-medium">{item.label}</span>
+                  <ChevronLeft className="h-3 w-3 text-gray-500 rotate-180 ml-auto" />
+                </button>
+              ))}
+              {/* Exit */}
+              <button
+                onClick={() => { haptic([20, 40]); setScreen('splash'); setCart([]); setNavTab('home'); }}
+                className="flex items-center gap-3 rounded-xl p-3 bg-rose-500/10 border border-rose-500/20 text-left hover:bg-rose-500/20 transition-colors mt-1"
+              >
+                <span className="text-sm">🚪</span>
+                <span className="text-[12px] text-rose-400 font-semibold">Exit App</span>
+              </button>
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+      </div>
+
+      {/* Bottom navbar — hidden on splash and detail */}
+      {screen !== 'detail' && (
+        <div className="shrink-0 flex items-center justify-around px-4 py-2 border-t border-white/10 bg-black/40 backdrop-blur-sm">
+          {([
+            { tab: 'home',     icon: '🏠', label: 'Home' },
+            { tab: 'cart',     icon: '🛒', label: 'Cart' },
+            { tab: 'settings', icon: '⚙️', label: 'Settings' },
+          ] as const).map(({ tab, icon, label }) => (
+            <button
+              key={tab}
+              onClick={() => switchTab(tab)}
+              className="flex flex-col items-center gap-0.5"
+            >
+              <span className="text-base">{icon}</span>
+              <span className={`text-[9px] font-semibold ${navTab === tab ? 'text-flutter-light-blue' : 'text-gray-500'}`}>
+                {label}
+              </span>
+              {navTab === tab && (
+                <motion.div layoutId="nav-dot" className="h-0.5 w-4 rounded-full bg-flutter-light-blue" />
+              )}
+            </button>
+          ))}
+        </div>
       )}
-    </AnimatePresence>
+    </div>
   );
 };
 
