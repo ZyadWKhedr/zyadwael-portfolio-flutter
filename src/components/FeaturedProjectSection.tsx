@@ -3,7 +3,7 @@ import { Sparkles } from 'lucide-react';
 import InteractivePhone from './InteractivePhone';
 import { AnimatedSection } from './AnimatedSection';
 
-const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'Interactive 3D'];
+const tags = ['Flutter', 'Dart', 'AI', 'Material 3', 'Mobile UX',];
 
 const FeaturedProjectSection = () => {
   return (
@@ -79,10 +79,10 @@ const FeaturedProjectSection = () => {
 
             <ul className="space-y-2 text-sm text-gray-400">
               {[
-                'Drag to tilt · scroll parallax · haptic feedback',
                 'Multiple in-phone apps: games, analytics, AI',
                 'Unbeatable MinMax Tic Tac Toe inside',
                 'Reflex test — try to beat your best ms',
+                'Live analytics dashboard with animated charts'
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="text-flutter-teal mt-1">▹</span>

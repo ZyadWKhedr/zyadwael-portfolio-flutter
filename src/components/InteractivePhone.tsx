@@ -20,11 +20,13 @@ import {
   Trophy,
   Target,
   Timer,
+  ShoppingBag,
+  Star,
 } from 'lucide-react';
 import TicTacToeGame from './TicTacToeGame';
 import { trackEvent } from '@/lib/analytics';
 
-type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction';
+type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction' | 'shop';
 
 const haptic = (pattern: number | number[] = 12) => {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -33,10 +35,11 @@ const haptic = (pattern: number | number[] = 12) => {
 };
 
 const APPS: { id: Exclude<AppId, 'home'>; label: string; icon: any; bg: string }[] = [
-  { id: 'ttt',      label: 'Tic Tac Toe', icon: Gamepad2, bg: 'from-flutter-blue to-flutter-light-blue' },
-  { id: 'reaction', label: 'Reflex',       icon: Zap,      bg: 'from-amber-500 to-rose-500' },
-  { id: 'stats',    label: 'Analytics',    icon: BarChart3,bg: 'from-emerald-500 to-flutter-teal' },
-  { id: 'ai',       label: 'Ask AI',       icon: Bot,      bg: 'from-flutter-purple to-flutter-blue' },
+  { id: 'ttt',      label: 'Tic Tac Toe', icon: Gamepad2,     bg: 'from-flutter-blue to-flutter-light-blue' },
+  { id: 'reaction', label: 'Reflex',       icon: Zap,          bg: 'from-amber-500 to-rose-500' },
+  { id: 'stats',    label: 'Analytics',    icon: BarChart3,    bg: 'from-emerald-500 to-flutter-teal' },
+  { id: 'ai',       label: 'Ask AI',       icon: Bot,          bg: 'from-flutter-purple to-flutter-blue' },
+  { id: 'shop',     label: 'Shop',         icon: ShoppingBag,  bg: 'from-rose-500 to-pink-600' },
 ];
 
 const InteractivePhone = () => {
@@ -144,6 +147,11 @@ const InteractivePhone = () => {
                 {app === 'ai' && (
                   <AppFrame key="ai" title="Ask AI" onBack={goHome}>
                     <AiApp onOpenChat={openAiAssistant} />
+                  </AppFrame>
+                )}
+                {app === 'shop' && (
+                  <AppFrame key="shop" title="Shop" onBack={goHome}>
+                    <ShopApp />
                   </AppFrame>
                 )}
               </AnimatePresence>
@@ -401,6 +409,126 @@ const ReactionGame = () => {
         Mobile devs ship snappy UIs. How snappy are you?
       </p>
     </div>
+  );
+};
+
+const PRODUCTS = [
+  { id: 1, name: 'Air Runner X', category: 'Sneakers', price: 129, rating: 4.8, color: 'from-blue-500 to-indigo-600' },
+  { id: 2, name: 'Urban Hoodie', category: 'Clothing', price: 79,  rating: 4.6, color: 'from-rose-500 to-pink-600' },
+  { id: 3, name: 'Slim Chinos',  category: 'Clothing', price: 59,  rating: 4.5, color: 'from-amber-500 to-orange-600' },
+  { id: 4, name: 'Classic Cap',  category: 'Accessories', price: 34, rating: 4.9, color: 'from-emerald-500 to-teal-600' },
+];
+
+const ShopApp = () => {
+  const [selected, setSelected] = useState<typeof PRODUCTS[0] | null>(null);
+  const [cart, setCart] = useState<number[]>([]);
+  const [added, setAdded] = useState(false);
+
+  const addToCart = (id: number) => {
+    haptic([10, 20, 10]);
+    setCart((c) => [...c, id]);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
+  };
+
+  return (
+    <AnimatePresence mode="wait">
+      {selected ? (
+        <motion.div
+          key="detail"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -40 }}
+          transition={{ duration: 0.22 }}
+          className="px-4 flex flex-col gap-3"
+        >
+          <button
+            onClick={() => setSelected(null)}
+            className="flex items-center gap-0.5 text-flutter-light-blue text-xs font-medium"
+          >
+            <ChevronLeft className="h-4 w-4" /> Back
+          </button>
+          <div className={`h-36 rounded-2xl bg-gradient-to-br ${selected.color} flex items-center justify-center`}>
+            <ShoppingBag className="h-16 w-16 text-white/80" />
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wider text-gray-400">{selected.category}</div>
+            <div className="text-base font-bold text-white mt-0.5">{selected.name}</div>
+            <div className="flex items-center gap-1 mt-1">
+              <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
+              <span className="text-[11px] text-amber-400 font-semibold">{selected.rating}</span>
+              <span className="text-[10px] text-gray-400 ml-1">· 240 reviews</span>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-300 leading-snug">
+            Premium quality, built to last. Designed for everyday comfort with a modern aesthetic.
+          </p>
+          <div className="flex items-center justify-between mt-1">
+            <div className="text-xl font-bold text-white">${selected.price}</div>
+            <motion.button
+              whileTap={{ scale: 0.94 }}
+              onClick={() => addToCart(selected.id)}
+              className="px-4 py-2 rounded-xl bg-flutter-gradient text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg shadow-flutter-blue/30"
+            >
+              {added ? (
+                <><Sparkles className="h-3.5 w-3.5" /> Added!</>
+              ) : (
+                <><ShoppingBag className="h-3.5 w-3.5" /> Add to cart</>
+              )}
+            </motion.button>
+          </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="grid"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="px-4 flex flex-col gap-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="text-[10px] uppercase tracking-wider text-gray-400">4 items</div>
+            <div className="relative">
+              <ShoppingBag className="h-4 w-4 text-flutter-light-blue" />
+              {cart.length > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-rose-500 text-[8px] font-bold text-white flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {PRODUCTS.map((p, i) => (
+              <motion.button
+                key={p.id}
+                onClick={() => setSelected(p)}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+                className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] text-left"
+              >
+                <div className={`h-20 bg-gradient-to-br ${p.color} flex items-center justify-center`}>
+                  <ShoppingBag className="h-8 w-8 text-white/80" />
+                </div>
+                <div className="p-2">
+                  <div className="text-[10px] text-gray-400">{p.category}</div>
+                  <div className="text-[11px] font-semibold text-white leading-tight">{p.name}</div>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-[11px] font-bold text-flutter-light-blue">${p.price}</span>
+                    <div className="flex items-center gap-0.5">
+                      <Star className="h-2.5 w-2.5 text-amber-400 fill-amber-400" />
+                      <span className="text-[9px] text-amber-400">{p.rating}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
