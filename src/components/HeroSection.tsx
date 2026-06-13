@@ -100,25 +100,6 @@ const HeroSection = () => {
               <p className="text-[10px] text-gray-400 mt-1">
                 <span className="text-white font-semibold">5+</span> apps · <span className="text-emerald-400">Available</span>
               </p>
-                <span className="text-white">Zyad </span>
-                <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
-                  Wael
-                </span>
-              </h1>
-              <div className="h-5 overflow-hidden mt-0.5">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={currentSkill}
-                    initial={{ y: 16, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -16, opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="text-xs font-semibold text-flutter-light-blue"
-                  >
-                    {skills[currentSkill]}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
             </div>
           </motion.div>
 
