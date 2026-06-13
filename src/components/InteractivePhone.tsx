@@ -76,16 +76,6 @@ const InteractivePhone = () => {
     haptic(8);
   };
 
-  // Pointer tilt for fine desktop hover
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (prefersReduced || e.pointerType === 'touch') return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    rotY.set(px * 22 - 4);
-    rotX.set(-py * 16);
-  };
-
   const openApp = (id: AppId) => {
     haptic([8, 30, 14]);
     setApp(id);
@@ -125,8 +115,6 @@ const InteractivePhone = () => {
         dragElastic={0.18}
         onPan={isTouch ? undefined : onPan}
         onPanEnd={isTouch ? undefined : onPanEnd}
-        onPointerMove={onPointerMove}
-        onPointerLeave={onPanEnd}
         style={{
           rotateY: isTouch ? -8 : springY,
           rotateX: isTouch ? 4 : springX,
