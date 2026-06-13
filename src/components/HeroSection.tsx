@@ -143,21 +143,6 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Tagline strip — col-span-4 */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="col-span-4 row-span-1 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl px-4 flex items-center gap-2"
-          >
-            <Zap className="h-4 w-4 text-flutter-teal shrink-0" />
-            <p className="text-xs text-gray-300 leading-snug">
-              I ship <span className="text-flutter-light-blue font-semibold">scalable mobile apps</span> with{' '}
-              <span className="text-flutter-teal font-semibold">AI inside</span>.
-            </p>
-          </motion.div>
-
-          {/* CTA row — col-span-4 */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -165,7 +150,27 @@ const HeroSection = () => {
             className="col-span-4 row-span-1 flex gap-2"
           >
             <Button
+              onClick={() => scrollTo('#contact')}
+              className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
+            >
+              Hire Me
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+            <Button
               onClick={() => scrollTo('#projects')}
+              variant="outline"
+              className="rounded-2xl border-white/15 bg-white/5 text-white px-3 text-xs"
+            >
+              See Work
+            </Button>
+            <Button
+              onClick={() => openCv('hero_mobile')}
+              variant="outline"
+              className="rounded-2xl border-white/15 bg-white/5 text-white"
+            >
+              <Download className="h-4 w-4" />
+            </Button>
+          </motion.div>
               className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
             >
               View Work
