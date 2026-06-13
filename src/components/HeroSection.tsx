@@ -171,26 +171,6 @@ const HeroSection = () => {
               <Download className="h-4 w-4" />
             </Button>
           </motion.div>
-              className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
-            >
-              View Work
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Button>
-            <Button
-              onClick={() => scrollTo('#contact')}
-              variant="outline"
-              className="rounded-2xl border-white/15 bg-white/5 text-white"
-            >
-              <Mail className="h-4 w-4" />
-            </Button>
-            <Button
-              onClick={() => openCv('hero_mobile')}
-              variant="outline"
-              className="rounded-2xl border-white/15 bg-white/5 text-white"
-            >
-              <Download className="h-4 w-4" />
-            </Button>
-          </motion.div>
         </div>
 
         {/* ────────────  DESKTOP LAYOUT (unchanged grid)  ──────────── */}
