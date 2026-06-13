@@ -16,7 +16,10 @@ const openCv = (location: string) => {
 
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
-  const skills = ['Flutter Developer', 'AI Engineer', 'Mobile Architect', 'Problem Solver'];
+  const skills = [
+    'Flutter Developer & AI Integration Specialist',
+    'Clean Architecture · iOS & Android',
+  ];
 
   useEffect(() => {
     const id = setInterval(() => setCurrentSkill((p) => (p + 1) % skills.length), 2500);
@@ -75,6 +78,28 @@ const HeroSection = () => {
                 </span>
               </div>
               <h1 className="text-2xl font-bold leading-tight">
+                <span className="text-white">Zyad </span>
+                <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
+                  Wael
+                </span>
+              </h1>
+              <div className="h-9 overflow-hidden mt-0.5">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={currentSkill}
+                    initial={{ y: 16, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -16, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-[11px] font-semibold text-flutter-light-blue leading-tight"
+                  >
+                    {skills[currentSkill]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+              <p className="text-[10px] text-gray-400 mt-1">
+                <span className="text-white font-semibold">5+</span> apps · <span className="text-emerald-400">Available</span>
+              </p>
                 <span className="text-white">Zyad </span>
                 <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
                   Wael
@@ -232,10 +257,22 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="text-base md:text-lg text-gray-400 leading-relaxed max-w-lg"
+              className="text-base md:text-lg text-gray-300 leading-relaxed max-w-lg"
             >
-              I engineer scalable mobile & AI-powered solutions.<br />
-              From architecture to deployment — I build with purpose.
+              I build <span className="text-flutter-light-blue font-semibold">fast, scalable Flutter apps</span> that feel native on iOS and Android — shipped clean, on time.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-sm text-gray-400 flex flex-wrap items-center gap-x-2 gap-y-1"
+            >
+              <span><span className="text-white font-semibold">5+</span> apps shipped</span>
+              <span className="text-flutter-light-blue/40">·</span>
+              <span><span className="text-white font-semibold">1+</span> year experience</span>
+              <span className="text-flutter-light-blue/40">·</span>
+              <span className="text-emerald-400 font-medium">Available for freelance</span>
             </motion.p>
 
             {/* Desktop bento stats */}
@@ -271,20 +308,19 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                onClick={() => scrollTo('#projects')}
+                onClick={() => scrollTo('#contact')}
                 className="group bg-flutter-gradient hover:scale-105 transition-all duration-300 text-white font-semibold px-6 py-5 rounded-full shadow-lg shadow-flutter-blue/30"
               >
-                View My Work
+                Hire Me
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => scrollTo('#contact')}
+                onClick={() => scrollTo('#projects')}
                 className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white font-semibold px-6 py-5 rounded-full"
               >
-                <Mail className="mr-2 h-4 w-4" />
-                Contact Me
+                See My Work
               </Button>
               <Button
                 size="lg"
