@@ -53,11 +53,10 @@ const FeaturedProjectSection = () => {
             className="space-y-6"
           >
             <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
-              A live iPhone, built in{' '}
+              Built to feel native.{' '}
               <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
-                React
+                Try it yourself.
               </span>
-              .
             </h3>
 
             <p className="text-gray-300 leading-relaxed">
