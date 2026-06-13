@@ -204,7 +204,7 @@ const HeroSection = () => {
                   Zyad Wael
                 </span>
               </h1>
-              <div className="relative inline-block h-9 md:h-11 overflow-hidden">
+              <div className="relative inline-block h-10 md:h-14 overflow-hidden">
                 <motion.p
                   key={currentSkill}
                   initial={{ y: 30, opacity: 0 }}
