@@ -204,14 +204,14 @@ const HeroSection = () => {
                   Zyad Wael
                 </span>
               </h1>
-              <div className="relative inline-block h-10 md:h-14 overflow-hidden">
+              <div className="relative inline-block h-8 md:h-10 overflow-hidden w-full">
                 <motion.p
                   key={currentSkill}
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -30, opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-2xl md:text-3xl font-semibold text-flutter-light-blue"
+                  className="text-lg md:text-xl font-semibold text-flutter-light-blue leading-tight"
                 >
                   {skills[currentSkill]}
                 </motion.p>
