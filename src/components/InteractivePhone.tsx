@@ -149,10 +149,17 @@ const InteractivePhone = () => {
                     <AiApp onOpenChat={openAiAssistant} />
                   </AppFrame>
                 )}
-                {app === 'shop' && (
-                  <AppFrame key="shop" title="Shop" onBack={goHome}>
+               {app === 'shop' && (
+                  <motion.div
+                    key="shop"
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.22 }}
+                    className="flex-1 flex flex-col overflow-hidden"
+                  >
                     <ShopApp />
-                  </AppFrame>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
