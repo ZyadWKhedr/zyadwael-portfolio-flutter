@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available for projects",
+    "greeting": "Hi, I'm",
+    "skill1": "Flutter Developer & AI Integration Specialist",
+    "skill2": "Clean Architecture · iOS & Android",
+    "description": "I build fast, scalable Flutter apps that feel native on iOS and Android — shipped clean, on time.",
+    "stats1": "apps shipped",
+    "stats2": "year experience",
+    "stats3": "Available for freelance",
+    "hire": "Hire Me",
+    "work": "See My Work",
+    "cv": "CV"
+  }
+}

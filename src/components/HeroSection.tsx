@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, ArrowRight, Sparkles, Zap, Brain, Smartphone } from 'lucide-react';
 import zyadProfile from '@/assets/zyad-profile.png';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n/index';
 
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
 
@@ -17,8 +19,10 @@ const openCv = (location: string) => {
 const HeroSection = () => {
   const [currentSkill, setCurrentSkill] = useState(0);
   const skills = [
-    'Flutter Developer & AI Integration Specialist',
+    'Mobile Application Developer',
+    'Software Engineer',
     'Clean Architecture · iOS & Android',
+    'Flutter · Dart · AI-Native',
   ];
 
   useEffect(() => {
@@ -28,6 +32,15 @@ const HeroSection = () => {
 
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  const { t } = useTranslation();
+  const isAr = i18n.language === 'ar';
+
+  const toggleLang = () => {
+    const next = isAr ? 'en' : 'ar';
+    i18n.changeLanguage(next);
+    document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = next;
+  };
 
   return (
     <section
