@@ -770,7 +770,7 @@ const ShopApp = () => {
       </div>
 
       {/* Bottom navbar — hidden on splash and detail */}
-      {screen !== 'detail' && (
+      {(screen as ShopScreen) !== 'detail' && (screen as ShopScreen) !== 'splash' && (
         <div className="shrink-0 flex items-center justify-around px-4 py-2 border-t border-white/10 bg-black/40 backdrop-blur-sm">
           {([
             { tab: 'home',     icon: '🏠', label: 'Home' },
