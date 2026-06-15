@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
-import { Github, Apple, ArrowUpRight, Plus, Brain, Cog, TrendingUp } from 'lucide-react';
+import { Github, Apple, ArrowUpRight, Plus, Brain, Cog, TrendingUp, ExternalLink } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics';
@@ -31,6 +31,173 @@ type Project = {
   githubUrl?: string;
 };
 
+/* ── Premium Project Card ── */
+const ProjectCard = ({
+  project,
+  index,
+  onClick,
+}: {
+  project: Project;
+  index: number;
+  onClick: () => void;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  const isAI = project.category === 'ai';
+
+  return (
+    <motion.button
+      layout
+      key={project.title}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: 'easeOut' }}
+      onClick={onClick}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className={`relative group text-left rounded-2xl overflow-hidden border transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50 ${
+        isAI
+          ? 'border-flutter-purple/30 hover:border-flutter-purple/60 shadow-[0_0_24px_-8px_rgba(168,85,247,0.4)]'
+          : 'border-white/8 hover:border-flutter-light-blue/40'
+      } bg-white/[0.03] backdrop-blur-xl`}
+      style={{
+        transform: hovered ? 'translateY(-8px)' : 'translateY(0)',
+        transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s',
+        boxShadow: hovered
+          ? isAI
+            ? '0 24px 48px -12px rgba(168,85,247,0.4), 0 0 0 1px rgba(168,85,247,0.3)'
+            : '0 24px 48px -12px rgba(19,185,253,0.25), 0 0 0 1px rgba(19,185,253,0.2)'
+          : undefined,
+      }}
+    >
+      {/* AI glow */}
+      {isAI && (
+        <div
+          className="pointer-events-none absolute -inset-px rounded-2xl transition-opacity duration-500"
+          style={{
+            opacity: hovered ? 1 : 0.4,
+            background: 'radial-gradient(120% 60% at 50% 0%, rgba(168,85,247,0.2), transparent 60%)',
+          }}
+        />
+      )}
+
+      {/* Thumbnail */}
+      <div className={`relative aspect-[16/10] bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+        {/* Dot pattern */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
+            backgroundSize: '18px 18px',
+          }}
+        />
+
+        {/* Icon — scales on hover */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            animate={{ scale: hovered ? 1.12 : 1, rotate: hovered ? -3 : 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+          >
+            {project.iconImage ? (
+              <img
+                src={project.iconImage}
+                alt={`${project.title} logo`}
+                className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/20"
+              />
+            ) : (
+              <span className="text-4xl sm:text-6xl md:text-7xl drop-shadow-lg">{project.icon}</span>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Overlay reveal on hover */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 20 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4 gap-2"
+        >
+          <div className="flex flex-wrap gap-1.5">
+            {project.technologies.slice(0, 3).map((t) => (
+              <span
+                key={t}
+                className="px-2 py-0.5 rounded-full text-[10px] font-mono text-white bg-white/20 backdrop-blur-sm border border-white/20"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 text-white text-xs font-semibold">
+            <ExternalLink className="h-3.5 w-3.5" />
+            View details
+          </div>
+        </motion.div>
+
+        {/* Category badge */}
+        {isAI ? (
+          <span className="absolute top-2 left-2 inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-flutter-purple to-flutter-blue text-white shadow-lg">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+            </span>
+            AI
+          </span>
+        ) : (
+          <span className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
+            {project.category === 'mobile' ? 'Mobile' : 'Desktop'}
+          </span>
+        )}
+
+        {/* Arrow — slides in on hover */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : 6, y: hovered ? 0 : -6 }}
+          transition={{ duration: 0.25 }}
+          className="hidden sm:flex absolute top-3 right-3 h-8 w-8 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 items-center justify-center"
+        >
+          <ArrowUpRight className="h-4 w-4 text-white" />
+        </motion.div>
+      </div>
+
+      {/* Body */}
+      <div className="p-3 sm:p-4 md:p-5">
+        <h3
+          className="text-sm sm:text-base md:text-lg font-semibold text-white transition-colors duration-300 line-clamp-1"
+          style={{ color: hovered ? (isAI ? '#a78bfa' : '#13B9FD') : 'white' }}
+        >
+          {project.title}
+        </h3>
+        <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm text-gray-400 leading-snug line-clamp-2 sm:min-h-[2.5rem]">
+          {project.problem}
+        </p>
+
+        {/* Store links — revealed on hover */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0 }}
+          transition={{ duration: 0.25 }}
+          className="overflow-hidden"
+        >
+          <div className="flex gap-2 mt-3 pt-3 border-t border-white/5">
+            {project.storeLinks?.playStore && (
+              <span className="px-2 py-1 rounded-lg bg-white/5 text-[10px] text-gray-400 border border-white/10">
+                Google Play
+              </span>
+            )}
+            {project.storeLinks?.appStore && (
+              <span className="px-2 py-1 rounded-lg bg-white/5 text-[10px] text-gray-400 border border-white/10">
+                App Store
+              </span>
+            )}
+            {project.githubUrl && (
+              <span className="px-2 py-1 rounded-lg bg-white/5 text-[10px] text-gray-400 border border-white/10">
+                GitHub
+              </span>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </motion.button>
+  );
+};
+
 const ProjectsSection = () => {
   const [active, setActive] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});
@@ -40,28 +207,12 @@ const ProjectsSection = () => {
     {
       title: 'Payss',
       problem: 'Turning everyday purchases into instant, social rewards.',
-      description:
-        "Consumer Flutter app for a social loyalty platform — connecting shoppers, merchants and a web dashboard with real-time rewards and discovery.",
+      description: "Consumer Flutter app for a social loyalty platform — connecting shoppers, merchants and a web dashboard with real-time rewards and discovery.",
       technologies: ['Flutter', 'REST APIs', 'Realtime', 'QR Scanner', 'Google Maps'],
-      features: [
-        "Social feed with live merchant 'vibes'",
-        'QR scanner for instant points',
-        'Smart map with filtering',
-        'Guest Mode, OTP login & Dark Mode',
-      ],
-      bullets: {
-        edge: 'Loyalty that feels social — instant rewards from every scan.',
-        tech: 'Flutter + Realtime APIs, QR + Google Maps with offline-safe caching.',
-        impact: 'Connects shoppers and merchants in one tap.',
-      },
-      gradient: 'from-flutter-purple to-flutter-teal',
-      icon: '💳',
-      iconImage: payssIcon,
-      category: 'mobile',
-      storeLinks: {
-        playStore: 'https://play.google.com/store/apps/details?id=com.payss.app',
-        appStore: 'https://apps.apple.com/eg/app/payss/id6767013931',
-      },
+      features: ["Social feed with live merchant 'vibes'", 'QR scanner for instant points', 'Smart map with filtering', 'Guest Mode, OTP login & Dark Mode'],
+      bullets: { edge: 'Loyalty that feels social — instant rewards from every scan.', tech: 'Flutter + Realtime APIs, QR + Google Maps with offline-safe caching.', impact: 'Connects shoppers and merchants in one tap.' },
+      gradient: 'from-flutter-purple to-flutter-teal', icon: '💳', iconImage: payssIcon, category: 'mobile',
+      storeLinks: { playStore: 'https://play.google.com/store/apps/details?id=com.payss.app', appStore: 'https://apps.apple.com/eg/app/payss/id6767013931' },
     },
     {
       title: 'Wofoodi',
@@ -69,19 +220,9 @@ const ProjectsSection = () => {
       description: 'Live location tracking app for nearest fuel stations with real-time pricing.',
       technologies: ['Flutter', 'Google Maps', 'Firebase Auth', 'REST API'],
       features: ['Live location tracking', 'Route navigation', 'Real-time fuel prices', 'Offline caching'],
-      bullets: {
-        edge: 'Finds the cheapest fuel within seconds of opening the app.',
-        tech: 'Flutter, Google Maps SDK, Firebase Auth, live REST sync.',
-        impact: 'Live in two GCC markets with growing daily usage.',
-      },
-      gradient: 'from-flutter-blue to-flutter-light-blue',
-      icon: '⛽',
-      iconImage: wofoodiIcon,
-      category: 'mobile',
-      storeLinks: {
-        appStore: 'https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551',
-        playStore: 'https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en',
-      },
+      bullets: { edge: 'Finds the cheapest fuel within seconds of opening the app.', tech: 'Flutter, Google Maps SDK, Firebase Auth, live REST sync.', impact: 'Live in two GCC markets with growing daily usage.' },
+      gradient: 'from-flutter-blue to-flutter-light-blue', icon: '⛽', iconImage: wofoodiIcon, category: 'mobile',
+      storeLinks: { appStore: 'https://apps.apple.com/eg/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551', playStore: 'https://play.google.com/store/apps/details?id=com.wofoodi.app.sa&hl=en' },
     },
     {
       title: 'Amoomy',
@@ -89,20 +230,9 @@ const ProjectsSection = () => {
       description: 'Full-featured logistics app with multi-role authentication system.',
       technologies: ['Flutter', 'Firebase Auth', 'REST APIs', 'Provider'],
       features: ['Apple & Google sign-in', 'Order management', 'Provider scheduling', 'Clean Architecture'],
-      bullets: {
-        edge: 'One app for clients, drivers and ops — no friction.',
-        tech: 'Flutter + Provider, Apple/Google sign-in, Clean Architecture.',
-        impact: 'Streamlined heavy-transport bookings end-to-end.',
-      },
-      gradient: 'from-flutter-teal to-flutter-purple',
-      icon: '🚚',
-      iconImage: amoomyIcon,
-      category: 'mobile',
-      storeLinks: {
-        appStore:
-          'https://apps.apple.com/eg/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564',
-        playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en',
-      },
+      bullets: { edge: 'One app for clients, drivers and ops — no friction.', tech: 'Flutter + Provider, Apple/Google sign-in, Clean Architecture.', impact: 'Streamlined heavy-transport bookings end-to-end.' },
+      gradient: 'from-flutter-teal to-flutter-purple', icon: '🚚', iconImage: amoomyIcon, category: 'mobile',
+      storeLinks: { appStore: 'https://apps.apple.com/eg/app/amoomy/id6753125564', playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.amoomy&hl=en' },
     },
     {
       title: 'Raval',
@@ -110,19 +240,9 @@ const ProjectsSection = () => {
       description: 'E-commerce app for easy and fast clothing shopping with order tracking.',
       technologies: ['Flutter', 'REST API', 'Clean Architecture', 'Provider'],
       features: ['Category filtering', 'Smart cart', 'Order tracking', 'Real-time order status'],
-      bullets: {
-        edge: 'Browse → checkout → track in under three taps.',
-        tech: 'Flutter + REST, Provider state, Clean Architecture layers.',
-        impact: 'Live retail app shipping orders daily.',
-      },
-      gradient: 'from-flutter-purple to-flutter-blue',
-      icon: '👕',
-      iconImage: ravalIcon,
-      category: 'mobile',
-      storeLinks: {
-        appStore: 'https://apps.apple.com/us/app/raval/id6756228964',
-        playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.raval',
-      },
+      bullets: { edge: 'Browse → checkout → track in under three taps.', tech: 'Flutter + REST, Provider state, Clean Architecture layers.', impact: 'Live retail app shipping orders daily.' },
+      gradient: 'from-flutter-purple to-flutter-blue', icon: '👕', iconImage: ravalIcon, category: 'mobile',
+      storeLinks: { appStore: 'https://apps.apple.com/us/app/raval/id6756228964', playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.raval' },
     },
     {
       title: 'ClipFlow',
@@ -130,15 +250,8 @@ const ProjectsSection = () => {
       description: 'macOS clipboard manager that organizes your copy history into smart, searchable flows.',
       technologies: ['Swift', 'macOS', 'AppKit', 'SwiftUI'],
       features: ['Clipboard history', 'Smart search', 'Quick paste shortcuts', 'Native macOS experience'],
-      bullets: {
-        edge: 'Never lose a copied snippet — searchable, organized history.',
-        tech: 'Native Swift + SwiftUI on macOS with AppKit hooks.',
-        impact: 'Shipped on the Mac App Store.',
-      },
-      gradient: 'from-flutter-blue to-flutter-purple',
-      icon: '📋',
-      iconImage: clipflowIcon,
-      category: 'desktop',
+      bullets: { edge: 'Never lose a copied snippet — searchable, organized history.', tech: 'Native Swift + SwiftUI on macOS with AppKit hooks.', impact: 'Shipped on the Mac App Store.' },
+      gradient: 'from-flutter-blue to-flutter-purple', icon: '📋', iconImage: clipflowIcon, category: 'desktop',
       storeLinks: { appStore: 'https://apps.apple.com/eg/app/clipflow-clipboard-manager/id6767848683?mt=12' },
     },
     {
@@ -147,15 +260,8 @@ const ProjectsSection = () => {
       description: 'Professional tournament-style chess app with complete rules and move validation.',
       technologies: ['Flutter', 'Clean Architecture', 'Game Logic', 'State Management'],
       features: ['Move validation', 'Check/checkmate detection', 'Real-time board updates', 'Tournament-style UI'],
-      bullets: {
-        edge: 'Tournament-grade chess with full rule validation.',
-        tech: 'Flutter with custom game-logic engine and reactive state.',
-        impact: 'Polished mobile experience on Google Play.',
-      },
-      gradient: 'from-flutter-teal to-flutter-purple',
-      icon: '♟️',
-      iconImage: chessIcon,
-      category: 'mobile',
+      bullets: { edge: 'Tournament-grade chess with full rule validation.', tech: 'Flutter with custom game-logic engine and reactive state.', impact: 'Polished mobile experience on Google Play.' },
+      gradient: 'from-flutter-teal to-flutter-purple', icon: '♟️', iconImage: chessIcon, category: 'mobile',
       storeLinks: { playStore: 'https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess' },
     },
     {
@@ -164,14 +270,8 @@ const ProjectsSection = () => {
       description: 'Desktop photobooth app with interactive filters and high-quality photo capture.',
       technologies: ['Flutter Desktop', 'Multimedia', 'Cross-platform', 'Image Processing'],
       features: ['Photo capture', 'Interactive filters', 'Real-time effects', 'Intuitive UI'],
-      bullets: {
-        edge: 'Event-ready photobooth that runs on any laptop.',
-        tech: 'Flutter Desktop with real-time image processing pipeline.',
-        impact: 'Deployed live at events with zero crash reports.',
-      },
-      gradient: 'from-flutter-blue to-flutter-purple',
-      icon: '📸',
-      category: 'desktop',
+      bullets: { edge: 'Event-ready photobooth that runs on any laptop.', tech: 'Flutter Desktop with real-time image processing pipeline.', impact: 'Deployed live at events with zero crash reports.' },
+      gradient: 'from-flutter-blue to-flutter-purple', icon: '📸', category: 'desktop',
     },
     {
       title: 'Gesture Volume Control',
@@ -179,14 +279,8 @@ const ProjectsSection = () => {
       description: 'Innovative app controlling phone volume using hand gestures via PC camera.',
       technologies: ['Flutter', 'Computer Vision', 'Gesture Recognition', 'Custom Package'],
       features: ['Hand gesture detection', 'Distance mapping', 'Reusable package', 'Volume control'],
-      bullets: {
-        edge: 'Hands-free device control using only a webcam.',
-        tech: 'Flutter + computer vision pipeline, packaged as reusable plugin.',
-        impact: 'Open-source package adopted by other developers.',
-      },
-      gradient: 'from-flutter-light-blue to-flutter-teal',
-      icon: '👋',
-      category: 'desktop',
+      bullets: { edge: 'Hands-free device control using only a webcam.', tech: 'Flutter + computer vision pipeline, packaged as reusable plugin.', impact: 'Open-source package adopted by other developers.' },
+      gradient: 'from-flutter-light-blue to-flutter-teal', icon: '👋', category: 'desktop',
     },
     {
       title: 'Meal Recommendation App',
@@ -194,14 +288,8 @@ const ProjectsSection = () => {
       description: 'AI-powered meal planner developed during internship at Cellula Technologies.',
       technologies: ['Flutter', 'Gemini AI', 'Clean Architecture', 'Git'],
       features: ['Personalized meal plans', 'Team collaboration', 'Trello workflow', 'API integration'],
-      bullets: {
-        edge: 'Personalized meal plans generated by Gemini AI.',
-        tech: 'Flutter + Gemini API integrated via Clean Architecture.',
-        impact: 'Built during internship at Cellula Technologies.',
-      },
-      gradient: 'from-flutter-purple to-flutter-blue',
-      icon: '🍽️',
-      category: 'ai',
+      bullets: { edge: 'Personalized meal plans generated by Gemini AI.', tech: 'Flutter + Gemini API integrated via Clean Architecture.', impact: 'Built during internship at Cellula Technologies.' },
+      gradient: 'from-flutter-purple to-flutter-blue', icon: '🍽️', category: 'ai',
     },
     {
       title: 'Realtime Chat App',
@@ -209,14 +297,8 @@ const ProjectsSection = () => {
       description: 'Real-time messaging application built with WebSocket technology.',
       technologies: ['WebSocket', 'Socket.io', 'JavaScript', 'Realtime'],
       features: ['Live messaging', 'Real-time communication', 'Socket connections', 'Instant messaging'],
-      bullets: {
-        edge: 'Sub-second delivery — chat that actually feels live.',
-        tech: 'WebSocket + Socket.io with reconnection and presence.',
-        impact: 'Reference architecture for real-time apps.',
-      },
-      gradient: 'from-flutter-blue to-flutter-light-blue',
-      icon: '💬',
-      category: 'ai',
+      bullets: { edge: 'Sub-second delivery — chat that actually feels live.', tech: 'WebSocket + Socket.io with reconnection and presence.', impact: 'Reference architecture for real-time apps.' },
+      gradient: 'from-flutter-blue to-flutter-light-blue', icon: '💬', category: 'ai',
       githubUrl: 'https://github.com/ZyadWKhedr/Chat-App',
     },
     {
@@ -225,14 +307,8 @@ const ProjectsSection = () => {
       description: 'High-performance game clone with monetization via Google AdMob.',
       technologies: ['Flutter', 'Flame Engine', 'Google AdMob', 'Local Storage'],
       features: ['60 FPS gameplay', 'Banner & interstitial ads', 'High-score tracking', 'Smooth animations'],
-      bullets: {
-        edge: '60 FPS gameplay with monetization baked in.',
-        tech: 'Flutter Flame engine with Google AdMob integration.',
-        impact: 'End-to-end shipped game, AdMob-verified.',
-      },
-      gradient: 'from-flutter-light-blue to-flutter-teal',
-      icon: '🐦',
-      category: 'mobile',
+      bullets: { edge: '60 FPS gameplay with monetization baked in.', tech: 'Flutter Flame engine with Google AdMob integration.', impact: 'End-to-end shipped game, AdMob-verified.' },
+      gradient: 'from-flutter-light-blue to-flutter-teal', icon: '🐦', category: 'mobile',
       githubUrl: 'https://github.com/ZyadWKhedr/Flapper-Bird',
     },
   ];
@@ -253,116 +329,19 @@ const ProjectsSection = () => {
 
     return (
       <>
-        <motion.div
-          layout
-          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6"
-        >
+        <motion.div layout className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6">
           <AnimatePresence mode="popLayout">
-            {visible.map((project, index) => {
-              const isAI = project.category === 'ai';
-              return (
-              <motion.button
-                layout
+            {visible.map((project, index) => (
+              <ProjectCard
                 key={project.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.05, ease: 'easeOut' }}
-                whileHover={{ y: -6 }}
-                whileTap={{ scale: 0.97 }}
+                project={project}
+                index={index}
                 onClick={() => {
-                  trackEvent(AnalyticsEvents.ProjectOpen, {
-                    project: project.title,
-                    category: project.category,
-                  });
+                  trackEvent(AnalyticsEvents.ProjectOpen, { project: project.title, category: project.category });
                   setActive(project);
                 }}
-                className={`relative group text-left glass rounded-2xl overflow-hidden border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-flutter-light-blue/50 ${
-                  isAI
-                    ? 'border-flutter-purple/30 hover:border-flutter-purple/60 shadow-[0_0_24px_-8px_rgba(168,85,247,0.4)]'
-                    : 'border-white/5 hover:border-flutter-light-blue/30'
-                }`}
-              >
-                {/* AI neural glow */}
-                {isAI && (
-                  <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-                       style={{ background: 'radial-gradient(120% 60% at 50% 0%, rgba(168,85,247,0.25), transparent 60%)' }} />
-                )}
-
-                {/* Thumbnail */}
-                <div className={`relative aspect-[16/11] bg-gradient-to-br ${project.gradient} overflow-hidden`}>
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage:
-                        'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-                      backgroundSize: '18px 18px',
-                    }}
-                  />
-                  <motion.div
-                    whileHover={{ scale: 1.08, rotate: -2 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    {project.iconImage ? (
-                      <img
-                        src={project.iconImage}
-                        alt={`${project.title} logo`}
-                        className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/20"
-                      />
-                    ) : (
-                      <span className="text-4xl sm:text-6xl md:text-7xl drop-shadow-lg">{project.icon}</span>
-                    )}
-                  </motion.div>
-
-                  {/* AI badge with pulse */}
-                  {isAI && (
-                    <span className="absolute top-2 left-2 inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-flutter-purple to-flutter-blue text-white shadow-lg shadow-flutter-purple/40">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
-                      </span>
-                      AI
-                    </span>
-                  )}
-                  {!isAI && (
-                    <span className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
-                      {project.category === 'mobile' ? 'Mobile' : 'Desktop'}
-                    </span>
-                  )}
-
-                  {/* Hover arrow — hidden on mobile */}
-                  <div className="hidden sm:flex absolute top-3 right-3 h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    <ArrowUpRight className="h-4 w-4 text-white" />
-                  </div>
-                </div>
-
-                {/* Body — ultra compact on mobile */}
-                <div className="p-3 sm:p-4 md:p-5">
-                  <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white group-hover:text-flutter-light-blue transition-colors line-clamp-1">
-                    {project.title}
-                  </h3>
-                  <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm text-gray-400 leading-snug line-clamp-2 sm:min-h-[2.5rem]">
-                    {project.problem}
-                  </p>
-                  <div className="mt-2 sm:mt-3 hidden sm:flex flex-wrap gap-1.5">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-0.5 rounded-full text-[10px] font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono text-gray-400 bg-white/5">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </motion.button>
-            );})}
+              />
+            ))}
           </AnimatePresence>
         </motion.div>
 
@@ -380,11 +359,7 @@ const ProjectsSection = () => {
         )}
         {expanded && items.length > INITIAL && (
           <div className="flex justify-center mt-10">
-            <Button
-              variant="ghost"
-              onClick={() => setShowAll((s) => ({ ...s, [tabId]: false }))}
-              className="rounded-full text-gray-400 hover:text-white"
-            >
+            <Button variant="ghost" onClick={() => setShowAll((s) => ({ ...s, [tabId]: false }))} className="rounded-full text-gray-400 hover:text-white">
               Show less
             </Button>
           </div>
@@ -411,8 +386,7 @@ const ProjectsSection = () => {
           </h2>
           <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full" />
           <p className="text-muted-foreground mt-6 text-base md:text-lg max-w-2xl mx-auto">
-            Shipped products across mobile, desktop & AI — each built to solve a real,
-            human problem with clean architecture and craft.
+            Shipped products across mobile, desktop & AI — each built to solve a real, human problem with clean architecture and craft.
           </p>
         </motion.div>
 
@@ -428,30 +402,21 @@ const ProjectsSection = () => {
               </TabsTrigger>
             ))}
           </TabsList>
-
           <TabsContent value="all">{renderGrid(projects, 'all')}</TabsContent>
-          {categories
-            .filter((c) => c.id !== 'all')
-            .map((cat) => (
-              <TabsContent key={cat.id} value={cat.id}>
-                {renderGrid(projects.filter((p) => p.category === cat.id), cat.id)}
-              </TabsContent>
-            ))}
+          {categories.filter((c) => c.id !== 'all').map((cat) => (
+            <TabsContent key={cat.id} value={cat.id}>
+              {renderGrid(projects.filter((p) => p.category === cat.id), cat.id)}
+            </TabsContent>
+          ))}
         </Tabs>
       </div>
 
-      {/* Detail — Drawer on mobile, Dialog on desktop */}
+      {/* Detail Dialog — desktop */}
       {active && !isMobile && (
         <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
           <DialogContent className="glass-strong border-flutter-light-blue/20 max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className={`relative -mx-6 -mt-6 aspect-[16/8] bg-gradient-to-br ${active.gradient} rounded-t-lg overflow-hidden`}>
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-                  backgroundSize: '18px 18px',
-                }}
-              />
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px,transparent 1px)', backgroundSize: '18px 18px' }} />
               <div className="absolute inset-0 flex items-center justify-center">
                 {active.iconImage ? (
                   <img src={active.iconImage} alt={active.title} className="h-28 w-28 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20" />
@@ -461,29 +426,20 @@ const ProjectsSection = () => {
               </div>
             </div>
             <DialogHeader className="mt-4">
-              <DialogTitle className="text-2xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
-                {active.title}
-              </DialogTitle>
-              <DialogDescription className="text-flutter-teal font-medium">
-                {active.problem}
-              </DialogDescription>
+              <DialogTitle className="text-2xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">{active.title}</DialogTitle>
+              <DialogDescription className="text-flutter-teal font-medium">{active.problem}</DialogDescription>
             </DialogHeader>
             <ProjectBody project={active} />
           </DialogContent>
         </Dialog>
       )}
 
+      {/* Detail Drawer — mobile */}
       {active && isMobile && (
         <Drawer open={!!active} onOpenChange={(o) => !o && setActive(null)}>
           <DrawerContent className="glass-strong border-flutter-light-blue/20 max-h-[92vh]">
             <div className={`relative aspect-[16/7] bg-gradient-to-br ${active.gradient} overflow-hidden`}>
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-                  backgroundSize: '18px 18px',
-                }}
-              />
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px,transparent 1px)', backgroundSize: '18px 18px' }} />
               <div className="absolute inset-0 flex items-center justify-center">
                 {active.iconImage ? (
                   <img src={active.iconImage} alt={active.title} className="h-20 w-20 rounded-2xl object-cover shadow-2xl ring-1 ring-white/20" />
@@ -493,16 +449,10 @@ const ProjectsSection = () => {
               </div>
             </div>
             <DrawerHeader className="text-left">
-              <DrawerTitle className="text-xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">
-                {active.title}
-              </DrawerTitle>
-              <DrawerDescription className="text-flutter-teal font-medium text-sm">
-                {active.problem}
-              </DrawerDescription>
+              <DrawerTitle className="text-xl bg-gradient-to-r from-white to-flutter-light-blue bg-clip-text text-transparent">{active.title}</DrawerTitle>
+              <DrawerDescription className="text-flutter-teal font-medium text-sm">{active.problem}</DrawerDescription>
             </DrawerHeader>
-            <div className="px-4 pb-6 overflow-y-auto">
-              <ProjectBody project={active} />
-            </div>
+            <div className="px-4 pb-6 overflow-y-auto"><ProjectBody project={active} /></div>
           </DrawerContent>
         </Drawer>
       )}
@@ -512,29 +462,19 @@ const ProjectsSection = () => {
 
 const ProjectBody = ({ project }: { project: Project }) => (
   <div className="space-y-5">
-    {/* 3-bullet formula */}
     <div className="space-y-2.5">
-      <BulletRow icon={Brain} color="text-flutter-purple" label="AI Edge" text={project.bullets.edge} />
-      <BulletRow icon={Cog} color="text-flutter-light-blue" label="Tech Engine" text={project.bullets.tech} />
+      <BulletRow icon={Brain} color="text-flutter-purple" label="Edge" text={project.bullets.edge} />
+      <BulletRow icon={Cog} color="text-flutter-light-blue" label="Tech" text={project.bullets.tech} />
       <BulletRow icon={TrendingUp} color="text-flutter-teal" label="Impact" text={project.bullets.impact} />
     </div>
-
     <div>
-      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-flutter-light-blue mb-2">
-        Stack
-      </h4>
+      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-flutter-light-blue mb-2">Stack</h4>
       <div className="flex flex-wrap gap-1.5">
         {project.technologies.map((t) => (
-          <span
-            key={t}
-            className="px-2.5 py-0.5 rounded-full text-[11px] font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20"
-          >
-            {t}
-          </span>
+          <span key={t} className="px-2.5 py-0.5 rounded-full text-[11px] font-mono text-flutter-light-blue/90 bg-flutter-light-blue/10 border border-flutter-light-blue/20">{t}</span>
         ))}
       </div>
     </div>
-
     <div className="flex flex-wrap gap-2 pt-1">
       {project.githubUrl && (
         <Button variant="outline" size="sm" onClick={() => window.open(project.githubUrl, '_blank')}>
@@ -558,17 +498,7 @@ const ProjectBody = ({ project }: { project: Project }) => (
   </div>
 );
 
-const BulletRow = ({
-  icon: Icon,
-  color,
-  label,
-  text,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-  label: string;
-  text: string;
-}) => (
+const BulletRow = ({ icon: Icon, color, label, text }: { icon: React.ComponentType<{ className?: string }>; color: string; label: string; text: string }) => (
   <div className="flex gap-3 items-start rounded-xl border border-white/5 bg-white/[0.02] p-3">
     <div className={`shrink-0 h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center ${color}`}>
       <Icon className="h-4 w-4" />
