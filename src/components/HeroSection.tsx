@@ -64,126 +64,128 @@ const HeroSection = () => {
 
       <div className="container mx-auto relative z-10">
         {/* ────────────  MOBILE BENTO  ──────────── */}
-        <div className="md:hidden grid grid-cols-4 auto-rows-[88px] gap-3">
-          {/* Hero block — col-span-4 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="col-span-4 row-span-3 relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl p-5 flex gap-4"
-          >
-            <div className="relative shrink-0">
-              <div className="absolute inset-0 rounded-2xl bg-flutter-gradient blur-xl opacity-40" />
-              <img
-                src={zyadProfile}
-                alt="Zyad Wael"
-                className="relative h-24 w-24 rounded-2xl object-cover object-top ring-2 ring-flutter-light-blue/40 shadow-2xl"
-              />
-            </div>
-            <div className="flex-1 min-w-0 flex flex-col justify-center">
-              <div className="inline-flex w-fit items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 mb-2">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                </span>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-300">
-                  Available
-                </span>
+        <div className="md:hidden flex flex-col gap-3 max-w-[360px] mx-auto scale-[0.92] min-[375px]:scale-100 origin-top transition-transform duration-300">
+          <div className="grid grid-cols-4 auto-rows-[82px] min-[375px]:auto-rows-[88px] gap-2.5 min-[375px]:gap-3">
+            {/* Hero block — col-span-4 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="col-span-4 row-span-3 relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl p-5 flex gap-4"
+            >
+              <div className="relative shrink-0">
+                <div className="absolute inset-0 rounded-2xl bg-flutter-gradient blur-xl opacity-40" />
+                <img
+                  src={zyadProfile}
+                  alt="Zyad Wael"
+                  className="relative h-24 w-24 rounded-2xl object-cover object-top ring-2 ring-flutter-light-blue/40 shadow-2xl"
+                />
               </div>
-              <h1 className="text-2xl font-bold leading-tight">
-                <span className="text-white">Zyad </span>
-                <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
-                  Wael
-                </span>
-              </h1>
-              <div className="h-9 overflow-hidden mt-0.5">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={currentSkill}
-                    initial={{ y: 16, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -16, opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="text-[11px] font-semibold text-flutter-light-blue leading-tight"
-                  >
-                    {skills[currentSkill]}
-                  </motion.p>
-                </AnimatePresence>
+              <div className="flex-1 min-w-0 flex flex-col justify-center">
+                <div className="inline-flex w-fit items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 mb-2">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-300">
+                    Available
+                  </span>
+                </div>
+                <h1 className="text-2xl font-bold leading-tight">
+                  <span className="text-white">Zyad </span>
+                  <span className="bg-gradient-to-r from-flutter-light-blue to-flutter-teal bg-clip-text text-transparent">
+                    Wael
+                  </span>
+                </h1>
+                <div className="h-9 overflow-hidden mt-0.5">
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={currentSkill}
+                      initial={{ y: 16, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -16, opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="text-[11px] font-semibold text-flutter-light-blue leading-tight"
+                    >
+                      {skills[currentSkill]}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+                <p className="text-[10px] text-gray-400 mt-1">
+                  <span className="text-white font-semibold">5+</span> apps · <span className="text-emerald-400">Available</span>
+                </p>
               </div>
-              <p className="text-[10px] text-gray-400 mt-1">
-                <span className="text-white font-semibold">5+</span> apps · <span className="text-emerald-400">Available</span>
-              </p>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Stats widget — col-span-2 */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="col-span-2 row-span-2 rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4 flex flex-col justify-between relative overflow-hidden"
-          >
-            <Smartphone className="absolute -bottom-2 -right-2 h-16 w-16 text-flutter-blue/10" />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-              Shipped
-            </span>
-            <div>
-              <div className="text-3xl font-bold bg-gradient-to-br from-white to-flutter-light-blue bg-clip-text text-transparent">
-                20+
-              </div>
-              <div className="text-[11px] text-gray-400">Production apps</div>
-            </div>
-          </motion.div>
-
-          {/* AI capabilities widget — col-span-2, neon ring */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="col-span-2 row-span-2 rounded-3xl border border-flutter-purple/40 bg-gradient-to-br from-flutter-purple/15 to-flutter-blue/10 backdrop-blur-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-[0_0_24px_-8px_rgba(168,85,247,0.5)]"
-          >
-            <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-flutter-purple/20 blur-2xl" />
-            <div className="flex items-center justify-between relative">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-flutter-light-blue">
-                AI Native
+            {/* Stats widget — col-span-2 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="col-span-2 row-span-2 rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4 flex flex-col justify-between relative overflow-hidden"
+            >
+              <Smartphone className="absolute -bottom-2 -right-2 h-16 w-16 text-flutter-blue/10" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                Shipped
               </span>
-              <Brain className="h-4 w-4 text-flutter-purple animate-pulse" />
-            </div>
-            <div className="relative">
-              <div className="text-sm font-bold text-white leading-tight">
-                Gemini · ML Kit · Computer Vision
+              <div>
+                <div className="text-3xl font-bold bg-gradient-to-br from-white to-flutter-light-blue bg-clip-text text-transparent">
+                  20+
+                </div>
+                <div className="text-[11px] text-gray-400">Production apps</div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="col-span-4 row-span-1 flex gap-2"
-          >
-            <Button
-              onClick={() => scrollTo('#contact')}
-              className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
+            {/* AI capabilities widget — col-span-2, neon ring */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="col-span-2 row-span-2 rounded-3xl border border-flutter-purple/40 bg-gradient-to-br from-flutter-purple/15 to-flutter-blue/10 backdrop-blur-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-[0_0_24px_-8px_rgba(168,85,247,0.5)]"
             >
-              Hire Me
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Button>
-            <Button
-              onClick={() => scrollTo('#projects')}
-              variant="outline"
-              className="rounded-2xl border-white/15 bg-white/5 text-white px-3 text-xs"
+              <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-flutter-purple/20 blur-2xl" />
+              <div className="flex items-center justify-between relative">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-flutter-light-blue">
+                  AI Native
+                </span>
+                <Brain className="h-4 w-4 text-flutter-purple animate-pulse" />
+              </div>
+              <div className="relative">
+                <div className="text-sm font-bold text-white leading-tight">
+                  Gemini · ML Kit · Computer Vision
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="col-span-4 row-span-1 flex gap-2"
             >
-              See Work
-            </Button>
-            <Button
-              onClick={() => openCv('hero_mobile')}
-              variant="outline"
-              className="rounded-2xl border-white/15 bg-white/5 text-white"
-            >
-              <Download className="h-4 w-4" />
-            </Button>
-          </motion.div>
+              <Button
+                onClick={() => scrollTo('#contact')}
+                className="flex-1 bg-flutter-gradient text-white font-semibold rounded-2xl shadow-lg shadow-flutter-blue/30"
+              >
+                Hire Me
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
+              <Button
+                onClick={() => scrollTo('#projects')}
+                variant="outline"
+                className="rounded-2xl border-white/15 bg-white/5 text-white px-3 text-xs"
+              >
+                See Work
+              </Button>
+              <Button
+                onClick={() => openCv('hero_mobile')}
+                variant="outline"
+                className="rounded-2xl border-white/15 bg-white/5 text-white"
+              >
+                <Download className="h-4 w-4" />
+              </Button>
+            </motion.div>
+          </div>
         </div>
 
         {/* ────────────  DESKTOP LAYOUT (unchanged grid)  ──────────── */}

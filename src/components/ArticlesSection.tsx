@@ -9,6 +9,15 @@ type ArticleCategory = 'flutter' | 'ai' | 'programming';
 const ArticlesSection = () => {
   const articles = [
     {
+      title: "Your Flutter App Is Lying to You — And You Don't Even Know It",
+      description: "A deep dive into mobile security, explaining how to implement freeRASP in Flutter to protect your application from tampering, rooting, and reverse engineering.",
+      readTime: "9 min read",
+      category: "Security",
+      group: 'flutter' as ArticleCategory,
+      gradient: "from-rose-500 to-flutter-blue",
+      url: "https://blog.stackademic.com/your-flutter-app-is-lying-to-you-and-you-dont-even-know-it-1c50ee4b17ef?gi=48cf46825f2b"
+    },
+    {
       title: "Demystifying Socket.IO: Real-Time Communication with Flutter & Riverpod",
       description: "Deep dive into implementing real-time communication in Flutter applications using Socket.IO and Riverpod state management.",
       readTime: "10 min read",

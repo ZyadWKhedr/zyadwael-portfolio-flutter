@@ -22,11 +22,13 @@ import {
   Timer,
   ShoppingBag,
   Star,
+  Github,
 } from 'lucide-react';
 import TicTacToeGame from './TicTacToeGame';
 import { trackEvent } from '@/lib/analytics';
+import zyadAscii from '@/assets/zyad-ascii.png';
 
-type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction' | 'shop';
+type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction' | 'github';
 
 const haptic = (pattern: number | number[] = 12) => {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -39,7 +41,7 @@ const APPS: { id: Exclude<AppId, 'home'>; label: string; icon: any; bg: string }
   { id: 'reaction', label: 'Reflex',       icon: Zap,          bg: 'from-amber-500 to-rose-500' },
   { id: 'stats',    label: 'Analytics',    icon: BarChart3,    bg: 'from-emerald-500 to-flutter-teal' },
   { id: 'ai',       label: 'Ask AI',       icon: Bot,          bg: 'from-flutter-purple to-flutter-blue' },
-  { id: 'shop',     label: 'Shop',         icon: ShoppingBag,  bg: 'from-rose-500 to-pink-600' },
+  { id: 'github',   label: 'GitHub',       icon: Github,       bg: 'from-zinc-800 to-zinc-950' },
 ];
 
 const InteractivePhone = () => {
@@ -128,7 +130,7 @@ const InteractivePhone = () => {
             {/* App surface */}
             <div className="absolute inset-0 pt-10 pb-6 flex flex-col">
               <AnimatePresence mode="wait">
-                {app === 'home' && <HomeScreen key="home" onOpen={openApp} />}
+                {app === 'home' && <HomeScreen key="home" onOpen={openApp} time={time} />}
                 {app === 'ttt' && (
                   <AppFrame key="ttt" title="Tic Tac Toe" onBack={goHome}>
                     <div className="px-4"><TicTacToeGame /></div>
@@ -149,17 +151,10 @@ const InteractivePhone = () => {
                     <AiApp onOpenChat={openAiAssistant} />
                   </AppFrame>
                 )}
-               {app === 'shop' && (
-                  <motion.div
-                    key="shop"
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.22 }}
-                    className="flex-1 flex flex-col overflow-hidden"
-                  >
-                    <ShopApp />
-                  </motion.div>
+                {app === 'github' && (
+                  <AppFrame key="github" title="GitHub" onBack={goHome}>
+                    <GithubApp />
+                  </AppFrame>
                 )}
               </AnimatePresence>
             </div>
@@ -195,54 +190,83 @@ const InteractivePhone = () => {
 
 /* ---------- Sub-screens ---------- */
 
-const HomeScreen = ({ onOpen }: { onOpen: (id: AppId) => void }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.96 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.96 }}
-    transition={{ duration: 0.25 }}
-    className="flex-1 px-6 flex flex-col"
-  >
-    <div className="text-center mb-5">
-      <div className="text-[10px] uppercase tracking-[0.2em] text-flutter-light-blue/70">Zyad OS</div>
-      <div className="text-xs text-white/60 mt-1">Pick an app</div>
-    </div>
-    <div className="grid grid-cols-2 gap-4">
-      {APPS.map((a, i) => (
-        <motion.button
-          key={a.id}
-          onClick={() => onOpen(a.id)}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ y: -2 }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 * i }}
-          className="flex flex-col items-center gap-1.5"
-        >
-          <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${a.bg} flex items-center justify-center shadow-lg shadow-black/40 border border-white/15`}>
-            <a.icon className="h-7 w-7 text-white" />
-          </div>
-          <span className="text-[10px] font-medium text-white/85">{a.label}</span>
-        </motion.button>
-      ))}
-    </div>
+const HomeScreen = ({ onOpen, time }: { onOpen: (id: AppId) => void; time: Date }) => {
+  const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+  const dateString = time.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 
-    {/* Widget */}
+  return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
-      className="mt-auto mb-2 rounded-2xl p-3 bg-white/[0.06] border border-white/10"
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.25 }}
+      className="flex-1 px-5 flex flex-col pt-1"
     >
-      <div className="flex items-center gap-2 text-[10px] text-flutter-light-blue uppercase tracking-wider">
-        <Sparkles className="h-3 w-3" /> Live
+      {/* Time and Date Widget */}
+      <div className="text-center mb-3 space-y-0.5">
+        <div className="text-[34px] font-light tracking-tight text-white leading-none">
+          {timeString}
+        </div>
+        <div className="text-[9px] font-bold text-flutter-light-blue/90 uppercase tracking-wider">
+          {dateString}
+        </div>
       </div>
-      <div className="mt-1 text-[11px] text-white/90 leading-snug">
-        Available for new mobile & AI projects this month.
+
+      {/* Weather Widget */}
+      <div className="mb-4 rounded-2xl p-2.5 bg-white/[0.04] border border-white/5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+            <span className="text-sm">☀️</span>
+          </div>
+          <div>
+            <div className="text-[9px] text-gray-400 font-medium">Alexandria, Egypt</div>
+            <div className="text-[10px] text-white font-semibold">Sunny & Clear</div>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-lg font-bold text-white leading-none">31°C</div>
+          <div className="text-[7px] text-gray-400 mt-0.5">H: 33° L: 26°</div>
+        </div>
       </div>
+
+      {/* Apps Grid */}
+      <div className="grid grid-cols-2 gap-3">
+        {APPS.map((a, i) => (
+          <motion.button
+            key={a.id}
+            onClick={() => onOpen(a.id)}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ y: -2 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 * i }}
+            className="flex flex-col items-center gap-1"
+          >
+            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${a.bg} flex items-center justify-center shadow-md shadow-black/40 border border-white/10`}>
+              <a.icon className="h-6 w-6 text-white" />
+            </div>
+            <span className="text-[9px] font-medium text-white/80">{a.label}</span>
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Widget */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="mt-auto mb-2 rounded-2xl p-3 bg-white/[0.06] border border-white/10"
+      >
+        <div className="flex items-center gap-2 text-[10px] text-flutter-light-blue uppercase tracking-wider">
+          <Sparkles className="h-3 w-3" /> Live
+        </div>
+        <div className="mt-1 text-[10px] text-white/90 leading-snug">
+          Available for new mobile & AI projects this month.
+        </div>
+      </motion.div>
     </motion.div>
-  </motion.div>
-);
+  );
+};
 
 const AppFrame = ({
   title, onBack, children,
@@ -419,387 +443,123 @@ const ReactionGame = () => {
   );
 };
 
-const PRODUCTS = [
-  { id: 1, name: 'Air Runner X',   category: 'Sneakers',    price: 129, rating: 4.8, color: 'from-blue-500 to-indigo-600' },
-  { id: 2, name: 'Urban Hoodie',   category: 'Clothing',    price: 79,  rating: 4.6, color: 'from-rose-500 to-pink-600' },
-  { id: 3, name: 'Slim Chinos',    category: 'Clothing',    price: 59,  rating: 4.5, color: 'from-amber-500 to-orange-600' },
-  { id: 4, name: 'Classic Cap',    category: 'Accessories', price: 34,  rating: 4.9, color: 'from-emerald-500 to-teal-600' },
-  { id: 5, name: 'Leather Wallet', category: 'Accessories', price: 49,  rating: 4.7, color: 'from-yellow-600 to-amber-700' },
-  { id: 6, name: 'Sport Watch',    category: 'Accessories', price: 199, rating: 4.9, color: 'from-slate-500 to-zinc-700' },
-];
-
-const CATEGORIES = ['All', 'Sneakers', 'Clothing', 'Accessories'];
-
-const BANNERS = [
-  { label: 'New Arrivals', sub: 'Fresh drops this week', color: 'from-flutter-blue to-flutter-purple' },
-  { label: 'Up to 40% Off', sub: 'Limited time deals', color: 'from-rose-500 to-pink-600' },
-  { label: 'Free Shipping', sub: 'On orders over $99', color: 'from-emerald-500 to-teal-600' },
-];
-
-type ShopScreen = 'splash' | 'home' | 'detail' | 'cart' | 'settings';
-
-const ShopApp = () => {
-  const [screen, setScreen] = useState<ShopScreen>('splash');
-  const [navTab, setNavTab] = useState<'home' | 'cart' | 'settings'>('home');
-  const [selected, setSelected] = useState<typeof PRODUCTS[0] | null>(null);
-  const [cart, setCart] = useState<number[]>([]);
-  const [added, setAdded] = useState(false);
-  const [activeCat, setActiveCat] = useState('All');
-  const [bannerIdx, setBannerIdx] = useState(0);
-
-  // Splash → home after 1.8s
-  useEffect(() => {
-    if (screen === 'splash') {
-      const t = setTimeout(() => setScreen('home'), 1800);
-      return () => clearTimeout(t);
-    }
-  }, [screen]);
-
-  // Auto-rotate banner
-  useEffect(() => {
-    const t = setInterval(() => setBannerIdx((i) => (i + 1) % BANNERS.length), 2500);
-    return () => clearInterval(t);
-  }, []);
-
-  const addToCart = (id: number) => {
-    haptic([10, 20, 10]);
-    setCart((c) => [...c, id]);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1200);
-  };
-
-  const removeFromCart = (id: number) => {
-    setCart((c) => { const i = c.indexOf(id); return i > -1 ? [...c.slice(0, i), ...c.slice(i + 1)] : c; });
-  };
-
-  const switchTab = (tab: 'home' | 'cart' | 'settings') => {
-    haptic(8);
-    setNavTab(tab);
-    setScreen(tab === 'home' ? 'home' : tab);
-    setSelected(null);
-  };
-
-  const cartProducts = cart.map((id) => PRODUCTS.find((p) => p.id === id)!).filter(Boolean);
-  const cartTotal = cartProducts.reduce((s, p) => s + p.price, 0);
-  const filtered = activeCat === 'All' ? PRODUCTS : PRODUCTS.filter((p) => p.category === activeCat);
-
-  // ── Splash ──
-  if (screen === 'splash') return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-[#0A0E27] to-[#1a1040]"
-    >
-      <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-        className="flex flex-col items-center gap-3"
-      >
-        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-2xl shadow-rose-500/40">
-          <ShoppingBag className="h-8 w-8 text-white" />
-        </div>
-        <div className="text-white font-bold text-lg tracking-wide">StyleShop</div>
-        <div className="text-gray-400 text-[11px]">Premium fashion store</div>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="absolute bottom-16 flex gap-1"
-      >
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-            className="h-1.5 w-1.5 rounded-full bg-rose-400"
-          />
-        ))}
-      </motion.div>
-    </motion.div>
-  );
-
+const GithubApp = () => {
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
-      {/* Screen content */}
-      <div className="flex-1 overflow-y-auto scrollbar-hide">
-        <AnimatePresence mode="wait">
-
-          {/* ── Home ── */}
-          {screen === 'home' && (
-            <motion.div
-              key="home"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col gap-3 pb-2"
-            >
-              {/* Header */}
-              <div className="px-4 pt-1 flex items-center justify-between">
-                <div>
-                  <div className="text-[10px] text-gray-400">Welcome back</div>
-                  <div className="text-sm font-bold text-white">StyleShop ✦</div>
-                </div>
-                <div className="relative" onClick={() => switchTab('cart')}>
-                  <ShoppingBag className="h-5 w-5 text-flutter-light-blue cursor-pointer" />
-                  {cart.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-rose-500 text-[8px] font-bold text-white flex items-center justify-center">
-                      {cart.length}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Banner */}
-              <div className="px-4">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={bannerIdx}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className={`h-20 rounded-2xl bg-gradient-to-r ${BANNERS[bannerIdx].color} p-4 flex flex-col justify-center`}
-                  >
-                    <div className="text-white font-bold text-sm">{BANNERS[bannerIdx].label}</div>
-                    <div className="text-white/70 text-[10px] mt-0.5">{BANNERS[bannerIdx].sub}</div>
-                  </motion.div>
-                </AnimatePresence>
-                <div className="flex justify-center gap-1 mt-2">
-                  {BANNERS.map((_, i) => (
-                    <div key={i} className={`h-1 rounded-full transition-all ${i === bannerIdx ? 'w-4 bg-flutter-light-blue' : 'w-1.5 bg-white/20'}`} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Categories */}
-              <div className="px-4 flex gap-2 overflow-x-auto scrollbar-hide">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCat(cat)}
-                    className={`shrink-0 px-3 py-1 rounded-full text-[10px] font-semibold border transition-all ${
-                      activeCat === cat
-                        ? 'bg-flutter-light-blue text-white border-flutter-light-blue'
-                        : 'border-white/15 text-gray-400 bg-white/5'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
-              {/* Products grid */}
-              <div className="px-4 grid grid-cols-2 gap-2">
-                {filtered.map((p, i) => (
-                  <motion.button
-                    key={p.id}
-                    onClick={() => { setSelected(p); setScreen('detail'); }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] text-left"
-                  >
-                    <div className={`h-20 bg-gradient-to-br ${p.color} flex items-center justify-center`}>
-                      <ShoppingBag className="h-8 w-8 text-white/80" />
-                    </div>
-                    <div className="p-2">
-                      <div className="text-[10px] text-gray-400">{p.category}</div>
-                      <div className="text-[11px] font-semibold text-white leading-tight">{p.name}</div>
-                      <div className="flex items-center justify-between mt-1">
-                        <span className="text-[11px] font-bold text-flutter-light-blue">${p.price}</span>
-                        <div className="flex items-center gap-0.5">
-                          <Star className="h-2.5 w-2.5 text-amber-400 fill-amber-400" />
-                          <span className="text-[9px] text-amber-400">{p.rating}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* ── Product detail ── */}
-          {screen === 'detail' && selected && (
-            <motion.div
-              key="detail"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.22 }}
-              className="px-4 flex flex-col gap-3"
-            >
-              <button
-                onClick={() => setScreen('home')}
-                className="flex items-center gap-0.5 text-flutter-light-blue text-xs font-medium"
-              >
-                <ChevronLeft className="h-4 w-4" /> Back
-              </button>
-              <div className={`h-36 rounded-2xl bg-gradient-to-br ${selected.color} flex items-center justify-center`}>
-                <ShoppingBag className="h-16 w-16 text-white/80" />
-              </div>
-              <div>
-                <div className="text-[10px] uppercase tracking-wider text-gray-400">{selected.category}</div>
-                <div className="text-base font-bold text-white mt-0.5">{selected.name}</div>
-                <div className="flex items-center gap-1 mt-1">
-                  <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
-                  <span className="text-[11px] text-amber-400 font-semibold">{selected.rating}</span>
-                  <span className="text-[10px] text-gray-400 ml-1">· 240 reviews</span>
-                </div>
-              </div>
-              <p className="text-[11px] text-gray-300 leading-snug">
-                Premium quality, built to last. Designed for everyday comfort with a modern aesthetic.
-              </p>
-              <div className="flex items-center justify-between mt-1">
-                <div className="text-xl font-bold text-white">${selected.price}</div>
-                <motion.button
-                  whileTap={{ scale: 0.94 }}
-                  onClick={() => addToCart(selected.id)}
-                  className="px-4 py-2 rounded-xl bg-flutter-gradient text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg shadow-flutter-blue/30"
-                >
-                  {added ? (
-                    <><Sparkles className="h-3.5 w-3.5" /> Added!</>
-                  ) : (
-                    <><ShoppingBag className="h-3.5 w-3.5" /> Add to cart</>
-                  )}
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* ── Cart ── */}
-          {screen === 'cart' && (
-            <motion.div
-              key="cart"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="px-4 flex flex-col gap-3"
-            >
-              <div className="text-sm font-bold text-white pt-1">My Cart</div>
-              {cartProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center gap-2 py-10">
-                  <ShoppingBag className="h-10 w-10 text-white/20" />
-                  <div className="text-[11px] text-gray-400">Cart is empty</div>
-                </div>
-              ) : (
-                <>
-                  {cartProducts.map((p, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                      className="flex items-center gap-3 rounded-xl p-2 bg-white/[0.05] border border-white/10"
-                    >
-                      <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center shrink-0`}>
-                        <ShoppingBag className="h-5 w-5 text-white/80" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-[11px] font-semibold text-white truncate">{p.name}</div>
-                        <div className="text-[10px] text-flutter-light-blue font-bold">${p.price}</div>
-                      </div>
-                      <button onClick={() => removeFromCart(p.id)} className="text-gray-500 hover:text-rose-400 text-xs">✕</button>
-                    </motion.div>
-                  ))}
-                  <div className="rounded-xl p-3 bg-white/[0.05] border border-white/10 flex items-center justify-between">
-                    <div className="text-[11px] text-gray-400">Total</div>
-                    <div className="text-sm font-bold text-white">${cartTotal}</div>
-                  </div>
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    className="w-full py-2.5 rounded-xl bg-flutter-gradient text-white text-xs font-semibold shadow-lg shadow-flutter-blue/30"
-                  >
-                    Checkout · ${cartTotal}
-                  </motion.button>
-                </>
-              )}
-            </motion.div>
-          )}
-
-          {/* ── Settings ── */}
-          {screen === 'settings' && (
-            <motion.div
-              key="settings"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="px-4 flex flex-col gap-3"
-            >
-              <div className="text-sm font-bold text-white pt-1">Settings</div>
-              {/* Profile card */}
-              <div className="rounded-2xl p-4 bg-white/[0.05] border border-white/10 flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-flutter-gradient flex items-center justify-center shrink-0">
-                  <span className="text-white font-bold text-sm">ZW</span>
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-white">Zyad Wael</div>
-                  <div className="text-[10px] text-gray-400">zyad@example.com</div>
-                  <div className="text-[9px] text-flutter-teal mt-0.5 font-medium">Premium member</div>
-                </div>
-              </div>
-              {/* Settings items */}
-              {[
-                { label: 'Edit Profile', icon: '👤' },
-                { label: 'Notifications', icon: '🔔' },
-                { label: 'Payment Methods', icon: '💳' },
-                { label: 'Order History', icon: '📦' },
-                { label: 'Help & Support', icon: '💬' },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className="flex items-center gap-3 rounded-xl p-3 bg-white/[0.04] border border-white/10 text-left hover:bg-white/[0.07] transition-colors"
-                >
-                  <span className="text-sm">{item.icon}</span>
-                  <span className="text-[12px] text-white/90 font-medium">{item.label}</span>
-                  <ChevronLeft className="h-3 w-3 text-gray-500 rotate-180 ml-auto" />
-                </button>
-              ))}
-              {/* Exit */}
-              <button
-                onClick={() => { haptic([20, 40]); setScreen('splash'); setCart([]); setNavTab('home'); }}
-                className="flex items-center gap-3 rounded-xl p-3 bg-rose-500/10 border border-rose-500/20 text-left hover:bg-rose-500/20 transition-colors mt-1"
-              >
-                <span className="text-sm">🚪</span>
-                <span className="text-[12px] text-rose-400 font-semibold">Exit App</span>
-              </button>
-            </motion.div>
-          )}
-
-        </AnimatePresence>
+    <div className="px-4 pb-6 space-y-4 text-left">
+      {/* Profile Header */}
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-xl bg-flutter-gradient flex items-center justify-center shrink-0">
+          <Github className="h-5 w-5 text-white" />
+        </div>
+        <div>
+          <div className="text-xs font-bold text-white">ZyadWKhedr</div>
+          <div className="text-[9px] text-gray-400">Software Engineer | Flutter Developer</div>
+        </div>
       </div>
 
-      {/* Bottom navbar — hidden on splash and detail */}
-      {(screen as ShopScreen) !== 'detail' && (screen as ShopScreen) !== 'splash' && (
-        <div className="shrink-0 flex items-center justify-around px-4 py-2 border-t border-white/10 bg-black/40 backdrop-blur-sm">
-          {([
-            { tab: 'home',     icon: '🏠', label: 'Home' },
-            { tab: 'cart',     icon: '🛒', label: 'Cart' },
-            { tab: 'settings', icon: '⚙️', label: 'Settings' },
-          ] as const).map(({ tab, icon, label }) => (
-            <button
-              key={tab}
-              onClick={() => switchTab(tab)}
-              className="flex flex-col items-center gap-0.5"
-            >
-              <span className="text-base">{icon}</span>
-              <span className={`text-[9px] font-semibold ${navTab === tab ? 'text-flutter-light-blue' : 'text-gray-500'}`}>
-                {label}
-              </span>
-              {navTab === tab && (
-                <motion.div layoutId="nav-dot" className="h-0.5 w-4 rounded-full bg-flutter-light-blue" />
-              )}
-            </button>
+      {/* ASCII Image */}
+      <div className="flex justify-center">
+        <div className="relative w-full aspect-[3/4] max-h-52 rounded-xl overflow-hidden border border-white/10 bg-zinc-950 p-2 flex items-center justify-center shadow-inner">
+          <img src={zyadAscii} alt="ASCII Portrait" className="w-full h-full object-contain" />
+        </div>
+      </div>
+
+      {/* whoami Section */}
+      <div className="space-y-1">
+        <div className="text-[9px] uppercase tracking-wider text-flutter-light-blue font-bold flex items-center gap-1">
+          <span>&gt;</span> whoami
+        </div>
+        <div className="rounded-xl p-2.5 bg-black/60 border border-white/10 font-mono text-[8px] text-gray-300 leading-normal overflow-x-auto whitespace-pre">
+{`class ZyadWael extends FlutterDeveloper {
+  final String location = "Alexandria, Egypt 🇪🇬";
+  final String focus    = "Mobile · AI · Clean Arch";
+  final bool available  = true;
+
+  List<String> get building => [
+    "AI-powered Flutter ecosystems",
+    "Cross-platform responsive designs"
+  ];
+}`}
+        </div>
+      </div>
+
+      {/* Skills Section */}
+      <div className="space-y-1">
+        <div className="text-[9px] uppercase tracking-wider text-flutter-teal font-bold">
+          &gt; skills --list
+        </div>
+        <div className="grid grid-cols-2 gap-1.5">
+          {[
+            { cat: 'Mobile', items: 'Flutter · Dart · Swift' },
+            { cat: 'AI & ML', items: 'Gemini · ML Kit · OpenCV' },
+            { cat: 'Architecture', items: 'Clean Arch · Riverpod' },
+            { cat: 'Backend/DB', items: 'Supabase · Firebase · SQL' },
+          ].map((s) => (
+            <div key={s.cat} className="rounded-lg p-1.5 bg-white/[0.04] border border-white/5">
+              <div className="text-[8px] font-bold text-white/80">{s.cat}</div>
+              <div className="text-[7px] text-gray-400 mt-0.5">{s.items}</div>
+            </div>
           ))}
         </div>
-      )}
+      </div>
+
+      {/* Articles Section */}
+      <div className="space-y-1">
+        <div className="text-[9px] uppercase tracking-wider text-flutter-purple font-bold">
+          &gt; cat articles.md
+        </div>
+        <div className="space-y-1">
+          {[
+            {
+              title: "Your Flutter App Is Lying to You",
+              url: "https://blog.stackademic.com/your-flutter-app-is-lying-to-you-and-you-dont-even-know-it-1c50ee4b17ef?gi=48cf46825f2b"
+            },
+            {
+              title: "Design Patterns in Dart & Flutter",
+              url: "https://medium.com/stackademic/software-craftsmanship-a-guide-to-design-patterns-in-dart-flutter-6011cb0f1b12"
+            },
+            {
+              title: "Dependency Injection in Riverpod",
+              url: "https://medium.com/@ziad.w.khedr/dependency-injection-in-flutter-using-riverpod-1118b7784893"
+            },
+          ].map((a) => (
+            <a
+              key={a.title}
+              href={a.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between rounded-lg p-1.5 bg-white/[0.04] border border-white/5 hover:bg-white/[0.08] transition-colors text-[8px] text-white/90"
+            >
+              <span className="truncate pr-2">📝 {a.title}</span>
+              <span className="text-flutter-light-blue shrink-0">➜</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Connect Section */}
+      <div className="space-y-1">
+        <div className="text-[9px] uppercase tracking-wider text-amber-400 font-bold">
+          &gt; connect
+        </div>
+        <div className="flex gap-2">
+          {[
+            { label: 'GitHub', url: 'https://github.com/ZyadWKhedr' },
+            { label: 'LinkedIn', url: 'https://www.linkedin.com/in/zyad-wael-a9035a275/' },
+            { label: 'Medium', url: 'https://medium.com/@ziad.w.khedr' },
+          ].map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center py-1 rounded-lg bg-flutter-gradient text-white text-[8px] font-bold shadow-md hover:opacity-90 transition-opacity"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

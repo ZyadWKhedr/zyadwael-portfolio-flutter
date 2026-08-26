@@ -39,9 +39,11 @@ const FeaturedProjectSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="flex justify-center"
+            className="flex justify-center w-full overflow-hidden"
           >
-            <InteractivePhone />
+            <div className="scale-[0.82] sm:scale-95 md:scale-100 origin-center transition-transform duration-300">
+              <InteractivePhone />
+            </div>
           </motion.div>
 
           {/* Details */}
