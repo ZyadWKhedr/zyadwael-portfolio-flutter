@@ -23,12 +23,13 @@ import {
   ShoppingBag,
   Star,
   Github,
+  Droplets,
 } from 'lucide-react';
 import TicTacToeGame from './TicTacToeGame';
 import { trackEvent } from '@/lib/analytics';
 import zyadAscii from '@/assets/zyad-ascii.png';
 
-type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction' | 'github';
+type AppId = 'home' | 'ttt' | 'stats' | 'ai' | 'reaction' | 'github' | 'fluid';
 
 const haptic = (pattern: number | number[] = 12) => {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -42,6 +43,7 @@ const APPS: { id: Exclude<AppId, 'home'>; label: string; icon: any; bg: string }
   { id: 'stats',    label: 'Analytics',    icon: BarChart3,    bg: 'from-emerald-500 to-flutter-teal' },
   { id: 'ai',       label: 'Ask AI',       icon: Bot,          bg: 'from-flutter-purple to-flutter-blue' },
   { id: 'github',   label: 'GitHub',       icon: Github,       bg: 'from-zinc-800 to-zinc-950' },
+  { id: 'fluid',    label: 'Physics',      icon: Droplets,     bg: 'from-blue-500 to-emerald-500' },
 ];
 
 const InteractivePhone = () => {
@@ -156,6 +158,11 @@ const InteractivePhone = () => {
                     <GithubApp />
                   </AppFrame>
                 )}
+                {app === 'fluid' && (
+                  <AppFrame key="fluid" title="Physics Sandbox" onBack={goHome}>
+                    <FluidSandbox />
+                  </AppFrame>
+                )}
               </AnimatePresence>
             </div>
 
@@ -213,20 +220,43 @@ const HomeScreen = ({ onOpen, time }: { onOpen: (id: AppId) => void; time: Date 
       </div>
 
       {/* Weather Widget */}
-      <div className="mb-4 rounded-2xl p-2.5 bg-white/[0.04] border border-white/5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
-            <span className="text-sm">☀️</span>
-          </div>
+      <div className="mb-4 rounded-2xl p-2.5 bg-white/[0.04] border border-white/5 flex items-center justify-between overflow-hidden relative group">
+        <div className="flex items-center gap-2 relative z-10">
+          <motion.div
+            animate={{ 
+              rotate: 360,
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 12,
+              ease: "linear"
+            }}
+            className="h-8 w-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30 text-sm select-none"
+          >
+            ☀️
+          </motion.div>
           <div>
             <div className="text-[9px] text-gray-400 font-medium">Alexandria, Egypt</div>
-            <div className="text-[10px] text-white font-semibold">Sunny & Clear</div>
+            <div className="text-[10px] text-white font-semibold flex items-center gap-1">
+              Sunny & Clear 
+              <motion.span 
+                animate={{ opacity: [0.4, 1, 0.4] }} 
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="inline-block h-1.5 w-1.5 rounded-full bg-amber-400"
+              />
+            </div>
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-right relative z-10">
           <div className="text-lg font-bold text-white leading-none">31°C</div>
           <div className="text-[7px] text-gray-400 mt-0.5">H: 33° L: 26°</div>
         </div>
+        {/* Soft background glow pulse */}
+        <motion.div 
+          animate={{ opacity: [0.02, 0.08, 0.02] }}
+          transition={{ repeat: Infinity, duration: 4 }}
+          className="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-amber-400 blur-xl pointer-events-none"
+        />
       </div>
 
       {/* Apps Grid */}
@@ -558,6 +588,174 @@ const GithubApp = () => {
               {link.label}
             </a>
           ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FluidSandbox = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationId: number;
+    let width = canvas.width = canvas.offsetWidth || 240;
+    let height = canvas.height = canvas.offsetHeight || 220;
+
+    interface Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      color: string;
+    }
+
+    const particles: Particle[] = [];
+    const colors = ['#13B9FD', '#00D084', '#8B5CF6', '#FF6B6B', '#FFCA28'];
+
+    const resize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth || 240;
+      height = canvas.height = canvas.offsetHeight || 220;
+    };
+    window.addEventListener('resize', resize);
+
+    const gravity = 0.15;
+    const friction = 0.99;
+    const bounce = -0.65;
+    let mouse = { x: -1000, y: -1000, active: false };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      if (mouse.active) {
+        for (let i = 0; i < 2; i++) {
+          particles.push({
+            x: mouse.x + (Math.random() - 0.5) * 6,
+            y: mouse.y + (Math.random() - 0.5) * 6,
+            vx: (Math.random() - 0.5) * 5,
+            vy: (Math.random() - 0.5) * 5 - 1.5,
+            radius: Math.random() * 3 + 2.5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+          });
+        }
+      }
+    };
+
+    const handlePointerUp = () => {
+      mouse.active = false;
+    };
+
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('pointermove', handlePointerMove);
+    canvas.addEventListener('pointerup', handlePointerUp);
+    canvas.addEventListener('pointerleave', handlePointerUp);
+
+    for (let i = 0; i < 35; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * (height / 2),
+        vx: (Math.random() - 0.5) * 2,
+        vy: Math.random() * 1.5,
+        radius: Math.random() * 3 + 2.5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
+    }
+
+    const render = () => {
+      ctx.fillStyle = 'rgba(10, 14, 39, 0.25)';
+      ctx.fillRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        p.vy += gravity;
+        p.vx *= friction;
+        p.vy *= friction;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (mouse.active) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 45) {
+            const force = (45 - dist) / 45;
+            const angle = Math.atan2(dy, dx);
+            p.vx += Math.cos(angle) * force * 1.6;
+            p.vy += Math.sin(angle) * force * 1.6;
+          }
+        }
+
+        if (p.x + p.radius > width) {
+          p.x = width - p.radius;
+          p.vx *= bounce;
+        } else if (p.x - p.radius < 0) {
+          p.x = p.radius;
+          p.vx *= bounce;
+        }
+
+        if (p.y + p.radius > height) {
+          p.y = height - p.radius;
+          p.vy *= bounce;
+          p.vx *= 0.85;
+        } else if (p.y - p.radius < 0) {
+          p.y = p.radius;
+          p.vy *= bounce;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 3;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      if (particles.length > 100) {
+        particles.splice(0, particles.length - 100);
+      }
+
+      animationId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
+      if (canvas) {
+        canvas.removeEventListener('pointerdown', handlePointerDown);
+        canvas.removeEventListener('pointermove', handlePointerMove);
+        canvas.removeEventListener('pointerup', handlePointerUp);
+        canvas.removeEventListener('pointerleave', handlePointerUp);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="w-full h-full relative overflow-hidden bg-[#0A0E27] flex flex-col">
+      <div className="absolute top-2 left-2 text-[8px] uppercase tracking-wider text-flutter-light-blue bg-black/40 px-2 py-0.5 rounded-full border border-white/5 pointer-events-none z-10">
+        Physics Active
+      </div>
+      <canvas ref={canvasRef} className="w-full h-[180px] cursor-crosshair touch-none" />
+      <div className="p-3 flex flex-col justify-end bg-black/40 border-t border-white/5 text-left space-y-1">
+        <div className="text-[10px] font-bold text-white">Liquid Sandbox</div>
+        <div className="text-[8px] text-gray-400 leading-snug">
+          Drag/tap on screen to spawn & repel colorful fluid particles. Uses Verlet particle integration physics.
         </div>
       </div>
     </div>
