@@ -751,8 +751,8 @@ const FluidSandbox = () => {
       <div className="absolute top-2 left-2 text-[8px] uppercase tracking-wider text-flutter-light-blue bg-black/40 px-2 py-0.5 rounded-full border border-white/5 pointer-events-none z-10">
         Physics Active
       </div>
-      <canvas ref={canvasRef} className="w-full h-[180px] cursor-crosshair touch-none" />
-      <div className="p-3 flex flex-col justify-end bg-black/40 border-t border-white/5 text-left space-y-1">
+      <canvas ref={canvasRef} className="w-full flex-1 cursor-crosshair touch-none" />
+      <div className="p-3 flex flex-col justify-end bg-black/60 border-t border-white/5 text-left space-y-1 z-10 shrink-0">
         <div className="text-[10px] font-bold text-white">Liquid Sandbox</div>
         <div className="text-[8px] text-gray-400 leading-snug">
           Drag/tap on screen to spawn & repel colorful fluid particles. Uses Verlet particle integration physics.
