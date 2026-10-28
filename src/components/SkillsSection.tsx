@@ -1,85 +1,166 @@
+import React from 'react';
+import { Smartphone, Layers, Cpu, Database, Check } from 'lucide-react';
 
-import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
+interface CapabilityGroup {
+  id: string;
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  skills: string[];
+  evidence: {
+    project: string;
+    detail: string;
+    link?: string;
+  }[];
+}
 
-const SkillsSection = () => {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      color: "from-flutter-blue to-flutter-light-blue",
-      skills: ["Dart", "Swift", "Java", "Python"]
-    },
-    {
-      title: "Frameworks & Libraries",
-      color: "from-flutter-light-blue to-flutter-teal",
-      skills: ["Flutter", "SwiftUI", "Flame Game Engine"]
-    },
-    {
-      title: "State Management",
-      color: "from-flutter-teal to-flutter-purple",
-      skills: ["Riverpod", "Provider", "Bloc/Cubit"]
-    },
-    {
-      title: "Databases & Backend",
-      color: "from-flutter-purple to-flutter-blue",
-      skills: ["Firebase", "Supabase", "SQLite", "RESTful APIs"]
-    },
-    {
-      title: "Version Control",
-      color: "from-blue-500 to-purple-500",
-      skills: ["Git", "GitHub"]
-    },
-    {
-      title: "Other Skills",
-      color: "from-purple-500 to-pink-500",
-      skills: ["Machine Learning Integration", "Computer Vision", "Google Maps API", "Google AdMob", "n8n Automation"]
-    }
-  ];
+const capabilities: CapabilityGroup[] = [
+  {
+    id: 'mobile',
+    title: 'Mobile Engineering',
+    icon: Smartphone,
+    description: 'Cross-platform native-feeling applications built for long-term maintainability and battery efficiency.',
+    skills: [
+      'Flutter & Dart',
+      'iOS (Swift & SwiftUI)',
+      'Android (Java/Kotlin)',
+      'Offline Caching (SQLite)',
+      'Hardware Sensors & Cameras',
+      'App Store & Play Store Deploy',
+    ],
+    evidence: [
+      { project: 'Amoomy & Raval', detail: 'Shipped to commercial production on iOS and Android.' },
+      { project: 'Liquid Navbar', detail: 'Custom canvas shaders & spring physics on pub.dev.' },
+    ],
+  },
+  {
+    id: 'architecture',
+    title: 'Architecture & State',
+    icon: Layers,
+    description: 'Strict separation of concerns ensuring codebases remain testable, refactorable, and bug-resilient.',
+    skills: [
+      'Clean Architecture (Domain/Data/UI)',
+      'Riverpod & Provider',
+      'BLoC / Cubit Pattern',
+      'Dependency Injection',
+      'Repository Pattern',
+      'Unit & Widget Testing',
+    ],
+    evidence: [
+      { project: 'Stackademic Article', detail: 'Author of "Software Craftsmanship: Design Patterns in Dart & Flutter".' },
+      { project: 'freeRASP Security', detail: 'Technical guide on mobile anti-tampering and reverse-engineering protection.' },
+    ],
+  },
+  {
+    id: 'ai-ml',
+    title: 'AI, ML & Real-Time',
+    icon: Cpu,
+    description: 'Integrating practical machine learning models and sub-second streaming pipelines into mobile clients.',
+    skills: [
+      'Gemini AI API & LLM Pipelines',
+      'Google ML Kit',
+      'Computer Vision (OpenCV)',
+      'Real-Time WebSockets (Socket.IO)',
+      'ASL Sign Language Detection',
+      'On-Device Inference',
+    ],
+    evidence: [
+      { project: 'Medium Publication', detail: 'Author of "Building a Real-Time ASL Detection App with Computer Vision".' },
+      { project: 'Socket.IO Guide', detail: 'Technical architecture for real-time mobile event streaming.' },
+    ],
+  },
+  {
+    id: 'data-science',
+    title: 'Data Science & Systems',
+    icon: Database,
+    description: 'Foundational algorithmic thinking, data modeling, and automated backend workflow pipelines.',
+    skills: [
+      'Python (Pandas, NumPy)',
+      'Data Structures & Algorithms',
+      'Supabase & PostgreSQL',
+      'RESTful API Design',
+      'Git & GitHub Actions CI/CD',
+      'n8n Workflow Automation',
+    ],
+    evidence: [
+      { project: 'AUFS FCDS', detail: 'Academic background in Data Science & Artificial Intelligence.' },
+      { project: 'HackerRank Club', detail: 'Head of Flutter Committee & technical curriculum mentor.' },
+    ],
+  },
+];
 
+export const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-20 px-4 lg:px-8">
-      <div className="container mx-auto">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-blue to-flutter-teal bg-clip-text text-transparent mb-6">
-            Technical Skills
-          </h2>
-          <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
-          <p className="text-muted-foreground mt-6 text-lg">
-            Technologies I work with to bring ideas to life
+    <section id="skills" className="py-20 md:py-28 border-b border-border-subtle bg-surface/30">
+      <div className="container max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              <span>Technical Capabilities</span>
+            </div>
+            <h2 className="font-serif fluid-3xl font-bold tracking-tight text-ink">
+              Skills Anchored in Execution
+            </h2>
+          </div>
+          <p className="text-ink-muted text-sm md:text-base max-w-md font-sans leading-relaxed">
+            No arbitrary percentage bars or technology logo dumps. Every capability is grounded 
+            in delivered commercial products or published technical research.
           </p>
-        </AnimatedSection>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <AnimatedItem key={category.title} delay={categoryIndex * 0.08}>
-              <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 group h-full">
-                <h3 className={`text-xl font-semibold mb-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
-                  {category.title}
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className={`px-4 py-2 glass-strong rounded-full text-sm font-mono hover:scale-110 transition-transform duration-200 bg-gradient-to-r ${category.color} bg-clip-text text-transparent hover:shadow-lg`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </AnimatedItem>
-          ))}
         </div>
 
-        {/* Floating skill icons */}
-        <AnimatedSection delay={0.3} className="relative mt-16 h-32 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center space-x-8 animate-float">
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl">📱</div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-500">🔥</div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-1000">🚀</div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-1500">💎</div>
-            <div className="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl delay-2000">🎯</div>
-          </div>
-        </AnimatedSection>
+        {/* 4-Column Capability Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-12">
+          {capabilities.map((group) => {
+            const Icon = group.icon;
+            return (
+              <div
+                key={group.id}
+                className="spec-card p-6 flex flex-col justify-between rounded-xl bg-surface hover:shadow-card transition-all"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-elevated border border-border-subtle flex items-center justify-center text-accent mb-4">
+                    <Icon className="w-5 h-5" />
+                  </div>
+
+                  <h3 className="font-serif text-lg font-bold text-ink mb-2">
+                    {group.title}
+                  </h3>
+
+                  <p className="text-xs text-ink-muted leading-relaxed font-sans mb-5">
+                    {group.description}
+                  </p>
+
+                  {/* Skills Tag List */}
+                  <div className="space-y-1.5 pb-6 border-b border-border-subtle">
+                    {group.skills.map((skill) => (
+                      <div key={skill} className="flex items-center gap-2 text-xs text-ink font-mono">
+                        <Check className="w-3 h-3 text-accent shrink-0" />
+                        <span>{skill}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Evidence Proof Strip */}
+                <div className="pt-4 mt-2">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-faint block mb-2">
+                    Verified Execution
+                  </span>
+                  <div className="space-y-2">
+                    {group.evidence.map((ev, i) => (
+                      <div key={i} className="p-2.5 rounded bg-elevated border border-border-subtle text-[11px]">
+                        <span className="font-semibold text-ink block">{ev.project}</span>
+                        <span className="text-ink-muted leading-tight block mt-0.5">{ev.detail}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

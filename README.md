@@ -1,73 +1,44 @@
-# Welcome to your Lovable project
+# Zyad Wael — Mobile Engineer & Data Science Student Portfolio
 
-## Project info
+The official portfolio and engineering showcase for **Zyad Wael**, specializing in cross-platform mobile development with Flutter, clean architecture, on-device AI integration, and data science.
 
-**URL**: https://lovable.dev/projects/74d53040-94ba-4792-962f-aebb5a114cb9
+🌐 **Live Site**: [https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/](https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Architecture & Engineering Principles
 
-**Use Lovable**
+- **Design Concept**: *Engineering Field Notes × Mobile Product Showcase* — clean editorial typography (Fraunces & Plus Jakarta Sans), high-contrast accessibility (WCAG AA), responsive fluid scale, and zero generic AI glassmorphism.
+- **Pre-rendered Initial HTML**: Content is present directly in the initial HTML payload for instant sub-second LCP and comprehensive SEO indexability.
+- **Evidence-Driven Case Studies**: Every featured project includes concrete problem statements, architecture decisions, measurable outcomes, and verified store links.
+- **Responsive & Adaptive**: Mobile-first design system with fluid `clamp()` sizing, responsive CSS Grid/Flexbox layouts, support for `prefers-reduced-motion`, touch-target compliance (≥ 44px), and manual + system light/dark theme modes.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/74d53040-94ba-4792-962f-aebb5a114cb9) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+- **Framework**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Custom CSS Design Tokens
+- **Icons**: Lucide Icons
+- **Deployment**: GitHub Pages CI/CD via GitHub Actions (`.github/workflows/deploy.yml`)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Local Development
 
-Follow these steps:
+```bash
+# 1. Install dependencies
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 2. Start local development server
 npm run dev
+
+# 3. Build for production (outputs to /dist)
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## License
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/74d53040-94ba-4792-962f-aebb5a114cb9) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT © [Zyad Wael](https://github.com/ZyadWKhedr)

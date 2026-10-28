@@ -1,54 +1,31 @@
-
+import React from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
+import SelectedWork from '@/components/SelectedWork';
 import SkillsSection from '@/components/SkillsSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import FeaturedProjectSection from '@/components/FeaturedProjectSection';
-import PackagesSection from '@/components/PackagesSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ArticlesSection from '@/components/ArticlesSection';
+import WritingSection from '@/components/WritingSection';
+import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
-import SocialLinks from '@/components/SocialLinks';
-import AiAssistant from '@/components/AiAssistant';
+import Footer from '@/components/Footer';
 
-const Index = () => {
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen relative">
-      {/* Navigation */}
+    <div className="min-h-screen bg-canvas text-ink transition-colors duration-200">
+      {/* Accessible Header Navigation */}
       <Navigation />
-      
-      {/* Social Links */}
-      <SocialLinks />
-      
-      {/* Main Content */}
-      <main className="relative">
+
+      {/* Main Content Landmark */}
+      <main id="main-content" tabIndex={-1} className="outline-none">
         <HeroSection />
-        <AboutSection />
+        <SelectedWork />
         <SkillsSection />
-        <FeaturedProjectSection />
-        <ProjectsSection />
-        <PackagesSection />
-        <TestimonialsSection />
-        <ArticlesSection />
+        <WritingSection />
+        <AboutSection />
         <ContactSection />
       </main>
 
-      <AiAssistant />
-      
-      
-      {/* Footer */}
-      <footer className="py-12 px-4 lg:px-8 border-t border-gray-800">
-        <div className="container mx-auto text-center">
-          <p className="text-gray-400 mb-4">
-            Built with <span className="text-flutter-light-blue">💙</span> Flutter spirit by{' '}
-            <span className="text-flutter-teal font-semibold">Zyad Wael</span>
-          </p>
-          <p className="text-sm text-gray-500">
-            Copyright © 2025. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      {/* Semantic Footer */}
+      <Footer />
     </div>
   );
 };

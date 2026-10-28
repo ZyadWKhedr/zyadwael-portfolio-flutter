@@ -1,26 +1,92 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zyad Wael - Flutter Developer & Data Science Student</title>
-    <meta name="description" content="Portfolio of Zyad Wael - Flutter Developer and Data Science Student specializing in clean architecture, AI integration, and cross-platform mobile development." />
-    <meta name="author" content="Zyad Wael" />
-
-    <meta property="og:title" content="Zyad Wael - Flutter Developer & Data Science Student" />
-    <meta property="og:description" content="Portfolio showcasing Flutter development projects, AI integration, and data science expertise." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@zyadwael" />
-    <meta name="twitter:image" content="/lovable-uploads/5f538683-3c1f-4efe-aa04-e55406896eb7.png" />
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- Primary Page Metadata -->
+    <title>Zyad Wael — Mobile Software Engineer &amp; Data Science Student</title>
+    <meta name="description" content="Portfolio of Zyad Wael — Mobile Software Engineer specializing in cross-platform Flutter applications, Clean Architecture, offline-first reliability, and practical AI integration." />
+    <meta name="author" content="Zyad Wael" />
+    <meta name="keywords" content="Zyad Wael, Flutter Developer, Mobile Engineer, Clean Architecture, Data Science, iOS, Android, Dart, Machine Learning, Cairo" />
+    <link rel="canonical" href="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/" />
+    <meta property="og:title" content="Zyad Wael — Mobile Software Engineer &amp; Data Science Student" />
+    <meta property="og:description" content="Shipped production Flutter applications, Clean Architecture case studies, and technical publications by Zyad Wael." />
+    <meta property="og:image" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zyad Wael — Mobile Software Engineer &amp; Data Science Student Portfolio" />
+    <meta property="og:site_name" content="Zyad Wael Portfolio" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/" />
+    <meta name="twitter:title" content="Zyad Wael — Mobile Software Engineer &amp; Data Science Student" />
+    <meta name="twitter:description" content="Shipped production Flutter applications, Clean Architecture case studies, and technical publications by Zyad Wael." />
+    <meta name="twitter:image" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/og-image.png" />
+    <meta name="twitter:image:alt" content="Zyad Wael — Mobile Software Engineer" />
+
+    <!-- Fonts: Fraunces (Display) + Plus Jakarta Sans (Body) + JetBrains Mono (Code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..700&family=JetBrains+Mono:wght@400..700&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload LCP Profile Image -->
+    <link rel="preload" as="image" href="/zyadwael-portfolio-flutter/zyad-profile.webp" type="image/webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Theme Initialization Script (Prevents FOUC) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- JSON-LD Structured Data: Person Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Zyad Wael",
+        "jobTitle": "Mobile Software Engineer",
+        "description": "Cross-platform mobile engineer specializing in Flutter, Clean Architecture, offline-first systems, and practical AI integration.",
+        "url": "https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/",
+        "image": "https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/zyad-profile.webp",
+        "email": "mailto:ziad.w.khedr@gmail.com",
+        "sameAs": [
+          "https://github.com/ZyadWKhedr",
+          "https://www.linkedin.com/in/ziad-wael-728b7a242/",
+          "https://medium.com/@ziad.w.khedr"
+        ],
+        "knowsAbout": [
+          "Flutter",
+          "Dart",
+          "Clean Architecture",
+          "Mobile Application Development",
+          "Data Science",
+          "Machine Learning",
+          "iOS",
+          "Android"
+        ]
+      }
+    </script>
   </head>
 
   <body>

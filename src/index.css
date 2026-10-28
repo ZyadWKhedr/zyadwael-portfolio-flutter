@@ -1,116 +1,172 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
-
 @layer base {
   :root {
-    --background: 10 14% 15%;
-    --foreground: 210 40% 98%;
+    /* Light Theme: Warm Paper & Precision Ink */
+    --bg-canvas: #F8F6F1;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #EFECE3;
+    --border-subtle: #E3DDD1;
+    --border-strong: #C4BCAB;
+    --text-ink: #181B19;
+    --text-muted: #565C58;
+    --text-faint: #7E8681;
+    --accent: #D75A36;
+    --accent-hover: #BE4A27;
+    --accent-subtle: rgba(215, 90, 54, 0.08);
+    --accent-fg: #FFFFFF;
 
-    --card: 220 13% 18%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 220 13% 18%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 199 89% 48%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 217 32% 17%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 199 89% 48%;
-
+    /* Base radius */
     --radius: 0.75rem;
 
-    --sidebar-background: 220 13% 18%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 199 89% 48%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217 32% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 32% 17%;
-    --sidebar-ring: 199 89% 48%;
+    /* Fluid typography tokens */
+    --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+    --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
+    --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    --text-lg: clamp(1.125rem, 1.06rem + 0.32vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+    --text-3xl: clamp(1.875rem, 1.62rem + 1.25vw, 2.5rem);
+    --text-4xl: clamp(2.25rem, 1.85rem + 2vw, 3.25rem);
+    --text-display: clamp(2.75rem, 2.15rem + 3vw, 4.5rem);
   }
-}
 
-@layer base {
+  .dark {
+    /* Dark Theme: Carbon Slate & Terracotta Ember */
+    --bg-canvas: #0F1214;
+    --bg-surface: #161A1D;
+    --bg-elevated: #1F2429;
+    --border-subtle: #272F36;
+    --border-strong: #3D4853;
+    --text-ink: #F2F5F4;
+    --text-muted: #9EABA5;
+    --text-faint: #6A7570;
+    --accent: #E06D4B;
+    --accent-hover: #EA8365;
+    --accent-subtle: rgba(224, 109, 75, 0.14);
+    --accent-fg: #0F1214;
+  }
+
   * {
-    @apply border-border;
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-dark-gradient text-foreground font-sans;
-    background: linear-gradient(135deg, #0A0E27 0%, #1A1B3A 50%, #2D3561 100%);
-    background-attachment: fixed;
+    background-color: var(--bg-canvas);
+    color: var(--text-ink);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100dvh;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
-  /* Glassmorphism utility classes */
-  .glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  /* High-visibility WCAG focus rings */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Accessible touch target helper */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #0175C2, #13B9FD);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #13B9FD, #02D39A);
-  }
-}
-
-@layer components {
-  .typing-effect {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #13B9FD;
-    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+  /* Selection highlight */
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-fg);
   }
 }
 
 @layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* Fluid heading utilities */
+  .fluid-display {
+    font-size: var(--text-display);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  .fluid-4xl {
+    font-size: var(--text-4xl);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+  .fluid-3xl {
+    font-size: var(--text-3xl);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .fluid-2xl {
+    font-size: var(--text-2xl);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  .fluid-xl {
+    font-size: var(--text-xl);
+    line-height: 1.35;
+  }
+  .fluid-lg {
+    font-size: var(--text-lg);
+    line-height: 1.45;
+  }
+  .fluid-base {
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+  .fluid-sm {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .fluid-xs {
+    font-size: var(--text-xs);
+    line-height: 1.4;
+  }
+
+  /* Minimum 44px touch target utility */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Architectural Spec Grid & Card Styles */
+  .spec-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .spec-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .spec-inset {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
