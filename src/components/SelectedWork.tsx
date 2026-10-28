@@ -224,7 +224,7 @@ export const SelectedWork: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
-                        aria-label={`View ${project.title} on Apple App Store`}
+                        aria-label={`App Store: View ${project.title} on Apple App Store`}
                       >
                         <Apple className="w-3.5 h-3.5" />
                         <span>App Store</span>
@@ -237,7 +237,7 @@ export const SelectedWork: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
-                        aria-label={`View ${project.title} on Google Play`}
+                        aria-label={`Google Play: View ${project.title} on Google Play`}
                       >
                         <Play className="w-3.5 h-3.5" />
                         <span>Google Play</span>
@@ -250,7 +250,7 @@ export const SelectedWork: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
-                        aria-label={`View ${project.title} on pub.dev`}
+                        aria-label={`pub.dev Package: View ${project.title} on pub.dev`}
                       >
                         <Code2 className="w-3.5 h-3.5" />
                         <span>pub.dev Package</span>
