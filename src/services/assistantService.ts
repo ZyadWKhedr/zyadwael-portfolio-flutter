@@ -44,7 +44,7 @@ export async function queryAssistant(
     console.error('[assistantService] Assistant invocation failed, returning grounded fallback:', err);
     return {
       reply:
-        "Zyad Wael is a Software Engineer specializing in mobile development with Flutter as his main framework, based in Alexandria, Egypt. With broad cross-platform and native mobile expertise spanning iOS (Swift), Android (Kotlin), Clean Architecture, and offline-first systems, he leads the Flutter Committee at HackerRank Campus Club and has shipped commercial production applications including Amoomy (logistics dispatch) and Raval (fashion e-commerce). Feel free to reach out directly at ziad.w.khedr@gmail.com or connect on LinkedIn!",
+        "Zyad Wael is a Software Engineer specializing in mobile development with Flutter as his main framework, based in Alexandria, Egypt. With broad cross-platform expertise spanning Clean Architecture, BLoC state management, offline-first systems, and custom canvas rendering, he mentors developers in the Flutter Committee at HackerRank Campus Club and has shipped commercial production applications including Amoomy (logistics dispatch) and Raval (fashion e-commerce). Feel free to reach out directly at ziad.w.khedr@gmail.com or connect on LinkedIn!",
       isFallback: true,
     };
   }

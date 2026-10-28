@@ -29,9 +29,9 @@
 - **File**: [src/components/sections/HeroSection.tsx](file:///d:/Web/zyadwael-portfolio-flutter/src/components/sections/HeroSection.tsx)
 - **Roles Cycled**:
   1. `Software Engineer — Mobile Development`
-  2. `Flutter (Main Framework) & Mobile Specialist`
-  3. `Native iOS (Swift) & Android (Kotlin)`
-  4. `Clean Architecture & Offline-First Systems`
+  2. `Flutter & Cross-Platform Architecture`
+  3. `Clean Architecture & BLoC Specialist`
+  4. `Offline-First & Reactive Systems`
 - **Choreography**: Each role enters via a slide-and-fade transition (`opacity: 0 -> 1, translateY: 8px -> 0px`). Text is contained within an inline flex container with fixed vertical alignment to prevent layout thrashing or cumulative layout shift (CLS: 0.000).
 
 ### 2.2 In-Browser Mobile App Simulators

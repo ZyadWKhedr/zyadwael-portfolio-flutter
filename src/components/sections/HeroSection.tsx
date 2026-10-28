@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUpRight, Github, Linkedin, Facebook, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import HeroBackground from '@/components/layout/HeroBackground';
 import profileWebp from '@/assets/zyad-profile.webp';
 
 const CV_URL = 'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
@@ -59,9 +60,9 @@ export const HeroSection: React.FC = () => {
 
   const roles = [
     t('hero.role1', 'Software Engineer — Mobile Development'),
-    t('hero.role2', 'Flutter (Main Framework) & Mobile Specialist'),
-    t('hero.role3', 'Native iOS (Swift) & Android (Kotlin)'),
-    t('hero.role4', 'Clean Architecture & Offline-First Systems'),
+    t('hero.role2', 'Flutter & Cross-Platform Architecture'),
+    t('hero.role3', 'Clean Architecture & BLoC Specialist'),
+    t('hero.role4', 'Offline-First & Reactive Systems'),
   ];
 
   useEffect(() => {
@@ -76,12 +77,9 @@ export const HeroSection: React.FC = () => {
   }, [roles.length]);
 
   return (
-    <section id="hero" className="scroll-mt-24 relative pt-10 pb-16 md:pt-16 md:pb-24 border-b border-border-subtle blueprint-grid">
-      {/* Ambient background breath (pure CSS, low overhead) */}
-      <div 
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-canvas/40 via-transparent to-canvas" 
-        aria-hidden="true" 
-      />
+    <section id="hero" className="scroll-mt-24 relative pt-10 pb-16 md:pt-16 md:pb-24 border-b border-border-subtle overflow-hidden">
+      {/* Architectural Atelier Hero Background (Concept 1) */}
+      <HeroBackground />
 
       <div className="container max-w-6xl mx-auto relative z-10">
         {/* Top Metadata Strip */}
@@ -121,7 +119,7 @@ export const HeroSection: React.FC = () => {
             </h1>
 
             <p className="text-ink-muted fluid-lg max-w-2xl leading-relaxed mb-8">
-              {t('hero.subheadline', 'Software Engineer specializing in mobile development with Flutter as my primary framework, complemented by native iOS (Swift) and Android (Kotlin) depth. Building high-concurrency dispatch systems, reactive commerce, and offline-first mobile apps from Alexandria, Egypt.')}
+              {t('hero.subheadline', 'Software Engineer specializing in mobile development with Flutter as my primary framework. Architecting high-concurrency dispatch systems, reactive commerce, and offline-first mobile apps from Alexandria, Egypt.')}
             </p>
 
             {/* CTAs */}
@@ -181,8 +179,8 @@ export const HeroSection: React.FC = () => {
                 <div className="text-xs font-mono text-ink-muted mt-1">Technical Articles</div>
               </div>
               <div>
-                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">Lead</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">Flutter Committee</div>
+                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">400+</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsDownloads', 'Package Downloads')}</div>
               </div>
             </div>
           </div>
@@ -208,7 +206,7 @@ export const HeroSection: React.FC = () => {
                   </div>
                   <div className="text-[11px] text-ink-muted mt-1 flex items-center justify-between">
                     <span>Alexandria, Egypt</span>
-                    <span className="font-mono text-[10px] text-ink-faint">Flutter · iOS · Android</span>
+                    <span className="font-mono text-[10px] text-ink-faint">Flutter &amp; Dart Specialist</span>
                   </div>
                 </div>
               </div>

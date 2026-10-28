@@ -11,3 +11,11 @@ export interface CapabilityGroup {
   skills: string[];
   evidence: SkillEvidence[];
 }
+
+export interface ExperienceMilestone {
+  period: string;
+  role: string;
+  organization: string;
+  description: string;
+  tags: string[];
+}

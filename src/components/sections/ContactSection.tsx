@@ -84,7 +84,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle blueprint-grid">
+    <section id="contact" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/20 relative">
       <div className="container max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start text-start">
           {/* Left Column: Direct Outreach & Direct Channels (6 cols) */}

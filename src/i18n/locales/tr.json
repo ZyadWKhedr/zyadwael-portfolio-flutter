@@ -20,21 +20,22 @@
   "hero": {
     "badge": "Yazılım Mühendisi — Mobil Geliştirme",
     "role1": "Yazılım Mühendisi — Mobil Geliştirme",
-    "role2": "Flutter (Ana Framework) & Mobil Uzmanı",
-    "role3": "Yerel iOS (Swift) & Android (Kotlin) Geliştirme",
-    "role4": "Clean Architecture & Çevrimdışı Öncelikli Sistemler",
+    "role2": "Flutter & Çapraz Platform Mimarisi",
+    "role3": "Clean Architecture & BLoC Uzmanı",
+    "role4": "Çevrimdışı Öncelikli & Reaktif Sistemler",
     "headline": "Yüksek performanslı, sağlam ve yerel standartlarda mobil uygulamalar.",
-    "subheadline": "Ana framework olarak Flutter'ı benimseyen, derin yerel iOS (Swift) ve Android (Kotlin) uzmanlığıyla desteklenen bir Mobil Yazılım Mühendisi. İskenderiye, Mısır'dan gerçek zamanlı lojistik, e-ticaret ve çevrimdışı öncelikli mobil uygulamalar geliştiriyorum.",
+    "subheadline": "Ana framework olarak Flutter'ı benimseyen bir Mobil Yazılım Mühendisi. İskenderiye, Mısır'dan yüksek eşzamanlılıklı sevkiyat sistemleri, reaktif e-ticaret ve çevrimdışı öncelikli mobil uygulamalar geliştiriyorum.",
     "ctaWork": "Projeleri İncele",
     "ctaContact": "İletişime Geç",
     "statsClients": "Canlıdaki Uygulamalar",
     "statsUptime": "Çökmesiz Çalışma Oranı",
+    "statsDownloads": "Paket İndirmeleri",
     "statsLocation": "İskenderiye, Mısır"
   },
   "about": {
     "badge": "Geçmiş & Felsefe",
     "title": "Yazılım ustalığı ve derin çapraz platform mobil uzmanlığı.",
-    "p1": "İskenderiye, Mısır merkezli olarak mobil geliştirmeye odaklanan bir yazılım mühendisiyim. Çoklu platform geliştirmede ana framework olarak Flutter'ı kullanırken, mühendislik deneyimim yerel iOS (Swift), Android (Kotlin), donanım sensörleri entegrasyonu ve performans profillemesi gibi tüm mobil ekosistemi kapsar.",
+    "p1": "İskenderiye, Mısır merkezli olarak Flutter ve Dart ile dayanıklı istemci sistemleri geliştirmeye odaklanan bir mobil yazılım mühendisiyim. Etki alanı ayrımı, deterministik durum yönetimi ve akıcı 60 FPS arayüzler üzerine odaklanıyorum.",
     "p2": "Son yıllarda lojistik, e-ticaret ve FinTech alanlarında yüksek talep gören ticari uygulamalar tasarlayıp yayınladım. Binlerce aktif kullanıcıya çevrimdışı dayanıklılık, anlık soket iletişimi ve akıcı 60 FPS geçişler sundum.",
     "p3": "HackerRank Campus Club bünyesinde Flutter Komitesi Başkanlığı yaparak genç mühendislere Clean Architecture, BLoC durum yönetimi ve test odaklı geliştirme (TDD) eğitimleri veriyorum.",
     "p4": "Geliştirme yaklaşımım üç temel ilkeye dayanır: iş mantığı ile arayüzün kesin ayrımı, SQLite ile güvenli çevrimdışı önbellekleme ve titiz performans profillemesi.",
@@ -42,8 +43,8 @@
     "pillar1Desc": "Sunum, etki alanı (domain) ve veri katmanları arasında kesin sınırlar. Arayüz elemanları yalnızca değişmez durum akışlarını dinler.",
     "pillar2Title": "Gerçek Zamanlı Güvenilirlik & Çapraz Platform",
     "pillar2Desc": "Hata toleranslı WebSocket akışları, arka plan senkronizasyonu ve dengesiz ağlar için tasarlanmış SQLite önbelleği.",
-    "pillar3Title": "Donanım Seviyesi & Yerel Entegrasyon",
-    "pillar3Desc": "Swift ve Kotlin ile kamera, Bluetooth Low Energy (BLE), arka plan konum takibi ve NFC için özel Platform Kanalları geliştirme."
+    "pillar3Title": "Özel Çizim & Hareket Fiziği",
+    "pillar3Desc": "Özel tuval gölgelendiricileri, yay fiziği eğrileri ve donanım sensörleri ile telemetriyi bağlayan platform kanalları."
   },
   "work": {
     "badge": "Ticari Uygulamalar & Açık Kaynak",

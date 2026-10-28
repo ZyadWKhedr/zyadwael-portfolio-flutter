@@ -4,7 +4,7 @@
 [![Lighthouse Desktop](https://img.shields.io/badge/Lighthouse_Desktop-100%25-brightgreen)](https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Production developer portfolio of **Zyad Wael**, a Software Engineer specializing in mobile development with **Flutter** as his main framework, alongside native **iOS (Swift)** and **Android (Kotlin)** depth, **Clean Architecture**, and offline-first systems based in **Alexandria, Egypt**.
+Production developer portfolio of **Zyad Wael**, a Software Engineer specializing in mobile application development with **Flutter & Dart**, **Clean Architecture**, and offline-first systems based in **Alexandria, Egypt**.
 
 - **Live Website:** [https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/](https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/)
 - **GitHub:** [https://github.com/ZyadWKhedr](https://github.com/ZyadWKhedr)
