@@ -29,7 +29,8 @@
     "ctaContact": "İletişime Geç",
     "statsClients": "Canlıdaki Uygulamalar",
     "statsUptime": "Çökmesiz Çalışma Oranı",
-    "statsDownloads": "Paket İndirmeleri",
+    "statsArticles": "Teknik Makaleler",
+    "statsExperience": "Yıllık Ticari Deneyim",
     "statsLocation": "İskenderiye, Mısır"
   },
   "about": {
@@ -50,6 +51,9 @@
     "badge": "Mobil Dünyamın İçinde",
     "title": "Tek bir etkileşimli cihazda yayınlanmış mobil uygulamalar.",
     "subtitle": "Etkileşimli bir akıllı telefon içinde canlı Flutter uygulamalarını, gerçek zamanlı sevkiyat sistemlerini ve reaktif mobil akışları keşfedin. Bir uygulama simgesine dokunun veya aşağıdaki projelerden birini seçin.",
+    "boaCategory": "Öne Çıkan Açık Kaynak Proje · Geliştirici Araçları",
+    "boaTitle": "Boa — Etkileşimli Terminal Araç Seti & Sıkıştırma Motoru",
+    "boaSubtitle": "Dosyaları sıkıştırmak, arşivleri çıkarmadan incelemek, algoritmaları kıyaslamak ve Zip-Slip dizin geçiş açıklarını etkisiz hale getirmek için Go ile yazılmış hızlı, etkileşimli bir terminal araç seti.",
     "mobileWorldBadge": "Mobil Dünyamın İçinde",
     "mobileWorldTitle": "Tek bir etkileşimli cihazda yayınlanmış mobil uygulamalar.",
     "mobileWorldSubtitle": "Etkileşimli bir akıllı telefon içinde canlı Flutter uygulamalarını, gerçek zamanlı sevkiyat sistemlerini ve reaktif mobil akışları keşfedin. Bir uygulama simgesine dokunun veya aşağıdaki projelerden birini seçin.",

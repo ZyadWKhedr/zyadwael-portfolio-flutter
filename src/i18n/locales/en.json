@@ -29,7 +29,8 @@
     "ctaContact": "Get in Touch",
     "statsClients": "Production Apps Shipped",
     "statsUptime": "Crash-Free Rate",
-    "statsDownloads": "Package Downloads",
+    "statsArticles": "Technical Articles",
+    "statsExperience": "Years Commercial Exp.",
     "statsLocation": "Alexandria, Egypt"
   },
   "about": {
@@ -50,6 +51,9 @@
     "badge": "Inside My Mobile World",
     "title": "Shipped mobile applications in one interactive device.",
     "subtitle": "Explore commercial Flutter applications, real-time dispatch systems, and reactive mobile flows inside one interactive smartphone. Tap any app icon or select a project below to inspect its architecture.",
+    "boaCategory": "Featured Open-Source Project · Developer Tooling",
+    "boaTitle": "Boa — Interactive Terminal Toolkit & Compression Engine",
+    "boaSubtitle": "A fast, interactive terminal toolkit written in Go for compressing files, exploring archives without extraction, benchmarking algorithms, and neutralizing Zip-Slip path traversal exploits.",
     "mobileWorldBadge": "Inside My Mobile World",
     "mobileWorldTitle": "Shipped mobile applications in one interactive device.",
     "mobileWorldSubtitle": "Explore commercial Flutter applications, real-time dispatch systems, and reactive mobile flows inside one interactive smartphone. Tap any app icon or select a project below to inspect its architecture.",

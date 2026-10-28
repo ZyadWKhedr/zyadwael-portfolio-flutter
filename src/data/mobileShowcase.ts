@@ -1,7 +1,7 @@
 import amoomyIcon from '@/assets/amoomy-icon.png';
 import wofoodiIcon from '@/assets/wofoodi-icon.png';
 import ravalIcon from '@/assets/raval-icon.png';
-import payssIcon from '@/assets/payss-icon.png';
+import ufuqIcon from '@/assets/ufuq-icon.png';
 import chessIcon from '@/assets/chess-icon.png';
 import zyadProfile from '@/assets/zyad-profile.webp';
 import type { MobileAppItem } from '@/types/mobileShowcase';
@@ -155,60 +155,62 @@ export const MOBILE_APPS: MobileAppItem[] = [
     ],
   },
   {
-    id: 'payss',
-    title: 'Payss',
-    category: 'Loyalty & FinTech',
-    tagline: 'Consumer mobile client connecting shoppers, merchant QR scans, and instant reward points.',
-    icon: payssIcon,
-    badge: 'Live Store',
-    description: 'Digital loyalty wallet eliminating physical stamp cards with sub-100ms hardware camera QR scanning and real-time point ledger updates.',
-    role: 'Flutter Mobile Engineer — Developed the consumer client application, hardware camera QR scanner integration, and live merchant activity feed.',
-    architecture: 'Combined real-time WebSocket event listeners with REST fallbacks. Packaged local point balances into encrypted secure storage for tamper-proof offline confirmation.',
+    id: 'ufuq',
+    title: 'Ufuq',
+    arabicTitle: 'أفق - أذكار وقرآن وإذاعة',
+    category: 'Islamic Companion & Audio',
+    tagline: 'Comprehensive spiritual companion with offline Athkar, Quran audio, and 24/7 radio.',
+    icon: ufuqIcon,
+    badge: 'Live App Store',
+    description: 'High-fidelity spiritual companion delivering offline Athkar, Holy Quran reading with audio recitation streams, GPS astronomical prayer times, and live 24/7 Islamic radio stations.',
+    role: 'Solo Mobile Engineer — Built the end-to-end iOS application, streaming audio architecture, SQLite local database, and sensor-calibrated Qibla compass.',
+    architecture: 'Engineered using Clean Architecture with BLoC/Provider state management. Decoupled audio playback service running in background isolates from the UI presentation layer.',
     decisions: [
-      'Engineered an ultra-fast QR scanning overlay with custom camera frame throttling to preserve battery health.',
-      'Built interactive merchant discovery with category filters, dynamic distance recalculations, and guest mode onboarding.',
-      'Implemented Dark/Light theme parity adhering to iOS Human Interface Guidelines.',
+      'Designed an offline-first SQLite cache for complete Quranic text, Athkar, and Hisn al-Muslim with instant search.',
+      'Implemented a low-latency audio streaming pipeline with lock-screen media controls and background audio playback.',
+      'Integrated hardware magnetometer calibration for accurate Qibla heading with tilt compensation.',
     ],
-    stack: ['Flutter', 'Dart', 'WebSockets', 'QR Scanner SDK', 'Google Maps', 'Secure Storage'],
-    metrics: ['Shipped iOS & Android', 'Sub-100ms QR Recognition', 'WebSocket Sync'],
+    stack: ['Flutter', 'Dart', 'Clean Architecture', 'Audio Streaming', 'SQLite', 'Sensors API', 'Local Notifications'],
+    metrics: ['Shipped iOS App Store', 'Offline-First SQLite', '24/7 Audio Radio'],
     links: {
-      appStore: 'https://apps.apple.com/eg/app/payss/id6767013931',
-      playStore: 'https://play.google.com/store/apps/details?id=com.payss.app',
+      appStore: 'https://apps.apple.com/us/app/ufuq/id6821979552',
+      github: 'https://github.com/ZyadWKhedr',
     },
     screens: [
       {
-        id: 'pa-scanner',
-        title: 'QR Viewfinder',
-        subtitle: 'Sub-100ms Optical Recognition',
-        flow: 'Battery-efficient camera viewfinder with throttled frame capture for instantaneous merchant check-in.',
-        accent: '#6366F1',
-        features: ['Hardware-throttled frame rate', 'Instant alignment target', 'Haptic scan confirmation'],
+        id: 'uf-athkar',
+        title: 'Hisn al-Muslim & Athkar',
+        subtitle: 'Daily Supplications & Audio',
+        flow: 'Categorized morning, evening, and prayer supplications with tactile haptic Subha counter.',
+        accent: '#059669',
+        features: ['Categorized daily supplications', 'Haptic feedback Subha counter', 'Audio recitation playback'],
       },
       {
-        id: 'pa-merchants',
-        title: 'Merchant Feed',
-        subtitle: 'Nearby Partner Stores',
-        flow: 'Geolocated merchant directory with live reward tiers and dynamic distance recalculation.',
-        accent: '#4F46E5',
-        features: ['Distance sorting', 'Category pill filters', 'Turn-by-turn map directions'],
+        id: 'uf-quran',
+        title: 'Holy Quran & Radio',
+        subtitle: '24/7 Islamic Live Stream',
+        flow: 'Complete Quranic text with verse bookmarking and worldwide 24/7 Islamic radio stations.',
+        accent: '#047857',
+        features: ['Uthmani script reader', 'Background audio streaming', 'Worldwide Quran radio stations'],
       },
       {
-        id: 'pa-wallet',
-        title: 'Encrypted Wallet',
-        subtitle: 'Reward Point Ledger',
-        flow: 'AES-256 encrypted local point balance backed by real-time WebSocket ledger synchronization.',
-        accent: '#4338CA',
-        features: ['Encrypted local storage', 'Instant point redemption', 'Transaction history log'],
+        id: 'uf-prayer',
+        title: 'Prayer Times & Qibla',
+        subtitle: 'Precise Astronomical GPS',
+        flow: 'High-accuracy prayer time countdowns based on astronomical calculations and magnetic Qibla compass.',
+        accent: '#065F46',
+        features: ['Astronomical GPS prayer times', 'Hardware magnetometer compass', 'Customizable Adhan alerts'],
       },
     ],
   },
   {
     id: 'chess',
     title: 'Grandmaster Chess',
-    category: 'Mobile Engine',
+    arabicTitle: 'شطرنج جراند ماستر',
+    category: 'Mobile Systems & Game AI',
     tagline: 'Tournament chess engine featuring minimax evaluation with alpha-beta pruning.',
     icon: chessIcon,
-    badge: 'Algorithmic',
+    badge: 'Live Stores',
     description: 'High-performance offline chess client with bitboard move generation, heuristic board evaluation, and adaptive depth search.',
     role: 'Solo Developer & Algorithmic Mobile Engineer — Implemented full board state mechanics and evaluation search in Dart.',
     architecture: 'Strict separation between the stateless board representation and minimax search worker. Evaluates thousands of positions per second without UI frame drops.',
@@ -217,10 +219,11 @@ export const MOBILE_APPS: MobileAppItem[] = [
       'Integrated an opening book tree parser for rapid opening move lookup.',
     ],
     stack: ['Flutter', 'Dart', 'Minimax Algorithm', 'Alpha-Beta Pruning', 'Vector Assets'],
-    metrics: ['Algorithmic Evaluation', 'Sub-50ms Move Computation', 'Zero Latency'],
+    metrics: ['Shipped iOS & Android', 'Minimax Alpha-Beta', 'Sub-50ms Move Computation'],
     links: {
+      appStore: 'https://apps.apple.com/us/app/grandmaster-chess/id6774163012',
+      playStore: 'https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess',
       github: 'https://github.com/ZyadWKhedr',
-      live: 'https://mostaql.com/u/zyad_waell/portfolio',
     },
     screens: [
       {
@@ -257,10 +260,10 @@ export const MOBILE_APPS: MobileAppItem[] = [
       'Active mentor at HackerRank Campus Club leading Flutter engineering workshops.',
     ],
     stack: ['Flutter', 'Dart', 'Clean Architecture', 'BLoC', 'Provider', 'SQLite', 'REST APIs', 'WebSockets'],
-    metrics: ['20+ Apps Shipped', '99.8% Crash-Free Rate', '400+ Package Downloads'],
+    metrics: ['6+ Shipped Apps', '99.8% Crash-Free Rate', '4+ Technical Articles'],
     links: {
       github: 'https://github.com/ZyadWKhedr',
-      live: 'https://www.linkedin.com/in/zyad-wael/',
+      live: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
     },
     screens: [
       {
@@ -292,7 +295,7 @@ export const MOBILE_APPS: MobileAppItem[] = [
     metrics: ['Fast 24h Response', 'Worldwide Remote', 'Available Now'],
     links: {
       github: 'https://github.com/ZyadWKhedr',
-      live: 'https://www.linkedin.com/in/zyad-wael/',
+      live: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
     },
     screens: [
       {
@@ -306,3 +309,4 @@ export const MOBILE_APPS: MobileAppItem[] = [
     ],
   },
 ];
+

@@ -9,7 +9,7 @@ const PackagesSection = () => {
     {
       title: "Liquid Navbar",
       description: "A Flutter package that mimics iOS Liquid Glass effects in a custom navigation bar with smooth animations and easy customization.",
-      stats: "400+ downloads",
+      stats: "130/140 pub points",
       features: [
         "iOS Liquid Glass effects",
         "Smooth animations",

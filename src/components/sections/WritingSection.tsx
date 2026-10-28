@@ -8,7 +8,7 @@ export const WritingSection: React.FC = () => {
 
   return (
     <section id="writing" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle text-start">
           <div>

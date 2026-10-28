@@ -15,7 +15,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/zyad-wael/',
+    url: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
     icon: Linkedin,
     label: 'LinkedIn profile',
   },
@@ -81,7 +81,7 @@ export const HeroSection: React.FC = () => {
       {/* Architectural Atelier Hero Background (Concept 1) */}
       <HeroBackground />
 
-      <div className="container max-w-6xl mx-auto relative z-10">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Metadata Strip */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-6 md:pb-8 border-b border-border-subtle text-xs font-mono text-ink-muted">
           <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export const HeroSection: React.FC = () => {
             {/* Verification Specs Ledger */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full mt-8 pt-6 border-t border-border-subtle">
               <div>
-                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">4+</div>
+                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">6+</div>
                 <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsClients', 'Production Apps Shipped')}</div>
               </div>
               <div>
@@ -175,12 +175,12 @@ export const HeroSection: React.FC = () => {
                 <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsUptime', 'Crash-Free Rate')}</div>
               </div>
               <div>
-                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">4</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">Technical Articles</div>
+                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">4+</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsArticles', 'Technical Articles')}</div>
               </div>
               <div>
-                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">400+</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsDownloads', 'Package Downloads')}</div>
+                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">1+</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsExperience', 'Years Commercial Exp.')}</div>
               </div>
             </div>
           </div>

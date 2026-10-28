@@ -29,7 +29,8 @@
     "ctaContact": "Kontakt aufnehmen",
     "statsClients": "Apps im Produktiveinsatz",
     "statsUptime": "Absturzfreie Sitzungen",
-    "statsDownloads": "Package-Downloads",
+    "statsArticles": "Fachartikel & Publikationen",
+    "statsExperience": "Jahre kommerzielle Erfahrung",
     "statsLocation": "Alexandria, Ägypten"
   },
   "about": {
@@ -50,6 +51,9 @@
     "badge": "In meiner mobilen Welt",
     "title": "Veröffentlichte mobile Anwendungen in einem interaktiven Smartphone.",
     "subtitle": "Erkunden Sie produktive Flutter-Apps, Echtzeit-Dispatch-Systeme und reaktive Mobile-Flows in einem einzigen interaktiven Smartphone. Tippen Sie auf ein App-Icon oder wählen Sie unten ein Projekt aus.",
+    "boaCategory": "Open-Source-Projekt · Entwicklertools",
+    "boaTitle": "Boa — Interaktives Terminal-Toolkit & Komprimierungs-Engine",
+    "boaSubtitle": "Ein schnelles, interaktives Terminal-Toolkit in Go zum Komprimieren von Dateien, Erkunden von Archiven ohne Entpacken, Benchmarking von Algorithmen und Neutralisieren von Zip-Slip-Pfadtraversierungsangriffen.",
     "mobileWorldBadge": "In meiner mobilen Welt",
     "mobileWorldTitle": "Veröffentlichte mobile Anwendungen in einem interaktiven Smartphone.",
     "mobileWorldSubtitle": "Erkunden Sie produktive Flutter-Apps, Echtzeit-Dispatch-Systeme und reaktive Mobile-Flows in einem einzigen interaktiven Smartphone. Tippen Sie auf ein App-Icon oder wählen Sie unten ein Projekt aus.",

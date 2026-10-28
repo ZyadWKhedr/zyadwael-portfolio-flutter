@@ -40,7 +40,8 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
   const [wofoodiGrade, setWofoodiGrade] = useState<'91' | '95' | 'diesel'>('91');
   const [amoomyCategory, setAmoomyCategory] = useState<'heavy' | 'flatbed' | 'crane'>('heavy');
   const [ravalQty, setRavalQty] = useState(2);
-  const [payssScanned, setPayssScanned] = useState(false);
+  const [ufuqCounter, setUfuqCounter] = useState(33);
+  const [ufuqRadioPlaying, setUfuqRadioPlaying] = useState(true);
 
   const activeApp = apps.find((a) => a.id === activeAppId) || null;
 
@@ -146,7 +147,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                     Zyad Wael · Mobile OS
                   </h4>
                   <p className="text-[11px] text-zinc-400 leading-snug mt-1 font-sans">
-                    20+ Shipped Apps · 400+ Package Downloads · Tap an app icon below to explore.
+                    6+ Shipped Apps · 4+ Technical Articles · Tap an app icon below to explore.
                   </p>
                 </div>
 
@@ -378,20 +379,37 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                         </div>
                       )}
 
-                      {activeApp.id === 'payss' && (
-                        <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 space-y-2">
+                      {activeApp.id === 'ufuq' && (
+                        <div className="p-2.5 rounded-xl bg-black/60 border border-emerald-900/40 mb-3 space-y-2">
                           <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-mono text-zinc-400">Viewfinder QR Target</span>
+                            <span className="text-[10px] font-mono text-emerald-400">Digital Subha & Radio</span>
                             <button
                               type="button"
-                              onClick={() => setPayssScanned(!payssScanned)}
-                              className="text-[9px] font-mono px-2 py-0.5 rounded bg-indigo-600 text-white"
+                              onClick={() => {
+                                triggerHaptic();
+                                setUfuqCounter((c) => (c >= 99 ? 0 : c + 1));
+                              }}
+                              className="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-colors"
                             >
-                              {payssScanned ? 'Reset' : 'Simulate Scan'}
+                              Tap Tasbih ({ufuqCounter}/99)
                             </button>
                           </div>
-                          <div className="text-[11px] font-mono text-indigo-300">
-                            {payssScanned ? '✓ +50 Points Credited Instantly' : 'Align camera over merchant QR'}
+                          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-300">
+                            <span className="truncate">📻 Cairo Quran Live Radio</span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                triggerHaptic();
+                                setUfuqRadioPlaying(!ufuqRadioPlaying);
+                              }}
+                              className={`text-[9px] font-mono px-2 py-0.5 rounded transition-colors ${
+                                ufuqRadioPlaying
+                                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                                  : 'bg-zinc-800 text-zinc-400'
+                              }`}
+                            >
+                              {ufuqRadioPlaying ? '▶ Live 128kbps' : '❚❚ Muted'}
+                            </button>
                           </div>
                         </div>
                       )}

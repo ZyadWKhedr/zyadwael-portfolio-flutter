@@ -7,7 +7,7 @@ export const AboutSection: React.FC = () => {
 
   return (
     <section id="about" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/30">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 text-start">
           <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-3">

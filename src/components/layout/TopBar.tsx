@@ -38,7 +38,7 @@ export const TopBar: React.FC = () => {
       aria-label={t('topBar.localTimeLabel', 'Local time in Alexandria, Egypt')}
       className="w-full bg-surface-subtle/90 border-b border-border-subtle py-1.5 px-4 text-xs font-mono text-ink-muted backdrop-blur-md relative z-40 transition-colors duration-200"
     >
-      <div className="container max-w-6xl mx-auto flex items-center justify-between gap-3 flex-wrap">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 flex-wrap">
         {/* Left: Location & Alexandria Local Time */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-ink font-medium">

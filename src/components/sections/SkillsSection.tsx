@@ -15,7 +15,7 @@ export const SkillsSection: React.FC = () => {
 
   return (
     <section id="skills" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/20">
-      <div className="container max-w-6xl mx-auto space-y-20">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Section 1: Technical Capabilities Matrix */}
         <div>
           {/* Section Header */}

@@ -48,7 +48,7 @@ export const HeroBackground: React.FC = () => {
       />
 
       {/* Layer 3: Subtle Architectural Registration Crosshairs */}
-      <div className="container max-w-6xl mx-auto h-full relative">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-full relative">
         <div className="absolute top-4 left-4 text-border-strong opacity-40 font-mono text-[10px] hidden sm:block">
           +
         </div>

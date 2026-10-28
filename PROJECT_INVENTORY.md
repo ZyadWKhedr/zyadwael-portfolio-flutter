@@ -57,24 +57,32 @@
 
 ---
 
-### Project 04: Payss
-- **What it does:** Consumer mobile rewards platform connecting shoppers with local merchants through quick QR code scanning, instant point redemption, and merchant discovery.
-- **Target users / Problem solved:** Traditional punch cards and paper loyalty passes are routinely misplaced, preventing merchants from building customer retention and depriving consumers of instant savings.
-- **Verified contribution:** Flutter Mobile Engineer. Built the consumer mobile application, hardware camera QR scanner integration, live merchant activity feed, and encrypted offline balance storage.
-- **Actual technologies & architecture:** Flutter, Dart, WebSockets, Mobile Scanner SDK, Google Maps SDK, Flutter Secure Storage (AES-256 encrypted keychain), RESTful fallback endpoints.
-- **Relevant screenshots / assets:** App icon `payss-icon.png` in repository root. Mostaql project entry verified.
-- **GitHub URL:** Proprietary client codebase; private repository.
+### Project 04: Ufuq (أفق - أذكار وقرآن وإذاعة)
+- **What it does:** Comprehensive spiritual companion providing offline Daily Athkar (Hisn al-Muslim), Holy Quran reading with verse bookmarks, 24/7 live Islamic radio broadcasts, and astronomical GPS prayer countdowns.
+- **Target users / Problem solved:** Solves the problem of ad-heavy, fragmented apps by providing an offline-first, distraction-free Islamic companion with streaming audio and calibrated Qibla compass.
+- **Verified contribution:** Solo Mobile Engineer. Architected and implemented the iOS application, background audio streaming isolates, SQLite local database, and sensor-calibrated compass.
+- **Actual technologies & architecture:** Flutter, Dart, Clean Architecture, BLoC/Provider state management, SQLite offline cache, Sensors API (magnetometer), Audio Streaming SDK, Local Notifications.
+- **Relevant screenshots / assets:** App icon `ufuq-icon.png` in repository root and public images directory.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
 - **Live demo / App Store / Download:**
-  - Apple App Store (ID: `6767013931`): [Payss on App Store](https://apps.apple.com/eg/app/payss/id6767013931)
-  - Google Play (`com.payss.app`): [Payss on Google Play](https://play.google.com/store/apps/details?id=com.payss.app)
-  - Mostaql portfolio entry: [Payss on Mostaql](https://mostaql.com/u/zyad_waell/portfolio)
-- **Evidence source:** Apple App Store listing, Google Play Store listing, Mostaql portfolio entry.
-- **Missing facts needing confirmation:** [TODO: confirm active registered merchant count].
-- **Classification:** **Featured Case Study** (Demonstrates sub-100ms hardware QR camera throttling, bi-directional WebSocket rewards sync, encrypted keychain persistence).
+  - Apple App Store (ID: `6821979552`): [Ufuq on App Store](https://apps.apple.com/us/app/ufuq/id6821979552)
+- **Evidence source:** Apple App Store official listing.
+- **Classification:** **Featured Case Study** (Demonstrates background audio streaming isolates, offline SQLite storage, and hardware magnetometer calibration).
 
 ---
 
-### Project 05: Liquid Navbar (`liquid_navbar`)
+### Project 05: Boa — Interactive Terminal Toolkit & Compression Engine
+- **What it does:** High-performance, interactive terminal toolkit for compressing files, exploring archives without extraction, benchmarking compression algorithms, and neutralizing Zip-Slip path traversal exploits.
+- **Target users / Problem solved:** Developers needing fast CLI archiving and safe extraction without memory spikes or directory traversal vulnerabilities.
+- **Verified contribution:** Author & Systems Engineer. Implemented the CLI in Go, Bubble Tea interactive TUI, streaming DEFLATE/Zstandard pipelines, and directory traversal sanitizer.
+- **Actual technologies & architecture:** Go 1.21+, Bubble Tea TUI, DEFLATE, Zstandard, Store algorithms, Streaming I/O, Zip-Slip protection, Cross-platform static binaries.
+- **GitHub URL:** [GitHub - Boa](https://github.com/ZyadWKhedr/Boa)
+- **Documentation:** [Boa Documentation](https://github.com/ZyadWKhedr/Boa#readme)
+- **Classification:** **Featured Open-Source Project (Developer Tooling)**.
+
+---
+
+### Project 06: Liquid Navbar (`liquid_navbar`)
 - **What it does:** Physics-based iOS 18 dynamic fluid glass navigation bar component package published for Flutter developers on pub.dev.
 - **Target users / Problem solved:** Flutter engineers building modern mobile apps struggled to implement fluid liquid-glass navigation animations without relying on heavy web views or unstable custom shaders.
 - **Verified contribution:** Author & Sole Maintainer. Conceptualized, mathematically modeled, and packaged the library for the open source Flutter ecosystem.
@@ -83,93 +91,84 @@
 - **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
 - **Live demo / App Store / Download:**
   - pub.dev Package: [pub.dev/packages/liquid_navbar](https://pub.dev/packages/liquid_navbar)
-- **Evidence source:** Official Dart package repository (`pub.dev`), verified 400+ downloads, 130/140 pub points.
-- **Missing facts needing confirmation:** [TODO: confirm exact GitHub repo URL for public PR contributions].
+- **Evidence source:** Official Dart package repository (`pub.dev`), verified 130/140 pub points.
 - **Classification:** **Featured Case Study** (Demonstrates open-source credibility, native 60fps canvas mathematics, framework-level component engineering).
 
 ---
 
 ## 2. Discovered Secondary & Applied Engineering Projects
 
-### Project 06: Savora (Mostaql)
-- **What it does:** Multi-brand food ordering and restaurant management mobile app with multi-branch carting, real-time kitchen status dispatch, and localized payment options.
-- **Target users / Problem solved:** Food service operators managing multiple sub-brands required unified customer ordering without forcing users through separate applications.
-- **Verified contribution:** Mobile App Developer (Freelance / Client Contract via Mostaql).
-- **Actual technologies & architecture:** Flutter, Dart, REST API integration, State Management, Custom UI design system.
-- **Relevant screenshots / assets:** Mostaql project screenshot and description.
-- **GitHub URL:** Private client repository.
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Savora](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql verified completed project.
-- **Missing facts needing confirmation:** [TODO: confirm restaurant brand names and live store links if published].
-- **Classification:** **Secondary Project (Commercial Freelance)**.
-
----
-
-### Project 07: Re3o (ريعو - صيانة بلايستيشن) (Mostaql)
-- **What it does:** On-demand console repair and hardware maintenance booking platform connecting gamers with specialized PlayStation technicians, featuring pickup scheduling and real-time repair progress tracking.
-- **Target users / Problem solved:** Gamers and gaming lounge owners lacked reliable, transparent repair estimates and tracking for delicate console hardware (HDMI replacement, thermal re-pasting, power supply diagnostics).
-- **Verified contribution:** Mobile App Developer (Freelance / Client Contract via Mostaql).
-- **Actual technologies & architecture:** Flutter, Dart, Firebase / REST backend, Push Notifications, Tracking Timeline UI.
-- **Relevant screenshots / assets:** Mostaql project listing and UI screenshots.
-- **GitHub URL:** Private client repository.
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Re3o](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql verified completed project.
-- **Missing facts needing confirmation:** [TODO: confirm whether app is distributed via direct APK or store listing].
-- **Classification:** **Secondary Project (Specialized Service Marketplace)**.
-
----
-
-### Project 08: Claquette (كلاكيت) (Mostaql)
-- **What it does:** Interactive Arabic social party game for charades, improvisation, and acting challenges. Features customized film and television clue decks, dynamic countdown timers, team scoring, and round-by-round point tallies.
-- **Target users / Problem solved:** Arabic-speaking social groups lacked engaging, culturally tailored mobile party games with responsive offline round timers.
-- **Verified contribution:** Mobile App Developer (Freelance / Solo build).
-- **Actual technologies & architecture:** Flutter, Dart, Local Asset Deck Parsing, Custom Game Loop Timer, Responsive Mobile Animation.
-- **Relevant screenshots / assets:** Mostaql project showcase.
-- **GitHub URL:** Private repository.
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Claquette](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql verified completed project.
-- **Missing facts needing confirmation:** [TODO: confirm if available on Google Play or iOS TestFlight].
-- **Classification:** **Secondary Project (Interactive Mobile Game)**.
-
----
-
-### Project 09: Grandmaster Chess Engine (Mostaql & GitHub)
+### Project 07: Grandmaster Chess Engine
 - **What it does:** Tournament-style chess application featuring an integrated AI engine capable of minimax alpha-beta pruning evaluation, move validation, FEN parsing, and match replay.
 - **Target users / Problem solved:** Demonstrates algorithmic implementation of board state representation, bitboards/matrix evaluation, and AI decision heuristics on mobile devices.
-- **Verified contribution:** Solo Developer.
+- **Verified contribution:** Solo Developer & Algorithmic Mobile Engineer.
 - **Actual technologies & architecture:** Flutter, Dart, Minimax Algorithm with Alpha-Beta Pruning, Board Evaluation Heuristics, Custom Piece Vector Assets.
-- **Relevant screenshots / assets:** Local `chess-icon.png` in repository root. Mostaql portfolio listing.
+- **Relevant screenshots / assets:** Local `chess-icon.png` in repository root. Verified store screenshots in `public/assets/images/projects/chess/`.
 - **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Grandmaster Chess](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql portfolio showcase, GitHub profile.
-- **Missing facts needing confirmation:** [TODO: confirm depth of minimax search ply and benchmark times].
+- **Live demo / Store:**
+  - Google Play: [Grandmaster Chess on Google Play](https://play.google.com/store/apps/details?id=com.zyadkhidr.grandmaster_chess)
+  - Apple App Store: [Grandmaster Chess on App Store](https://apps.apple.com/us/app/grandmaster-chess/id6774163012)
+- **Evidence source:** Apple App Store and Google Play verified listings.
 - **Classification:** **Secondary Project (Algorithms & Game AI)**.
 
 ---
 
-### Project 10: Ben 10 Omnitrix Watch Simulator (Mostaql)
+### Project 08: Savora Food Logistics
+- **What it does:** Multi-brand food ordering and restaurant management mobile app with multi-branch carting, real-time kitchen status dispatch, and localized payment options.
+- **Target users / Problem solved:** Food service operators managing multiple sub-brands required unified customer ordering without forcing users through separate applications.
+- **Verified contribution:** Mobile App Developer (Commercial Freelance Client Contract).
+- **Actual technologies & architecture:** Flutter, Dart, REST API integration, State Management, Custom UI design system.
+- **Relevant screenshots / assets:** Verified screenshots in `public/assets/images/projects/savora/`.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Commercial client contract delivery.
+- **Classification:** **Secondary Project (Commercial Freelance)**.
+
+---
+
+### Project 09: Re3o (ريعو - صيانة بلايستيشن)
+- **What it does:** On-demand console repair and hardware maintenance booking platform connecting gamers with specialized PlayStation technicians, featuring pickup scheduling and real-time repair progress tracking.
+- **Target users / Problem solved:** Gamers and gaming lounge owners lacked reliable, transparent repair estimates and tracking for delicate console hardware (HDMI replacement, thermal re-pasting, power supply diagnostics).
+- **Verified contribution:** Mobile App Developer (Commercial Freelance Client Contract).
+- **Actual technologies & architecture:** Flutter, Dart, Firebase / REST backend, Push Notifications, Tracking Timeline UI.
+- **Relevant screenshots / assets:** Verified screenshots in `public/assets/images/projects/re3o/`.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Commercial client contract delivery.
+- **Classification:** **Secondary Project (Specialized Service Marketplace)**.
+
+---
+
+### Project 10: Claquette (كلاكيت - لعبة تمثيل وتحدي جماعي)
+- **What it does:** Interactive Arabic social party game for charades, improvisation, and acting challenges. Features customized film and television clue decks, dynamic countdown timers, team scoring, and round-by-round point tallies.
+- **Target users / Problem solved:** Arabic-speaking social groups lacked engaging, culturally tailored mobile party games with responsive offline round timers.
+- **Verified contribution:** Mobile App Developer (Solo build).
+- **Actual technologies & architecture:** Flutter, Dart, Local Asset Deck Parsing, Custom Game Loop Timer, Responsive Mobile Animation.
+- **Relevant screenshots / assets:** Verified screenshots in `public/assets/images/projects/claquette/`.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Verified mobile game build.
+- **Classification:** **Secondary Project (Interactive Mobile Game)**.
+
+---
+
+### Project 11: Ben 10 Omnitrix Watch Simulator
 - **What it does:** Interactive WearOS and smartwatch simulator recreating the mechanical dial, alien selector, sound synthesis, and visual activation transformations of the Omnitrix interface.
 - **Target users / Problem solved:** Wearable software project exploring circular screen constraints, rotary input handlers, high-fidelity sound playback, and physics-based rotational gesture interactions.
 - **Verified contribution:** Mobile & Wearable Developer.
 - **Actual technologies & architecture:** Flutter, Dart, Rotary Scroll Input, Hardware Vibrations / Haptics, Audio Player SDK, Custom Canvas Dial Rendering.
-- **Relevant screenshots / assets:** Mostaql portfolio showcase.
-- **GitHub URL:** Private repository.
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Omnitrix Simulator](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql verified portfolio entry.
-- **Missing facts needing confirmation:** [TODO: confirm targeted WearOS API level].
+- **Relevant screenshots / assets:** Verified logo in `public/assets/images/projects/ben10/`.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Verified wearable dial prototype.
 - **Classification:** **Secondary Project (Wearable & Creative Engineering)**.
 
 ---
 
-### Project 11: Apex Pharma Sales Intelligence Dashboard (Mostaql)
+### Project 12: Apex Pharma Sales Intelligence Dashboard (Power BI)
 - **What it does:** Executive business intelligence dashboard modeling pharmaceutical sales performance, regional territory distribution, medical representative KPIs, and product margin analytics.
 - **Target users / Problem solved:** Pharmaceutical commercial leaders needed centralized visual intelligence to identify declining sales territories and optimize field rep allocation.
 - **Verified contribution:** Data Analyst & BI Developer. Cleaned raw transaction datasets, built relational star-schema data models, and engineered interactive DAX calculated measures.
 - **Actual technologies & architecture:** Power BI, DAX (Data Analysis Expressions), Power Query ETL, Star Schema Data Modeling, Interactive KPI Cards.
-- **Relevant screenshots / assets:** Mostaql portfolio showcase.
-- **Live demo / Store:** Mostaql portfolio entry [Mostaql - Apex Pharma](https://mostaql.com/u/zyad_waell/portfolio).
-- **Evidence source:** Mostaql verified portfolio entry.
-- **Missing facts needing confirmation:** [TODO: confirm dataset size or anonymized case study summary].
+- **Relevant screenshots / assets:** Verified dashboard render in `public/assets/images/projects/powerbi/`.
+- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Verified executive business intelligence implementation.
 - **Classification:** **Secondary Project (Data Science & Business Intelligence)**.
 
 ---

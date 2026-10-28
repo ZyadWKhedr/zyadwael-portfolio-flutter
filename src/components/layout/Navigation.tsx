@@ -105,8 +105,8 @@ export const Navigation: React.FC = () => {
       </a>
 
       {/* Main Sticky Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full bg-canvas/90 backdrop-blur-md border-b border-border-subtle transition-colors duration-200">
-        <div className="container max-w-6xl mx-auto flex items-center justify-between h-16 md:h-20">
+      <header className="sticky top-0 z-50 w-full bg-canvas/90 backdrop-blur-md border-b border-border-subtle transition-colors duration-200">
+        <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
           {/* Logo / Identity */}
           <a
             href="#hero"
@@ -114,9 +114,6 @@ export const Navigation: React.FC = () => {
           >
             <span className="font-serif text-xl md:text-2xl font-bold tracking-tight text-ink group-hover:text-accent transition-colors">
               Zyad Wael
-            </span>
-            <span className="hidden sm:inline-flex items-center text-[11px] font-mono tracking-wider uppercase px-2 py-0.5 rounded border border-border-subtle text-ink-muted bg-surface">
-              Alexandria · Mobile Engineer
             </span>
           </a>
 

@@ -6,7 +6,7 @@ import { sendContactMessage } from '@/services/contactService';
 
 const EMAIL = 'ziad.w.khedr@gmail.com';
 const GITHUB_URL = 'https://github.com/ZyadWKhedr';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/zyad-wael/';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/zyad-wael-a9035a275/';
 const MEDIUM_URL = 'https://medium.com/@ziad.w.khedr';
 const STACKOVERFLOW_URL = 'https://stackoverflow.com/users/24248795/zyad-wael-khedr';
 const FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=61573995256480';
@@ -85,7 +85,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section id="contact" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/20 relative">
-      <div className="container max-w-6xl mx-auto relative z-10">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start text-start">
           {/* Left Column: Direct Outreach & Direct Channels (6 cols) */}
           <div className="lg:col-span-6 flex flex-col gap-6">

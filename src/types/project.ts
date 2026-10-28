@@ -46,11 +46,19 @@ export interface SecondaryProject {
   role: string;
   stack: string[];
   icon?: string;
+  image?: string;
+  features?: string[];
+  metrics?: string[];
+  detailedDescription?: string;
   links: {
     github?: string;
     live?: string;
     store?: string;
+    playStore?: string;
+    appStore?: string;
+    article?: string;
   };
   evidence: string;
   statusNotes?: string;
 }
+

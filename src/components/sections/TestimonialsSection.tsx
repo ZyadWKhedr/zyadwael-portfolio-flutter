@@ -3,14 +3,14 @@ import { Quote, Linkedin, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '@/data/testimonials';
 
-const LINKEDIN_PROFILE = 'https://www.linkedin.com/in/zyad-wael/';
+const LINKEDIN_PROFILE = 'https://www.linkedin.com/in/zyad-wael-a9035a275/';
 
 export const TestimonialsSection: React.FC = () => {
   const { t } = useTranslation();
 
   return (
     <section id="testimonials" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/40">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle text-start">
           <div>
@@ -96,7 +96,7 @@ export const TestimonialsSection: React.FC = () => {
             rel="noopener noreferrer"
             className="touch-target inline-flex items-center gap-1.5 text-accent hover:underline font-semibold"
           >
-            <span>linkedin.com/in/zyad-wael</span>
+            <span>linkedin.com/in/zyad-wael-a9035a275</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>

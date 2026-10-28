@@ -11,7 +11,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/zyad-wael/',
+    url: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
     icon: Linkedin,
     label: 'LinkedIn profile',
   },
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="py-12 md:py-16 bg-canvas border-t border-border-subtle transition-colors duration-200">
-      <div className="container max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono text-ink-muted">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono text-ink-muted">
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-start">
           <span className="font-serif font-bold text-ink text-sm">Zyad Wael</span>
           <span>·</span>
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="container max-w-6xl mx-auto mt-6 pt-6 border-t border-border-subtle/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-ink-faint">
+      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-6 border-t border-border-subtle/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-ink-faint">
         <div className="flex items-center gap-1.5">
           <MapPin className="w-3 h-3 text-accent" />
           <span>{t('footer.location', 'Alexandria, Egypt')} · UTC+2</span>

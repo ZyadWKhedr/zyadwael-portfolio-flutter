@@ -29,7 +29,8 @@
     "ctaContact": "Me contacter",
     "statsClients": "Applications en production",
     "statsUptime": "Taux sans plantage",
-    "statsDownloads": "Téléchargements Package",
+    "statsArticles": "Articles techniques",
+    "statsExperience": "Années d'exp. commerciale",
     "statsLocation": "Alexandrie, Égypte"
   },
   "about": {
@@ -50,6 +51,9 @@
     "badge": "Dans mon univers mobile",
     "title": "Applications mobiles publiées dans un smartphone interactif unique.",
     "subtitle": "Explorez les applications Flutter en production, les systèmes de dispatch en temps réel et les flux réactifs dans un smartphone interactif. Touchez une icône d'application ou sélectionnez un projet ci-dessous.",
+    "boaCategory": "Projet Open-Source Vedette · Outils Développeur",
+    "boaTitle": "Boa — Boîte à outils de terminal interactive & Moteur de compression",
+    "boaSubtitle": "Un ensemble d'outils de terminal rapide et interactif développé en Go pour compresser des fichiers, explorer des archives sans extraction, comparer des algorithmes et neutraliser les failles Zip-Slip.",
     "mobileWorldBadge": "Dans mon univers mobile",
     "mobileWorldTitle": "Applications mobiles publiées dans un smartphone interactif unique.",
     "mobileWorldSubtitle": "Explorez les applications Flutter en production, les systèmes de dispatch en temps réel et les flux réactifs dans un smartphone interactif. Touchez une icône d'application ou sélectionnez un projet ci-dessous.",
