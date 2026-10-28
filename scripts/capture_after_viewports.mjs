@@ -7,12 +7,17 @@ const targetUrl = 'http://127.0.0.1:4173/zyadwael-portfolio-flutter/';
 const outDir = 'd:\\Web\\zyadwael-portfolio-flutter\\audit-after';
 
 const viewports = [
-  { width: 360, height: 740, name: 'rebuilt-viewport-360.png' },
-  { width: 390, height: 844, name: 'rebuilt-viewport-390.png' },
-  { width: 768, height: 1024, name: 'rebuilt-viewport-768.png' },
-  { width: 1024, height: 768, name: 'rebuilt-viewport-1024.png' },
-  { width: 1440, height: 900, name: 'rebuilt-viewport-1440.png' },
-  { width: 1920, height: 1080, name: 'rebuilt-viewport-1920.png' },
+  { width: 320, height: 568, name: 'rebuilt-viewport-320.png', label: 'Narrow Mobile (SE)' },
+  { width: 360, height: 740, name: 'rebuilt-viewport-360.png', label: 'Android Standard' },
+  { width: 390, height: 844, name: 'rebuilt-viewport-390.png', label: 'iPhone 14' },
+  { width: 430, height: 932, name: 'rebuilt-viewport-430.png', label: 'iPhone Pro Max' },
+  { width: 480, height: 854, name: 'rebuilt-viewport-480.png', label: 'Large Mobile' },
+  { width: 768, height: 1024, name: 'rebuilt-viewport-768.png', label: 'iPad Portrait' },
+  { width: 1024, height: 768, name: 'rebuilt-viewport-1024.png', label: 'iPad Landscape' },
+  { width: 1280, height: 800, name: 'rebuilt-viewport-1280.png', label: 'Small Laptop' },
+  { width: 1440, height: 900, name: 'rebuilt-viewport-1440.png', label: 'MacBook Pro' },
+  { width: 1920, height: 1080, name: 'rebuilt-viewport-1920.png', label: 'FHD Desktop' },
+  { width: 2560, height: 1440, name: 'rebuilt-viewport-2560.png', label: 'QHD / 2K Ultrawide' },
 ];
 
 async function sleep(ms) {
@@ -20,10 +25,10 @@ async function sleep(ms) {
 }
 
 async function run() {
-  const port = 9335;
-  const userDataDir = path.join(process.env.TEMP || 'C:\\temp', 'chrome-audit-after-' + Date.now());
+  const port = 9336;
+  const userDataDir = path.join(process.env.TEMP || 'C:\\temp', 'chrome-audit-viewports-' + Date.now());
   
-  console.log('Spawning Chrome...');
+  console.log('Spawning Chrome for comprehensive viewport audit...');
   const chrome = spawn(chromePath, [
     '--headless=new',
     `--remote-debugging-port=${port}`,
@@ -95,13 +100,15 @@ async function run() {
 
     await send('Page.enable');
     await send('DOM.enable');
+    await send('Runtime.enable');
     await send('Network.enable');
 
     console.log('Waiting 3s for page to settle and hydrate...');
     await sleep(3000);
 
+    const overflowResults = [];
+
     for (const vp of viewports) {
-      console.log(`Setting viewport: ${vp.width}x${vp.height}...`);
       await send('Emulation.setDeviceMetricsOverride', {
         width: vp.width,
         height: vp.height,
@@ -109,9 +116,25 @@ async function run() {
         mobile: vp.width < 1024,
       });
       await send('Emulation.setVisibleSize', { width: vp.width, height: vp.height });
-      await sleep(1000);
+      await sleep(600);
 
-      console.log(`Capturing screenshot for ${vp.name}...`);
+      // Evaluate horizontal overflow
+      const evalRes = await send('Runtime.evaluate', {
+        expression: `({
+          scrollWidth: document.documentElement.scrollWidth,
+          clientWidth: document.documentElement.clientWidth,
+          hasOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth
+        })`,
+        returnByValue: true,
+      });
+
+      const metrics = evalRes.result.value;
+      overflowResults.push({
+        width: vp.width,
+        label: vp.label,
+        ...metrics,
+      });
+
       const { data } = await send('Page.captureScreenshot', {
         format: 'png',
         captureBeyondViewport: false,
@@ -119,8 +142,11 @@ async function run() {
 
       const filePath = path.join(outDir, vp.name);
       fs.writeFileSync(filePath, Buffer.from(data, 'base64'));
-      console.log(`Saved: ${filePath} (${fs.statSync(filePath).size} bytes)`);
+      console.log(`[Viewport ${vp.width}px (${vp.label})] Screenshot saved. Overflow: ${metrics.hasOverflow ? 'FAIL' : 'PASS (0px)'} (scrollWidth: ${metrics.scrollWidth}, clientWidth: ${metrics.clientWidth})`);
     }
+
+    console.log('\n--- VIEWPORT AUDIT SUMMARY ---');
+    console.table(overflowResults);
 
     ws.close();
   } finally {
