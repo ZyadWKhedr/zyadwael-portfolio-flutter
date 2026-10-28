@@ -1,0 +1,116 @@
+{
+  "topBar": {
+    "location": "Alexandrie, Égypte",
+    "timezone": "UTC+2 / EET",
+    "localTimeLabel": "Heure locale à Alexandrie, Égypte",
+    "available": "Disponible pour des opportunités en ingénierie mobile"
+  },
+  "nav": {
+    "work": "Projets",
+    "skills": "Compétences",
+    "writing": "Articles",
+    "testimonials": "Avis",
+    "about": "À propos",
+    "contact": "Contact",
+    "resume": "CV",
+    "toggleTheme": "Changer de thème",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "hero": {
+    "badge": "Ingénieur Logiciel — Développement Mobile",
+    "role1": "Ingénieur Logiciel — Développement Mobile",
+    "role2": "Flutter (Framework Principal) & Spécialiste Mobile",
+    "role3": "Développement iOS (Swift) & Android (Kotlin)",
+    "role4": "Clean Architecture & Systèmes Hors Ligne",
+    "headline": "Conception d'applications mobiles robustes et natives de haute performance.",
+    "subheadline": "Ingénieur logiciel spécialisé dans le développement mobile avec Flutter comme framework principal, complété par une expertise native approfondie en iOS (Swift) et Android (Kotlin). Conception de systèmes de logistique en temps réel, e-commerce et applications mobiles hors ligne depuis Alexandrie, Égypte.",
+    "ctaWork": "Découvrir les applications",
+    "ctaContact": "Me contacter",
+    "statsClients": "Applications en production",
+    "statsUptime": "Taux sans plantage",
+    "statsLocation": "Alexandrie, Égypte"
+  },
+  "about": {
+    "badge": "Parcours & Philosophie",
+    "title": "Rigueur logicielle et expertise approfondie du développement mobile.",
+    "p1": "Basé à Alexandrie en Égypte, je suis un ingénieur logiciel dédié au développement mobile. Si Flutter constitue mon framework principal pour la livraison multiplateforme, mon expertise couvre l'ensemble de l'écosystème mobile — incluant le développement natif iOS (Swift), Android (Kotlin), l'intégration matérielle et le profilage avancé des performances.",
+    "p2": "Au cours des dernières années, j'ai architecturé et déployé des applications commerciales exigeantes dans la logistique, le commerce électronique et la FinTech—utilisées quotidiennement par des milliers d'utilisateurs avec des exigences strictes en matière de fonctionnement hors ligne et d'animations fluides à 60 FPS.",
+    "p3": "Je dirige le comité Flutter du HackerRank Campus Club, où j'encadre de futurs ingénieurs sur la Clean Architecture, la gestion d'état BLoC et le développement mobile guidé par les tests (TDD).",
+    "p4": "Mon approche repose sur trois principes fondamentaux : séparation stricte de la logique métier et de l'interface, persistance locale robuste avec SQLite, et profilage rigoureux des performances.",
+    "pillar1Title": "Clean Architecture & Séparation des Responsabilités",
+    "pillar1Desc": "Frontières strictes entre présentation, domaine et données. L'interface reste un simple consommateur de flux d'états immuables.",
+    "pillar2Title": "Fiabilité Temps Réel & Multiplateforme",
+    "pillar2Desc": "Flux WebSockets tolérants aux pannes, synchronisation en arrière-plan et mise en cache SQLite pour les réseaux instables.",
+    "pillar3Title": "Maîtrise Matérielle & Intégration Native",
+    "pillar3Desc": "Création de Platform Channels en Swift et Kotlin pour les capteurs, Bluetooth Low Energy (BLE), géolocalisation et NFC."
+  },
+  "work": {
+    "badge": "Applications Commerciales & Open Source",
+    "title": "Applications mobiles publiées et architectures logicielles.",
+    "subtitle": "Applications réelles disponibles sur l'Apple App Store, le Google Play Store et pub.dev. Rigueur architecturale, résilience hors ligne et impact mesurable.",
+    "tabDecisions": "Décisions & Compromis",
+    "tabArchitecture": "Architecture Système",
+    "tabOutcome": "Impact en Production",
+    "problemLabel": "Problématique clé",
+    "roleLabel": "Rôle en ingénierie",
+    "architectureLabel": "Fondation architecturale",
+    "viewAppStore": "App Store",
+    "viewPlayStore": "Google Play",
+    "viewGithub": "Code source",
+    "viewPubDev": "Paquet pub.dev",
+    "categoryAll": "Tous les projets",
+    "categoryMobile": "Applications Mobiles",
+    "categoryOpenSource": "Open Source & Systèmes"
+  },
+  "skills": {
+    "badge": "Compétences Techniques",
+    "title": "Conçu pour la durabilité, la maintenabilité et l'échelle.",
+    "subtitle": "Chaque compétence technique est appuyée par du code en production ou des bibliothèques open-source.",
+    "evidenceLabel": "Preuves en Production"
+  },
+  "writing": {
+    "badge": "Publications Techniques",
+    "title": "Articles approfondis sur l'architecture mobile et la sécurité.",
+    "subtitle": "Analyses publiées sur Medium et Stackademic explorant la sécurité côté client, la gestion d'état et les sockets en temps réel.",
+    "readArticle": "Lire la publication"
+  },
+  "testimonials": {
+    "badge": "Recommandations Professionnelles",
+    "title": "Témoignages vérifiés de confrères ingénieurs.",
+    "subtitle": "Commentaires authentiques d'ingénieurs, designers et chefs d'équipe ayant collaboré directement avec moi sur des projets mobiles.",
+    "verified": "Recommandation LinkedIn vérifiée",
+    "readFull": "Lire le témoignage complet",
+    "closeModal": "Fermer"
+  },
+  "contact": {
+    "badge": "Échanger sur un projet",
+    "title": "Bâtissons ensemble une solution de premier ordre.",
+    "subtitle": "Disponible pour des postes d'ingénieur mobile à temps plein, des missions freelance à fort impact ou des rôles de leadership technique.",
+    "nameLabel": "Votre Nom",
+    "namePlaceholder": "Claire Martin",
+    "emailLabel": "Adresse Email",
+    "emailPlaceholder": "claire@exemple.com",
+    "subjectLabel": "Objet",
+    "subjectPlaceholder": "Projet d'application mobile / Opportunité d'emploi",
+    "messageLabel": "Détails du projet ou du poste",
+    "messagePlaceholder": "Décrivez votre projet, vos délais ou les exigences du poste...",
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours...",
+    "successTitle": "Message Transmis",
+    "successText": "Merci ! Votre message a été transmis directement à Zyad. Il vous répondra sous 24 à 48 heures.",
+    "sendAnother": "Envoyer un autre message",
+    "directEmail": "Email direct",
+    "copyEmail": "Copier l'adresse email",
+    "copied": "Copié dans le presse-papiers !",
+    "location": "Localisation",
+    "locationVal": "Alexandrie, Égypte (UTC+2 / EET)",
+    "profiles": "Profils Vérifiés"
+  },
+  "footer": {
+    "tagline": "Ingénieur logiciel spécialisé dans le développement mobile (Flutter, iOS, Android) depuis Alexandrie, Égypte.",
+    "rights": "Tous droits réservés.",
+    "backToTop": "Haut de page",
+    "location": "Alexandrie, Égypte"
+  }
+}

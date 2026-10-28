@@ -190,6 +190,20 @@
   .animate-accent-breathe {
     animation: accent-pulse 8s ease-in-out infinite;
   }
+  /* Arabic RTL Typography & Layout Enhancements */
+  html[dir="rtl"] {
+    font-family: 'Cairo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  html[dir="rtl"] .font-serif {
+    font-family: 'Cairo', 'Fraunces', serif;
+    letter-spacing: normal;
+  }
+  html[dir="rtl"] .font-sans {
+    font-family: 'Cairo', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  html[dir="rtl"] .font-mono {
+    font-family: 'JetBrains Mono', 'Cairo', monospace;
+  }
 }
 
 /* Reduced Motion Override */

@@ -1,84 +1,73 @@
-export interface SkillEvidence {
-  project: string;
-  detail: string;
-  link?: string;
-}
-
-export interface CapabilityGroup {
-  id: string;
-  title: string;
-  description: string;
-  skills: string[];
-  evidence: SkillEvidence[];
-}
+import type { SkillEvidence, CapabilityGroup } from '@/types/skill';
+export type { SkillEvidence, CapabilityGroup };
 
 export const CAPABILITIES: CapabilityGroup[] = [
   {
-    id: 'mobile',
-    title: 'Mobile Engineering',
-    description: 'Cross-platform native-feeling applications built for long-term maintainability and battery efficiency.',
+    id: 'flutter-core',
+    title: 'Flutter & Cross-Platform (Main Framework)',
+    description: 'High-concurrency, 60/120 FPS mobile interfaces built for long-term maintainability, battery efficiency, and fluid rendering.',
     skills: [
-      'Flutter & Dart',
-      'iOS (Swift & SwiftUI)',
-      'Android (Java/Kotlin)',
-      'Offline Caching (SQLite)',
-      'Hardware Sensors & Cameras',
-      'App Store & Play Store Deploy',
+      'Flutter & Dart (Primary Core)',
+      'Custom Canvas Shaders & Physics',
+      'BLoC / Cubit State Architecture',
+      'Provider & Riverpod Containers',
+      'pub.dev Package Engineering',
+      'Responsive Multi-Screen Adaptive UI',
     ],
     evidence: [
-      { project: 'Amoomy & Raval', detail: 'Shipped to commercial production on iOS and Android.' },
-      { project: 'Liquid Navbar', detail: 'Custom canvas shaders & spring physics on pub.dev.' },
+      { project: 'Amoomy & Raval', detail: 'Shipped to commercial production on Apple App Store & Google Play.' },
+      { project: 'Liquid Navbar', detail: 'Custom bezier canvas shaders & spring physics on pub.dev (400+ downloads).' },
+    ],
+  },
+  {
+    id: 'native-mobile',
+    title: 'Native Mobile (Beyond Flutter)',
+    description: 'Direct platform engineering bridging native platform channels, sensor telemetry, and hardware APIs.',
+    skills: [
+      'iOS (Swift & SwiftUI)',
+      'Android (Kotlin & Jetpack Compose)',
+      'Platform Channels (Method & Event)',
+      'BLE, Sensors & Background GPS',
+      'Mobile Security (Keystore & SSL Pinning)',
+      'Native Memory & CPU Profiling',
+    ],
+    evidence: [
+      { project: 'Bluetooth Chess', detail: 'Native RFCOMM/BLE peripheral sync and hardware socket handshakes.' },
+      { project: 'freeRASP Security', detail: 'Author of mobile anti-tampering and reverse-engineering protection guide.' },
     ],
   },
   {
     id: 'architecture',
-    title: 'Architecture & State',
-    description: 'Strict separation of concerns ensuring codebases remain testable, refactorable, and bug-resilient.',
+    title: 'Architecture & Offline-First',
+    description: 'Strict separation of concerns ensuring codebases remain testable, refactorable, and bug-resilient under scale.',
     skills: [
       'Clean Architecture (Domain/Data/UI)',
-      'Riverpod & Provider',
-      'BLoC / Cubit Pattern',
-      'Dependency Injection',
-      'Repository Pattern',
-      'Unit & Widget Testing',
-    ],
-    evidence: [
-      { project: 'Stackademic Article', detail: 'Author of "Software Craftsmanship: Design Patterns in Dart & Flutter".' },
-      { project: 'freeRASP Security', detail: 'Technical guide on mobile anti-tampering and reverse-engineering protection.' },
-    ],
-  },
-  {
-    id: 'ai-ml',
-    title: 'AI, ML & Real-Time',
-    description: 'Integrating practical machine learning models and sub-second streaming pipelines into mobile clients.',
-    skills: [
-      'Gemini AI API & LLM Pipelines',
-      'Google ML Kit',
-      'Computer Vision (OpenCV)',
+      'Offline Caching (SQLite & Isar)',
       'Real-Time WebSockets (Socket.IO)',
-      'ASL Sign Language Detection',
-      'On-Device Inference',
+      'Repository & Factory Patterns',
+      'Dependency Injection (GetIt)',
+      'Unit, Widget & Integration Testing',
     ],
     evidence: [
-      { project: 'Medium Publication', detail: 'Author of "Building a Real-Time ASL Detection App with Computer Vision".' },
-      { project: 'Socket.IO Guide', detail: 'Technical architecture for real-time mobile event streaming.' },
+      { project: 'Stackademic Publication', detail: 'Author of "Software Craftsmanship: Design Patterns in Dart & Flutter".' },
+      { project: 'HackerRank Campus Club', detail: 'Head of Flutter Committee, mentoring engineers on Clean Architecture.' },
     ],
   },
   {
-    id: 'data-science',
-    title: 'Data Science & Systems',
-    description: 'Foundational algorithmic thinking, data modeling, and automated backend workflow pipelines.',
+    id: 'devops-lifecycle',
+    title: 'DevOps & Store Delivery',
+    description: 'End-to-end mobile release pipelines, store compliance, automated builds, and telemetry monitoring.',
     skills: [
-      'Python (Pandas, NumPy)',
-      'Data Structures & Algorithms',
-      'Supabase & PostgreSQL',
-      'RESTful API Design',
-      'Git & GitHub Actions CI/CD',
-      'n8n Workflow Automation',
+      'App Store Connect & TestFlight',
+      'Google Play Console Management',
+      'Fastlane & GitHub Actions CI/CD',
+      'Firebase (Crashlytics, Auth, Messaging)',
+      'Supabase & PostgreSQL Integration',
+      'RESTful API Design & OpenAPI',
     ],
     evidence: [
-      { project: 'AUFS FCDS', detail: 'Academic background in Data Science & Artificial Intelligence.' },
-      { project: 'HackerRank Club', detail: 'Head of Flutter Committee & technical curriculum mentor.' },
+      { project: 'Production Stores', detail: 'Verified commercial releases on Apple App Store and Google Play.' },
+      { project: 'Automated CI/CD', detail: 'Zero-downtime test, code signing, and artifact distribution pipelines.' },
     ],
   },
 ];

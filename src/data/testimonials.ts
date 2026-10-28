@@ -1,14 +1,6 @@
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  relationship: string;
-  quote: string;
-  initials: string;
-  linkedIn?: string;
-  highlight: string;
-}
+import type { Testimonial } from '@/types/testimonial';
+export type { Testimonial };
+
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -40,7 +32,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Karim Balbaa',
     role: 'Head of Cyber Security Committee',
     company: 'HackerRank Campus Club',
-    relationship: 'Fellow campus club leadership member at AUFS',
+    relationship: 'Fellow technical committee lead at HackerRank Campus Club',
     quote:
       'Zyad consistently demonstrates exceptional technical skills and a strong ability to solve complex problems. His deep understanding of Flutter and mobile app development, combined with his creative approach, makes him a highly valuable asset to any team. Beyond his technical expertise, Zyad is a smart and quick learner who adapts to new challenges effortlessly.',
     initials: 'KB',

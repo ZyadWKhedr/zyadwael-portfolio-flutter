@@ -1,0 +1,116 @@
+{
+  "topBar": {
+    "location": "İskenderiye, Mısır",
+    "timezone": "UTC+2 / EET",
+    "localTimeLabel": "İskenderiye, Mısır yerel saati",
+    "available": "Mobil Mühendislik Pozisyonları İçin Müsait"
+  },
+  "nav": {
+    "work": "Projeler",
+    "skills": "Yetenekler",
+    "writing": "Yazılar",
+    "testimonials": "Görüşler",
+    "about": "Hakkımda",
+    "contact": "İletişim",
+    "resume": "Özgeçmiş",
+    "toggleTheme": "Temayı değiştir",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
+  },
+  "hero": {
+    "badge": "Yazılım Mühendisi — Mobil Geliştirme",
+    "role1": "Yazılım Mühendisi — Mobil Geliştirme",
+    "role2": "Flutter (Ana Framework) & Mobil Uzmanı",
+    "role3": "Yerel iOS (Swift) & Android (Kotlin) Geliştirme",
+    "role4": "Clean Architecture & Çevrimdışı Öncelikli Sistemler",
+    "headline": "Yüksek performanslı, sağlam ve yerel standartlarda mobil uygulamalar.",
+    "subheadline": "Ana framework olarak Flutter'ı benimseyen, derin yerel iOS (Swift) ve Android (Kotlin) uzmanlığıyla desteklenen bir Mobil Yazılım Mühendisi. İskenderiye, Mısır'dan gerçek zamanlı lojistik, e-ticaret ve çevrimdışı öncelikli mobil uygulamalar geliştiriyorum.",
+    "ctaWork": "Projeleri İncele",
+    "ctaContact": "İletişime Geç",
+    "statsClients": "Canlıdaki Uygulamalar",
+    "statsUptime": "Çökmesiz Çalışma Oranı",
+    "statsLocation": "İskenderiye, Mısır"
+  },
+  "about": {
+    "badge": "Geçmiş & Felsefe",
+    "title": "Yazılım ustalığı ve derin çapraz platform mobil uzmanlığı.",
+    "p1": "İskenderiye, Mısır merkezli olarak mobil geliştirmeye odaklanan bir yazılım mühendisiyim. Çoklu platform geliştirmede ana framework olarak Flutter'ı kullanırken, mühendislik deneyimim yerel iOS (Swift), Android (Kotlin), donanım sensörleri entegrasyonu ve performans profillemesi gibi tüm mobil ekosistemi kapsar.",
+    "p2": "Son yıllarda lojistik, e-ticaret ve FinTech alanlarında yüksek talep gören ticari uygulamalar tasarlayıp yayınladım. Binlerce aktif kullanıcıya çevrimdışı dayanıklılık, anlık soket iletişimi ve akıcı 60 FPS geçişler sundum.",
+    "p3": "HackerRank Campus Club bünyesinde Flutter Komitesi Başkanlığı yaparak genç mühendislere Clean Architecture, BLoC durum yönetimi ve test odaklı geliştirme (TDD) eğitimleri veriyorum.",
+    "p4": "Geliştirme yaklaşımım üç temel ilkeye dayanır: iş mantığı ile arayüzün kesin ayrımı, SQLite ile güvenli çevrimdışı önbellekleme ve titiz performans profillemesi.",
+    "pillar1Title": "Temiz Mimari & Sorumlulukların Ayrımı",
+    "pillar1Desc": "Sunum, etki alanı (domain) ve veri katmanları arasında kesin sınırlar. Arayüz elemanları yalnızca değişmez durum akışlarını dinler.",
+    "pillar2Title": "Gerçek Zamanlı Güvenilirlik & Çapraz Platform",
+    "pillar2Desc": "Hata toleranslı WebSocket akışları, arka plan senkronizasyonu ve dengesiz ağlar için tasarlanmış SQLite önbelleği.",
+    "pillar3Title": "Donanım Seviyesi & Yerel Entegrasyon",
+    "pillar3Desc": "Swift ve Kotlin ile kamera, Bluetooth Low Energy (BLE), arka plan konum takibi ve NFC için özel Platform Kanalları geliştirme."
+  },
+  "work": {
+    "badge": "Ticari Uygulamalar & Açık Kaynak",
+    "title": "Yayınlanan mobil uygulamalar ve sistem mimarileri.",
+    "subtitle": "Apple App Store, Google Play Store ve pub.dev üzerinde yayınlanan gerçek uygulamalar. Temiz mimari, çevrimdışı dayanıklılık ve ölçülebilir üretim etkisi.",
+    "tabDecisions": "Kararlar & Tavizler",
+    "tabArchitecture": "Sistem Mimarisi",
+    "tabOutcome": "Canlı Kullanım Etkisi",
+    "problemLabel": "Temel Problem",
+    "roleLabel": "Mühendislik Rolü",
+    "architectureLabel": "Mimari Temel",
+    "viewAppStore": "App Store",
+    "viewPlayStore": "Google Play",
+    "viewGithub": "Kaynak Kodu",
+    "viewPubDev": "pub.dev Paketi",
+    "categoryAll": "Tüm Projeler",
+    "categoryMobile": "Mobil Uygulamalar",
+    "categoryOpenSource": "Açık Kaynak & Sistemler"
+  },
+  "skills": {
+    "badge": "Teknik Yetkinlikler",
+    "title": "Dayanıklılık, sürdürülebilirlik ve ölçeklenebilirlik için tasarlandı.",
+    "subtitle": "Her teknik yetkinlik, resmi mağazalarda yayınlanmış canlı kod veya açık kaynaklı kütüphanelerle desteklenmektedir.",
+    "evidenceLabel": "Canlı Sistem Kanıtları"
+  },
+  "writing": {
+    "badge": "Teknik Makaleler",
+    "title": "Mobil mimari ve güvenlik üzerine derinlemesine teknik yayınlar.",
+    "subtitle": "Medium ve Stackademic üzerinde yayınlanmış; istemci tarafı güvenlik, durum yönetimi ve anlık soket iletişimi konularını ele alan makaleler.",
+    "readArticle": "Yazıyı Oku"
+  },
+  "testimonials": {
+    "badge": "Mühendislik Referansları",
+    "title": "Birlikte çalıştığım mühendislik meslektaşlarımdan doğrulanmış tavsiyeler.",
+    "subtitle": "Üretim seviyesindeki mobil projelerde omuz omuza çalıştığım yazılım mühendisleri ve tasarımcılardan dürüst geri bildirimler.",
+    "verified": "Doğrulanmış LinkedIn Tavsiyesi",
+    "readFull": "Tavsiyenin tamamını oku",
+    "closeModal": "Kapat"
+  },
+  "contact": {
+    "badge": "İletişim Başlatın",
+    "title": "Birlikte sıra dışı bir mobil deneyim inşa edelim.",
+    "subtitle": "Tam zamanlı mobil mühendislik pozisyonları, yüksek etkili serbest projeler ve teknik liderlik fırsatları için müsaitim.",
+    "nameLabel": "Adınız Soyadınız",
+    "namePlaceholder": "Ahmet Yılmaz",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "ahmet@ornek.com",
+    "subjectLabel": "Konu",
+    "subjectPlaceholder": "Mobil Uygulama Projesi / İş Fırsatı",
+    "messageLabel": "Proje veya Pozisyon Detayları",
+    "messagePlaceholder": "Uygulamanız, zaman planınız veya pozisyon gereksinimleri hakkında bilgi verin...",
+    "submit": "Mesajı Gönder",
+    "sending": "Gönderiliyor...",
+    "successTitle": "Mesajınız İletildi",
+    "successText": "Teşekkür ederim! Mesajınız doğrudan Zyad'ın gelen kutusuna iletildi. Talebinizi inceleyip 24–48 saat içinde dönüş yapacaktır.",
+    "sendAnother": "Yeni bir mesaj gönder",
+    "directEmail": "Doğrudan E-posta",
+    "copyEmail": "E-postayı kopyala",
+    "copied": "Panoya kopyalandı!",
+    "location": "Konum",
+    "locationVal": "İskenderiye, Mısır (UTC+2 / EET)",
+    "profiles": "Doğrulanmış Profiller"
+  },
+  "footer": {
+    "tagline": "İskenderiye, Mısır'dan mobil geliştirme (Flutter, iOS, Android) alanında uzmanlaşmış Yazılım Mühendisi.",
+    "rights": "Tüm hakları saklıdır.",
+    "backToTop": "Yukarı çık",
+    "location": "İskenderiye, Mısır"
+  }
+}

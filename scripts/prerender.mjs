@@ -14,6 +14,22 @@ if (typeof global.localStorage === 'undefined') {
     clear: () => {},
   };
 }
+if (typeof global.navigator === 'undefined') {
+  global.navigator = { language: 'en', languages: ['en'] };
+}
+if (typeof global.document === 'undefined') {
+  global.document = {
+    documentElement: {
+      setAttribute: () => {},
+      classList: { toggle: () => {} },
+    },
+    getElementsByTagName: () => [],
+    createElement: () => ({ setAttribute: () => {}, appendChild: () => {}, style: {} }),
+    createTextNode: () => ({}),
+    head: { appendChild: () => {} },
+    getElementById: () => null,
+  };
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');

@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDown, ArrowUpRight, Github, Linkedin, Facebook, Mail, Sparkles, Terminal } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Facebook, Mail } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import profileWebp from '@/assets/zyad-profile.webp';
 
 const CV_URL = 'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
-
-const ROLES = [
-  'Flutter Application Engineer',
-  'Cross-Platform Mobile Architect',
-  'Data Science & AI Student',
-  'Clean Architecture Practitioner',
-];
 
 const SOCIAL_LINKS = [
   {
@@ -20,7 +14,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/zyad-wael-a9035a275/',
+    url: 'https://www.linkedin.com/in/zyad-wael/',
     icon: Linkedin,
     label: 'LinkedIn profile',
   },
@@ -29,7 +23,7 @@ const SOCIAL_LINKS = [
     url: 'https://medium.com/@ziad.w.khedr',
     icon: () => (
       <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
-        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
       </svg>
     ),
     label: 'Technical articles on Medium',
@@ -39,7 +33,7 @@ const SOCIAL_LINKS = [
     url: 'https://stackoverflow.com/users/24248795/zyad-wael-khedr',
     icon: () => (
       <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
-        <path d="M15 21H3v-8h2v6h10v-6h2v8zm-1.36-9.82l-1.13-1.48 6.27-4.79 1.13 1.48-6.27 4.79zm1.45 4.56L5.82 15l.27-1.97 9.27.74-.27 1.97zm.72-3.26l-8.98-2.1.46-1.93 8.98 2.1-.46 1.93zm1.81-3.39L10.4 5.18l.96-1.76 7.22 3.92-.96 1.75z"/>
+        <path d="M15 21H3v-8h2v6h10v-6h2v8zm-1.36-9.82l-1.13-1.48 6.27-4.79 1.13 1.48-6.27 4.79zm1.45 4.56L5.82 15l.27-1.97 9.27.74-.27 1.97zm.72-3.26l-8.98-2.1.46-1.93 8.98 2.1-.46 1.93zm1.81-3.39L10.4 5.18l.96-1.76 7.22 3.92-.96 1.75z" />
       </svg>
     ),
     label: 'Stack Overflow profile',
@@ -59,22 +53,30 @@ const SOCIAL_LINKS = [
 ];
 
 export const HeroSection: React.FC = () => {
+  const { t } = useTranslation();
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleFade, setRoleFade] = useState(true);
+
+  const roles = [
+    t('hero.role1', 'Software Engineer — Mobile Development'),
+    t('hero.role2', 'Flutter (Main Framework) & Mobile Specialist'),
+    t('hero.role3', 'Native iOS (Swift) & Android (Kotlin)'),
+    t('hero.role4', 'Clean Architecture & Offline-First Systems'),
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setRoleFade(false);
       setTimeout(() => {
-        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
         setRoleFade(true);
       }, 250);
     }, 3800);
     return () => clearInterval(timer);
-  }, []);
+  }, [roles.length]);
 
   return (
-    <section id="hero" className="relative pt-12 pb-16 md:pt-20 md:pb-24 border-b border-border-subtle blueprint-grid">
+    <section id="hero" className="scroll-mt-24 relative pt-10 pb-16 md:pt-16 md:pb-24 border-b border-border-subtle blueprint-grid">
       {/* Ambient background breath (pure CSS, low overhead) */}
       <div 
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-canvas/40 via-transparent to-canvas" 
@@ -88,7 +90,7 @@ export const HeroSection: React.FC = () => {
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
             <span className="font-semibold uppercase tracking-wider text-ink">Availability</span>
             <span className="text-ink-faint">/</span>
-            <span>Open for mobile engineering roles &amp; high-impact contracts</span>
+            <span>{t('topBar.available', 'Available for Mobile Engineering Roles')}</span>
           </div>
           <div className="flex items-center gap-3 text-ink-faint">
             <span className="font-medium text-ink-muted">Alexandria, Egypt</span>
@@ -101,7 +103,7 @@ export const HeroSection: React.FC = () => {
         {/* Main Hero Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 md:pt-12">
           {/* Left Column: Heading, Positioning & Actions (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-start">
             {/* Animated Rotating Role Capsule */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-surface border border-border-strong mb-4 shadow-subtle min-h-[32px]">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
@@ -110,18 +112,16 @@ export const HeroSection: React.FC = () => {
                   roleFade ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'
                 }`}
               >
-                {ROLES[roleIndex]}
+                {roles[roleIndex]}
               </span>
             </div>
 
             <h1 className="font-serif fluid-display font-bold tracking-tight text-ink mb-6">
-              I build mobile products that feel native, ship clean, and endure.
+              {t('hero.headline', 'Engineering resilient, native-grade mobile applications.')}
             </h1>
 
             <p className="text-ink-muted fluid-lg max-w-2xl leading-relaxed mb-8">
-              Specialized in cross-platform engineering with <strong className="font-semibold text-ink">Flutter &amp; Dart</strong>, 
-              strict <strong className="font-semibold text-ink">Clean Architecture</strong>, offline-first reliability, 
-              and practical on-device <strong className="font-semibold text-ink">AI integration</strong>.
+              {t('hero.subheadline', 'Software Engineer specializing in mobile development with Flutter as my primary framework, complemented by native iOS (Swift) and Android (Kotlin) depth. Building high-concurrency dispatch systems, reactive commerce, and offline-first mobile apps from Alexandria, Egypt.')}
             </p>
 
             {/* CTAs */}
@@ -130,17 +130,15 @@ export const HeroSection: React.FC = () => {
                 href="#work"
                 className="btn-tactile touch-target inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-mono uppercase tracking-wider font-semibold rounded-md bg-accent text-white hover:bg-accent-hover shadow-subtle hover:shadow transition-all"
               >
-                <span>View Selected Work</span>
+                <span>{t('hero.ctaWork', 'Explore Shipped Apps')}</span>
                 <ArrowDown className="w-4 h-4" />
               </a>
 
               <a
-                href={CV_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 className="btn-tactile touch-target inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-mono uppercase tracking-wider font-semibold rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-all"
               >
-                <span>Download CV</span>
+                <span>{t('hero.ctaContact', 'Get in Touch')}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
@@ -172,11 +170,11 @@ export const HeroSection: React.FC = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full mt-8 pt-6 border-t border-border-subtle">
               <div>
                 <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">4+</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">Shipped Store Apps</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsClients', 'Production Apps Shipped')}</div>
               </div>
               <div>
-                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">400+</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">Package Downloads</div>
+                <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">99.8%</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">{t('hero.statsUptime', 'Crash-Free Rate')}</div>
               </div>
               <div>
                 <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">4</div>
@@ -184,7 +182,7 @@ export const HeroSection: React.FC = () => {
               </div>
               <div>
                 <div className="font-serif text-2xl lg:text-3xl font-bold text-ink">Lead</div>
-                <div className="text-xs font-mono text-ink-muted mt-1">AUFS Flutter Comm.</div>
+                <div className="text-xs font-mono text-ink-muted mt-1">Flutter Committee</div>
               </div>
             </div>
           </div>
@@ -195,7 +193,7 @@ export const HeroSection: React.FC = () => {
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-elevated border border-border-subtle">
                 <img
                   src={profileWebp}
-                  alt="Zyad Wael, Mobile Engineer"
+                  alt="Zyad Wael, Mobile Software Engineer"
                   width="380"
                   height="475"
                   fetchpriority="high"
@@ -206,11 +204,11 @@ export const HeroSection: React.FC = () => {
                 <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-canvas/92 backdrop-blur-sm border border-border-subtle">
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className="font-bold text-ink">Zyad Wael</span>
-                    <span className="text-accent font-semibold">Flutter / Data Science</span>
+                    <span className="text-accent font-semibold">Mobile Software Engineer</span>
                   </div>
                   <div className="text-[11px] text-ink-muted mt-1 flex items-center justify-between">
                     <span>Alexandria, Egypt</span>
-                    <span className="font-mono text-[10px] text-ink-faint">AUFS FCDS</span>
+                    <span className="font-mono text-[10px] text-ink-faint">Flutter · iOS · Android</span>
                   </div>
                 </div>
               </div>

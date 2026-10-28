@@ -4,62 +4,8 @@ import ravalIcon from '@/assets/raval-icon.png';
 import payssIcon from '@/assets/payss-icon.png';
 import chessIcon from '@/assets/chess-icon.png';
 
-export interface AppScreenshot {
-  id: string;
-  url?: string;
-  caption: string;
-  placeholderLabel: string;
-}
-
-export interface InteractiveDemo {
-  type: 'dispatch_queue' | 'station_radar' | 'reactive_cart' | 'qr_scanner' | 'liquid_canvas';
-  title: string;
-  subtitle: string;
-  summary: string;
-}
-
-export interface FeaturedProject {
-  id: string;
-  title: string;
-  arabicTitle?: string;
-  category: string;
-  tagline: string;
-  icon: string;
-  problem: string;
-  role: string;
-  architecture: string;
-  decisions: string[];
-  stack: string[];
-  outcome: string;
-  metrics: string[];
-  links: {
-    appStore?: string;
-    playStore?: string;
-    github?: string;
-    live?: string;
-  };
-  screenshots: AppScreenshot[];
-  interactiveDemo: InteractiveDemo;
-}
-
-export interface SecondaryProject {
-  id: string;
-  title: string;
-  arabicTitle?: string;
-  category: 'Mobile' | 'Applied AI' | 'Data & Analytics' | 'Wearable & Games';
-  tagline: string;
-  problem: string;
-  role: string;
-  stack: string[];
-  icon?: string;
-  links: {
-    github?: string;
-    live?: string;
-    store?: string;
-  };
-  evidence: string;
-  statusNotes?: string;
-}
+import type { AppScreenshot, InteractiveDemo, FeaturedProject, SecondaryProject } from '@/types/project';
+export type { AppScreenshot, InteractiveDemo, FeaturedProject, SecondaryProject };
 
 export const FEATURED_PROJECTS: FeaturedProject[] = [
   {
@@ -254,11 +200,11 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
 export const SECONDARY_PROJECTS: SecondaryProject[] = [
   {
     id: 'grandmaster-chess',
-    title: 'Grandmaster Chess AI',
-    category: 'Applied AI',
+    title: 'Grandmaster Mobile Chess Engine',
+    category: 'Mobile Systems',
     tagline: 'Tournament chess engine featuring minimax evaluation with alpha-beta pruning.',
-    problem: 'Demonstrates algorithmic board state representation, bitboard move generation, and minimax AI decision heuristics on mobile devices.',
-    role: 'Solo Developer & Algorithmic Engineer',
+    problem: 'Demonstrates algorithmic board state representation, bitboard move generation, and minimax evaluation heuristics on mobile devices.',
+    role: 'Solo Developer & Algorithmic Mobile Engineer',
     stack: ['Flutter', 'Dart', 'Minimax Algorithm', 'Alpha-Beta Pruning', 'Custom Vector Assets'],
     icon: chessIcon,
     links: {
@@ -342,10 +288,10 @@ export const SECONDARY_PROJECTS: SecondaryProject[] = [
   {
     id: 'asl-detection',
     title: 'Real-Time ASL Alphabet Recognition',
-    category: 'Applied AI',
+    category: 'Mobile Systems',
     tagline: 'Computer vision pipeline detecting 26 American Sign Language hand gestures via webcam.',
     problem: 'Assistive vision prototype built to translate sign language gestures into text on commodity webcam hardware without specialized sensors.',
-    role: 'Author & Machine Learning Engineer',
+    role: 'Author & Computer Vision Engineer',
     stack: ['Python', 'OpenCV', 'MediaPipe Hands (21 Landmarks)', 'TensorFlow', 'NumPy'],
     links: {
       github: 'https://github.com/ZyadWKhedr',

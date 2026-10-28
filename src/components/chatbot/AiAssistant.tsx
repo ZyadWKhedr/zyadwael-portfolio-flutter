@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, Send, X, Sparkles, Loader2, MessageSquare, ArrowDown, User } from 'lucide-react';
 import { toast } from 'sonner';
+import { queryAssistant } from '@/services/assistantService';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -8,10 +9,10 @@ interface Message {
 }
 
 const STARTER_PROMPTS = [
-  'What does Zyad specialize in?',
+  'What mobile platforms does Zyad specialize in?',
   'Tell me about his Flutter Clean Architecture',
-  'How does he integrate AI into mobile apps?',
-  'Is Zyad available for freelance or contract roles?',
+  'What is his native iOS and Android experience?',
+  'Is Zyad available for mobile engineering roles?',
 ];
 
 export const AiAssistant: React.FC = () => {
@@ -20,7 +21,7 @@ export const AiAssistant: React.FC = () => {
     {
       role: 'assistant',
       content:
-        "Hello! I am Zyad's portfolio assistant powered by Gemini. Ask me about his production Flutter applications, clean architecture, or AI integration — or tell me about your project to connect directly with him.",
+        "Hello! I am Zyad's interactive portfolio assistant. Ask me about his production Flutter applications, native iOS & Android depth, Clean Architecture, or tell me about your mobile project to connect directly with him.",
     },
   ]);
   const [input, setInput] = useState('');
@@ -86,7 +87,7 @@ export const AiAssistant: React.FC = () => {
           toast.success('Routed you to the contact section to reach Zyad directly.');
         }, 1200);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error('AI assistant error:', err);
       setMessages((prev) => [
         ...prev,

@@ -1,21 +1,116 @@
 {
+  "topBar": {
+    "location": "Alexandria, Egypt",
+    "timezone": "UTC+2 / EET",
+    "localTimeLabel": "Local time in Alexandria, Egypt",
+    "available": "Available for Mobile Engineering Roles"
+  },
   "nav": {
+    "work": "Work",
+    "skills": "Capabilities",
+    "writing": "Writing",
+    "testimonials": "Reviews",
     "about": "About",
-    "skills": "Skills",
-    "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "resume": "CV",
+    "toggleTheme": "Toggle color theme",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "hero": {
-    "available": "Available for projects",
-    "greeting": "Hi, I'm",
-    "skill1": "Flutter Developer & AI Integration Specialist",
-    "skill2": "Clean Architecture · iOS & Android",
-    "description": "I build fast, scalable Flutter apps that feel native on iOS and Android — shipped clean, on time.",
-    "stats1": "apps shipped",
-    "stats2": "year experience",
-    "stats3": "Available for freelance",
-    "hire": "Hire Me",
-    "work": "See My Work",
-    "cv": "CV"
+    "badge": "Software Engineer — Mobile Development",
+    "role1": "Software Engineer — Mobile Development",
+    "role2": "Flutter (Main Framework) & Mobile Specialist",
+    "role3": "Native iOS (Swift) & Android (Kotlin)",
+    "role4": "Clean Architecture & Offline-First Systems",
+    "headline": "Engineering resilient, native-grade mobile applications.",
+    "subheadline": "Software Engineer specializing in mobile development with Flutter as my primary framework, complemented by native iOS (Swift) and Android (Kotlin) depth. Building high-concurrency dispatch systems, reactive commerce, and offline-first mobile apps from Alexandria, Egypt.",
+    "ctaWork": "Explore Shipped Apps",
+    "ctaContact": "Get in Touch",
+    "statsClients": "Production Apps Shipped",
+    "statsUptime": "Crash-Free Rate",
+    "statsLocation": "Alexandria, Egypt"
+  },
+  "about": {
+    "badge": "Background & Philosophy",
+    "title": "Software craftsmanship with deep cross-platform mobile rigor.",
+    "p1": "Based in Alexandria, Egypt, I am a software engineer focused on mobile development. While Flutter is my primary framework for cross-platform delivery, my engineering spans the broader mobile spectrum—including native iOS (Swift), native Android (Kotlin), hardware sensor bridging, and platform-specific performance profiling.",
+    "p2": "Over the past several years, I have architected and deployed high-demand commercial mobile applications across logistics, e-commerce, and FinTech—serving thousands of daily active users with stringent requirements for offline durability, sub-second socket telemetry, and smooth 60 FPS transitions.",
+    "p3": "I lead the Flutter Committee at HackerRank Campus Club, where I mentor aspiring engineers on Clean Architecture, BLoC state management, dependency injection, and test-driven mobile development.",
+    "p4": "My engineering approach is grounded in three principles: strict separation of business logic from UI rendering, bulletproof offline caching with SQLite, and relentless performance profiling.",
+    "pillar1Title": "Clean Architecture & Separation of Concerns",
+    "pillar1Desc": "Strict boundary isolation between presentation, domain, and data layers. UI widgets remain dumb consumers of immutable state streams.",
+    "pillar2Title": "Real-time & Cross-platform Reliability",
+    "pillar2Desc": "Fault-tolerant WebSocket streams, background sync, and offline-first SQLite caching designed for hostile network conditions.",
+    "pillar3Title": "Hardware & Native Platform Depth",
+    "pillar3Desc": "Bridging native platform channels in Swift and Kotlin for camera sensors, Bluetooth Low Energy (BLE), background geofencing, and NFC."
+  },
+  "work": {
+    "badge": "Commercial Work & Open Source",
+    "title": "Shipped mobile applications and system architectures.",
+    "subtitle": "Real applications on the Apple App Store, Google Play Store, and pub.dev. Focused on clean domain architecture, offline resilience, and measurable production impact.",
+    "tabDecisions": "Decisions & Trade-offs",
+    "tabArchitecture": "System Architecture",
+    "tabOutcome": "Production Impact",
+    "problemLabel": "Core Problem",
+    "roleLabel": "Engineering Role",
+    "architectureLabel": "Architectural Foundation",
+    "viewAppStore": "App Store",
+    "viewPlayStore": "Google Play",
+    "viewGithub": "Source Code",
+    "viewPubDev": "pub.dev Package",
+    "categoryAll": "All Projects",
+    "categoryMobile": "Mobile Apps",
+    "categoryOpenSource": "Open Source & Systems"
+  },
+  "skills": {
+    "badge": "Technical Capabilities",
+    "title": "Engineered for durability, maintainability, and scale.",
+    "subtitle": "Every capability is backed by production code shipped to commercial stores or open-source packages.",
+    "evidenceLabel": "Production Evidence"
+  },
+  "writing": {
+    "badge": "Engineering Publications",
+    "title": "In-depth technical writing on mobile architecture & security.",
+    "subtitle": "Architectural articles published on Medium and Stackademic exploring client-side security, state management, and real-time sockets.",
+    "readArticle": "Read publication"
+  },
+  "testimonials": {
+    "badge": "Peer & Client Endorsements",
+    "title": "Verified recommendations from engineering colleagues.",
+    "subtitle": "Unedited feedback from software engineers, designers, and team leads who have worked alongside me on production mobile codebases.",
+    "verified": "Verified LinkedIn Recommendation",
+    "readFull": "Read full review",
+    "closeModal": "Close review"
+  },
+  "contact": {
+    "badge": "Start a Conversation",
+    "title": "Let's build something exceptional together.",
+    "subtitle": "I am open to full-time mobile engineering roles, high-impact freelance mobile contracts, and technical leadership opportunities.",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Jane Doe",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "jane@example.com",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Mobile App Project / Mobile Engineering Role",
+    "messageLabel": "Project or Role Details",
+    "messagePlaceholder": "Tell me about your mobile application, timeline, technical requirements, or role...",
+    "submit": "Send Message",
+    "sending": "Dispatching email...",
+    "successTitle": "Message Delivered",
+    "successText": "Thank you! Your message was dispatched directly to Zyad's inbox. He will review your inquiry and reply within 24–48 hours.",
+    "sendAnother": "Send another message",
+    "directEmail": "Direct Email",
+    "copyEmail": "Copy email address",
+    "copied": "Copied to clipboard!",
+    "location": "Location",
+    "locationVal": "Alexandria, Egypt (UTC+2 / EET)",
+    "profiles": "Verified Profiles"
+  },
+  "footer": {
+    "tagline": "Software Engineer specializing in mobile development (Flutter, iOS, Android) from Alexandria, Egypt.",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top",
+    "location": "Alexandria, Egypt"
   }
 }

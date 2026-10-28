@@ -1,25 +1,28 @@
 import React from 'react';
 import { ArrowUpRight, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { ARTICLES } from '@/data/articles';
 
 export const WritingSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
-    <section id="writing" className="py-20 md:py-28 border-b border-border-subtle">
+    <section id="writing" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle">
       <div className="container max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle text-start">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
               <span className="w-2 h-2 rounded-full bg-accent" />
-              <span>Technical Notes &amp; Publications</span>
+              <span>{t('writing.badge', 'Engineering Publications')}</span>
             </div>
             <h2 className="font-serif fluid-3xl font-bold tracking-tight text-ink">
-              Writing &amp; Architectural Field Notes
+              {t('writing.title', 'In-depth technical writing on mobile architecture & security.')}
             </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <p className="text-ink-muted text-sm max-w-sm font-sans leading-relaxed">
-              Published engineering articles on mobile security, real-time networking, and clean code.
+              {t('writing.subtitle', 'Architectural articles published on Medium and Stackademic exploring client-side security, state management, and real-time sockets.')}
             </p>
             <a
               href="https://medium.com/@ziad.w.khedr"
@@ -39,7 +42,7 @@ export const WritingSection: React.FC = () => {
           {ARTICLES.map((article) => (
             <article
               key={article.url}
-              className="py-8 group flex flex-col md:flex-row md:items-baseline justify-between gap-6 transition-colors"
+              className="py-8 group flex flex-col md:flex-row md:items-baseline justify-between gap-6 transition-colors text-start"
             >
               <div className="md:w-3/4 flex flex-col gap-2">
                 <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-ink-muted">
@@ -62,26 +65,27 @@ export const WritingSection: React.FC = () => {
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="focus:outline-none focus-visible:underline"
+                    className="focus:outline-none focus-visible:underline inline-flex items-center gap-2"
                   >
-                    {article.title}
+                    <span>{article.title}</span>
+                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   </a>
                 </h3>
 
-                <p className="text-sm text-ink-muted leading-relaxed font-sans max-w-2xl mt-1">
+                <p className="text-sm text-ink-muted leading-relaxed font-sans max-w-3xl pt-1">
                   {article.summary}
                 </p>
               </div>
 
-              <div className="md:w-1/4 flex md:justify-end items-center">
+              <div className="shrink-0 pt-2 md:pt-0">
                 <a
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="touch-target inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-medium rounded-md border border-border-subtle bg-surface group-hover:border-accent group-hover:text-accent transition-colors"
-                  aria-label={`Read Article: ${article.title} on ${article.publication}`}
+                  className="btn-tactile touch-target inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-medium rounded-md border border-border-subtle bg-surface hover:bg-elevated hover:border-accent text-ink hover:text-accent transition-all"
+                  aria-label={`Read ${article.title} on ${article.publication}`}
                 >
-                  <span>Read Article</span>
+                  <span>{t('writing.readArticle', 'Read publication')}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>

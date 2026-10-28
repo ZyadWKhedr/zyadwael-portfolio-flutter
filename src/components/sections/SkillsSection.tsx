@@ -1,32 +1,34 @@
 import React from 'react';
-import { Smartphone, Layers, Cpu, Database, Check } from 'lucide-react';
+import { Smartphone, Layers, Terminal, Cpu, Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { CAPABILITIES } from '@/data/skills';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  mobile: Smartphone,
+  'flutter-core': Smartphone,
+  'native-mobile': Cpu,
   architecture: Layers,
-  'ai-ml': Cpu,
-  'data-science': Database,
+  'devops-lifecycle': Terminal,
 };
 
 export const SkillsSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
-    <section id="skills" className="py-20 md:py-28 border-b border-border-subtle bg-surface/30">
+    <section id="skills" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/30">
       <div className="container max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle text-start">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
               <span className="w-2 h-2 rounded-full bg-accent" />
-              <span>Technical Capabilities</span>
+              <span>{t('skills.badge', 'Technical Capabilities')}</span>
             </div>
             <h2 className="font-serif fluid-3xl font-bold tracking-tight text-ink">
-              Skills Anchored in Execution
+              {t('skills.title', 'Engineered for durability, maintainability, and scale.')}
             </h2>
           </div>
           <p className="text-ink-muted text-sm md:text-base max-w-md font-sans leading-relaxed">
-            No arbitrary percentage bars or technology logo dumps. Every capability is grounded 
-            in delivered commercial products or published technical research.
+            {t('skills.subtitle', 'Every capability is backed by production code shipped to commercial stores or open-source packages.')}
           </p>
         </div>
 
@@ -37,7 +39,7 @@ export const SkillsSection: React.FC = () => {
             return (
               <div
                 key={group.id}
-                className="spec-card p-4 sm:p-6 overflow-hidden flex flex-col justify-between rounded-xl bg-surface hover:shadow-card transition-all"
+                className="spec-card p-4 sm:p-6 overflow-hidden flex flex-col justify-between rounded-xl bg-surface hover:shadow-card transition-all text-start"
               >
                 <div>
                   <div className="w-10 h-10 rounded-lg bg-elevated border border-border-subtle flex items-center justify-center text-accent mb-4">
@@ -63,16 +65,16 @@ export const SkillsSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Evidence Proof Strip */}
-                <div className="pt-4 mt-2">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-faint block mb-2">
-                    Verified Execution
-                  </span>
-                  <div className="space-y-2">
-                    {group.evidence.map((ev, i) => (
-                      <div key={i} className="p-2.5 rounded bg-elevated border border-border-subtle text-[11px]">
-                        <span className="font-semibold text-ink block">{ev.project}</span>
-                        <span className="text-ink-muted leading-tight block mt-0.5">{ev.detail}</span>
+                {/* Evidence Callout */}
+                <div className="pt-4">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-accent font-semibold mb-2">
+                    {t('skills.evidenceLabel', 'Production Evidence')}
+                  </div>
+                  <div className="space-y-1.5">
+                    {group.evidence.map((ev, eIdx) => (
+                      <div key={eIdx} className="text-xs text-ink-muted leading-snug">
+                        <span className="font-semibold text-ink font-mono text-[11px] block">{ev.project}</span>
+                        <span className="text-ink-faint text-[11px]">{ev.detail}</span>
                       </div>
                     ))}
                   </div>
