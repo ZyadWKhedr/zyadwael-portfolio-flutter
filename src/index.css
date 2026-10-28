@@ -156,9 +156,39 @@
     border-color: var(--border-strong);
   }
 
-  .spec-inset {
-    background-color: var(--bg-elevated);
-    border: 1px solid var(--border-subtle);
+  /* Living Blueprint Drafting Grid Pattern */
+  .blueprint-grid {
+    background-image: 
+      linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: center center;
+  }
+
+  .blueprint-dots {
+    background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+  }
+
+  /* Tactile feedback for interactive elements */
+  .btn-tactile {
+    transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+  .btn-tactile:hover {
+    transform: translateY(-1.5px);
+  }
+  .btn-tactile:active {
+    transform: translateY(1px);
+  }
+
+  /* Subtle pulsing accent glow */
+  @keyframes accent-pulse {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.32; transform: scale(1.05); }
+  }
+  .animate-accent-breathe {
+    animation: accent-pulse 8s ease-in-out infinite;
   }
 }
 

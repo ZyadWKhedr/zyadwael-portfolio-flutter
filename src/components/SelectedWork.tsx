@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { ExternalLink, Apple, Play, Code2, Layers, CheckCircle2, ChevronRight, Filter } from 'lucide-react';
+import { ExternalLink, Apple, Play, Code2, Layers, CheckCircle2, ChevronRight, Filter, Smartphone, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { FEATURED_PROJECTS, SECONDARY_PROJECTS, SecondaryProject } from '@/data/projects';
+import ProjectInteractiveDemo from './ProjectInteractiveDemo';
 
+type TabKey = 'decisions' | 'architecture' | 'demo' | 'screenshots' | 'outcome';
 type CategoryFilter = 'All' | 'Mobile' | 'Applied AI' | 'Data & Analytics' | 'Wearable & Games';
 
 export const SelectedWork: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Record<string, 'decisions' | 'architecture' | 'outcome'>>({
+  const [activeTab, setActiveTab] = useState<Record<string, TabKey>>({
     amoomy: 'decisions',
     wofoodi: 'decisions',
     raval: 'decisions',
@@ -15,7 +17,7 @@ export const SelectedWork: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('All');
 
-  const setTab = (projectId: string, tab: 'decisions' | 'architecture' | 'outcome') => {
+  const setTab = (projectId: string, tab: TabKey) => {
     setActiveTab((prev) => ({ ...prev, [projectId]: tab }));
   };
 
@@ -25,8 +27,8 @@ export const SelectedWork: React.FC = () => {
   });
 
   return (
-    <section id="work" className="py-20 md:py-28 border-b border-border-subtle">
-      <div className="container max-w-6xl mx-auto">
+    <section id="work" className="py-20 md:py-28 border-b border-border-subtle blueprint-grid">
+      <div className="container max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle">
           <div>
@@ -40,7 +42,7 @@ export const SelectedWork: React.FC = () => {
           </div>
           <p className="text-ink-muted text-sm md:text-base max-w-md font-sans leading-relaxed">
             Production Flutter applications shipped to the Apple App Store and Google Play. 
-            Real users, real constraints, clean architecture.
+            Real users, real constraints, clean architecture, and interactive in-browser simulators.
           </p>
         </div>
 
@@ -72,7 +74,7 @@ export const SelectedWork: React.FC = () => {
                         href={project.links.appStore}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
+                        className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
                         aria-label={`App Store: View ${project.title} on Apple App Store`}
                       >
                         <Apple className="w-3.5 h-3.5" />
@@ -85,7 +87,7 @@ export const SelectedWork: React.FC = () => {
                         href={project.links.playStore}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
+                        className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
                         aria-label={`Google Play: View ${project.title} on Google Play`}
                       >
                         <Play className="w-3.5 h-3.5" />
@@ -98,7 +100,7 @@ export const SelectedWork: React.FC = () => {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
+                        className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-border-subtle bg-surface hover:border-accent hover:text-accent transition-colors"
                         aria-label={`pub.dev Package: View ${project.title} on pub.dev`}
                       >
                         <Code2 className="w-3.5 h-3.5" />
@@ -167,7 +169,7 @@ export const SelectedWork: React.FC = () => {
                   </div>
 
                   {/* Right Column: Architectural Inspector Tabs (7 cols) */}
-                  <div className="lg:col-span-7 spec-card p-3.5 sm:p-6 rounded-xl bg-surface overflow-hidden">
+                  <div className="lg:col-span-7 spec-card p-3.5 sm:p-6 rounded-xl bg-surface overflow-hidden shadow-subtle">
                     {/* Inspection Toggle Bar */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-subtle pb-3 mb-5">
                       <span className="font-mono text-xs uppercase tracking-wider text-ink-muted flex items-center gap-2">
@@ -175,11 +177,12 @@ export const SelectedWork: React.FC = () => {
                         <span>Technical Ledger</span>
                       </span>
 
-                      <div className="flex items-center w-full sm:w-auto bg-elevated p-1 rounded-md border border-border-subtle">
+                      {/* Tab Selector Buttons */}
+                      <div className="flex items-center w-full sm:w-auto bg-elevated p-1 rounded-md border border-border-subtle overflow-x-auto scrollbar-hide gap-1">
                         <button
                           type="button"
                           onClick={() => setTab(project.id, 'decisions')}
-                          className={`touch-target flex-1 sm:flex-initial text-center px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
+                          className={`btn-tactile touch-target shrink-0 sm:shrink px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
                             currentTab === 'decisions'
                               ? 'bg-surface text-accent font-semibold shadow-subtle'
                               : 'text-ink-muted hover:text-ink'
@@ -190,7 +193,7 @@ export const SelectedWork: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setTab(project.id, 'architecture')}
-                          className={`touch-target flex-1 sm:flex-initial text-center px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
+                          className={`btn-tactile touch-target shrink-0 sm:shrink px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
                             currentTab === 'architecture'
                               ? 'bg-surface text-accent font-semibold shadow-subtle'
                               : 'text-ink-muted hover:text-ink'
@@ -200,8 +203,32 @@ export const SelectedWork: React.FC = () => {
                         </button>
                         <button
                           type="button"
+                          onClick={() => setTab(project.id, 'demo')}
+                          className={`btn-tactile touch-target shrink-0 sm:shrink px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors flex items-center gap-1 ${
+                            currentTab === 'demo'
+                              ? 'bg-surface text-accent font-bold shadow-subtle'
+                              : 'text-ink-muted hover:text-ink'
+                          }`}
+                        >
+                          <Sparkles className="w-3 h-3 text-accent" />
+                          <span>Live Demo</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTab(project.id, 'screenshots')}
+                          className={`btn-tactile touch-target shrink-0 sm:shrink px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors flex items-center gap-1 ${
+                            currentTab === 'screenshots'
+                              ? 'bg-surface text-accent font-semibold shadow-subtle'
+                              : 'text-ink-muted hover:text-ink'
+                          }`}
+                        >
+                          <ImageIcon className="w-3 h-3" />
+                          <span>Screenshots</span>
+                        </button>
+                        <button
+                          type="button"
                           onClick={() => setTab(project.id, 'outcome')}
-                          className={`touch-target flex-1 sm:flex-initial text-center px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
+                          className={`btn-tactile touch-target shrink-0 sm:shrink px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors ${
                             currentTab === 'outcome'
                               ? 'bg-surface text-accent font-semibold shadow-subtle'
                               : 'text-ink-muted hover:text-ink'
@@ -213,7 +240,8 @@ export const SelectedWork: React.FC = () => {
                     </div>
 
                     {/* Tab Panels */}
-                    <div className="min-h-[160px] flex flex-col justify-between">
+                    <div className="min-h-[180px] flex flex-col justify-between">
+                      {/* 1. DECISIONS PANEL */}
                       {currentTab === 'decisions' && (
                         <div className="space-y-3">
                           <div className="text-xs font-mono uppercase tracking-wider text-ink-faint">
@@ -230,6 +258,7 @@ export const SelectedWork: React.FC = () => {
                         </div>
                       )}
 
+                      {/* 2. ARCHITECTURE PANEL */}
                       {currentTab === 'architecture' && (
                         <div className="space-y-3">
                           <div className="text-xs font-mono uppercase tracking-wider text-ink-faint">
@@ -249,6 +278,62 @@ export const SelectedWork: React.FC = () => {
                         </div>
                       )}
 
+                      {/* 3. LIVE SIMULATION DEMO PANEL */}
+                      {currentTab === 'demo' && (
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-ink-faint">
+                            <span>Interactive In-Browser Simulation</span>
+                            <span className="text-accent font-semibold">{project.interactiveDemo.title}</span>
+                          </div>
+                          <ProjectInteractiveDemo type={project.interactiveDemo.type} projectId={project.id} />
+                          <p className="text-[11px] text-ink-muted font-sans">
+                            {project.interactiveDemo.summary}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* 4. STRUCTURED SCREENSHOTS PANEL */}
+                      {currentTab === 'screenshots' && (
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-ink-faint">
+                            <span>Mobile Screen Mockup Slots</span>
+                            <span className="text-[10px] text-accent">Extensible Schema</span>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            {project.screenshots.map((s) => (
+                              <div
+                                key={s.id}
+                                className="p-2.5 rounded-lg bg-canvas border border-border-subtle flex flex-col justify-between"
+                              >
+                                <div className="aspect-[9/16] rounded-md bg-elevated border border-dashed border-border-strong flex flex-col items-center justify-center p-2 text-center overflow-hidden">
+                                  {s.url ? (
+                                    <img src={s.url} alt={s.caption} className="w-full h-full object-cover rounded" />
+                                  ) : (
+                                    <div className="space-y-2 p-1">
+                                      <Smartphone className="w-6 h-6 text-accent mx-auto opacity-70" />
+                                      <span className="text-[10px] font-mono font-bold text-ink block leading-tight">
+                                        {s.placeholderLabel}
+                                      </span>
+                                      <span className="text-[9px] font-mono text-ink-faint block">
+                                        [Asset slot ready]
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                                <p className="text-[10px] text-ink-muted mt-2 font-sans leading-tight line-clamp-2">
+                                  {s.caption}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-[10px] font-mono text-ink-faint italic text-right">
+                            * Structured data ready in src/data/projects.ts for incoming app screenshots.
+                          </div>
+                        </div>
+                      )}
+
+                      {/* 5. OUTCOME PANEL */}
                       {currentTab === 'outcome' && (
                         <div className="space-y-3">
                           <div className="text-xs font-mono uppercase tracking-wider text-ink-faint">
@@ -320,7 +405,7 @@ export const SelectedWork: React.FC = () => {
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className={`touch-target px-3 py-1.5 text-xs font-mono rounded-md border transition-colors ${
+                  className={`btn-tactile touch-target px-3 py-1.5 text-xs font-mono rounded-md border transition-colors ${
                     selectedCategory === category
                       ? 'bg-accent text-white border-accent font-semibold shadow-subtle'
                       : 'bg-surface text-ink-muted border-border-subtle hover:border-border-strong hover:text-ink'
@@ -337,7 +422,7 @@ export const SelectedWork: React.FC = () => {
             {filteredSecondary.map((item: SecondaryProject) => (
               <div
                 key={item.id}
-                className="spec-card p-4 sm:p-6 rounded-xl bg-surface overflow-hidden flex flex-col justify-between hover:shadow-card transition-all"
+                className="spec-card p-4 sm:p-6 rounded-xl bg-surface overflow-hidden flex flex-col justify-between hover:shadow-card transition-all btn-tactile"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">

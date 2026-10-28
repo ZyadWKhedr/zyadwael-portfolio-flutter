@@ -4,6 +4,20 @@ import ravalIcon from '@/assets/raval-icon.png';
 import payssIcon from '@/assets/payss-icon.png';
 import chessIcon from '@/assets/chess-icon.png';
 
+export interface AppScreenshot {
+  id: string;
+  url?: string;
+  caption: string;
+  placeholderLabel: string;
+}
+
+export interface InteractiveDemo {
+  type: 'dispatch_queue' | 'station_radar' | 'reactive_cart' | 'qr_scanner' | 'liquid_canvas';
+  title: string;
+  subtitle: string;
+  summary: string;
+}
+
 export interface FeaturedProject {
   id: string;
   title: string;
@@ -24,6 +38,8 @@ export interface FeaturedProject {
     github?: string;
     live?: string;
   };
+  screenshots: AppScreenshot[];
+  interactiveDemo: InteractiveDemo;
 }
 
 export interface SecondaryProject {
@@ -72,6 +88,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       appStore: 'https://apps.apple.com/us/app/amoomy-%D8%B9%D9%85%D9%88%D9%85%D9%8A-%D8%A7%D9%84%D9%86%D9%82%D9%84-%D8%A7%D9%84%D8%AB%D9%82%D9%8A%D9%84/id6753125564',
       playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.amoomy',
     },
+    screenshots: [
+      { id: 'am-1', caption: 'Role-based driver dispatch and vehicle category selection', placeholderLabel: 'Driver Dispatch Screen' },
+      { id: 'am-2', caption: 'Real-time quotation bids comparison and operator negotiation', placeholderLabel: 'Quotation Matrix Screen' },
+      { id: 'am-3', caption: 'Offline corridor request buffer with auto-sync', placeholderLabel: 'Corridor Route Tracking Screen' },
+    ],
+    interactiveDemo: {
+      type: 'dispatch_queue',
+      title: 'Real-Time Dispatch Bid Simulator',
+      subtitle: 'Simulate live heavy-equipment bid negotiations between client and operators',
+      summary: 'Demonstrates offline-safe order state dispatch and multi-role context switching.',
+    },
   },
   {
     id: 'wofoodi',
@@ -98,6 +125,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     links: {
       appStore: 'https://apps.apple.com/us/app/%D9%88%D9%81%D9%88%D8%AF%D9%8A/id6751444551',
       playStore: 'https://play.google.com/store/apps/details?id=com.wofoodi.app.sa',
+    },
+    screenshots: [
+      { id: 'wo-1', caption: 'Geospatial radar with fuel grade availability filter', placeholderLabel: 'Highway Station Map Screen' },
+      { id: 'wo-2', caption: 'Station detailed intelligence: diesel, 91, 95 prices', placeholderLabel: 'Station Price Details Screen' },
+      { id: 'wo-3', caption: 'Turn-by-turn route navigation with offline price fallback', placeholderLabel: 'Route Navigation Screen' },
+    ],
+    interactiveDemo: {
+      type: 'station_radar',
+      title: 'Geospatial Fuel Radar Simulation',
+      subtitle: 'Simulate trajectory-based station clustering and live price filtering',
+      summary: 'Demonstrates sub-meter route radius filtering and compile-time SVG map markers.',
     },
   },
   {
@@ -126,6 +164,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       appStore: 'https://apps.apple.com/us/app/raval/id6756228964',
       playStore: 'https://play.google.com/store/apps/details?id=com.zeroonez.raval',
     },
+    screenshots: [
+      { id: 'ra-1', caption: 'High-speed catalog browse with zero layout-shift progressive loader', placeholderLabel: 'Product Catalog Screen' },
+      { id: 'ra-2', caption: 'Optimistic reactive cart calculation and coupon engine', placeholderLabel: 'Cart & Checkout Screen' },
+      { id: 'ra-3', caption: 'Real-time order dispatch lifecycle timeline tracker', placeholderLabel: 'Order Lifecycle Tracking Screen' },
+    ],
+    interactiveDemo: {
+      type: 'reactive_cart',
+      title: 'Optimistic State Cart Calculation',
+      subtitle: 'Experience instant UI state recomputation with zero spinner delay',
+      summary: 'Demonstrates Clean Architecture domain entities with reactive price calculation.',
+    },
   },
   {
     id: 'payss',
@@ -152,6 +201,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       appStore: 'https://apps.apple.com/eg/app/payss/id6767013931',
       playStore: 'https://play.google.com/store/apps/details?id=com.payss.app',
     },
+    screenshots: [
+      { id: 'pa-1', caption: 'Hardware-throttled camera viewfinder with instant QR alignment target', placeholderLabel: 'QR Scanner Viewfinder Screen' },
+      { id: 'pa-2', caption: 'Local merchant discovery map with real-time distance recalculation', placeholderLabel: 'Merchant Feed Screen' },
+      { id: 'pa-3', caption: 'AES-256 encrypted rewards wallet and live point balance badge', placeholderLabel: 'Rewards Wallet Screen' },
+    ],
+    interactiveDemo: {
+      type: 'qr_scanner',
+      title: 'Sub-100ms QR Recognition & Reward Ledger',
+      subtitle: 'Simulate instant merchant QR check-in and encrypted point balance increment',
+      summary: 'Demonstrates camera viewfinder frame throttling and WebSocket reward synchronization.',
+    },
   },
   {
     id: 'liquid-navbar',
@@ -176,6 +236,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     links: {
       live: 'https://pub.dev/packages/liquid_navbar',
       github: 'https://github.com/ZyadWKhedr',
+    },
+    screenshots: [
+      { id: 'ln-1', caption: 'Fluid spring physics curve reacting to tap coordinates', placeholderLabel: 'Fluid Bezier Matrix Spec' },
+      { id: 'ln-2', caption: 'Declarative Cupertino & Material 3 palette configuration', placeholderLabel: 'Theme Configuration Spec' },
+      { id: 'ln-3', caption: 'pub.dev package score ledger (130/140 points)', placeholderLabel: 'Package Quality Scorecard' },
+    ],
+    interactiveDemo: {
+      type: 'liquid_canvas',
+      title: 'Interactive Spring Physics Canvas',
+      subtitle: 'Tap the navigation buttons below to test the fluid bezier wave in real time',
+      summary: 'Runs custom canvas matrix calculations directly in the browser replicating Flutter CustomPainter.',
     },
   },
 ];

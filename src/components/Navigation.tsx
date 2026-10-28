@@ -40,7 +40,7 @@ export const Navigation: React.FC = () => {
 
   // Section observer
   useEffect(() => {
-    const sections = ['hero', 'work', 'skills', 'writing', 'about', 'contact'];
+    const sections = ['hero', 'work', 'skills', 'writing', 'testimonials', 'about', 'contact'];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 180;
       for (const id of sections) {
@@ -63,6 +63,7 @@ export const Navigation: React.FC = () => {
     { label: 'Work', href: '#work' },
     { label: 'Skills', href: '#skills' },
     { label: 'Writing', href: '#writing' },
+    { label: 'Reviews', href: '#testimonials' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -89,7 +90,7 @@ export const Navigation: React.FC = () => {
               Zyad Wael
             </span>
             <span className="hidden sm:inline-flex items-center text-[11px] font-mono tracking-wider uppercase px-2 py-0.5 rounded border border-border-subtle text-ink-muted bg-surface">
-              Flutter · AI
+              Alexandria · Flutter &amp; AI
             </span>
           </a>
 
@@ -101,13 +102,16 @@ export const Navigation: React.FC = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`touch-target px-3.5 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`btn-tactile touch-target relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     isActive
                       ? 'text-accent font-semibold'
                       : 'text-ink-muted hover:text-ink hover:bg-surface/50'
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-accent rounded-full animate-in fade-in duration-200" />
+                  )}
                 </a>
               );
             })}

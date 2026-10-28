@@ -1,106 +1,112 @@
+import React from 'react';
+import { Quote, Linkedin, ExternalLink, MessageSquarePlus } from 'lucide-react';
+import { TESTIMONIALS } from '@/data/testimonials';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Quote } from 'lucide-react';
-import { AnimatedSection, AnimatedItem } from '@/components/AnimatedSection';
+const LINKEDIN_PROFILE = 'https://www.linkedin.com/in/zyad-wael-a9035a275/';
 
-const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Ali Khaled",
-      role: "UI/UX Designer",
-      company: "Xperience Software Solutions",
-      quote: "Working with Zyad has been a pleasure — his Flutter development skills are impressive, and he consistently delivers clean, maintainable, and well-structured code. His attention to detail and dedication to creating intuitive user experiences make collaboration seamless. I highly recommend him for any mobile app or software project.",
-      avatar: "👨‍💻",
-      linkedIn: "https://www.linkedin.com/in/alikhaled19/"
-    },
-    {
-      name: "Ahmed Abd Alaziz",
-      role: "Flutter Developer",
-      company: "ZeroOneZ",
-      quote: "I had the pleasure of working with Ziad, and he is a dedicated and reliable professional. He is highly motivated, open to new ideas, and approaches challenges with a positive and flexible mindset. He is also a great team player and a pleasure to work with. I highly recommend him.",
-      avatar: "👨‍💻",
-      linkedIn: "https://www.linkedin.com/in/ahmed-abd-alaziz/"
-    },
-    {
-      name: "Karim Balbaa",
-      role: "Head of Cyber Security Committee",
-      company: "HackerRank Campus Club",
-      quote: "Zyad consistently demonstrates exceptional technical skills and a strong ability to solve complex problems. His deep understanding of Flutter and mobile app development, combined with his creative approach, makes him a highly valuable asset to any team. Beyond his technical expertise, Zyad is a smart and quick learner who adapts to new challenges effortlessly.",
-      avatar: "🛡️",
-      linkedIn: "https://www.linkedin.com/in/karim-balbaa/"
-    }
-  ];
-
+export const TestimonialsSection: React.FC = () => {
   return (
-    <section id="testimonials" className="py-20 px-4 lg:px-8">
-      <div className="container mx-auto">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-flutter-purple to-flutter-blue bg-clip-text text-transparent mb-6">
-            Testimonials
-          </h2>
-          <div className="w-24 h-1 bg-flutter-gradient mx-auto rounded-full"></div>
-          <p className="text-muted-foreground mt-6 text-lg">
-            What people say about working with me
+    <section id="testimonials" className="py-20 md:py-28 border-b border-border-subtle bg-surface/40">
+      <div className="container max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-border-subtle">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              <span>Colleague Endorsements</span>
+            </div>
+            <h2 className="font-serif fluid-3xl font-bold tracking-tight text-ink">
+              Engineering Peer Reviews
+            </h2>
+          </div>
+          <p className="text-ink-muted text-sm md:text-base max-w-md font-sans leading-relaxed">
+            Direct recommendations from software engineers, UI/UX designers, and campus leadership 
+            collaborators on verified LinkedIn profiles.
           </p>
-        </AnimatedSection>
-
-        {/* Mobile: horizontal snap carousel */}
-        <div className="md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 scrollbar-hide">
-          {testimonials.map((t, i) => (
-            <AnimatedItem key={i} delay={i * 0.1}>
-              <Card className="glass border-0 snap-center shrink-0 w-[82vw] max-w-sm overflow-hidden relative">
-                <CardContent className="p-6">
-                  <Quote className="h-8 w-8 text-flutter-teal/30 mb-2" />
-                  <p className="text-sm text-foreground/80 leading-relaxed mb-4 italic line-clamp-4">
-                    "{t.quote}"
-                  </p>
-                  <div
-                    className={`flex items-center gap-3 ${t.linkedIn ? 'cursor-pointer' : ''}`}
-                    onClick={() => t.linkedIn && window.open(t.linkedIn, '_blank')}
-                  >
-                    <div className="text-2xl p-1.5 rounded-full bg-gradient-to-r from-flutter-blue/30 to-flutter-teal/30">
-                      {t.avatar}
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-flutter-light-blue">{t.name}</h4>
-                      <p className="text-[11px] text-flutter-teal">{t.company}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimatedItem>
-          ))}
         </div>
 
-        {/* Desktop: grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <AnimatedItem key={index} delay={index * 0.1}>
-              <Card className="glass border-0 hover:scale-[1.02] transition-all duration-500 group overflow-hidden relative h-full">
-                <CardContent className="p-8">
-                  <div className="absolute top-4 right-4 opacity-20">
-                    <Quote className="h-12 w-12 text-flutter-teal" />
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-12">
+          {TESTIMONIALS.map((t) => (
+            <div
+              key={t.id}
+              className="spec-card p-6 rounded-xl bg-surface flex flex-col justify-between hover:shadow-card transition-all group"
+            >
+              <div>
+                {/* Header row: Quote icon + Highlight pill */}
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-elevated border border-border-subtle flex items-center justify-center text-accent shrink-0">
+                    <Quote className="w-4 h-4" />
                   </div>
-                  <p className="text-foreground/70 leading-relaxed mb-6 italic relative z-10">
-                    "{testimonial.quote}"
-                  </p>
-                  <div
-                    className={`flex items-center gap-4 ${testimonial.linkedIn ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
-                    onClick={() => testimonial.linkedIn && window.open(testimonial.linkedIn, '_blank')}
+                  <span className="px-2 py-0.5 rounded bg-accent-subtle text-accent text-[10px] font-mono font-semibold uppercase tracking-wider text-right line-clamp-1">
+                    {t.highlight}
+                  </span>
+                </div>
+
+                {/* Quote body */}
+                <blockquote className="text-xs md:text-sm text-ink-muted font-sans leading-relaxed italic mb-6">
+                  "{t.quote}"
+                </blockquote>
+              </div>
+
+              {/* Attribution footer */}
+              <div className="pt-4 border-t border-border-subtle flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-elevated border border-border-strong flex items-center justify-center text-xs font-mono font-bold text-ink">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold text-ink font-sans flex items-center gap-1.5">
+                      <span>{t.name}</span>
+                    </h3>
+                    <p className="text-[11px] text-ink-faint font-mono">
+                      {t.role} · {t.company}
+                    </p>
+                  </div>
+                </div>
+
+                {t.linkedIn && (
+                  <a
+                    href={t.linkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="touch-target p-2 rounded-md text-ink-faint hover:text-accent hover:bg-elevated transition-colors"
+                    aria-label={`View ${t.name}'s verified profile on LinkedIn`}
                   >
-                    <div className="text-3xl p-2 rounded-full bg-gradient-to-r from-flutter-blue to-flutter-teal bg-opacity-20">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-flutter-light-blue">{testimonial.name}</h4>
-                      <p className="text-sm text-foreground/60">{testimonial.role}</p>
-                      <p className="text-xs text-flutter-teal">{testimonial.company}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimatedItem>
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </div>
           ))}
+
+          {/* Invitation Card for Future Collaborators */}
+          <div className="spec-card p-6 rounded-xl bg-elevated/40 border-dashed border-border-strong flex flex-col justify-between">
+            <div>
+              <div className="w-8 h-8 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-accent mb-4">
+                <MessageSquarePlus className="w-4 h-4" />
+              </div>
+              <h3 className="font-serif text-lg font-bold text-ink mb-2">
+                Collaborated on a project?
+              </h3>
+              <p className="text-xs text-ink-muted font-sans leading-relaxed">
+                If we have shipped software, resolved complex architecture, or led technical workshops together, 
+                your endorsement on LinkedIn is always appreciated.
+              </p>
+            </div>
+
+            <div className="pt-6">
+              <a
+                href={LINKEDIN_PROFILE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="touch-target inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-border-strong bg-surface hover:border-accent hover:text-accent text-xs font-mono font-medium transition-colors w-full justify-center"
+              >
+                <span>Leave a LinkedIn Endorsement</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
