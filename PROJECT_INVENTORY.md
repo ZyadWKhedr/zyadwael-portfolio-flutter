@@ -83,11 +83,16 @@
   - GitHub: [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
 - **Evidence source:** Official Dart package repository scoring 130/140 pub points.
 - **Classification:** **Featured Open-Source Package (Flutter & Dart Ecosystem)**.
-- **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
-- **Live demo / App Store / Download:**
-  - pub.dev Package: [pub.dev/packages/liquid_navbar](https://pub.dev/packages/liquid_navbar)
-- **Evidence source:** Official Dart package repository (`pub.dev`), verified 130/140 pub points.
-- **Classification:** **Featured Case Study** (Demonstrates open-source credibility, native 60fps canvas mathematics, framework-level component engineering).
+
+---
+
+### Project 06: Boa — Archive Explorer & Compression Engine
+- **What it does:** Fast, secure command-line tool and terminal archive explorer written in Go for multi-threaded streaming compression, archive inspection without extraction, performance benchmarking, and neutralizing Zip-Slip path traversal exploits.
+- **Target users / Problem solved:** Developers needing high-performance compression (Zstandard & DEFLATE) and safe archive extraction without path traversal vulnerabilities.
+- **Verified contribution:** Author & Systems Engineer. Implemented the CLI in Go, streaming compression engine, Bubble Tea TUI archive explorer, and Zip-Slip path traversal sanitizer.
+- **Actual technologies & architecture:** Go 1.21+, Bubble Tea TUI, DEFLATE, Zstandard, Store algorithms, Streaming I/O, Zip-Slip protection, Cross-platform static binaries.
+- **GitHub URL:** [GitHub - Boa](https://github.com/ZyadWKhedr/Boa)
+- **Classification:** **Featured Open-Source Project (Developer Tooling & Systems Engineering)**.
 
 ---
 

@@ -22,6 +22,7 @@ import { SECONDARY_PROJECTS } from '@/data/projects';
 import type { SecondaryProject } from '@/types/project';
 import { InteractiveSmartphone } from '@/components/showcase/InteractiveSmartphone';
 import { LiquidNavbarShowcase } from '@/components/showcase/LiquidNavbarShowcase';
+import { BoaShowcase } from '@/components/showcase/BoaShowcase';
 
 type TabKey = 'architecture' | 'decisions' | 'outcome';
 type CategoryFilter = 'All' | 'Mobile' | 'Mobile Systems' | 'Data & Analytics' | 'Wearable & Games';
@@ -394,6 +395,26 @@ export const SelectedWork: React.FC = () => {
           </div>
 
           <LiquidNavbarShowcase />
+        </div>
+
+        {/* ========================================================================= */}
+        {/* FEATURED OPEN-SOURCE PROJECT: BOA CLI & ARCHIVE TOOL (NON-INTERACTIVE) */}
+        {/* ========================================================================= */}
+        <div className="pt-8 pb-16 text-start">
+          <div className="max-w-3xl mb-8">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400 mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{t('work.boaCategory', 'Featured Open-Source Project · Developer Tooling & CLI')}</span>
+            </div>
+            <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
+              {t('work.boaTitle', 'Boa — Archive Explorer & Compression Engine in Go')}
+            </h3>
+            <p className="text-sm md:text-base text-ink-muted leading-relaxed font-sans mt-2">
+              {t('work.boaSubtitle', 'A fast command-line tool written in Go for multi-threaded streaming compression, exploring archives without extraction, benchmarking algorithms, and neutralizing Zip-Slip path traversal exploits.')}
+            </p>
+          </div>
+
+          <BoaShowcase />
         </div>
 
         {/* ========================================================================= */}
