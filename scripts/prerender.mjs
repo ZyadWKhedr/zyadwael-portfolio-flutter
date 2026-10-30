@@ -63,11 +63,30 @@ async function prerender() {
   fs.writeFileSync(notFoundHtmlPath, rootRendered, 'utf-8');
   console.log('[Success] Created dist/404.html for GitHub Pages routing.');
 
-  // Clean up any old ufuq directory
+  // 3. Pre-render dist/ufuq/index.html with UfuqShowcasePage content & meta
   const ufuqDir = path.join(distDir, 'ufuq');
-  if (fs.existsSync(ufuqDir)) {
-    fs.rmSync(ufuqDir, { recursive: true, force: true });
+  if (!fs.existsSync(ufuqDir)) {
+    fs.mkdirSync(ufuqDir, { recursive: true });
   }
+
+  const { html: ufuqHtml } = render('/zyadwael-portfolio-flutter/ufuq');
+  let ufuqRendered = rawBaseTemplate.replace(
+    '<div id="root"></div>',
+    `<div id="root">${ufuqHtml}</div>`
+  );
+
+  // Customize Title and Meta Description for Ufuq
+  ufuqRendered = ufuqRendered.replace(
+    /<title>.*?<\/title>/,
+    '<title>Ufuq (أفق) — Islamic Companion iOS App | Offline Quran, Prayer Times &amp; Radio</title>'
+  );
+  ufuqRendered = ufuqRendered.replace(
+    /<meta name="description" content=".*?" \/>/,
+    '<meta name="description" content="Ufuq (أفق) is a free, ad-free Islamic spiritual companion iOS app featuring 100% offline Medina Quran, 24/7 background Quran radio from Cairo, astronomical GPS prayer times, and tactile Subha counter." />'
+  );
+
+  fs.writeFileSync(path.join(ufuqDir, 'index.html'), ufuqRendered, 'utf-8');
+  console.log(`[Success] Pre-rendered ${ufuqHtml.length} chars of HTML directly into dist/ufuq/index.html`);
 
   // Clean up ssr directory so GitHub Pages artifact is clean
   fs.rmSync(path.join(distDir, 'ssr'), { recursive: true, force: true });
