@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Moon, Download, Menu, X, ArrowUpRight, Globe, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sun, Moon, Download, Menu, X, ArrowUpRight, Globe, Check, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from '@/i18n';
 
@@ -86,12 +87,13 @@ export const Navigation: React.FC = () => {
   const currentLangObj = SUPPORTED_LANGUAGES.find((l) => l.code === currentLangCode) || SUPPORTED_LANGUAGES[0];
 
   const navLinks = [
-    { label: t('nav.work', 'Work'), href: '#work' },
-    { label: t('nav.skills', 'Capabilities'), href: '#skills' },
-    { label: t('nav.writing', 'Writing'), href: '#writing' },
-    { label: t('nav.testimonials', 'Reviews'), href: '#testimonials' },
-    { label: t('nav.about', 'About'), href: '#about' },
-    { label: t('nav.contact', 'Contact'), href: '#contact' },
+    { label: t('nav.work', 'Work'), href: '#work', isRouter: false },
+    { label: 'Ufuq Showcase ✦', href: '/ufuq', isRouter: true },
+    { label: t('nav.skills', 'Capabilities'), href: '#skills', isRouter: false },
+    { label: t('nav.writing', 'Writing'), href: '#writing', isRouter: false },
+    { label: t('nav.testimonials', 'Reviews'), href: '#testimonials', isRouter: false },
+    { label: t('nav.about', 'About'), href: '#about', isRouter: false },
+    { label: t('nav.contact', 'Contact'), href: '#contact', isRouter: false },
   ];
 
   return (
@@ -120,6 +122,17 @@ export const Navigation: React.FC = () => {
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main navigation">
             {navLinks.map((link) => {
+              if (link.isRouter) {
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="btn-tactile touch-target relative px-3 py-2 text-sm font-medium rounded-md text-emerald-500 dark:text-emerald-400 hover:text-emerald-600 dark:hover:text-emerald-300 font-mono transition-colors flex items-center gap-1"
+                  >
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              }
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
@@ -245,16 +258,31 @@ export const Navigation: React.FC = () => {
           </div>
 
           <nav className="flex flex-col gap-3 my-6" aria-label="Mobile links">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="touch-target text-xl font-serif font-medium text-ink hover:text-accent py-2 border-b border-border-subtle/50 text-start"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.isRouter) {
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="touch-target text-xl font-serif font-medium text-emerald-500 dark:text-emerald-400 hover:text-emerald-600 dark:hover:text-emerald-300 py-2 border-b border-border-subtle/50 text-start flex items-center justify-between"
+                  >
+                    <span>{link.label}</span>
+                    <Sparkles className="w-4 h-4 text-emerald-400" />
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="touch-target text-xl font-serif font-medium text-ink hover:text-accent py-2 border-b border-border-subtle/50 text-start"
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Mobile Language Selector */}

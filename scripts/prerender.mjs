@@ -47,18 +47,46 @@ async function prerender() {
   }
 
   const { render } = await import('file:///' + ssrEntryPath.replace(/\\/g, '/'));
-  const { html } = render();
+  const rawBaseTemplate = fs.readFileSync(indexHtmlPath, 'utf-8');
 
-  let template = fs.readFileSync(indexHtmlPath, 'utf-8');
-
-  // Inject rendered HTML into root container
-  template = template.replace(
+  // 1. Pre-render Root Index
+  const { html: indexHtml } = render('/zyadwael-portfolio-flutter/');
+  const rootRendered = rawBaseTemplate.replace(
     '<div id="root"></div>',
-    `<div id="root">${html}</div>`
+    `<div id="root">${indexHtml}</div>`
+  );
+  fs.writeFileSync(indexHtmlPath, rootRendered, 'utf-8');
+  console.log(`[Success] Pre-rendered ${indexHtml.length} chars of HTML directly into dist/index.html`);
+
+  // 2. Ensure 404.html exists for GitHub Pages SPA fallback
+  const notFoundHtmlPath = path.join(distDir, '404.html');
+  fs.writeFileSync(notFoundHtmlPath, rootRendered, 'utf-8');
+  console.log('[Success] Created dist/404.html for GitHub Pages routing.');
+
+  // 3. Pre-render dist/ufuq/index.html with UfuqShowcasePage content & meta
+  const ufuqDir = path.join(distDir, 'ufuq');
+  if (!fs.existsSync(ufuqDir)) {
+    fs.mkdirSync(ufuqDir, { recursive: true });
+  }
+
+  const { html: ufuqHtml } = render('/zyadwael-portfolio-flutter/ufuq');
+  let ufuqRendered = rawBaseTemplate.replace(
+    '<div id="root"></div>',
+    `<div id="root">${ufuqHtml}</div>`
   );
 
-  fs.writeFileSync(indexHtmlPath, template, 'utf-8');
-  console.log(`[Success] Pre-rendered ${html.length} chars of HTML directly into dist/index.html`);
+  // Customize Title and Meta Description for Ufuq
+  ufuqRendered = ufuqRendered.replace(
+    /<title>.*?<\/title>/,
+    '<title>Ufuq (أفق) — Islamic Companion &amp; Audio Streaming iOS App by Zyad Wael</title>'
+  );
+  ufuqRendered = ufuqRendered.replace(
+    /<meta name="description" content=".*?" \/>/,
+    '<meta name="description" content="Explore Ufuq (أفق) — a modern Islamic spiritual companion engineered with Flutter, BLoC clean architecture, offline SQLite Holy Quran, and 24/7 background audio radio streaming on iOS." />'
+  );
+
+  fs.writeFileSync(path.join(ufuqDir, 'index.html'), ufuqRendered, 'utf-8');
+  console.log(`[Success] Pre-rendered ${ufuqHtml.length} chars of HTML directly into dist/ufuq/index.html`);
 
   // Clean up ssr directory so GitHub Pages artifact is clean
   fs.rmSync(path.join(distDir, 'ssr'), { recursive: true, force: true });

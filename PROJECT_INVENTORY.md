@@ -62,32 +62,27 @@
 - **Target users / Problem solved:** Solves the problem of ad-heavy, fragmented apps by providing an offline-first, distraction-free Islamic companion with streaming audio and calibrated Qibla compass.
 - **Verified contribution:** Solo Mobile Engineer. Architected and implemented the iOS application, background audio streaming isolates, SQLite local database, and sensor-calibrated compass.
 - **Actual technologies & architecture:** Flutter, Dart, Clean Architecture, BLoC/Provider state management, SQLite offline cache, Sensors API (magnetometer), Audio Streaming SDK, Local Notifications.
-- **Relevant screenshots / assets:** App icon `ufuq-icon.png` in repository root and public images directory.
+- **Relevant screenshots / assets:** App icon `ufuq-icon.png` and full App Store screenshots (`ufuq-screen-1.jpg` to `ufuq-screen-7.jpg`) in `public/assets/images/projects/ufuq/`.
 - **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
 - **Live demo / App Store / Download:**
   - Apple App Store (ID: `6821979552`): [Ufuq on App Store](https://apps.apple.com/us/app/ufuq/id6821979552)
+  - Dedicated Showcase Page: `/ufuq` route on portfolio with Spotify-inspired theme, iPhone 18 mockups with transitions, live radio simulation, and full architecture dossier.
 - **Evidence source:** Apple App Store official listing.
-- **Classification:** **Featured Case Study** (Demonstrates background audio streaming isolates, offline SQLite storage, and hardware magnetometer calibration).
+- **Classification:** **Featured Case Study & Dedicated Showcase Page**.
 
 ---
 
-### Project 05: Boa — Interactive Terminal Toolkit & Compression Engine
-- **What it does:** High-performance, interactive terminal toolkit for compressing files, exploring archives without extraction, benchmarking compression algorithms, and neutralizing Zip-Slip path traversal exploits.
-- **Target users / Problem solved:** Developers needing fast CLI archiving and safe extraction without memory spikes or directory traversal vulnerabilities.
-- **Verified contribution:** Author & Systems Engineer. Implemented the CLI in Go, Bubble Tea interactive TUI, streaming DEFLATE/Zstandard pipelines, and directory traversal sanitizer.
-- **Actual technologies & architecture:** Go 1.21+, Bubble Tea TUI, DEFLATE, Zstandard, Store algorithms, Streaming I/O, Zip-Slip protection, Cross-platform static binaries.
-- **GitHub URL:** [GitHub - Boa](https://github.com/ZyadWKhedr/Boa)
-- **Documentation:** [Boa Documentation](https://github.com/ZyadWKhedr/Boa#readme)
-- **Classification:** **Featured Open-Source Project (Developer Tooling)**.
-
----
-
-### Project 06: Liquid Navbar (`liquid_navbar`)
-- **What it does:** Physics-based iOS 18 dynamic fluid glass navigation bar component package published for Flutter developers on pub.dev.
+### Project 05: Liquid Navbar (`liquid_navbar`)
+- **What it does:** Physics-based iOS dynamic fluid glass navigation bar component package published for Flutter developers on pub.dev.
 - **Target users / Problem solved:** Flutter engineers building modern mobile apps struggled to implement fluid liquid-glass navigation animations without relying on heavy web views or unstable custom shaders.
 - **Verified contribution:** Author & Sole Maintainer. Conceptualized, mathematically modeled, and packaged the library for the open source Flutter ecosystem.
 - **Actual technologies & architecture:** Flutter, Dart, Canvas API, `CustomPainter`, Bezier curve interpolation, Vector Math, Spring Physics calculations, zero external runtime dependencies.
-- **Relevant screenshots / assets:** Package documentation and interactive examples on pub.dev.
+- **Relevant screenshots / assets:** Interactive fluid spring sandbox in `LiquidNavbarShowcase.tsx`.
+- **Live demo / Package Repository:**
+  - pub.dev Package: [pub.dev/packages/liquid_navbar](https://pub.dev/packages/liquid_navbar) (Score: 130/140 Pub Points)
+  - GitHub: [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
+- **Evidence source:** Official Dart package repository scoring 130/140 pub points.
+- **Classification:** **Featured Open-Source Package (Flutter & Dart Ecosystem)**.
 - **GitHub URL:** [GitHub - ZyadWKhedr](https://github.com/ZyadWKhedr)
 - **Live demo / App Store / Download:**
   - pub.dev Package: [pub.dev/packages/liquid_navbar](https://pub.dev/packages/liquid_navbar)

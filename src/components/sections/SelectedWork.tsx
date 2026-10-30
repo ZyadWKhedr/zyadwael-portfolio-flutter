@@ -16,11 +16,12 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { MOBILE_APPS } from '@/data/mobileShowcase';
 import { SECONDARY_PROJECTS } from '@/data/projects';
 import type { SecondaryProject } from '@/types/project';
 import { InteractiveSmartphone } from '@/components/showcase/InteractiveSmartphone';
-import { BoaTerminalShowcase } from '@/components/showcase/BoaTerminalShowcase';
+import { LiquidNavbarShowcase } from '@/components/showcase/LiquidNavbarShowcase';
 
 type TabKey = 'architecture' | 'decisions' | 'outcome';
 type CategoryFilter = 'All' | 'Mobile' | 'Mobile Systems' | 'Data & Analytics' | 'Wearable & Games';
@@ -317,7 +318,18 @@ export const SelectedWork: React.FC = () => {
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      {selectedApp.id === 'ufuq' && (
+                        <Link
+                          to="/ufuq"
+                          className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold rounded-md bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all"
+                          aria-label="View dedicated Ufuq App Showcase page"
+                        >
+                          <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+                          <span>Interactive Showcase &amp; Mockups →</span>
+                        </Link>
+                      )}
+
                       {selectedApp.links.appStore && (
                         <a
                           href={selectedApp.links.appStore}
@@ -365,23 +377,23 @@ export const SelectedWork: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* FEATURED OPEN-SOURCE PROJECT: BOA TERMINAL SHOWCASE */}
+        {/* FEATURED OPEN-SOURCE PROJECT: LIQUID NAVBAR SHOWCASE */}
         {/* ========================================================================= */}
         <div className="pt-16 pb-16 text-start">
           <div className="max-w-3xl mb-8">
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400 mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{t('work.boaCategory', 'Featured Open-Source Project · Developer Tooling')}</span>
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span>{t('work.liquidCategory', 'Featured Open-Source Package · Flutter & Dart Package')}</span>
             </div>
             <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
-              {t('work.boaTitle', 'Boa — Interactive Terminal Toolkit & Compression Engine')}
+              {t('work.liquidTitle', 'Liquid Navbar — Physics-Based Fluid Navigation for Flutter')}
             </h3>
             <p className="text-sm md:text-base text-ink-muted leading-relaxed font-sans mt-2">
-              {t('work.boaSubtitle', 'A fast, interactive terminal toolkit written in Go for compressing files, exploring archives without extraction, benchmarking algorithms, and neutralizing Zip-Slip path traversal exploits.')}
+              {t('work.liquidSubtitle', 'An open-source Flutter navigation component published on pub.dev, featuring fluid bezier spring physics, 60fps CustomPainter rendering, and zero external dependencies.')}
             </p>
           </div>
 
-          <BoaTerminalShowcase />
+          <LiquidNavbarShowcase />
         </div>
 
         {/* ========================================================================= */}
