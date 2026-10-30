@@ -102,15 +102,7 @@ export const Footer: React.FC = () => {
           <MapPin className="w-3 h-3 text-accent" />
           <span>{t('footer.location', 'Alexandria, Egypt')} · UTC+2</span>
         </div>
-        <div className="flex items-center gap-3">
-          <Link
-            to="/ufuq"
-            className="inline-flex items-center gap-1.5 text-emerald-500 hover:text-emerald-400 font-semibold transition-colors"
-          >
-            <Sparkles className="w-3 h-3 text-emerald-500" />
-            <span>Ufuq App Showcase</span>
-          </Link>
-          <span>·</span>
+        <div>
           <span>© {new Date().getFullYear()} Zyad Wael. {t('footer.rights', 'All rights reserved.')}</span>
         </div>
       </div>

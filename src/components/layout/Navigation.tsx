@@ -88,7 +88,6 @@ export const Navigation: React.FC = () => {
 
   const navLinks = [
     { label: t('nav.work', 'Work'), href: '#work', isRouter: false },
-    { label: 'Ufuq Showcase ✦', href: '/ufuq', isRouter: true },
     { label: t('nav.skills', 'Capabilities'), href: '#skills', isRouter: false },
     { label: t('nav.writing', 'Writing'), href: '#writing', isRouter: false },
     { label: t('nav.testimonials', 'Reviews'), href: '#testimonials', isRouter: false },

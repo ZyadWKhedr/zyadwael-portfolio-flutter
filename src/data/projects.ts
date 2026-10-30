@@ -216,7 +216,6 @@ export const SECONDARY_PROJECTS: SecondaryProject[] = [
     links: {
       appStore: 'https://apps.apple.com/id/app/ufuq/id6821979552',
       github: 'https://github.com/ZyadWKhedr',
-      live: '/ufuq',
     },
     evidence: 'Verified store release on Apple App Store (ID: 6821979552).',
   },

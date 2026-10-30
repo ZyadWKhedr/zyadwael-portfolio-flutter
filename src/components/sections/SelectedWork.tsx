@@ -9,20 +9,16 @@ import {
   ChevronRight,
   Smartphone,
   Filter,
-  ArrowRight,
   RotateCcw,
-  Sparkles,
   X,
   BookOpen,
+  Package,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { MOBILE_APPS } from '@/data/mobileShowcase';
 import { SECONDARY_PROJECTS } from '@/data/projects';
 import type { SecondaryProject } from '@/types/project';
 import { InteractiveSmartphone } from '@/components/showcase/InteractiveSmartphone';
-import { LiquidNavbarShowcase } from '@/components/showcase/LiquidNavbarShowcase';
-import { BoaShowcase } from '@/components/showcase/BoaShowcase';
 
 type TabKey = 'architecture' | 'decisions' | 'outcome';
 type CategoryFilter = 'All' | 'Mobile' | 'Mobile Systems' | 'Data & Analytics' | 'Wearable & Games';
@@ -41,8 +37,6 @@ export const SelectedWork: React.FC = () => {
     return p.category === selectedCategory;
   });
 
-  const isRtl = i18n.language === 'ar';
-
   // Handle escape key to close modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -57,7 +51,7 @@ export const SelectedWork: React.FC = () => {
   return (
     <section
       id="work"
-      className="scroll-mt-24 py-20 md:py-32 border-b border-border-subtle relative bg-surface/20"
+      className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle relative bg-surface/20"
     >
       <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -80,7 +74,7 @@ export const SelectedWork: React.FC = () => {
         {/* ========================================================================= */}
         {/* UNIFIED INTERACTIVE MOBILE SHOWCASE */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-14">
           {/* Left Column: The Interactive Smartphone (5 cols) */}
           <div className="lg:col-span-5 flex justify-center order-1 lg:order-1">
             <InteractiveSmartphone
@@ -320,17 +314,6 @@ export const SelectedWork: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 shrink-0">
-                      {selectedApp.id === 'ufuq' && (
-                        <Link
-                          to="/ufuq"
-                          className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold rounded-md bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all"
-                          aria-label="View dedicated Ufuq App Showcase page"
-                        >
-                          <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Interactive Showcase &amp; Mockups →</span>
-                        </Link>
-                      )}
-
                       {selectedApp.links.appStore && (
                         <a
                           href={selectedApp.links.appStore}
@@ -378,57 +361,164 @@ export const SelectedWork: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* FEATURED OPEN-SOURCE PROJECT: LIQUID NAVBAR SHOWCASE */}
+        {/* OPEN-SOURCE & DEVELOPER TOOLS (Minimal, Clean, Built by Zyad) */}
         {/* ========================================================================= */}
-        <div className="pt-16 pb-16 text-start">
+        <div className="pt-12 pb-14 text-start border-t border-border-subtle/80">
           <div className="max-w-3xl mb-8">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span>{t('work.liquidCategory', 'Featured Open-Source Package · Flutter & Dart Package')}</span>
+              <Package className="w-3.5 h-3.5" />
+              <span>{t('work.openSourceBadge', 'Open Source & Developer Tools')}</span>
             </div>
             <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
-              {t('work.liquidTitle', 'Liquid Navbar — Physics-Based Fluid Navigation for Flutter')}
+              {t('work.openSourceHeading', 'Packages & tools built by Zyad.')}
             </h3>
             <p className="text-sm md:text-base text-ink-muted leading-relaxed font-sans mt-2">
-              {t('work.liquidSubtitle', 'An open-source Flutter navigation component published on pub.dev, featuring fluid bezier spring physics, 60fps CustomPainter rendering, and zero external dependencies.')}
+              {t(
+                'work.openSourceSubheading',
+                'Production libraries and command-line utilities I authored and open-sourced for the developer community.'
+              )}
             </p>
           </div>
 
-          <LiquidNavbarShowcase />
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Liquid Navbar Card */}
+            <div className="spec-card p-6 md:p-7 rounded-2xl bg-surface border border-border-subtle hover:border-border-strong hover:shadow-card transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-semibold">
+                    Flutter / Dart Package
+                  </span>
+                  <a
+                    href="https://pub.dev/packages/liquid_navbar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+                  >
+                    pub.dev · 130/140 pts ↗
+                  </a>
+                </div>
 
-        {/* ========================================================================= */}
-        {/* FEATURED OPEN-SOURCE PROJECT: BOA CLI & ARCHIVE TOOL (NON-INTERACTIVE) */}
-        {/* ========================================================================= */}
-        <div className="pt-8 pb-16 text-start">
-          <div className="max-w-3xl mb-8">
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400 mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{t('work.boaCategory', 'Featured Open-Source Project · Developer Tooling & CLI')}</span>
+                <h4 className="font-serif text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
+                  Liquid Navbar
+                </h4>
+                <div className="text-xs font-mono text-ink-faint mb-3">
+                  Built &amp; maintained by Zyad Wael
+                </div>
+
+                <p className="text-sm text-ink-muted leading-relaxed font-sans mb-5">
+                  A fluid, physics-based navigation bar package for Flutter featuring custom bezier spring curves, 60fps CustomPainter rendering, and zero external dependencies. Published on pub.dev.
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {['Flutter', 'Dart', 'CustomPainter', 'Vector Math', 'pub.dev'].map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 text-xs font-mono rounded bg-elevated text-ink-muted border border-border-subtle"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <code className="text-xs font-mono text-ink-muted bg-canvas px-2.5 py-1 rounded border border-border-subtle select-all">
+                  flutter pub add liquid_navbar
+                </code>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://pub.dev/packages/liquid_navbar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border-strong hover:bg-elevated text-ink hover:text-accent text-xs font-mono font-medium transition-colors"
+                    aria-label="View Liquid Navbar on pub.dev"
+                  >
+                    <span>pub.dev</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href="https://github.com/ZyadWKhedr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border-strong hover:bg-elevated text-ink hover:text-accent text-xs font-mono font-medium transition-colors"
+                    aria-label="View Liquid Navbar source on GitHub"
+                  >
+                    <Code2 className="w-3.5 h-3.5" />
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
-              {t('work.boaTitle', 'Boa — Archive Explorer & Compression Engine in Go')}
-            </h3>
-            <p className="text-sm md:text-base text-ink-muted leading-relaxed font-sans mt-2">
-              {t('work.boaSubtitle', 'A fast command-line tool written in Go for multi-threaded streaming compression, exploring archives without extraction, benchmarking algorithms, and neutralizing Zip-Slip path traversal exploits.')}
-            </p>
-          </div>
 
-          <BoaShowcase />
+            {/* Boa CLI Card */}
+            <div className="spec-card p-6 md:p-7 rounded-2xl bg-surface border border-border-subtle hover:border-border-strong hover:shadow-card transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-semibold">
+                    CLI &amp; Systems Tool
+                  </span>
+                  <span className="text-xs font-mono text-ink-muted bg-surface-subtle px-2.5 py-0.5 rounded border border-border-subtle">
+                    Go 1.21+
+                  </span>
+                </div>
+
+                <h4 className="font-serif text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
+                  Boa CLI
+                </h4>
+                <div className="text-xs font-mono text-ink-faint mb-3">
+                  Built &amp; maintained by Zyad Wael
+                </div>
+
+                <p className="text-sm text-ink-muted leading-relaxed font-sans mb-5">
+                  A fast, concurrent archive explorer and compression CLI engine written in Go. Supports multi-threaded streaming compression, in-memory archive inspection without extraction, and Zip-Slip exploit protection.
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {['Go (Golang)', 'CLI Tooling', 'Streaming Compression', 'Security', 'TUI'].map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 text-xs font-mono rounded bg-elevated text-ink-muted border border-border-subtle"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <code className="text-xs font-mono text-ink-muted bg-canvas px-2.5 py-1 rounded border border-border-subtle select-all">
+                  go install github.com/zyadkhidr/boa@latest
+                </code>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://github.com/ZyadWKhedr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border-strong hover:bg-elevated text-ink hover:text-accent text-xs font-mono font-medium transition-colors"
+                    aria-label="View Boa CLI on GitHub"
+                  >
+                    <Code2 className="w-3.5 h-3.5" />
+                    <span>GitHub</span>
+                    <ExternalLink className="w-3 h-3 text-ink-faint" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* SECONDARY PROJECTS: EXTENDED TECHNICAL LEDGER */}
+        {/* SECONDARY PROJECTS: MORE PROJECTS & TECHNICAL SYSTEMS */}
         {/* ========================================================================= */}
-        <div className="pt-8 text-start">
+        <div className="pt-8 text-start border-t border-border-subtle/80">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border-subtle">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-ink-muted mb-2">
                 <Layers className="w-3.5 h-3.5 text-accent" />
-                <span>{t('work.categoryOpenSource', 'Extended Technical Ledger')}</span>
+                <span>{t('work.moreProjectsBadge', 'Additional Work')}</span>
               </div>
               <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
-                Specialized mobile client systems, analytics & experiments.
+                {t('work.moreProjectsHeading', 'More projects & mobile client systems.')}
               </h3>
             </div>
 
@@ -509,16 +599,6 @@ export const SelectedWork: React.FC = () => {
                   <div className="flex items-center justify-between text-xs font-mono pt-1">
                     {/* Store & GitHub Action Buttons */}
                     <div className="flex items-center gap-1.5">
-                      {proj.links.live && (
-                        <Link
-                          to={proj.links.live}
-                          className="touch-target inline-flex items-center gap-1 px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 font-mono text-[10px] font-bold border border-emerald-500/20 transition-colors"
-                          title="View Dedicated Showcase"
-                        >
-                          <Sparkles className="w-3 h-3" />
-                          <span>Showcase</span>
-                        </Link>
-                      )}
                       {proj.links.playStore && (
                         <a
                           href={proj.links.playStore}
@@ -574,7 +654,7 @@ export const SelectedWork: React.FC = () => {
                       type="button"
                       onClick={() => setModalProject(proj)}
                       className="touch-target inline-flex items-center gap-1 text-accent hover:underline font-semibold text-xs font-mono"
-                      aria-label={`Inspect ${proj.title} engineering dossier`}
+                      aria-label={`Inspect ${proj.title} details`}
                     >
                       <span>Details</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -659,7 +739,7 @@ export const SelectedWork: React.FC = () => {
             {/* In-Depth Description */}
             <div className="space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                System Overview & Specifications
+                System Overview
               </h4>
               <p className="text-sm text-ink-muted leading-relaxed font-sans">
                 {modalProject.detailedDescription || modalProject.problem}
@@ -670,7 +750,7 @@ export const SelectedWork: React.FC = () => {
             {modalProject.features && modalProject.features.length > 0 && (
               <div className="space-y-2">
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                  Engineered Capabilities
+                  Key Capabilities
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-ink-muted">
                   {modalProject.features.map((feat) => (
@@ -703,15 +783,6 @@ export const SelectedWork: React.FC = () => {
             {/* Action Footer */}
             <div className="pt-4 border-t border-border-subtle flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                {modalProject.links.live && (
-                  <Link
-                    to={modalProject.links.live}
-                    className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold shadow transition-colors"
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>View Dedicated Showcase</span>
-                  </Link>
-                )}
                 {modalProject.links.playStore && (
                   <a
                     href={modalProject.links.playStore}
@@ -753,7 +824,7 @@ export const SelectedWork: React.FC = () => {
                     className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border-strong text-ink hover:text-accent font-mono text-xs font-semibold transition-colors"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Read Technical Article</span>
+                    <span>Read Article</span>
                   </a>
                 )}
               </div>
