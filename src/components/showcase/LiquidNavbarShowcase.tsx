@@ -5,33 +5,12 @@ import {
   Code2,
   Copy,
   Check,
-  Zap,
-  Sliders,
-  Layers,
-  Flame,
   Star,
   CheckCircle2,
+  Layers,
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-
-interface NavDestination {
-  id: string;
-  label: string;
-  icon: string;
-}
-
-const DESTINATIONS: NavDestination[] = [
-  { id: 'explore', label: 'Explore', icon: '✦' },
-  { id: 'audio', label: 'Recitations', icon: '♫' },
-  { id: 'prayer', label: 'Prayer', icon: '◐' },
-  { id: 'saved', label: 'Bookmarks', icon: '★' },
-];
 
 export const LiquidNavbarShowcase: React.FC = () => {
-  const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState(0);
-  const [styleMode, setStyleMode] = useState<'liquid-glass' | 'material3'>('liquid-glass');
-  const [bounciness, setBounciness] = useState<'smooth' | 'spring' | 'elastic'>('spring');
   const [copiedInstall, setCopiedInstall] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
 
@@ -119,164 +98,63 @@ LiquidNavbar(
         </div>
       </div>
 
-      {/* Main Interactive Playground & Code Split */}
+      {/* Static Visual Preview & Code Split (Non-interactive) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-border-subtle">
-        {/* Left Column: Interactive Fluid Spring Sandbox (7 cols) */}
+        {/* Left Column: Static Visual Display & Specs (7 cols) */}
         <div className="lg:col-span-7 p-6 md:p-8 space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-accent" />
+              <Layers className="w-4 h-4 text-accent" />
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
-                Live Interactive Physics Sandbox
+                Visual Architecture &amp; Component Layout
               </h4>
             </div>
             <span className="font-mono text-xs text-ink-muted">
-              60 FPS CustomPainter Simulation
+              60 FPS CustomPainter Rendering
             </span>
           </div>
 
-          {/* Interactive Configuration Controls */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-surface border border-border-subtle">
-            {/* Style Variant */}
-            <div className="space-y-1.5">
-              <label className="font-mono text-[11px] text-ink-muted uppercase block">
-                Visual Shader Mode
-              </label>
-              <div className="flex rounded-lg bg-elevated p-1 border border-border-subtle">
-                <button
-                  type="button"
-                  onClick={() => setStyleMode('liquid-glass')}
-                  className={`flex-1 py-1 px-2 rounded text-xs font-mono transition-colors ${
-                    styleMode === 'liquid-glass'
-                      ? 'bg-surface text-accent font-bold shadow-sm'
-                      : 'text-ink-muted hover:text-ink'
-                  }`}
-                >
-                  iOS Liquid Glass
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStyleMode('material3')}
-                  className={`flex-1 py-1 px-2 rounded text-xs font-mono transition-colors ${
-                    styleMode === 'material3'
-                      ? 'bg-surface text-accent font-bold shadow-sm'
-                      : 'text-ink-muted hover:text-ink'
-                  }`}
-                >
-                  Material 3 Fluid
-                </button>
-              </div>
-            </div>
+          {/* Static Visual Presentation of the Component */}
+          <div className="relative py-10 px-6 rounded-2xl bg-gradient-to-b from-surface/40 to-elevated/40 border border-border-subtle flex flex-col items-center justify-center min-h-[190px] overflow-hidden">
+            {/* Subtle Static Accent Glow */}
+            <div className="absolute w-44 h-44 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
 
-            {/* Spring Dynamics */}
-            <div className="space-y-1.5">
-              <label className="font-mono text-[11px] text-ink-muted uppercase block">
-                Spring Curve Physics
-              </label>
-              <div className="flex rounded-lg bg-elevated p-1 border border-border-subtle">
-                {(['smooth', 'spring', 'elastic'] as const).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    onClick={() => setBounciness(mode)}
-                    className={`flex-1 py-1 px-1.5 rounded text-xs font-mono capitalize transition-colors ${
-                      bounciness === mode
-                        ? 'bg-surface text-accent font-bold shadow-sm'
-                        : 'text-ink-muted hover:text-ink'
-                    }`}
-                  >
-                    {mode}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Navigation Bar Canvas */}
-          <div className="relative py-12 px-6 rounded-2xl bg-gradient-to-b from-surface/40 to-elevated/40 border border-border-subtle flex flex-col items-center justify-center min-h-[220px] overflow-hidden">
-            {/* Ambient Background Wave Glow */}
-            <div
-              className="absolute w-44 h-44 rounded-full bg-accent/15 blur-3xl transition-all duration-500 pointer-events-none"
-              style={{
-                left: `calc(${activeTab * 25}% + 12%)`,
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-            />
-
-            <p className="text-xs font-sans text-ink-muted mb-6 text-center">
-              Tap any tab below to test the dynamic fluid wave and bezier spring curve:
-            </p>
-
-            {/* The Simulated Fluid Navbar */}
-            <div
-              className={`relative w-full max-w-md h-16 rounded-full px-2 border transition-all duration-300 flex items-center justify-around shadow-lg ${
-                styleMode === 'liquid-glass'
-                  ? 'bg-surface/90 backdrop-blur-md border-border-strong/70'
-                  : 'bg-elevated border-border-subtle'
-              }`}
-            >
-              {/* Dynamic Fluid Pill Indicator */}
+            {/* Static Liquid Navbar Render */}
+            <div className="relative w-full max-w-md h-16 rounded-full px-2 border border-border-strong/70 bg-surface/90 backdrop-blur-md flex items-center justify-around shadow-lg">
+              {/* Highlight Indicator Pill */}
               <div
-                className="absolute top-2 bottom-2 rounded-full bg-accent shadow-md transition-all ease-out"
+                className="absolute top-2 bottom-2 rounded-full bg-accent shadow-md pointer-events-none"
                 style={{
                   width: 'calc(25% - 8px)',
-                  left: `calc(${activeTab * 25}% + 4px)`,
-                  transitionDuration:
-                    bounciness === 'smooth'
-                      ? '250ms'
-                      : bounciness === 'spring'
-                      ? '450ms'
-                      : '600ms',
-                  transitionTimingFunction:
-                    bounciness === 'elastic'
-                      ? 'cubic-bezier(0.68, -0.6, 0.32, 1.6)'
-                      : bounciness === 'spring'
-                      ? 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-                      : 'cubic-bezier(0.16, 1, 0.3, 1)',
+                  left: 'calc(25% + 4px)',
                 }}
               >
-                {/* Micro Fluid Droplet Lip */}
                 <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-4 h-1.5 bg-accent rounded-full blur-[1px] opacity-70" />
               </div>
 
-              {/* Destination Tabs */}
-              {DESTINATIONS.map((dest, idx) => {
-                const isActive = activeTab === idx;
-                return (
-                  <button
-                    key={dest.id}
-                    type="button"
-                    onClick={() => setActiveTab(idx)}
-                    className="touch-target relative z-10 flex-1 flex flex-col items-center justify-center py-1 text-center transition-colors group"
-                  >
-                    <span
-                      className={`text-base transition-transform duration-200 ${
-                        isActive
-                          ? 'scale-110 text-white font-bold'
-                          : 'text-ink-muted group-hover:text-ink'
-                      }`}
-                    >
-                      {dest.icon}
-                    </span>
-                    <span
-                      className={`text-[11px] font-mono transition-colors duration-200 mt-0.5 ${
-                        isActive
-                          ? 'text-white font-bold'
-                          : 'text-ink-muted group-hover:text-ink'
-                      }`}
-                    >
-                      {dest.label}
-                    </span>
-                  </button>
-                );
-              })}
+              {/* Static Destination Tabs */}
+              <div className="relative z-10 flex-1 flex flex-col items-center justify-center py-1 text-center">
+                <span className="text-base text-ink-muted">✦</span>
+                <span className="text-[11px] font-mono text-ink-muted mt-0.5">Explore</span>
+              </div>
+              <div className="relative z-10 flex-1 flex flex-col items-center justify-center py-1 text-center">
+                <span className="text-base text-white font-bold scale-110">♫</span>
+                <span className="text-[11px] font-mono text-white font-bold mt-0.5">Recitations</span>
+              </div>
+              <div className="relative z-10 flex-1 flex flex-col items-center justify-center py-1 text-center">
+                <span className="text-base text-ink-muted">◐</span>
+                <span className="text-[11px] font-mono text-ink-muted mt-0.5">Prayer</span>
+              </div>
+              <div className="relative z-10 flex-1 flex flex-col items-center justify-center py-1 text-center">
+                <span className="text-base text-ink-muted">★</span>
+                <span className="text-[11px] font-mono text-ink-muted mt-0.5">Bookmarks</span>
+              </div>
             </div>
 
-            {/* Physics Status Live Telemetry */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-ink-muted">
-              <span>Active Index: <strong className="text-ink">#{activeTab}</strong></span>
-              <span>Curve: <strong className="text-accent">{bounciness}</strong></span>
+            {/* Component Specs Ribbon */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-ink-muted">
+              <span>Framework: <strong className="text-ink">Flutter &amp; Dart</strong></span>
+              <span>Vector Math: <strong className="text-accent">Bezier Cubic</strong></span>
               <span>Render Cycle: <strong className="text-emerald-500 font-semibold">16.6ms (60 FPS)</strong></span>
             </div>
           </div>
@@ -315,7 +193,7 @@ LiquidNavbar(
               <div className="flex items-center gap-2">
                 <Code2 className="w-4 h-4 text-accent" />
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
-                  Dart API & Implementation
+                  Dart API &amp; Implementation
                 </h4>
               </div>
               <button
@@ -386,4 +264,3 @@ LiquidNavbar(
 };
 
 export default LiquidNavbarShowcase;
-

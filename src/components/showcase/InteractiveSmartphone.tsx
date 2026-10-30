@@ -83,7 +83,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
   };
 
   // 4 Primary apps for the bottom dock
-  const dockApps = apps.filter((a) => ['amoomy', 'raval', 'wofoodi', 'contact'].includes(a.id));
+  const dockApps = apps.filter((a) => ['amoomy', 'ufuq', 'wofoodi', 'raval'].includes(a.id));
 
   return (
     <div className="relative mx-auto select-none transition-all duration-300">

@@ -200,6 +200,27 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
 
 export const SECONDARY_PROJECTS: SecondaryProject[] = [
   {
+    id: 'ufuq',
+    title: 'Ufuq (أفق) — Islamic Companion & Audio',
+    arabicTitle: 'أفق - أذكار وقرآن وإذاعة',
+    category: 'Mobile',
+    tagline: 'Comprehensive spiritual companion featuring GPS prayer calculation, offline Quran, and 24/7 radio.',
+    problem: 'Muslims seeking a unified, distraction-free companion app frequently faced ad-cluttered interfaces, inaccurate prayer timing algorithms, and separate apps for Quran reading and live radio broadcasting.',
+    role: 'Solo Mobile Engineer — Built the end-to-end iOS application, streaming audio architecture, SQLite local database, and sensor-calibrated Qibla compass.',
+    stack: ['Flutter', 'Dart', 'Clean Architecture', 'Audio Streaming', 'SQLite', 'Sensors API', 'WidgetKit'],
+    icon: ufuqIcon,
+    image: '/assets/images/projects/ufuq/ufuq-preview.png',
+    features: ['100% Offline Holy Quran with Uthmani script', '24/7 Live Holy Quran Radio streaming', 'Astronomical GPS prayer times countdown', 'Hardware magnetometer Qibla compass', 'Ad-free & zero tracking'],
+    metrics: ['Shipped iOS App Store', 'Offline-First SQLite', '24/7 Audio Radio'],
+    detailedDescription: 'High-fidelity spiritual companion delivering offline Athkar, Holy Quran reading in authentic Uthmani script, GPS astronomical prayer times, and live 24/7 Islamic radio stations with background playback.',
+    links: {
+      appStore: 'https://apps.apple.com/id/app/ufuq/id6821979552',
+      github: 'https://github.com/ZyadWKhedr',
+      live: '/ufuq',
+    },
+    evidence: 'Verified store release on Apple App Store (ID: 6821979552).',
+  },
+  {
     id: 'grandmaster-chess',
     title: 'Grandmaster Mobile Chess Engine',
     arabicTitle: 'شطرنج جراند ماستر',

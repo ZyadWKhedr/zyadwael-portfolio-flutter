@@ -509,6 +509,16 @@ export const SelectedWork: React.FC = () => {
                   <div className="flex items-center justify-between text-xs font-mono pt-1">
                     {/* Store & GitHub Action Buttons */}
                     <div className="flex items-center gap-1.5">
+                      {proj.links.live && (
+                        <Link
+                          to={proj.links.live}
+                          className="touch-target inline-flex items-center gap-1 px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 font-mono text-[10px] font-bold border border-emerald-500/20 transition-colors"
+                          title="View Dedicated Showcase"
+                        >
+                          <Sparkles className="w-3 h-3" />
+                          <span>Showcase</span>
+                        </Link>
+                      )}
                       {proj.links.playStore && (
                         <a
                           href={proj.links.playStore}
@@ -693,6 +703,15 @@ export const SelectedWork: React.FC = () => {
             {/* Action Footer */}
             <div className="pt-4 border-t border-border-subtle flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
+                {modalProject.links.live && (
+                  <Link
+                    to={modalProject.links.live}
+                    className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold shadow transition-colors"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>View Dedicated Showcase</span>
+                  </Link>
+                )}
                 {modalProject.links.playStore && (
                   <a
                     href={modalProject.links.playStore}
