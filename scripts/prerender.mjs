@@ -78,11 +78,11 @@ async function prerender() {
   // Customize Title and Meta Description for Ufuq
   ufuqRendered = ufuqRendered.replace(
     /<title>.*?<\/title>/,
-    '<title>Ufuq (أفق) — Islamic Companion iOS App | Offline Quran, Prayer Times &amp; Radio</title>'
+    '<title>تطبيق أُفُق (Ufuq) — رفيقك الإسلامي للقرآن الكريم، إذاعة القاهرة، ومواقيت الصلاة</title>'
   );
   ufuqRendered = ufuqRendered.replace(
     /<meta name="description" content=".*?" \/>/,
-    '<meta name="description" content="Ufuq (أفق) is a free, ad-free Islamic spiritual companion iOS app featuring 100% offline Medina Quran, 24/7 background Quran radio from Cairo, astronomical GPS prayer times, and tactile Subha counter." />'
+    '<meta name="description" content="تطبيق إسلامي حديث يجمع المصحف الشريف بالرسم العثماني كاملاً دون إنترنت، إذاعة القرآن الكريم من القاهرة 24/7، ومواقيت الصلاة الفلكية بدقة GPS بإعلانات خفيفة للغاية وغير مشتتة تحترم خشوعك." />'
   );
 
   fs.writeFileSync(path.join(ufuqDir, 'index.html'), ufuqRendered, 'utf-8');

@@ -30,6 +30,7 @@ export default {
 				serif: ['Fraunces', 'Georgia', 'serif'],
 				sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
 				mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+				arabic: ['Cairo', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				canvas: 'var(--bg-canvas)',
