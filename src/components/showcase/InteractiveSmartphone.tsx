@@ -34,6 +34,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
   onSelectApp,
 }) => {
   const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState('9:41');
 
@@ -187,7 +188,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
 
                       {/* App Name Label */}
                       <span className="text-[10px] font-sans font-medium text-zinc-200 group-hover:text-white truncate max-w-[62px] text-center tracking-tight">
-                        {app.title}
+                        {isAr && app.arabicTitle ? app.arabicTitle.split(' - ')[0] : app.title}
                       </span>
                     </button>
                   ))}
@@ -231,20 +232,20 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                     aria-label="Return to phone home screen"
                   >
                     <ChevronLeft className="w-3.5 h-3.5" />
-                    <span>Home</span>
+                    <span>{isAr ? 'الرئيسية' : 'Home'}</span>
                   </button>
 
                   <div className="text-center truncate px-2">
                     <span className="text-xs font-bold text-white block truncate">
-                      {activeApp.title}
+                      {isAr && activeApp.arabicTitle ? activeApp.arabicTitle : activeApp.title}
                     </span>
                     <span className="text-[9px] font-mono text-zinc-400 block truncate">
-                      {activeApp.category}
+                      {isAr && activeApp.arabicCategory ? activeApp.arabicCategory : activeApp.category}
                     </span>
                   </div>
 
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent/20 text-accent font-semibold border border-accent/30">
-                    Live
+                    {isAr ? 'حي' : 'Live'}
                   </span>
                 </div>
 
@@ -265,7 +266,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                             : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
                         }`}
                       >
-                        {scr.title}
+                        {isAr && scr.arabicTitle ? scr.arabicTitle : scr.title}
                       </button>
                     ))}
                   </div>
@@ -312,10 +313,14 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                       <div className="relative z-10 p-3 pt-0 text-start flex items-end justify-between gap-2">
                         <div className="truncate">
                           <span className="text-xs font-serif font-bold text-white block truncate">
-                            {activeApp.screens[activeScreenIndex].title}
+                            {isAr && activeApp.screens[activeScreenIndex].arabicTitle
+                              ? activeApp.screens[activeScreenIndex].arabicTitle
+                              : activeApp.screens[activeScreenIndex].title}
                           </span>
                           <span className="text-[10px] font-mono text-emerald-400 block truncate">
-                            {activeApp.screens[activeScreenIndex].subtitle}
+                            {isAr && activeApp.screens[activeScreenIndex].arabicSubtitle
+                              ? activeApp.screens[activeScreenIndex].arabicSubtitle
+                              : activeApp.screens[activeScreenIndex].subtitle}
                           </span>
                         </div>
 
@@ -340,19 +345,25 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                         {/* Screen Title & Subtitle */}
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[10px] font-mono text-accent font-semibold uppercase tracking-wider">
-                            Screen 0{activeScreenIndex + 1}
+                            {isAr ? `شاشة 0${activeScreenIndex + 1}` : `Screen 0${activeScreenIndex + 1}`}
                           </span>
                           <span className="text-[10px] font-mono text-zinc-400">
-                            {activeApp.screens[activeScreenIndex].subtitle}
+                            {isAr && activeApp.screens[activeScreenIndex].arabicSubtitle
+                              ? activeApp.screens[activeScreenIndex].arabicSubtitle
+                              : activeApp.screens[activeScreenIndex].subtitle}
                           </span>
                         </div>
 
                         <h5 className="font-serif text-base font-bold text-white mb-1.5">
-                          {activeApp.screens[activeScreenIndex].title}
+                          {isAr && activeApp.screens[activeScreenIndex].arabicTitle
+                            ? activeApp.screens[activeScreenIndex].arabicTitle
+                            : activeApp.screens[activeScreenIndex].title}
                         </h5>
 
                         <p className="text-xs text-zinc-300 leading-relaxed font-sans mb-3">
-                          {activeApp.screens[activeScreenIndex].flow}
+                          {isAr && activeApp.screens[activeScreenIndex].arabicFlow
+                            ? activeApp.screens[activeScreenIndex].arabicFlow
+                            : activeApp.screens[activeScreenIndex].flow}
                         </p>
 
                         {/* Interactive Micro-Demos inside preview */}
@@ -444,7 +455,10 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
 
                         {/* Feature Highlights Checklist */}
                         <div className="space-y-1.5 pt-1">
-                          {activeApp.screens[activeScreenIndex].features.map((feat) => (
+                          {(isAr && activeApp.screens[activeScreenIndex].arabicFeatures
+                            ? activeApp.screens[activeScreenIndex].arabicFeatures
+                            : activeApp.screens[activeScreenIndex].features
+                          ).map((feat) => (
                             <div
                               key={feat}
                               className="flex items-center gap-2 text-[11px] font-mono text-zinc-300"
@@ -459,7 +473,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                       {/* Direct Store / Repository Action inside phone */}
                       <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2 mt-2">
                         <span className="text-[10px] font-mono text-zinc-400">
-                          {activeApp.metrics[0]}
+                          {isAr && activeApp.arabicMetrics ? activeApp.arabicMetrics[0] : activeApp.metrics[0]}
                         </span>
 
                         {activeApp.links.appStore && (
@@ -486,16 +500,18 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                           </a>
                         )}
 
-                        {activeApp.links.github && (
-                          <a
-                            href={activeApp.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
-                          >
-                            <Code2 className="w-3 h-3" />
-                            <span>Source</span>
-                          </a>
+                        {activeApp.links.github &&
+                          activeApp.links.github !== 'https://github.com/ZyadWKhedr' &&
+                          !activeApp.links.github.endsWith('/ZyadWKhedr') && (
+                            <a
+                              href={activeApp.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
+                            >
+                              <Code2 className="w-3 h-3" />
+                              <span>{isAr ? 'الكود' : 'Source'}</span>
+                            </a>
                         )}
                       </div>
                     </div>

@@ -79,7 +79,12 @@
     "viewPubDev": "حزمة pub.dev",
     "categoryAll": "كل المشاريع",
     "categoryMobile": "تطبيقات الموبايل",
-    "categoryOpenSource": "المشاريع المفتوحة والأنظمة"
+    "categoryOpenSource": "المشاريع المفتوحة والأنظمة",
+    "deviceConsoleTitle": "وحدة التحكم التفاعلية بالهاتف",
+    "openSourceBadge": "حزم وأدوات مفتوحة المصدر",
+    "openSourceHeading": "مكتبات وأدوات برمجية من تطوير زياد وائل.",
+    "moreProjectsBadge": "مشاريع إضافية",
+    "moreProjectsHeading": "المزيد من المشاريع وأنظمة الموبايل."
   },
   "skills": {
     "badge": "القدرات التقنية",

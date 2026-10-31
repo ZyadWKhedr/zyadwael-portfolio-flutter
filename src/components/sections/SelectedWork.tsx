@@ -28,6 +28,7 @@ type CategoryFilter = 'All' | 'Mobile' | 'Mobile Systems' | 'Data & Analytics' |
 
 export const SelectedWork: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabKey>('architecture');
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('All');
@@ -141,10 +142,10 @@ export const SelectedWork: React.FC = () => {
                             </div>
                             <div className="truncate">
                               <span className="font-serif text-sm font-bold text-ink block group-hover:text-accent transition-colors truncate">
-                                {app.title}
+                                {isAr && app.arabicTitle ? app.arabicTitle : app.title}
                               </span>
                               <span className="text-[10px] font-mono text-ink-muted block truncate">
-                                {app.category}
+                                {isAr && app.arabicCategory ? app.arabicCategory : app.category}
                               </span>
                             </div>
                           </div>
@@ -194,16 +195,16 @@ export const SelectedWork: React.FC = () => {
                       <div className="truncate">
                         <div className="flex items-center gap-2">
                           <h3 className="font-serif text-2xl font-bold text-ink truncate">
-                            {selectedApp.title}
+                            {isAr && selectedApp.arabicTitle ? selectedApp.arabicTitle : selectedApp.title}
                           </h3>
-                          {selectedApp.arabicTitle && (
+                          {!isAr && selectedApp.arabicTitle && (
                             <span className="font-serif text-xs px-2 py-0.5 rounded bg-surface-subtle text-ink-muted border border-border-subtle shrink-0">
                               {selectedApp.arabicTitle}
                             </span>
                           )}
                         </div>
                         <p className="text-xs font-mono text-accent font-medium mt-0.5">
-                          {selectedApp.category} · {selectedApp.badge}
+                          {isAr && selectedApp.arabicCategory ? selectedApp.arabicCategory : selectedApp.category} · {isAr && selectedApp.arabicBadge ? selectedApp.arabicBadge : selectedApp.badge}
                         </p>
                       </div>
                     </div>
@@ -222,14 +223,14 @@ export const SelectedWork: React.FC = () => {
                   {/* Role & Problem Context */}
                   <div className="p-4 rounded-xl bg-canvas/60 border border-border-subtle/80 space-y-2">
                     <div className="text-xs font-mono text-ink-faint">
-                      <span className="font-semibold text-ink">{t('work.roleLabel', 'Engineering Role')}:</span>{' '}
-                      {selectedApp.role}
+                      <span className="font-semibold text-ink">{isAr ? 'الدور الهندسي:' : t('work.roleLabel', 'Engineering Role')}:</span>{' '}
+                      {isAr && selectedApp.arabicRole ? selectedApp.arabicRole : selectedApp.role}
                     </div>
                     <div className="text-xs md:text-sm text-ink-muted font-sans leading-relaxed">
                       <span className="font-semibold text-ink font-mono text-xs block mb-1">
-                        {t('work.problemLabel', 'Core Problem')}:
+                        {isAr ? 'المشكلة الأساسية:' : t('work.problemLabel', 'Core Problem')}:
                       </span>
-                      {selectedApp.description}
+                      {isAr && selectedApp.arabicDescription ? selectedApp.arabicDescription : selectedApp.description}
                     </div>
                   </div>
 
@@ -272,10 +273,12 @@ export const SelectedWork: React.FC = () => {
                     </div>
 
                     <div className="pt-3 min-h-[96px] text-xs md:text-sm text-ink-muted leading-relaxed font-sans">
-                      {activeTab === 'architecture' && <p>{selectedApp.architecture}</p>}
+                      {activeTab === 'architecture' && (
+                        <p>{isAr && selectedApp.arabicArchitecture ? selectedApp.arabicArchitecture : selectedApp.architecture}</p>
+                      )}
                       {activeTab === 'decisions' && (
                         <ul className="space-y-1.5">
-                          {selectedApp.decisions.map((dec, i) => (
+                          {(isAr && selectedApp.arabicDecisions ? selectedApp.arabicDecisions : selectedApp.decisions).map((dec, i) => (
                             <li key={i} className="flex items-start gap-2">
                               <span className="font-mono text-accent text-xs font-bold mt-0.5">
                                 [0{i + 1}]
@@ -287,9 +290,9 @@ export const SelectedWork: React.FC = () => {
                       )}
                       {activeTab === 'outcome' && (
                         <div className="space-y-3">
-                          <p>{selectedApp.tagline}</p>
+                          <p>{isAr && selectedApp.arabicTagline ? selectedApp.arabicTagline : selectedApp.tagline}</p>
                           <div className="flex flex-wrap gap-2 pt-1">
-                            {selectedApp.metrics.map((m) => (
+                            {(isAr && selectedApp.arabicMetrics ? selectedApp.arabicMetrics : selectedApp.metrics).map((m) => (
                               <span
                                 key={m}
                                 className="px-2.5 py-1 rounded bg-elevated border border-border-subtle text-ink font-mono text-xs font-semibold"
@@ -324,7 +327,7 @@ export const SelectedWork: React.FC = () => {
                           aria-label="View Ufuq App Landing Page"
                         >
                           <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>App Landing Page ↗</span>
+                          <span>{isAr ? 'صفحة التطبيق ↗' : 'App Landing Page ↗'}</span>
                         </Link>
                       )}
 
@@ -354,17 +357,19 @@ export const SelectedWork: React.FC = () => {
                         </a>
                       )}
 
-                      {selectedApp.links.github && (
-                        <a
-                          href={selectedApp.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
-                          aria-label={`View ${selectedApp.title} source code on GitHub`}
-                        >
-                          <Code2 className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Source</span>
-                        </a>
+                      {selectedApp.links.github &&
+                        selectedApp.links.github !== 'https://github.com/ZyadWKhedr' &&
+                        !selectedApp.links.github.endsWith('/ZyadWKhedr') && (
+                          <a
+                            href={selectedApp.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
+                            aria-label={`View ${selectedApp.title} source code on GitHub`}
+                          >
+                            <Code2 className="w-3.5 h-3.5" aria-hidden="true" />
+                            <span>{isAr ? 'الكود المصدري' : 'Source'}</span>
+                          </a>
                       )}
                     </div>
                   </div>
@@ -381,16 +386,18 @@ export const SelectedWork: React.FC = () => {
           <div className="max-w-3xl mb-8">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-2">
               <Package className="w-3.5 h-3.5" />
-              <span>{t('work.openSourceBadge', 'Open Source & Developer Tools')}</span>
+              <span>{isAr ? 'حزم وأدوات مفتوحة المصدر' : t('work.openSourceBadge', 'Open Source & Developer Tools')}</span>
             </div>
             <h3 className="font-serif fluid-2xl font-bold tracking-tight text-ink">
-              {t('work.openSourceHeading', 'Packages & tools built by Zyad.')}
+              {isAr ? 'مكتبات وأدوات برمجية من تطوير زياد وائل.' : t('work.openSourceHeading', 'Packages & tools built by Zyad.')}
             </h3>
             <p className="text-sm md:text-base text-ink-muted leading-relaxed font-sans mt-2">
-              {t(
-                'work.openSourceSubheading',
-                'Production libraries and command-line utilities I authored and open-sourced for the developer community.'
-              )}
+              {isAr
+                ? 'حزم ومكتبات برمجية وأدوات سطر أوامر معمارية قام زياد وائل ببرمجتها ونشرها لمجتمع المطورين.'
+                : t(
+                    'work.openSourceSubheading',
+                    'Production libraries and command-line utilities I authored and open-sourced for the developer community.'
+                  )}
             </p>
           </div>
 
@@ -400,7 +407,7 @@ export const SelectedWork: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <span className="px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-semibold">
-                    Flutter / Dart Package
+                    {isAr ? 'حزمة فلاتر مفتوحة المصدر' : 'Flutter / Dart Package'}
                   </span>
                   <a
                     href="https://pub.dev/packages/liquid_navbar"
@@ -413,18 +420,23 @@ export const SelectedWork: React.FC = () => {
                 </div>
 
                 <h4 className="font-serif text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
-                  Liquid Navbar
+                  {isAr ? 'شريط التنقل الانسيابي (Liquid Navbar)' : 'Liquid Navbar'}
                 </h4>
                 <div className="text-xs font-mono text-ink-faint mb-3">
-                  Built &amp; maintained by Zyad Wael
+                  {isAr ? 'تصميم وصيانة: زياد وائل' : 'Built & maintained by Zyad Wael'}
                 </div>
 
                 <p className="text-sm text-ink-muted leading-relaxed font-sans mb-5">
-                  A fluid, physics-based navigation bar package for Flutter featuring custom bezier spring curves, 60fps CustomPainter rendering, and zero external dependencies. Published on pub.dev.
+                  {isAr
+                    ? 'شريط تنقل عائم زجاجي بفيزياء النوابض لنظام iOS 18 منشور رسمياً على pub.dev. يتميز بحسابات منحنيات بيزييه المباشرة عبر Canvas بمعدل 60 إطاراً في الثانية دون أي مكتبات خارجية.'
+                    : 'A fluid, physics-based navigation bar package for Flutter featuring custom bezier spring curves, 60fps CustomPainter rendering, and zero external dependencies. Published on pub.dev.'}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 mb-6">
-                  {['Flutter', 'Dart', 'CustomPainter', 'Vector Math', 'pub.dev'].map((t) => (
+                  {(isAr
+                    ? ['فلاتر (Flutter)', 'لغة Dart', 'حسابات Canvas', 'فيزياء النوابض', 'مكتبة pub.dev']
+                    : ['Flutter', 'Dart', 'CustomPainter', 'Vector Math', 'pub.dev']
+                  ).map((t) => (
                     <span
                       key={t}
                       className="px-2 py-0.5 text-xs font-mono rounded bg-elevated text-ink-muted border border-border-subtle"
@@ -451,14 +463,14 @@ export const SelectedWork: React.FC = () => {
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                   <a
-                    href="https://github.com/ZyadWKhedr"
+                    href="https://github.com/ZyadWKhedr/Liquid_NavBar"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border-strong hover:bg-elevated text-ink hover:text-accent text-xs font-mono font-medium transition-colors"
                     aria-label="View Liquid Navbar source on GitHub"
                   >
                     <Code2 className="w-3.5 h-3.5" />
-                    <span>GitHub</span>
+                    <span>{isAr ? 'المستودع' : 'GitHub'}</span>
                   </a>
                 </div>
               </div>
@@ -469,7 +481,7 @@ export const SelectedWork: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-semibold">
-                    CLI &amp; Systems Tool
+                    {isAr ? 'أداة أنظمة وسطر أوامر' : 'CLI & Systems Tool'}
                   </span>
                   <span className="text-xs font-mono text-ink-muted bg-surface-subtle px-2.5 py-0.5 rounded border border-border-subtle">
                     Go 1.21+
@@ -477,18 +489,23 @@ export const SelectedWork: React.FC = () => {
                 </div>
 
                 <h4 className="font-serif text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
-                  Boa CLI
+                  {isAr ? 'أداة سطر الأوامر Boa CLI' : 'Boa CLI'}
                 </h4>
                 <div className="text-xs font-mono text-ink-faint mb-3">
-                  Built &amp; maintained by Zyad Wael
+                  {isAr ? 'تطوير وبرمجة: زياد وائل' : 'Built & maintained by Zyad Wael'}
                 </div>
 
                 <p className="text-sm text-ink-muted leading-relaxed font-sans mb-5">
-                  A fast, concurrent archive explorer and compression CLI engine written in Go. Supports multi-threaded streaming compression, in-memory archive inspection without extraction, and Zip-Slip exploit protection.
+                  {isAr
+                    ? 'أداة سطر أوامر سريعة وآمنة مكتوبة بلغة Go لضغط واستكشاف الأرشيف في الذاكرة دون فك الضغط، مع دعم المعالجة متوازية الخيوط والحماية التامة من ثغرات Zip-Slip.'
+                    : 'A fast, concurrent archive explorer and compression CLI engine written in Go. Supports multi-threaded streaming compression, in-memory archive inspection without extraction, and Zip-Slip exploit protection.'}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 mb-6">
-                  {['Go (Golang)', 'CLI Tooling', 'Streaming Compression', 'Security', 'TUI'].map((t) => (
+                  {(isAr
+                    ? ['لغة Go (Golang)', 'أدوات سطر الأوامر', 'ضغط متوازي', 'أمان وحماية', 'واجهات TUI']
+                    : ['Go (Golang)', 'CLI Tooling', 'Streaming Compression', 'Security', 'TUI']
+                  ).map((t) => (
                     <span
                       key={t}
                       className="px-2 py-0.5 text-xs font-mono rounded bg-elevated text-ink-muted border border-border-subtle"
@@ -505,14 +522,14 @@ export const SelectedWork: React.FC = () => {
                 </code>
                 <div className="flex items-center gap-2">
                   <a
-                    href="https://github.com/ZyadWKhedr"
+                    href="https://github.com/ZyadWKhedr/Boa"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="touch-target inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border-strong hover:bg-elevated text-ink hover:text-accent text-xs font-mono font-medium transition-colors"
                     aria-label="View Boa CLI on GitHub"
                   >
                     <Code2 className="w-3.5 h-3.5" />
-                    <span>GitHub</span>
+                    <span>{isAr ? 'المستودع' : 'GitHub'}</span>
                     <ExternalLink className="w-3 h-3 text-ink-faint" />
                   </a>
                 </div>
@@ -540,20 +557,26 @@ export const SelectedWork: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-mono text-ink-faint flex items-center gap-1 me-1">
                 <Filter className="w-3 h-3" />
-                <span>Filter:</span>
+                <span>{isAr ? 'التصنيف:' : 'Filter:'}</span>
               </span>
-              {(['All', 'Mobile', 'Mobile Systems', 'Data & Analytics', 'Wearable & Games'] as CategoryFilter[]).map((cat) => (
+              {[
+                { key: 'All', en: 'All', ar: 'الكل' },
+                { key: 'Mobile', en: 'Mobile', ar: 'تطبيقات الموبايل' },
+                { key: 'Mobile Systems', en: 'Mobile Systems', ar: 'أنظمة الموبايل والألعاب' },
+                { key: 'Data & Analytics', en: 'Data & Analytics', ar: 'تحليل البيانات' },
+                { key: 'Wearable & Games', en: 'Wearable & Games', ar: 'الأجهزة القابلة للارتداء' },
+              ].map((cat) => (
                 <button
-                  key={cat}
+                  key={cat.key}
                   type="button"
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => setSelectedCategory(cat.key as CategoryFilter)}
                   className={`touch-target px-3 py-1 text-xs font-mono rounded-md border transition-all ${
-                    selectedCategory === cat
+                    selectedCategory === cat.key
                       ? 'border-accent bg-accent/10 text-accent font-semibold shadow-sm'
                       : 'border-border-subtle bg-surface text-ink-muted hover:border-border-strong hover:text-ink'
                   }`}
                 >
-                  {cat}
+                  {isAr ? cat.ar : cat.en}
                 </button>
               ))}
             </div>
@@ -572,9 +595,15 @@ export const SelectedWork: React.FC = () => {
                     <div className="aspect-[16/10] rounded-xl overflow-hidden border border-border-subtle bg-zinc-950 mb-4 group-hover:border-border-strong transition-colors relative">
                       <img
                         src={getAssetUrl(proj.image)}
-                        alt={proj.title}
+                        alt={isAr && proj.arabicTitle ? proj.arabicTitle : proj.title}
                         className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src.endsWith('.webp')) {
+                            target.src = target.src.replace(/\.webp$/, '.png');
+                          }
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                     </div>
@@ -582,9 +611,9 @@ export const SelectedWork: React.FC = () => {
 
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <span className="px-2 py-0.5 rounded bg-elevated border border-border-subtle text-[11px] font-mono text-accent">
-                      {proj.category}
+                      {isAr && proj.arabicCategory ? proj.arabicCategory : proj.category}
                     </span>
-                    {proj.arabicTitle && (
+                    {!isAr && proj.arabicTitle && (
                       <span className="text-[11px] font-serif text-ink-muted">
                         {proj.arabicTitle}
                       </span>
@@ -592,10 +621,14 @@ export const SelectedWork: React.FC = () => {
                   </div>
 
                   <h4 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors mb-1">
-                    {proj.title}
+                    {isAr && proj.arabicTitle ? proj.arabicTitle : proj.title}
                   </h4>
-                  <p className="text-xs font-mono text-ink-muted mb-3">{proj.tagline}</p>
-                  <p className="text-sm text-ink-muted leading-relaxed font-sans mb-4">{proj.problem}</p>
+                  <p className="text-xs font-mono text-ink-muted mb-3">
+                    {isAr && proj.arabicTagline ? proj.arabicTagline : proj.tagline}
+                  </p>
+                  <p className="text-sm text-ink-muted leading-relaxed font-sans mb-4">
+                    {isAr && proj.arabicProblem ? proj.arabicProblem : proj.problem}
+                  </p>
                 </div>
 
                 <div className="pt-4 border-t border-border-subtle space-y-3">
@@ -620,7 +653,7 @@ export const SelectedWork: React.FC = () => {
                           title="View Ufuq App Landing Page"
                         >
                           <Sparkles className="w-3 h-3" />
-                          <span>Promo Page ↗</span>
+                          <span>{isAr ? 'صفحة التطبيق ↗' : 'Promo Page ↗'}</span>
                         </Link>
                       )}
                       {proj.links.playStore && (
@@ -647,17 +680,19 @@ export const SelectedWork: React.FC = () => {
                           <Apple className="w-3.5 h-3.5" />
                         </a>
                       )}
-                      {proj.links.github && (
-                        <a
-                          href={proj.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target p-1.5 rounded hover:bg-elevated text-ink hover:text-accent transition-colors"
-                          title="View Source on GitHub"
-                          aria-label={`View ${proj.title} source on GitHub`}
-                        >
-                          <Code2 className="w-3.5 h-3.5" />
-                        </a>
+                      {proj.links.github &&
+                        proj.links.github !== 'https://github.com/ZyadWKhedr' &&
+                        !proj.links.github.endsWith('/ZyadWKhedr') && (
+                          <a
+                            href={proj.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="touch-target p-1.5 rounded hover:bg-elevated text-ink hover:text-accent transition-colors"
+                            title={isAr ? 'عرض الكود على GitHub' : 'View Source on GitHub'}
+                            aria-label={`View ${proj.title} source on GitHub`}
+                          >
+                            <Code2 className="w-3.5 h-3.5" />
+                          </a>
                       )}
                       {proj.links.article && (
                         <a
@@ -665,7 +700,7 @@ export const SelectedWork: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="touch-target p-1.5 rounded hover:bg-elevated text-ink hover:text-accent transition-colors"
-                          title="Read Technical Article"
+                          title={isAr ? 'قراءة المقال التقني' : 'Read Technical Article'}
                           aria-label={`Read article about ${proj.title}`}
                         >
                           <BookOpen className="w-3.5 h-3.5" />
@@ -680,8 +715,8 @@ export const SelectedWork: React.FC = () => {
                       className="touch-target inline-flex items-center gap-1 text-accent hover:underline font-semibold text-xs font-mono"
                       aria-label={`Inspect ${proj.title} details`}
                     >
-                      <span>Details</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
+                      <span>{isAr ? 'التفاصيل' : 'Details'}</span>
+                      <ChevronRight className={`w-3.5 h-3.5 ${isAr ? 'rotate-180' : ''}`} />
                     </button>
                   </div>
                 </div>
@@ -711,19 +746,19 @@ export const SelectedWork: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="px-2 py-0.5 rounded bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-semibold">
-                    {modalProject.category}
+                    {isAr && modalProject.arabicCategory ? modalProject.arabicCategory : modalProject.category}
                   </span>
-                  {modalProject.arabicTitle && (
+                  {!isAr && modalProject.arabicTitle && (
                     <span className="font-serif text-xs text-ink-muted px-2 py-0.5 rounded bg-surface border border-border-subtle">
                       {modalProject.arabicTitle}
                     </span>
                   )}
                 </div>
                 <h3 id="modal-project-title" className="font-serif text-2xl font-bold text-ink">
-                  {modalProject.title}
+                  {isAr && modalProject.arabicTitle ? modalProject.arabicTitle : modalProject.title}
                 </h3>
                 <p className="text-xs font-mono text-ink-muted mt-0.5">
-                  {modalProject.tagline}
+                  {isAr && modalProject.arabicTagline ? modalProject.arabicTagline : modalProject.tagline}
                 </p>
               </div>
 
@@ -742,8 +777,14 @@ export const SelectedWork: React.FC = () => {
               <div className="aspect-[16/9] rounded-xl overflow-hidden border border-border-subtle bg-zinc-950 shadow-inner">
                 <img
                   src={getAssetUrl(modalProject.image)}
-                  alt={modalProject.title}
+                  alt={isAr && modalProject.arabicTitle ? modalProject.arabicTitle : modalProject.title}
                   className="w-full h-full object-cover object-top filter contrast-[1.02]"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src.endsWith('.webp')) {
+                      target.src = target.src.replace(/\.webp$/, '.png');
+                    }
+                  }}
                 />
               </div>
             )}
@@ -752,15 +793,15 @@ export const SelectedWork: React.FC = () => {
             {modalProject.id === 'ufuq' && (
               <div className="space-y-2">
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                  Authentic iOS Screenshots
+                  {isAr ? 'شاشات حقيقية من داخل التطبيق' : 'Authentic iOS Screenshots'}
                 </h4>
                 <div className="grid grid-cols-5 gap-2">
                   {[
-                    { label: 'Home', src: 'assets/images/projects/ufuq/ufuq-real-home.jpg' },
-                    { label: 'Quran', src: 'assets/images/projects/ufuq/ufuq-real-quran.jpg' },
-                    { label: 'Subha', src: 'assets/images/projects/ufuq/ufuq-real-subha.png' },
-                    { label: 'Qibla', src: 'assets/images/projects/ufuq/ufuq-real-qibla.png' },
-                    { label: 'Prayer', src: 'assets/images/projects/ufuq/ufuq-real-prayer.jpg' },
+                    { label: isAr ? 'الرئيسية' : 'Home', src: 'assets/images/projects/ufuq/ufuq-real-home.jpg' },
+                    { label: isAr ? 'المصحف' : 'Quran', src: 'assets/images/projects/ufuq/ufuq-real-quran.jpg' },
+                    { label: isAr ? 'السبحة' : 'Subha', src: 'assets/images/projects/ufuq/ufuq-real-subha.png' },
+                    { label: isAr ? 'القبلة' : 'Qibla', src: 'assets/images/projects/ufuq/ufuq-real-qibla.png' },
+                    { label: isAr ? 'المواقيت' : 'Prayer', src: 'assets/images/projects/ufuq/ufuq-real-prayer.jpg' },
                   ].map((s) => (
                     <div key={s.label} className="group/img rounded-lg overflow-hidden border border-border-subtle bg-black aspect-[9/16] relative shadow-sm">
                       <img src={getAssetUrl(s.src)} alt={s.label} className="w-full h-full object-cover object-top transition-transform group-hover/img:scale-105" />
@@ -776,33 +817,42 @@ export const SelectedWork: React.FC = () => {
             {/* Problem & Role */}
             <div className="p-4 rounded-xl bg-surface/70 border border-border-subtle space-y-2 text-xs font-mono">
               <div>
-                <span className="text-ink font-bold">Engineering Role:</span>{' '}
-                <span className="text-ink-muted">{modalProject.role}</span>
+                <span className="text-ink font-bold">{isAr ? 'الدور الهندسي:' : 'Engineering Role:'}</span>{' '}
+                <span className="text-ink-muted">
+                  {isAr && modalProject.arabicRole ? modalProject.arabicRole : modalProject.role}
+                </span>
               </div>
               <div>
-                <span className="text-ink font-bold">Verification:</span>{' '}
-                <span className="text-emerald-400 font-semibold">{modalProject.evidence}</span>
+                <span className="text-ink font-bold">{isAr ? 'حالة التوثيق:' : 'Verification:'}</span>{' '}
+                <span className="text-emerald-400 font-semibold">
+                  {isAr && modalProject.arabicEvidence ? modalProject.arabicEvidence : modalProject.evidence}
+                </span>
               </div>
             </div>
 
             {/* In-Depth Description */}
             <div className="space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                System Overview
+                {isAr ? 'نظرة معمارية شاملة' : 'System Overview'}
               </h4>
               <p className="text-sm text-ink-muted leading-relaxed font-sans">
-                {modalProject.detailedDescription || modalProject.problem}
+                {isAr && modalProject.arabicDetailedDescription
+                  ? modalProject.arabicDetailedDescription
+                  : modalProject.detailedDescription || (isAr && modalProject.arabicProblem ? modalProject.arabicProblem : modalProject.problem)}
               </p>
             </div>
 
             {/* Features Checklist */}
-            {modalProject.features && modalProject.features.length > 0 && (
+            {((isAr && modalProject.arabicFeatures) || (modalProject.features && modalProject.features.length > 0)) && (
               <div className="space-y-2">
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                  Key Capabilities
+                  {isAr ? 'القدرات والخصائص الأساسية' : 'Key Capabilities'}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-ink-muted">
-                  {modalProject.features.map((feat) => (
+                  {(isAr && modalProject.arabicFeatures
+                    ? modalProject.arabicFeatures
+                    : modalProject.features || []
+                  ).map((feat) => (
                     <div key={feat} className="flex items-center gap-2 p-2 rounded-lg bg-surface border border-border-subtle">
                       <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
                       <span>{feat}</span>
@@ -815,7 +865,7 @@ export const SelectedWork: React.FC = () => {
             {/* Tech Stack Chips */}
             <div className="space-y-2">
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
-                Technology Stack
+                {isAr ? 'التقنيات المستخدمة' : 'Technology Stack'}
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {modalProject.stack.map((st) => (
@@ -838,7 +888,7 @@ export const SelectedWork: React.FC = () => {
                     className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold shadow transition-colors"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>View App Landing Page</span>
+                    <span>{isAr ? 'صفحة التطبيق' : 'View App Landing Page'}</span>
                   </Link>
                 )}
                 {modalProject.links.playStore && (
@@ -863,16 +913,18 @@ export const SelectedWork: React.FC = () => {
                     <span>App Store</span>
                   </a>
                 )}
-                {modalProject.links.github && (
-                  <a
-                    href={modalProject.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border-strong text-ink hover:text-accent font-mono text-xs font-semibold transition-colors"
-                  >
-                    <Code2 className="w-3.5 h-3.5" />
-                    <span>GitHub Repository</span>
-                  </a>
+                {modalProject.links.github &&
+                  modalProject.links.github !== 'https://github.com/ZyadWKhedr' &&
+                  !modalProject.links.github.endsWith('/ZyadWKhedr') && (
+                    <a
+                      href={modalProject.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border-strong text-ink hover:text-accent font-mono text-xs font-semibold transition-colors"
+                    >
+                      <Code2 className="w-3.5 h-3.5" />
+                      <span>{isAr ? 'مستودع GitHub' : 'GitHub Repository'}</span>
+                    </a>
                 )}
                 {modalProject.links.article && (
                   <a
@@ -882,7 +934,7 @@ export const SelectedWork: React.FC = () => {
                     className="btn-tactile touch-target inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border-strong text-ink hover:text-accent font-mono text-xs font-semibold transition-colors"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Read Article</span>
+                    <span>{isAr ? 'قراءة المقال' : 'Read Article'}</span>
                   </a>
                 )}
               </div>
@@ -892,7 +944,7 @@ export const SelectedWork: React.FC = () => {
                 onClick={() => setModalProject(null)}
                 className="btn-tactile touch-target px-4 py-2 rounded-lg bg-ink text-canvas font-mono text-xs font-semibold hover:bg-accent transition-colors ms-auto"
               >
-                Close
+                {isAr ? 'إغلاق' : 'Close'}
               </button>
             </div>
           </div>

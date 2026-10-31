@@ -79,7 +79,12 @@
     "viewPubDev": "pub.dev Package",
     "categoryAll": "All Projects",
     "categoryMobile": "Mobile Apps",
-    "categoryOpenSource": "Open Source & Systems"
+    "categoryOpenSource": "Open Source & Systems",
+    "deviceConsoleTitle": "Interactive Device Console",
+    "openSourceBadge": "Open Source & Developer Tools",
+    "openSourceHeading": "Packages & tools built by Zyad.",
+    "moreProjectsBadge": "Additional Work",
+    "moreProjectsHeading": "More projects & mobile client systems."
   },
   "skills": {
     "badge": "Technical Capabilities",
