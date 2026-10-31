@@ -20,13 +20,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { MobileAppItem } from '@/types/mobileShowcase';
-
-const getAssetUrl = (relativePath: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  const cleanBase = base.endsWith('/') ? base : `${base}/`;
-  const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
-  return `${cleanBase}${cleanPath}`;
-};
+import { getAssetUrl } from '@/lib/utils';
 
 interface InteractiveSmartphoneProps {
   apps: MobileAppItem[];

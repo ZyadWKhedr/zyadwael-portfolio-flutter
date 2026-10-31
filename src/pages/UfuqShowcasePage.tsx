@@ -27,14 +27,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ufuqIcon from '@/assets/ufuq-icon.png';
-
-// Fallback image helper ensuring valid public URLs on GitHub Pages
-const getAssetUrl = (relativePath: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  const cleanBase = base.endsWith('/') ? base : `${base}/`;
-  const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
-  return `${cleanBase}${cleanPath}`;
-};
+import { getAssetUrl } from '@/lib/utils';
 
 // Authentic Production Screenshots from the App
 const APP_MODULES = [

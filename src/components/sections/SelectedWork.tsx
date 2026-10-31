@@ -21,6 +21,7 @@ import { MOBILE_APPS } from '@/data/mobileShowcase';
 import { SECONDARY_PROJECTS } from '@/data/projects';
 import type { SecondaryProject } from '@/types/project';
 import { InteractiveSmartphone } from '@/components/showcase/InteractiveSmartphone';
+import { getAssetUrl } from '@/lib/utils';
 
 type TabKey = 'architecture' | 'decisions' | 'outcome';
 type CategoryFilter = 'All' | 'Mobile' | 'Mobile Systems' | 'Data & Analytics' | 'Wearable & Games';
@@ -570,7 +571,7 @@ export const SelectedWork: React.FC = () => {
                   {proj.image && (
                     <div className="aspect-[16/10] rounded-xl overflow-hidden border border-border-subtle bg-zinc-950 mb-4 group-hover:border-border-strong transition-colors relative">
                       <img
-                        src={proj.image}
+                        src={getAssetUrl(proj.image)}
                         alt={proj.title}
                         className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
@@ -740,7 +741,7 @@ export const SelectedWork: React.FC = () => {
             {modalProject.image && (
               <div className="aspect-[16/9] rounded-xl overflow-hidden border border-border-subtle bg-zinc-950 shadow-inner">
                 <img
-                  src={modalProject.image}
+                  src={getAssetUrl(modalProject.image)}
                   alt={modalProject.title}
                   className="w-full h-full object-cover object-top filter contrast-[1.02]"
                 />
@@ -755,14 +756,14 @@ export const SelectedWork: React.FC = () => {
                 </h4>
                 <div className="grid grid-cols-5 gap-2">
                   {[
-                    { label: 'Home', src: '/assets/images/projects/ufuq/ufuq-real-home.jpg' },
-                    { label: 'Quran', src: '/assets/images/projects/ufuq/ufuq-real-quran.jpg' },
-                    { label: 'Subha', src: '/assets/images/projects/ufuq/ufuq-real-subha.png' },
-                    { label: 'Qibla', src: '/assets/images/projects/ufuq/ufuq-real-qibla.png' },
-                    { label: 'Prayer', src: '/assets/images/projects/ufuq/ufuq-real-prayer.jpg' },
+                    { label: 'Home', src: 'assets/images/projects/ufuq/ufuq-real-home.jpg' },
+                    { label: 'Quran', src: 'assets/images/projects/ufuq/ufuq-real-quran.jpg' },
+                    { label: 'Subha', src: 'assets/images/projects/ufuq/ufuq-real-subha.png' },
+                    { label: 'Qibla', src: 'assets/images/projects/ufuq/ufuq-real-qibla.png' },
+                    { label: 'Prayer', src: 'assets/images/projects/ufuq/ufuq-real-prayer.jpg' },
                   ].map((s) => (
                     <div key={s.label} className="group/img rounded-lg overflow-hidden border border-border-subtle bg-black aspect-[9/16] relative shadow-sm">
-                      <img src={s.src} alt={s.label} className="w-full h-full object-cover object-top transition-transform group-hover/img:scale-105" />
+                      <img src={getAssetUrl(s.src)} alt={s.label} className="w-full h-full object-cover object-top transition-transform group-hover/img:scale-105" />
                       <span className="absolute bottom-1 inset-x-1 text-[9px] font-mono font-bold bg-black/80 text-white text-center py-0.5 rounded backdrop-blur-sm">
                         {s.label}
                       </span>
