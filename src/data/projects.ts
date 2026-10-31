@@ -149,9 +149,11 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       github: 'https://github.com/ZyadWKhedr',
     },
     screenshots: [
-      { id: 'uf-1', caption: 'Categorized Hisn al-Muslim daily Athkar with haptic Subha counter', placeholderLabel: 'Daily Athkar Screen' },
-      { id: 'uf-2', caption: 'Complete Holy Quran with verse bookmarking and 24/7 live audio radio stream', placeholderLabel: 'Holy Quran & Audio Screen' },
-      { id: 'uf-3', caption: 'Astronomical GPS prayer times countdown with magnetic Qibla compass', placeholderLabel: 'Prayer Times Screen' },
+      { id: 'uf-1', url: '/assets/images/projects/ufuq/ufuq-real-home.jpg', caption: 'Daily spiritual overview, Hijri date, and 1-tap live Holy Quran radio from Cairo', placeholderLabel: 'Home & Radio Screen' },
+      { id: 'uf-2', url: '/assets/images/projects/ufuq/ufuq-real-quran.jpg', caption: 'Complete Holy Quran in Medina Uthmani script with golden Ayah rosettes, 100% offline', placeholderLabel: 'Holy Quran Screen' },
+      { id: 'uf-3', url: '/assets/images/projects/ufuq/ufuq-real-subha.png', caption: 'Emerald electronic tally counter with 5-digit LCD screen and tactile touch sensor', placeholderLabel: 'Electronic Subha Screen' },
+      { id: 'uf-4', url: '/assets/images/projects/ufuq/ufuq-real-qibla.png', caption: 'Sensor-calibrated Qibla compass with Kaaba degree (136.1°) and distance calculation', placeholderLabel: 'Qibla Compass Screen' },
+      { id: 'uf-5', url: '/assets/images/projects/ufuq/ufuq-real-prayer.jpg', caption: 'Astronomical GPS prayer times countdown with Cairo timetable and Iqama intervals', placeholderLabel: 'Prayer Times Screen' },
     ],
     interactiveDemo: {
       type: 'dispatch_queue',

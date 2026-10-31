@@ -747,6 +747,31 @@ export const SelectedWork: React.FC = () => {
               </div>
             )}
 
+            {/* Authentic Screens Gallery for Ufuq */}
+            {modalProject.id === 'ufuq' && (
+              <div className="space-y-2">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
+                  Authentic iOS Screenshots
+                </h4>
+                <div className="grid grid-cols-5 gap-2">
+                  {[
+                    { label: 'Home', src: '/assets/images/projects/ufuq/ufuq-real-home.jpg' },
+                    { label: 'Quran', src: '/assets/images/projects/ufuq/ufuq-real-quran.jpg' },
+                    { label: 'Subha', src: '/assets/images/projects/ufuq/ufuq-real-subha.png' },
+                    { label: 'Qibla', src: '/assets/images/projects/ufuq/ufuq-real-qibla.png' },
+                    { label: 'Prayer', src: '/assets/images/projects/ufuq/ufuq-real-prayer.jpg' },
+                  ].map((s) => (
+                    <div key={s.label} className="group/img rounded-lg overflow-hidden border border-border-subtle bg-black aspect-[9/16] relative shadow-sm">
+                      <img src={s.src} alt={s.label} className="w-full h-full object-cover object-top transition-transform group-hover/img:scale-105" />
+                      <span className="absolute bottom-1 inset-x-1 text-[9px] font-mono font-bold bg-black/80 text-white text-center py-0.5 rounded backdrop-blur-sm">
+                        {s.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Problem & Role */}
             <div className="p-4 rounded-xl bg-surface/70 border border-border-subtle space-y-2 text-xs font-mono">
               <div>

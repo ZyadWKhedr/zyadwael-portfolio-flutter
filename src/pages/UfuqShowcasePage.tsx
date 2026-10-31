@@ -36,7 +36,7 @@ const getAssetUrl = (relativePath: string) => {
   return `${cleanBase}${cleanPath}`;
 };
 
-// 5 Authentic Production Screenshots from the App
+// Authentic Production Screenshots from the App
 const APP_MODULES = [
   {
     id: 'home',
@@ -84,19 +84,19 @@ const APP_MODULES = [
     metric: 'Tactile Haptic Feedback',
   },
   {
-    id: 'athkar',
-    title: 'Hisn al-Muslim Supplications',
-    arabicTitle: 'حصن المسلم',
-    badge: 'Daily Remembrance',
-    tagline: 'Comprehensive authentic Athkar for morning, evening, and after prayers.',
-    image: 'assets/images/projects/ufuq/ufuq-real-athkar.png',
+    id: 'qibla',
+    title: 'Calibrated Qibla Compass',
+    arabicTitle: 'بوصلة القبلة الذكية',
+    badge: 'Magnetometer Precision',
+    tagline: 'Sensor-calibrated Kaaba direction dial with exact degree and distance calculation.',
+    image: 'assets/images/projects/ufuq/ufuq-real-qibla.png',
     highlights: [
-      'Authentic Sahih supplications from Hisn al-Muslim (حصن المسلم)',
-      'Clear, bold Arabic calligraphy designed for effortless legibility',
-      'Repetition progress counters with automatic completion signals',
-      'One-tap sharing and personal favorites bookmarking',
+      'Hardware magnetometer alignment with smooth tilt compensation',
+      'Exact Kaaba degree heading (136.1°) and distance (1,287 km from Cairo)',
+      'Gold & ivory circular compass dial with clear directional needle',
+      'On-device GPS calculation without telemetry or location sharing',
     ],
-    metric: '130+ Authentic Athkar',
+    metric: 'Hardware Sensor Calibrated',
   },
   {
     id: 'prayer',
@@ -112,6 +112,36 @@ const APP_MODULES = [
       'Exact Iqama intervals and astronomical moon phase display',
     ],
     metric: 'Solar GPS Accuracy',
+  },
+  {
+    id: 'athkar',
+    title: 'Hisn al-Muslim Supplications',
+    arabicTitle: 'حصن المسلم',
+    badge: 'Daily Remembrance',
+    tagline: 'Comprehensive authentic Athkar for morning, evening, and after prayers.',
+    image: 'assets/images/projects/ufuq/ufuq-real-athkar.png',
+    highlights: [
+      'Authentic Sahih supplications from Hisn al-Muslim (حصن المسلم)',
+      'Clear, bold Arabic calligraphy designed for effortless legibility',
+      'Repetition progress counters with automatic completion signals',
+      'One-tap sharing and personal favorites bookmarking',
+    ],
+    metric: '130+ Authentic Athkar',
+  },
+  {
+    id: 'splash',
+    title: 'Sacred Brand Identity & Splash',
+    arabicTitle: 'شاشة البداية والوقار',
+    badge: 'Sacred Visual Design',
+    tagline: 'Deep emerald texture, golden Quranic verse, and peaceful typography.',
+    image: 'assets/images/projects/ufuq/ufuq-real-splash.jpg',
+    highlights: [
+      'Deep Islamic emerald texture reflecting timeless manuscript binding',
+      'Authentic Thuluth calligraphic logo for Ufuq (أفق)',
+      'Reflective Quranic verse: «وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ»',
+      'Distraction-free entry into daily spiritual worship',
+    ],
+    metric: 'Distraction-Free Sanctuary',
   },
 ];
 
