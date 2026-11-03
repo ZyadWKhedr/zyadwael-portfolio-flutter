@@ -458,9 +458,9 @@ export const UfuqShowcasePage: React.FC = () => {
         </div>
 
         {/* 2-Column Split: Sticky Phone on One Side, Scrolling Chapters on the Other */}
-        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start relative">
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 relative">
           {/* Scrolling Text Chapters (7 columns) */}
-          <div className="col-span-7 space-y-6">
+          <div className="col-span-7 space-y-8">
             {FEATURES.map((feat, idx) => {
               const Icon = feat.icon;
               const isActive = idx === activeFeatureIndex;
@@ -472,7 +472,7 @@ export const UfuqShowcasePage: React.FC = () => {
                     chapterRefs.current[idx] = el;
                   }}
                   onClick={() => scrollToFeature(idx)}
-                  className={`p-8 lg:p-10 rounded-3xl transition-all duration-300 cursor-pointer min-h-[380px] flex flex-col justify-center border ${
+                  className={`p-8 lg:p-10 rounded-3xl transition-all duration-300 cursor-pointer min-h-[420px] flex flex-col justify-center border ${
                     isActive
                       ? 'bg-zinc-900/90 border-emerald-500/40 shadow-2xl shadow-emerald-950/40 ring-1 ring-emerald-500/20'
                       : 'bg-zinc-950/40 border-white/[0.06] hover:border-white/15 opacity-60 hover:opacity-90'
@@ -501,27 +501,29 @@ export const UfuqShowcasePage: React.FC = () => {
             })}
           </div>
 
-          {/* Sticky Phone Column (5 columns, pinned in viewport alongside chapters) */}
-          <div className="col-span-5 sticky top-28 flex flex-col items-center justify-center py-2">
-            <PhoneMockup activeScreenIndex={activeFeatureIndex} />
+          {/* Sticky Phone Track (5 columns stretching full height of the 6 chapters) */}
+          <div className="col-span-5 relative h-full">
+            <div className="sticky top-28 flex flex-col items-center justify-center py-2">
+              <PhoneMockup activeScreenIndex={activeFeatureIndex} />
 
-            {/* Quick-Jump Step Dots under the Phone */}
-            <div className="mt-6 flex items-center gap-2">
-              {FEATURES.map((feat, idx) => {
-                const isActive = idx === activeFeatureIndex;
-                return (
-                  <button
-                    key={feat.id}
-                    onClick={() => scrollToFeature(idx)}
-                    aria-label={`Jump to ${feat.titleEn}`}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'w-7 bg-emerald-400'
-                        : 'w-2 bg-zinc-700 hover:bg-zinc-500'
-                    }`}
-                  />
-                );
-              })}
+              {/* Quick-Jump Step Dots under the Phone */}
+              <div className="mt-6 flex items-center gap-2">
+                {FEATURES.map((feat, idx) => {
+                  const isActive = idx === activeFeatureIndex;
+                  return (
+                    <button
+                      key={feat.id}
+                      onClick={() => scrollToFeature(idx)}
+                      aria-label={`Jump to ${feat.titleEn}`}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        isActive
+                          ? 'w-7 bg-emerald-400'
+                          : 'w-2 bg-zinc-700 hover:bg-zinc-500'
+                      }`}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
