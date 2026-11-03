@@ -69,8 +69,8 @@ This table registers every verified factual claim, project attribute, open sourc
 
 | Section | Required Fact Source | Current Status |
 | :--- | :--- | :--- |
-| Employment History | `source/linkedin.pdf` | **HALTED** per strict instruction until PDF is provided. |
-| Job Roles, Dates, Companies | `source/linkedin.pdf` | **HALTED** per strict instruction until PDF is provided. |
-| Education Degree & University | `source/linkedin.pdf` | **HALTED** per strict instruction until PDF is provided. |
-| About Me Narrative | LinkedIn About + GitHub Bio | **HALTED** pending LinkedIn profile export to avoid inventing claims. |
+| Employment History | `source/linkedin.pdf` (or `public/Zyad_Wael_CV.pdf`) | **HALTED** per strict instruction until you confirm which document to use. |
+| Job Roles, Dates, Companies | `source/linkedin.pdf` (or `public/Zyad_Wael_CV.pdf`) | **HALTED** (Candidate in CV: ZeroOneZ, Upwork, Cellula Technologies). |
+| Education Degree & University | `source/linkedin.pdf` (or `public/Zyad_Wael_CV.pdf`) | **HALTED** (Candidate in CV: Faculty of Computers and Data Science, Alexandria University). |
+| About Me Narrative | LinkedIn About + GitHub Bio | **HALTED** pending confirmation to avoid inventing claims. |
 

@@ -9,8 +9,13 @@ This document records all sources that could not be retrieved, missing files req
 ### A. `source/linkedin.pdf` (CRITICAL STOP CONDITION)
 - **Status**: **MISSING**
 - **Impact**: Strict rule states: *"LinkedIn can't be scraped. If this file is missing, STOP and tell me before writing Experience or About."*
-- **Action Required**: Please export your LinkedIn profile as a PDF (`More` -> `Save to PDF` on LinkedIn) and place it at `source/linkedin.pdf` in the project root.
-- **Pending Sections**: **Experience** ("Where I've worked", employment dates, company roles, descriptions, education line) and **About** (factual career summary).
+- **Alternative Found in Repo**: We found your official PDF resume at `public/Zyad_Wael_CV.pdf` which contains verified dates, roles, and descriptions:
+  - Junior Flutter Developer at **ZeroOneZ** (Jun 2025 - Present)
+  - Freelance Flutter Developer on **Upwork** (May 2024 - Present)
+  - Flutter Developer Intern at **Cellula Technologies** (Jan 2025 - Apr 2025)
+  - Education: **Faculty of Computers and Data Science, Alexandria University** (Sep 2023 - Oct 2027)
+- **Action Required**: Please confirm whether we should use `public/Zyad_Wael_CV.pdf` as the verified source for Experience & About, or if you prefer to export your profile from LinkedIn and add `source/linkedin.pdf`.
+- **Pending Sections**: **Experience** ("Where I've worked") and **About** are halted until you confirm.
 
 ---
 
