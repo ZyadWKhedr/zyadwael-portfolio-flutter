@@ -1,0 +1,61 @@
+[
+  {
+    "id": "boa",
+    "name": "Boa",
+    "language": "Go",
+    "stars": 8,
+    "description": {
+      "en": "Interactive terminal archive compression and extraction tool with filesystem benchmarking.",
+      "ar": "أداة سطر أوامر تفاعلية لضغط واستخراج الملفات مع قياس سرعة نظام الملفات."
+    },
+    "installCommand": "git clone https://github.com/ZyadWKhedr/Boa.git && cd Boa && go build -o boa .",
+    "links": {
+      "github": "https://github.com/ZyadWKhedr/Boa"
+    }
+  },
+  {
+    "id": "liquid_navbar",
+    "name": "Liquid_NavBar",
+    "language": "Dart / Flutter",
+    "stars": 1,
+    "packageVersion": "v2.0.7",
+    "description": {
+      "en": "Customizable liquid-glass floating navigation bar for Flutter with physics-based draggable indicator and optical refraction.",
+      "ar": "شريط تنقل عائم بتأثير زجاجي سائل في فلاتر يدعم مؤشراً فيزيائياً قابلاً للسحب وانكساراً بصرياً."
+    },
+    "installCommand": "flutter pub add liquid_navbar",
+    "links": {
+      "github": "https://github.com/ZyadWKhedr/Liquid_NavBar",
+      "pubDev": "https://pub.dev/packages/liquid_navbar"
+    }
+  },
+  {
+    "id": "droplet",
+    "name": "Droplet",
+    "language": "C++ / Dart",
+    "stars": 1,
+    "description": {
+      "en": "Solar-powered smart rainwater collection and monitoring system with sensor telemetry.",
+      "ar": "نظام ذكي لجمع ومراقبة مياه الأمطار يعمل بالطاقة الشمسية مع قراءة مستشعرات عن بعد."
+    },
+    "installCommand": "git clone https://github.com/ZyadWKhedr/Droplet.git",
+    "links": {
+      "github": "https://github.com/ZyadWKhedr/Droplet"
+    }
+  },
+  {
+    "id": "eidi-scanner",
+    "name": "Eidi-Scanner",
+    "language": "Dart / Flutter",
+    "stars": 1,
+    "description": {
+      "en": "Real-time Egyptian banknote currency denomination detection application using Google ML Kit.",
+      "ar": "تطبيق مسح فوري للعملات الورقية المصرية والتعرف على فئاتها باستخدام Google ML Kit."
+    },
+    "installCommand": "git clone https://github.com/ZyadWKhedr/Eidi-Scanner.git",
+    "links": {
+      "github": "https://github.com/ZyadWKhedr/Eidi-Scanner"
+    }
+  }
+]
+

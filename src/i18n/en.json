@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "name": "Zyad Wael",
+    "work": "Work",
+    "opensource": "Open Source",
+    "writing": "Writing",
+    "experience": "Experience",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm Zyad Wael",
+    "tagline": "Flutter mobile developer building intentional, high-performance client applications in Alexandria, Egypt.",
+    "ctaWork": "Selected Work",
+    "ctaContact": "Contact Me"
+  },
+  "work": {
+    "sectionTitle": "Selected Work",
+    "sectionSubtitle": "Commercial and published mobile applications built with Flutter.",
+    "featuredBadge": "Featured Project",
+    "showcaseLink": "Showcase Page",
+    "viewAppStore": "App Store",
+    "viewGooglePlay": "Google Play",
+    "viewGithub": "GitHub",
+    "technologies": "Technologies"
+  },
+  "opensource": {
+    "sectionTitle": "Open Source",
+    "sectionSubtitle": "Public developer tools, packages, and engineering experiments.",
+    "stars": "stars",
+    "copyInstall": "Copy command",
+    "copied": "Copied!",
+    "viewPubDev": "pub.dev",
+    "viewRepo": "Repository"
+  },
+  "writing": {
+    "sectionTitle": "Writing",
+    "sectionSubtitle": "Articles on mobile security, reactive architecture, and algorithms.",
+    "filterAll": "All Topics",
+    "filterFlutter": "Flutter",
+    "filterAi": "AI & ML",
+    "filterAlgorithms": "Algorithms & Math",
+    "viewAll": "View all articles",
+    "viewLess": "Show less",
+    "readArticle": "Read on Medium",
+    "englishNote": "English"
+  },
+  "experience": {
+    "sectionTitle": "Where I've worked",
+    "sectionSubtitle": "Professional software development roles and internships.",
+    "educationTitle": "Education",
+    "present": "Present"
+  },
+  "about": {
+    "sectionTitle": "About",
+    "bioP1": "Since 2023, I have focused on building cross-platform Flutter applications that combine clean code with intuitive, responsive design.",
+    "bioP2": "I study Computing and Data Science at Alexandria University and share practical architectural insights through technical writing on Medium.",
+    "bioP3": "My goal is always to engineer software that is technically solid, maintainable, and genuinely useful for people."
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "sectionSubtitle": "Get in touch for mobile engineering opportunities, freelance projects, or technical conversations.",
+    "emailLabel": "Direct Email",
+    "copyEmail": "Copy Email",
+    "copied": "Copied to clipboard!",
+    "linksTitle": "Profiles & Code"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "sourceNote": "Built cleanly with Vite, React, and Tailwind CSS. Hosted on GitHub Pages."
+  }
+}
+

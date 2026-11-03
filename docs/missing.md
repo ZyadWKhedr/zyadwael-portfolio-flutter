@@ -1,66 +1,45 @@
-# Missing Sources & Verification Discrepancies
+# Missing Sources & Verification Discrepancies (docs/missing.md)
 
-This document records all sources that could not be retrieved, missing files required by strict verification rules, and discrepancies between repositories, listings, and documentation.
-
----
-
-## 1. Blockers Requiring User Input
-
-### A. `source/linkedin.pdf` (CRITICAL STOP CONDITION)
-- **Status**: **MISSING**
-- **Impact**: Strict rule states: *"LinkedIn can't be scraped. If this file is missing, STOP and tell me before writing Experience or About."*
-- **Alternative Found in Repo**: We found your official PDF resume at `public/Zyad_Wael_CV.pdf` which contains verified dates, roles, and descriptions:
-  - Junior Flutter Developer at **ZeroOneZ** (Jun 2025 - Present)
-  - Freelance Flutter Developer on **Upwork** (May 2024 - Present)
-  - Flutter Developer Intern at **Cellula Technologies** (Jan 2025 - Apr 2025)
-  - Education: **Faculty of Computers and Data Science, Alexandria University** (Sep 2023 - Oct 2027)
-- **Action Required**: Please confirm whether we should use `public/Zyad_Wael_CV.pdf` as the verified source for Experience & About, or if you prefer to export your profile from LinkedIn and add `source/linkedin.pdf`.
-- **Pending Sections**: **Experience** ("Where I've worked") and **About** are halted until you confirm.
+This document records the resolution of previous blockers, remaining non-blocking items, and technical discrepancies.
 
 ---
 
-## 2. Missing Sources & Incomplete Listings
+## 1. Resolved Blockers
 
-### B. `source/medium-export/`
-- **Status**: **MISSING**
-- **Impact**: Medium RSS feed (`https://medium.com/feed/@ziad.w.khedr`) only yields the 10 most recent articles.
-- **Recovered So Far**: 16 articles verified by combining the RSS feed, GitHub Profile README links, and publication indices (including the freeRASP, Riverpod Dependency Injection, and Clean Architecture guides). Approximately 4 articles remain unindexed without the Medium export directory or profile article list.
-- **Action Required**: Optional: if you have the full Medium export zip/folder, place it at `source/medium-export/` so all ~20 articles can be archived with exact timestamps.
+### A. `source/linkedin.pdf`
+* **Status**: **RESOLVED**
+* **Source**: Exported profile imported from `/Users/zyadwael/Downloads/Profile.pdf` to `source/linkedin.pdf`.
+* **Verified Claims**:
+  * Work history: Vee Tech, Rockai Dev, ZeroOneZ, Cellula Technologies.
+  * Education: Alexandria University (Oct 2023 – Oct 2027).
+  * Factual summary text for About section.
 
-### C. `Tashkeel` App Listing
-- **Status**: **NO PUBLIC STORE OR REPO FOUND**
-- **Searched**: GitHub public repositories (`ZyadWKhedr`), Apple App Store API (US, SA, EG), Google Play developer indices, and repository history.
-- **Resolution**: Under strict data rules, Tashkeel will be rendered as a minimal entry (name and factual description from sources) without invented ratings or stats, unless you provide a store URL or repository link.
+### B. `Tashkeel` App Listing
+* **Status**: **RESOLVED**
+* **Source**: Apple App Store link provided (`https://apps.apple.com/br/app/tashkeel-%D8%AA-%D8%B4-%D9%83-%D9%8A%D9%84/id6827159466`, App ID `6827159466`).
+* **Verified Claims**: 100% offline Arabic diacritization tool utilizing contextual syntactic analysis with `.txt` import/export.
 
-### D. `Savora` & `Re3o` Commercial Projects
-- **Status**: **PROPRIETARY CLIENT PROJECTS (NO PUBLIC STORE LINKS)**
-- **Searched**: GitHub public repositories (proprietary codebases), Apple App Store API.
-- **Resolution**: Both have verified visual assets and descriptions in the codebase inventory (`public/assets/images/projects/savora/` and `re3o/`), but no public store URLs or public repos. Rendered as minimal verified client contract entries without dummy links.
+### C. `Re3o` App Listing
+* **Status**: **RESOLVED**
+* **Source**: Google Play link provided (`https://play.google.com/store/apps/details?id=com.re3o.app`).
+* **Verified Claims**: PlayStation maintenance and technician booking client platform.
 
 ---
 
-## 3. Discrepancies & Technical Notes
+## 2. Discrepancies & Notes
 
-### E. `Boa` (Go) Installation Command vs. `go.mod`
-- **Finding**: 
-  - `README.md` states: `go install github.com/ZyadWKhedr/Boa@latest`
-  - `go.mod` declares: `module compressor`
-- **Issue**: Running `go install github.com/ZyadWKhedr/Boa@latest` fails in Go with:
-  ```
-  go: github.com/ZyadWKhedr/Boa@latest: parsing go.mod: unexpected module path "compressor"
-  ```
-- **Resolution**:
-  - For Go direct binary installation to work, the `go.mod` module path must be updated to `module github.com/ZyadWKhedr/Boa`.
-  - Otherwise, the documented factual installation method is:
-    ```bash
-    git clone https://github.com/ZyadWKhedr/Boa.git
-    cd Boa
-    go build -o boa .
-    ```
+### D. Vee Tech End Date (Old Portfolio vs. LinkedIn PDF)
+* **Old Portfolio**: Stated Vee Tech as "Present".
+* **LinkedIn PDF**: States July 2026 – October 2026 (4 months).
+* **Resolution**: Following strict rule (*"trust the PDF and report the difference"*), the portfolio will display **July 2026 – October 2026**.
 
-### F. Store Ratings & Download Counts
-- **Status**: 
-  - `Ufuq` (ID: 6821979552): `averageUserRating = 0`, `userRatingCount = 0` (Apple returns 0 when an app has insufficient public rating counts).
-  - `Grandmaster Chess` (ID: 6774163012): `averageUserRating = 0`, `userRatingCount = 0`.
-- **Resolution**: Per strict rule (*"Only show a rating, download count, or stat if it comes directly from a store API or listing. Never invent facts"*), NO star ratings, download figures, or user statistics will be shown.
+### E. `Savora` Commercial Contract
+* **Status**: Proprietary freelance client contract app. Visual screens verified in repo (`public/assets/images/projects/savora/`). Rendered as a verified client contract entry without external store links.
 
+### F. `Boa` (Go) Installation Command vs. `go.mod`
+* **Finding**: `README.md` states `go install github.com/ZyadWKhedr/Boa@latest`, while `go.mod` specifies `module compressor`.
+* **Resolution**: Documented build-from-source installation (`git clone && go build`) to ensure user commands work without unexpected module errors.
+
+### G. Store Ratings & Numbers
+* **Finding**: App Store APIs report 0 ratings for current listings.
+* **Resolution**: Zero fabricated ratings or fake user counts will be shown on any card or badge.

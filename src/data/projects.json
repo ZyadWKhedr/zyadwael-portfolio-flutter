@@ -1,0 +1,158 @@
+[
+  {
+    "id": "ufuq",
+    "featured": true,
+    "title": {
+      "en": "Ufuq",
+      "ar": "أُفُق"
+    },
+    "tagline": {
+      "en": "Distraction-free Quran, live Cairo radio, and solar prayer timings.",
+      "ar": "رفيق إسلامي هادئ للقرآن، إذاعة القاهرة المباشرة ومواقيت الصلاة."
+    },
+    "description": {
+      "en": "An Islamic daily companion featuring the complete Holy Quran in authentic Uthmani script for offline reading, 24/7 background live streaming of Cairo Quran Radio (FM 94.7), astronomical solar prayer countdown, a tactile Subha with haptic feedback, and a sensor-calibrated Qibla compass.",
+      "ar": "رفيق يومي إسلامي يضم المصحف الشريف كاملاً بالرسم العثماني للقراءة أوفلاين، وبثاً مباشراً لإذاعة القرآن الكريم من القاهرة على مدار الساعة، ومواقيت صلاة فلكية دقيقة، ومسبحة إلكترونية بنبضات لمسية، وبوصلة دقيقة للقبلة."
+    },
+    "category": {
+      "en": "Mobile App (iOS)",
+      "ar": "تطبيق هاتف (iOS)"
+    },
+    "technologies": ["Flutter", "Dart", "Clean Architecture", "Audio Streaming", "CoreLocation", "Haptics"],
+    "icon": "assets/images/projects/ufuq/ufuq-icon.png",
+    "preview": "assets/images/projects/ufuq/ufuq-preview.webp",
+    "links": {
+      "appStore": "https://apps.apple.com/id/app/ufuq/id6821979552",
+      "landingPage": "/ufuq"
+    }
+  },
+  {
+    "id": "tashkeel",
+    "featured": false,
+    "title": {
+      "en": "Tashkeel",
+      "ar": "تَشْكِيل"
+    },
+    "tagline": {
+      "en": "100% offline Arabic diacritization tool utilizing contextual syntactic analysis.",
+      "ar": "أداة ذكية لتشكيل النصوص العربية أوفلاين بالاعتماد على التحليل السياقي وقواعد النحو."
+    },
+    "description": {
+      "en": "An intelligent Arabic text diacritization application running 100% locally on-device without internet access. Employs advanced contextual language analysis and Arabic grammar rules to add full vowel marks with single-tap text or file (.txt) import and export.",
+      "ar": "تطبيق محلي 100% لتشكيل وضبط النصوص العربية بالحركات الكاملة بدقة نحوية دون الحاجة للإنترنت، مع دعم استيراد وتصدير ملفات النصوص وسجل للمحفوظات."
+    },
+    "category": {
+      "en": "Mobile App (iOS / iPadOS)",
+      "ar": "تطبيق هاتف ولوحي (iOS / iPadOS)"
+    },
+    "technologies": ["Flutter", "Dart", "Offline NLP", "Text Processing", "File I/O"],
+    "icon": "assets/images/projects/tashkeel/tashkeel-icon.webp",
+    "preview": "assets/images/projects/tashkeel/tashkeel-preview.webp",
+    "links": {
+      "appStore": "https://apps.apple.com/br/app/tashkeel-%D8%AA-%D8%B4-%D9%83-%D9%8A%D9%84/id6827159466"
+    }
+  },
+  {
+    "id": "savora",
+    "featured": false,
+    "title": {
+      "en": "Savora",
+      "ar": "سافورا"
+    },
+    "tagline": {
+      "en": "Multi-brand restaurant ordering and multi-branch cart dispatching client.",
+      "ar": "منصة طلبات مطاعم متعددة الفروع مع سلة تسوق موحدة ومتابعة فورية."
+    },
+    "description": {
+      "en": "Engineered a multi-brand restaurant ordering application supporting multi-branch order routing, customized meal modifier options, stateful cart checkout flows, and real-time order status tracking.",
+      "ar": "تطبيق لطلب الوجبات من مطاعم متعددة الفروع يدعم تخصيص خيارات الوجبات، إدارة السلة محلياً، ومتابعة حالة تجهيز وتوصيل الطلب."
+    },
+    "category": {
+      "en": "Freelance Client Contract",
+      "ar": "مشروع تعاقدي لعميل"
+    },
+    "technologies": ["Flutter", "Dart", "Riverpod", "REST APIs", "Clean Architecture"],
+    "icon": "assets/images/projects/savora/savora-icon.png",
+    "preview": "assets/images/projects/savora/savora-preview.png",
+    "links": {}
+  },
+  {
+    "id": "re3o",
+    "featured": false,
+    "title": {
+      "en": "Re3o",
+      "ar": "ريعو"
+    },
+    "tagline": {
+      "en": "On-demand PlayStation maintenance and technician pickup platform.",
+      "ar": "منصة حجز صيانة منصات البلاي ستيشن وطلب فني معتمد."
+    },
+    "description": {
+      "en": "A specialized service booking platform for PlayStation console diagnostics, hardware repairs, and scheduled doorstep courier pickup with transparent status milestones and direct support chat.",
+      "ar": "منصة لحجز خدمات صيانة أجهزة البلاي ستيشن وتحديد مواعيد استلام الجهاز من الباب وتتبع خطوات الصيانة والتواصل المباشر."
+    },
+    "category": {
+      "en": "Mobile App (Android)",
+      "ar": "تطبيق هاتف (Android)"
+    },
+    "technologies": ["Flutter", "Dart", "Provider", "Google Maps", "REST APIs"],
+    "icon": "assets/images/projects/re3o/re3o-icon.png",
+    "preview": "assets/images/projects/re3o/re3o-preview.png",
+    "links": {
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.re3o.app"
+    }
+  },
+  {
+    "id": "amoomy",
+    "featured": false,
+    "title": {
+      "en": "Amoomy",
+      "ar": "عمومي"
+    },
+    "tagline": {
+      "en": "Heavy vehicle recovery and long-distance hauling coordination platform in KSA.",
+      "ar": "منصة تنسيق سطحات النقل الثقيل والمساعدات اللوجستية في السعودية."
+    },
+    "description": {
+      "en": "A logistics and transportation client operating across Saudi Arabia, linking drivers with heavy tow truck operators and flatbeds using map-based routing, instant offers, and service tracking.",
+      "ar": "منصة لوجستية في المملكة العربية السعودية لربط السائقين بمشغلي سطحات النقل الثقيل باستخدام خرائط الموقع وتقديم العروض المباشرة وتتبع المسار."
+    },
+    "category": {
+      "en": "Commercial Mobile Application",
+      "ar": "تطبيق تجاري معتمد"
+    },
+    "technologies": ["Flutter", "Dart", "Firebase Auth", "Provider", "REST APIs", "Google Maps"],
+    "icon": "assets/images/projects/amoomy/amoomy-icon.png",
+    "preview": "assets/images/projects/amoomy/amoomy-preview.png",
+    "links": {
+      "appStore": "https://apps.apple.com/sa/app/amoomy/id6753125564"
+    }
+  },
+  {
+    "id": "raval",
+    "featured": false,
+    "title": {
+      "en": "Raval",
+      "ar": "رافال"
+    },
+    "tagline": {
+      "en": "Fashion e-commerce application with stateful cart and order tracking.",
+      "ar": "تطبيق تسوق أزياء متكامل مع إدارة السلة ومتابعة دورة الطلب."
+    },
+    "description": {
+      "en": "An e-commerce shopping client built with multi-variant product selection, synchronized local cart state, payment gateway integration, and customer order history.",
+      "ar": "تطبيق متجر أزياء متكامل يدعم تصفح خيارات المنتجات، إدارة السلة، وإتمام الدفع ومتابعة الشحنات."
+    },
+    "category": {
+      "en": "Commercial Mobile Application",
+      "ar": "تطبيق تجاري معتمد"
+    },
+    "technologies": ["Flutter", "Dart", "Clean Architecture", "REST APIs", "State Management"],
+    "icon": "assets/images/projects/raval/raval-icon.png",
+    "preview": "assets/images/projects/raval/raval-preview.png",
+    "links": {
+      "appStore": "https://apps.apple.com/sa/app/raval/id6756228964"
+    }
+  }
+]
+

@@ -1,0 +1,135 @@
+{
+  "jobs": [
+    {
+      "id": "vee-tech",
+      "company": "Vee Tech",
+      "role": {
+        "en": "Mobile Application Developer",
+        "ar": "مطور تطبيقات هواتف"
+      },
+      "employmentType": {
+        "en": "Contract / Mobile Developer",
+        "ar": "تعاقد / مطور هواتف"
+      },
+      "period": {
+        "en": "Jul 2026 — Oct 2026",
+        "ar": "يوليو ٢٠٢٦ — أكتوبر ٢٠٢٦"
+      },
+      "duration": {
+        "en": "4 months",
+        "ar": "٤ أشهر"
+      },
+      "location": {
+        "en": "Cairo, Egypt",
+        "ar": "القاهرة، مصر"
+      },
+      "description": {
+        "en": "Developed mobile application features, integrated clean client architecture, and coordinated mobile application deliverables.",
+        "ar": "تطوير ميزات تطبيقات الهواتف وتطبيق مبادئ الهيكلية النظيفة والتنسيق لتسليم متطلبات التطبيق."
+      }
+    },
+    {
+      "id": "rockai-dev",
+      "company": "Rockai Dev",
+      "role": {
+        "en": "Mobile Application Developer",
+        "ar": "مطور تطبيقات هواتف"
+      },
+      "employmentType": {
+        "en": "Mobile Application Developer",
+        "ar": "مطور تطبيقات هواتف"
+      },
+      "period": {
+        "en": "Jul 2026 — Sep 2026",
+        "ar": "يوليو ٢٠٢٦ — سبتمبر ٢٠٢٦"
+      },
+      "duration": {
+        "en": "3 months",
+        "ar": "٣ أشهر"
+      },
+      "location": {
+        "en": "Alexandria, Egypt",
+        "ar": "الإسكندرية، مصر"
+      },
+      "description": {
+        "en": "Engineered mobile application client components and user interfaces for cross-platform deployment.",
+        "ar": "برمجة واجهات ومكونات تطبيقات الهواتف عبر منصات متعددة."
+      }
+    },
+    {
+      "id": "zeroonez",
+      "company": "ZeroOneZ",
+      "role": {
+        "en": "Flutter Developer",
+        "ar": "مطور فلاتر"
+      },
+      "employmentType": {
+        "en": "Flutter Developer",
+        "ar": "مطور فلاتر"
+      },
+      "period": {
+        "en": "Jun 2025 — May 2026",
+        "ar": "يونيو ٢٠٢٥ — مايو ٢٠٢٦"
+      },
+      "duration": {
+        "en": "1 year",
+        "ar": "سنة واحدة"
+      },
+      "location": {
+        "en": "Alexandria, Egypt",
+        "ar": "الإسكندرية، مصر"
+      },
+      "description": {
+        "en": "Built responsive, scalable production Flutter applications, integrated Google Maps and WebSocket real-time messaging, and developed e-commerce and logistics mobile clients.",
+        "ar": "بناء وتطوير تطبيقات فلاتر إنتاجية، وربط خرائط جوجل والمراسلة الفورية عبر WebSocket، وتطوير تطبيقات للتجارة والخدمات اللوجستية."
+      }
+    },
+    {
+      "id": "cellula-technologies",
+      "company": "Cellula Technologies",
+      "role": {
+        "en": "Flutter Developer Intern",
+        "ar": "متدرب تطوير فلاتر"
+      },
+      "employmentType": {
+        "en": "Internship",
+        "ar": "تدريب عملي"
+      },
+      "period": {
+        "en": "Feb 2025 — Apr 2025",
+        "ar": "فبراير ٢٠٢٥ — أبريل ٢٠٢٥"
+      },
+      "duration": {
+        "en": "3 months",
+        "ar": "٣ أشهر"
+      },
+      "location": {
+        "en": "Cairo, Egypt",
+        "ar": "القاهرة، مصر"
+      },
+      "description": {
+        "en": "Collaborated on Flutter mobile clients with state management and dynamic recommendation engines, integrating REST APIs and AI-assisted workflows.",
+        "ar": "المشاركة في تطوير تطبيقات فلاتر وإدارة الحالة والربط مع الواجهات البرمجية وتكامل ميزات الذكاء الاصطناعي."
+      }
+    }
+  ],
+  "education": {
+    "institution": {
+      "en": "Alexandria University",
+      "ar": "جامعة الإسكندرية"
+    },
+    "degree": {
+      "en": "Faculty of Computers and Data Science",
+      "ar": "كلية الحاسبات وعلوم البيانات"
+    },
+    "period": {
+      "en": "Oct 2023 — Oct 2027",
+      "ar": "أكتوبر ٢٠٢٣ — أكتوبر ٢٠٢٧"
+    },
+    "location": {
+      "en": "Alexandria, Egypt",
+      "ar": "الإسكندرية، مصر"
+    }
+  }
+}
+
