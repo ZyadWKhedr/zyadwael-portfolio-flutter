@@ -8,13 +8,18 @@ import {
   Clock,
   Compass,
   Heart,
+  Calendar,
+  Bell,
+  Sparkles,
+  LayoutGrid,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ufuqIcon from '@/assets/ufuq-icon.png';
 import { getAssetUrl } from '@/lib/utils';
 
-// App Store verified link
+// Verified Store Links
 const APP_STORE_URL = 'https://apps.apple.com/id/app/ufuq/id6821979552';
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.ziad.ufuq';
 
 interface FeatureItem {
   id: string;
@@ -38,16 +43,16 @@ const FEATURES: FeatureItem[] = [
     id: 'home-radio',
     stepAr: '٠١',
     stepEn: '01',
-    shortNameAr: 'الرئيسية والإذاعة',
-    shortNameEn: 'Home & Radio',
-    tagAr: 'الرئيسية · البث المباشر',
-    tagEn: 'Home & Radio',
-    titleAr: 'الرئيسية وبث إذاعة القرآن الكريم',
-    titleEn: 'Home & Live Cairo Quran Radio',
+    shortNameAr: 'الرئيسية والتقويم',
+    shortNameEn: 'Home & Calendar',
+    tagAr: 'الرئيسية · التقويم الهجري · البث المباشر',
+    tagEn: 'Home · Hijri Calendar · Live Radio',
+    titleAr: 'الرئيسية، التقويم الهجري وبث إذاعة القرآن الكريم',
+    titleEn: 'Home, Hijri Calendar & Live Cairo Quran Radio',
     descAr:
-      'واجهة موحدة تعرض آية يومية والعد التنازلي لموعد الصلاة القادم. نتيح الاستماع المباشر لإذاعة القرآن الكريم من القاهرة على مدار الساعة في الخلفية بنقرة واحدة.',
+      'واجهة موحدة تعرض آية يومية، التقويم الهجري المحدث، وأسماء الله الحسنى، مع العد التنازلي لموعد الصلاة القادم. نتيح الاستماع المباشر لإذاعة القرآن الكريم من القاهرة على مدار الساعة بنقرة واحدة.',
     descEn:
-      'A unified home screen displaying the daily verse and next prayer countdown. Listen to live Cairo Quran Radio 24/7 in the background with a single tap.',
+      'A unified home screen displaying the daily verse, updated Hijri calendar, Names of Allah, and prayer countdown. Listen to live Cairo Quran Radio 24/7 in the background with a single tap.',
     image: 'assets/images/projects/ufuq/ufuq-screen-home.webp',
     fallbackImage: 'assets/images/projects/ufuq/ufuq-real-home.jpg',
     icon: Radio,
@@ -92,16 +97,16 @@ const FEATURES: FeatureItem[] = [
     id: 'prayer-times',
     stepAr: '٠٤',
     stepEn: '04',
-    shortNameAr: 'مواقيت الصلاة',
-    shortNameEn: 'Prayer Times',
-    tagAr: 'مواقيت الصلاة',
-    tagEn: 'Prayer Timings',
-    titleAr: 'مواقيت الصلاة الفلكية والعد التنازلي',
-    titleEn: 'Astronomical Prayer Timings',
+    shortNameAr: 'المواقيت والتنبيهات',
+    shortNameEn: 'Prayers & Alerts',
+    tagAr: 'مواقيت الصلاة · إشعارات الأذان · صيام الأيام البيض',
+    tagEn: 'Prayer Timings · Azan Alerts · White Days Fasting',
+    titleAr: 'مواقيت الصلاة الفلكية وتنبيهات صيام الأيام البيض',
+    titleEn: 'Astronomical Prayer Timings & Sunnah Fasting Alerts',
     descAr:
-      'حساب دقيق لمواقيت الصلوات الخمس بحسب إحداثيات موقعك الجغرافي. نقدّم عداداً تنازلياً يوضح الوقت المتبقي لأداء الصلاة القادمة.',
+      'حساب دقيق لمواقيت الصلوات الخمس بحسب إحداثيات موقعك الجغرافي مع إشعارات الأذان. نقدّم تنبيهات دورية لصيام السنن والأيام البيض، مع ودجات أنيقة للشاشة الرئيسية.',
     descEn:
-      'Accurate prayer times calculated from your GPS coordinates, featuring a live countdown timer until the next prayer.',
+      'Accurate prayer times calculated from your GPS coordinates with adhan notifications, timely reminders for fasting the White Days (13, 14, 15), and home screen widgets.',
     image: 'assets/images/projects/ufuq/ufuq-screen-prayer.webp',
     fallbackImage: 'assets/images/projects/ufuq/ufuq-real-prayer.jpg',
     icon: Clock,
@@ -146,7 +151,7 @@ const FEATURES: FeatureItem[] = [
 
 /**
  * Pure CSS/SVG Real iPhone Device Frame
- * Locked explicit pixel dimensions (295px width, 630px height) ensuring it can never collapse.
+ * Explicit dimensions ensuring it can never collapse.
  */
 interface PhoneMockupProps {
   activeScreenIndex?: number;
@@ -166,7 +171,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
       {/* Soft Ambient Radial Backlight behind Phone */}
       <div className="absolute -inset-8 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Physical Hardware Outer Chassis - Explicit Width & Height */}
+      {/* Physical Hardware Outer Chassis */}
       <div className="relative w-[280px] h-[585px] sm:w-[300px] sm:h-[630px] rounded-[48px] p-[10px] sm:p-[11px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-950 border border-white/20 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.1),0_0_0_6px_#18191c]">
         {/* Hardware side buttons */}
         <div className="absolute -left-[9px] top-24 w-[3px] h-8 bg-zinc-500 rounded-l-sm" />
@@ -174,7 +179,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
         <div className="absolute -left-[9px] top-52 w-[3px] h-12 bg-zinc-500 rounded-l-sm" />
         <div className="absolute -right-[9px] top-32 w-[3px] h-16 bg-zinc-500 rounded-r-sm" />
 
-        {/* Screen Bezel & Container - Explicit Height */}
+        {/* Screen Bezel & Container */}
         <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-black shadow-inner ring-1 ring-white/10">
           {/* Top Dynamic Island */}
           <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-[85px] h-[22px] bg-black rounded-full z-30 shadow-md flex items-center justify-end px-2 pointer-events-none">
@@ -257,7 +262,7 @@ export const UfuqShowcasePage: React.FC = () => {
     };
   }, [isAr]);
 
-  // Track active chapter during scrolling on desktop with IntersectionObserver
+  // Track active chapter during scrolling with IntersectionObserver
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -286,7 +291,6 @@ export const UfuqShowcasePage: React.FC = () => {
         observers.forEach((obs) => obs.disconnect());
       };
     } else {
-      // Fallback scroll listener
       const handleScroll = () => {
         const scrollPosition = window.scrollY + window.innerHeight * 0.45;
         chapterRefs.current.forEach((el, index) => {
@@ -318,7 +322,7 @@ export const UfuqShowcasePage: React.FC = () => {
       style={{ direction: isAr ? 'rtl' : 'ltr' }}
     >
       {/* ------------------------------------------------------------- */}
-      {/* 1. TOP BAR / NAVIGATION (Clean, human, unbloated)              */}
+      {/* 1. TOP BAR / NAVIGATION                                        */}
       {/* ------------------------------------------------------------- */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#070b09]/90 border-b border-white/[0.07]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
@@ -336,8 +340,8 @@ export const UfuqShowcasePage: React.FC = () => {
             </span>
           </Link>
 
-          {/* Right Controls: Minimal & Natural */}
-          <div className="flex items-center gap-3">
+          {/* Right Controls */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Language Switcher */}
             <button
               onClick={() => setLang(isAr ? 'en' : 'ar')}
@@ -347,7 +351,20 @@ export const UfuqShowcasePage: React.FC = () => {
               {isAr ? 'English' : 'العربية'}
             </button>
 
-            {/* Direct App Store Download Button */}
+            {/* Google Play Button */}
+            <a
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white border border-white/10 font-medium text-xs transition-colors shadow-sm active:scale-95"
+            >
+              <svg className="w-3.5 h-3.5 fill-current shrink-0 text-emerald-400" viewBox="0 0 24 24">
+                <path d="M3.609 1.814L13.793 12 3.61 22.186a1.94 1.94 0 0 1-.61-.954V2.768c.15-.36.368-.69.61-.954zm11.6 11.602l2.366-2.366-10.42-6.01 8.054 8.376zm2.366-3.782l1.986 1.147a1.442 1.442 0 0 1 0 2.476l-1.986 1.147-2.366-2.385 2.366-2.385zm-3.782 4.966l-8.054 8.376 10.42-6.01-2.366-2.366z" />
+              </svg>
+              <span className="hidden sm:inline">Google Play</span>
+            </a>
+
+            {/* App Store Button */}
             <a
               href={APP_STORE_URL}
               target="_blank"
@@ -388,11 +405,11 @@ export const UfuqShowcasePage: React.FC = () => {
           {/* One-line Tagline */}
           <p className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-8">
             {isAr
-              ? 'رفيقك اليومي الهادئ للقرآن، الإذاعة المباشرة، ومواقيت الصلاة دون تشتيت.'
-              : 'A quiet daily companion for Holy Quran, live Cairo radio, and solar prayer times.'}
+              ? 'رفيقك اليومي الهادئ للقرآن، الإذاعة المباشرة، التقويم الهجري ومواقيت الصلاة دون تشتيت.'
+              : 'A quiet daily companion for Holy Quran, live Cairo radio, Hijri calendar, and solar prayer times.'}
           </p>
 
-          {/* Store Badges */}
+          {/* Store Badges - Both Active on App Store & Google Play */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {/* App Store Download Badge */}
             <a
@@ -410,21 +427,23 @@ export const UfuqShowcasePage: React.FC = () => {
               </div>
             </a>
 
-            {/* Google Play Disabled Coming Soon Badge */}
-            <div
-              aria-disabled="true"
-              className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-400 opacity-65 cursor-not-allowed select-none"
+            {/* Google Play Active Download Badge */}
+            <a
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-white border border-white/15 shadow-lg transition-all active:scale-95 group"
             >
-              <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 fill-current shrink-0 text-emerald-400 group-hover:scale-105 transition-transform" viewBox="0 0 24 24">
                 <path d="M3.609 1.814L13.793 12 3.61 22.186a1.94 1.94 0 0 1-.61-.954V2.768c.15-.36.368-.69.61-.954zm11.6 11.602l2.366-2.366-10.42-6.01 8.054 8.376zm2.366-3.782l1.986 1.147a1.442 1.442 0 0 1 0 2.476l-1.986 1.147-2.366-2.385 2.366-2.385zm-3.782 4.966l-8.054 8.376 10.42-6.01-2.366-2.366z" />
               </svg>
               <div className="text-start leading-tight">
-                <span className="block text-[10px] font-mono uppercase text-zinc-500">
-                  {isAr ? 'قريباً على' : 'Coming soon to'}
+                <span className="block text-[10px] font-mono uppercase text-zinc-400">
+                  {isAr ? 'احصل عليه من' : 'Get it on'}
                 </span>
-                <span className="block text-sm font-semibold text-zinc-300">Google Play</span>
+                <span className="block text-sm font-semibold text-white">Google Play</span>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -566,7 +585,93 @@ export const UfuqShowcasePage: React.FC = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 4. ADS AND PRIVACY NOTE                                       */}
+      {/* 4. COMPANION CAPABILITIES GRID (Widgets, Hijri, Fasting, 99 Names) */}
+      {/* ------------------------------------------------------------- */}
+      <section className="py-16 md:py-20 px-4 sm:px-6 border-b border-white/[0.07] bg-[#050907]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{isAr ? 'ميزات وتفاصيل إضافية' : 'Everyday Companion Features'}</span>
+            </span>
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              {isAr ? 'عناية بأدق تفاصيل يومك الإيماني' : 'Designed for Mindful Daily Devotion'}
+            </h2>
+
+            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+              {isAr
+                ? 'أدوات مدمجة تعمل بانسجام لتسهيل متابعة صلواتك، أذكارك، وسنن الصيام.'
+                : 'Built-in tools crafted to simplify tracking your prayers, supplications, and sunnah fasting.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* 1. Home Screen Widgets */}
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-white/[0.07] hover:border-emerald-500/30 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
+                <LayoutGrid className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white tracking-tight">
+                {isAr ? 'ودجات الشاشة الرئيسية' : 'Home Screen Widgets'}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {isAr
+                  ? 'ودجات أنيقة ومتنوعة الأحجام لنظامي iOS و Android لعرض مواقيت الصلاة القادمة والآية اليومية دون الحاجة لفتح التطبيق.'
+                  : 'Glanceable iOS and Android widgets displaying next prayer countdowns and daily verses right from your home screen.'}
+              </p>
+            </div>
+
+            {/* 2. Hijri Calendar */}
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-white/[0.07] hover:border-emerald-500/30 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
+                <Calendar className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white tracking-tight">
+                {isAr ? 'التقويم الهجري المعتمد' : 'Astronomical Hijri Calendar'}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {isAr
+                  ? 'عرض دقيق لتاريخ اليوم الهجري ومتابعة دورة الشهور القمرية مع إمكانية التعديل والتزامن مع التقويم الرسمي المعتمد.'
+                  : 'Synchronized Hijri date tracking, lunar cycle milestones, and Islamic month navigation with astronomical accuracy.'}
+              </p>
+            </div>
+
+            {/* 3. Prayer & Fasting Alerts */}
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-white/[0.07] hover:border-emerald-500/30 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
+                <Bell className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white tracking-tight">
+                {isAr ? 'تنبيهات الصلاة وصيام البيض' : 'Prayer & Fasting Reminders'}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {isAr
+                  ? 'إشعارات دقيقة لمواقيت الصلاة، وتنبيهات استباقية للتذكير بفضل صيام الأيام البيض (١٣، ١٤، ١٥) وسنن الإثنين والخميس.'
+                  : 'Reliable adhan notifications along with proactive reminders for the sunnah fasting of the White Days (13, 14, 15) and Mondays.'}
+              </p>
+            </div>
+
+            {/* 4. Names of Allah */}
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-white/[0.07] hover:border-emerald-500/30 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white tracking-tight">
+                {isAr ? 'أسماء الله الحسنى' : '99 Names of Allah'}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {isAr
+                  ? 'قائمة مفصلة لأسماء الله الحسنى التسعة والتسعين مع شروحات مبسطة لمعانيها لتعزيز التأمل والتدبر اليومي.'
+                  : 'Complete presentation of the 99 Names of Allah with clear explanations and meanings for daily reflection.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 5. ADS AND PRIVACY NOTE                                       */}
       {/* ------------------------------------------------------------- */}
       <section className="py-16 md:py-20 px-4 sm:px-6 border-b border-white/[0.07] bg-[#060e0a]">
         <div className="max-w-2xl mx-auto text-center space-y-4">
@@ -587,7 +692,7 @@ export const UfuqShowcasePage: React.FC = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 5. FINAL SECTION: BIG QR CODE & APP STORE                     */}
+      {/* 6. FINAL SECTION: BIG QR CODE & STORE DOWNLOADS               */}
       {/* ------------------------------------------------------------- */}
       <section className="py-16 md:py-24 px-4 sm:px-6 border-b border-white/[0.07] relative">
         <div className="max-w-3xl mx-auto">
@@ -615,12 +720,13 @@ export const UfuqShowcasePage: React.FC = () => {
 
                 <p className="text-sm text-zinc-300 leading-relaxed">
                   {isAr
-                    ? 'امسح رمز الاستجابة السريعة بكاميرا هاتفك أو اضغط على الزر أدناه للانتقال المباشر إلى صفحة التطبيق في متجر App Store.'
-                    : 'Scan the QR code with your iPhone camera or tap the badge below to view the app directly on the App Store.'}
+                    ? 'امسح رمز الاستجابة السريعة بكاميرا هاتفك أو حمّل التطبيق مباشرة عبر متجر App Store لأجهزة iOS أو متجر Google Play لأجهزة Android.'
+                    : 'Scan the QR code with your phone camera or download directly from the App Store (iOS) or Google Play (Android).'}
                 </p>
 
-                {/* App Store Badge */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center sm:items-start gap-3">
+                {/* Dual Store Badges */}
+                <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                  {/* App Store Badge */}
                   <a
                     href={APP_STORE_URL}
                     target="_blank"
@@ -635,13 +741,31 @@ export const UfuqShowcasePage: React.FC = () => {
                       <span className="block text-sm font-bold">App Store</span>
                     </div>
                   </a>
+
+                  {/* Google Play Badge */}
+                  <a
+                    href={GOOGLE_PLAY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white border border-white/15 shadow-lg transition-all active:scale-95 group"
+                  >
+                    <svg className="w-5 h-5 fill-current shrink-0 text-emerald-400 group-hover:scale-105 transition-transform" viewBox="0 0 24 24">
+                      <path d="M3.609 1.814L13.793 12 3.61 22.186a1.94 1.94 0 0 1-.61-.954V2.768c.15-.36.368-.69.61-.954zm11.6 11.602l2.366-2.366-10.42-6.01 8.054 8.376zm2.366-3.782l1.986 1.147a1.442 1.442 0 0 1 0 2.476l-1.986 1.147-2.366-2.385 2.366-2.385zm-3.782 4.966l-8.054 8.376 10.42-6.01-2.366-2.366z" />
+                    </svg>
+                    <div className="text-start leading-tight">
+                      <span className="block text-[10px] font-mono uppercase text-zinc-400">
+                        {isAr ? 'احصل عليه من' : 'Get it on'}
+                      </span>
+                      <span className="block text-sm font-semibold text-white">Google Play</span>
+                    </div>
+                  </a>
                 </div>
 
-                {/* Android Notice */}
+                {/* Cross-platform Notice */}
                 <div className="pt-1">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
-                    {isAr ? 'قريباً على أندرويد (Google Play)' : 'Android coming soon (Google Play)'}
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    {isAr ? 'تطبيق أصلي متاح الآن على iOS و Android' : 'Native mobile experience live on iOS & Android'}
                   </span>
                 </div>
               </div>
@@ -651,7 +775,7 @@ export const UfuqShowcasePage: React.FC = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 6. MINIMAL FOOTER                                             */}
+      {/* 7. MINIMAL FOOTER                                             */}
       {/* ------------------------------------------------------------- */}
       <footer className="py-8 px-4 sm:px-6 bg-[#050806] text-xs text-zinc-500 font-mono">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">

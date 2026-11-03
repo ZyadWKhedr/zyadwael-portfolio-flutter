@@ -7,22 +7,23 @@
       "ar": "أُفُق"
     },
     "tagline": {
-      "en": "Distraction-free Quran, live Cairo radio, and solar prayer timings.",
-      "ar": "رفيق إسلامي هادئ للقرآن، إذاعة القاهرة المباشرة ومواقيت الصلاة."
+      "en": "Distraction-free Quran, live Cairo radio, Hijri calendar, home widgets, and solar prayer timings.",
+      "ar": "رفيق إسلامي هادئ للقرآن، إذاعة القاهرة، التقويم الهجري، ودجات الشاشة ومواقيت الصلاة."
     },
     "description": {
-      "en": "An Islamic daily companion featuring the complete Holy Quran in authentic Uthmani script for offline reading, 24/7 background live streaming of Cairo Quran Radio (FM 94.7), astronomical solar prayer countdown, a tactile Subha with haptic feedback, and a sensor-calibrated Qibla compass.",
-      "ar": "رفيق يومي إسلامي يضم المصحف الشريف كاملاً بالرسم العثماني للقراءة أوفلاين، وبثاً مباشراً لإذاعة القرآن الكريم من القاهرة على مدار الساعة، ومواقيت صلاة فلكية دقيقة، ومسبحة إلكترونية بنبضات لمسية، وبوصلة دقيقة للقبلة."
+      "en": "An Islamic daily companion featuring the complete Holy Quran in authentic Uthmani script for offline reading, 24/7 background live streaming of Cairo Quran Radio (FM 94.7), astronomical solar prayer countdown, timely alerts for the sunnah fasting of the White Days, 99 Names of Allah, glanceable home screen widgets, a tactile Subha with haptic feedback, and a sensor-calibrated Qibla compass.",
+      "ar": "رفيق يومي إسلامي يضم المصحف الشريف كاملاً بالرسم العثماني للقراءة أوفلاين، وبثاً مباشراً لإذاعة القرآن الكريم من القاهرة على مدار الساعة، ومواقيت صلاة فلكية دقيقة، وتنبيهات لصيام الأيام البيض، وأسماء الله الحسنى، وودجات للشاشة الرئيسية، ومسبحة إلكترونية بنبضات لمسية، وبوصلة دقيقة للقبلة."
     },
     "category": {
-      "en": "Mobile App (iOS)",
-      "ar": "تطبيق هاتف (iOS)"
+      "en": "Mobile App (iOS & Android)",
+      "ar": "تطبيق هاتف (iOS و Android)"
     },
-    "technologies": ["Flutter", "Dart", "Clean Architecture", "Audio Streaming", "CoreLocation", "Haptics"],
+    "technologies": ["Flutter", "Dart", "Clean Architecture", "Audio Streaming", "CoreLocation", "Haptics", "Widgets"],
     "icon": "assets/images/projects/ufuq/ufuq-icon.png",
     "preview": "assets/images/projects/ufuq/ufuq-preview.webp",
     "links": {
       "appStore": "https://apps.apple.com/id/app/ufuq/id6821979552",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.ziad.ufuq",
       "landingPage": "/ufuq"
     }
   },
