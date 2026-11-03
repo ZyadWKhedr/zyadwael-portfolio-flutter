@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Apple,
-  Globe,
   ShieldCheck,
   Radio,
   BookOpen,
@@ -11,7 +10,6 @@ import {
   Heart,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import ufuqIcon from '@/assets/ufuq-icon.png';
 import { getAssetUrl } from '@/lib/utils';
 
@@ -22,6 +20,8 @@ interface FeatureItem {
   id: string;
   stepAr: string;
   stepEn: string;
+  shortNameAr: string;
+  shortNameEn: string;
   tagAr: string;
   tagEn: string;
   titleAr: string;
@@ -29,6 +29,7 @@ interface FeatureItem {
   descAr: string;
   descEn: string;
   image: string;
+  fallbackImage: string;
   icon: React.ElementType;
 }
 
@@ -37,6 +38,8 @@ const FEATURES: FeatureItem[] = [
     id: 'home-radio',
     stepAr: '٠١',
     stepEn: '01',
+    shortNameAr: 'الرئيسية والإذاعة',
+    shortNameEn: 'Home & Radio',
     tagAr: 'الرئيسية · البث المباشر',
     tagEn: 'Home & Radio',
     titleAr: 'الرئيسية وبث إذاعة القرآن الكريم',
@@ -46,12 +49,15 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'A unified home screen displaying the daily verse and next prayer countdown. Listen to live Cairo Quran Radio 24/7 in the background with a single tap.',
     image: 'assets/images/projects/ufuq/ufuq-screen-home.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-home.jpg',
     icon: Radio,
   },
   {
     id: 'mushaf',
     stepAr: '٠٢',
     stepEn: '02',
+    shortNameAr: 'المصحف الشريف',
+    shortNameEn: 'Holy Quran',
     tagAr: 'المصحف الشريف',
     tagEn: 'Holy Quran',
     titleAr: 'المصحف الشريف بالرسم العثماني',
@@ -61,12 +67,15 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'The complete Holy Quran bundled locally for offline reading. Displayed in authentic Uthmani script with an intuitive index for Surahs and Juzs.',
     image: 'assets/images/projects/ufuq/ufuq-screen-quran.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-quran.jpg',
     icon: BookOpen,
   },
   {
     id: 'tasbeeh',
     stepAr: '٠٣',
     stepEn: '03',
+    shortNameAr: 'المسبحة اللمسية',
+    shortNameEn: 'Subha Counter',
     tagAr: 'المسبحة اللمسية',
     tagEn: 'Haptic Tasbeeh',
     titleAr: 'مسبحة إلكترونية بنبضات لمسية',
@@ -76,12 +85,15 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'A digital subha supporting standard counts (33, 99, 100) or open tallying. Subtle haptic vibrations at every press allow you to recite without looking at the display.',
     image: 'assets/images/projects/ufuq/ufuq-screen-tasbeeh.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-subha.png',
     icon: Fingerprint,
   },
   {
     id: 'prayer-times',
     stepAr: '٠٤',
     stepEn: '04',
+    shortNameAr: 'مواقيت الصلاة',
+    shortNameEn: 'Prayer Times',
     tagAr: 'مواقيت الصلاة',
     tagEn: 'Prayer Timings',
     titleAr: 'مواقيت الصلاة الفلكية والعد التنازلي',
@@ -91,12 +103,15 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'Accurate prayer times calculated from your GPS coordinates, featuring a live countdown timer until the next prayer.',
     image: 'assets/images/projects/ufuq/ufuq-screen-prayer.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-prayer.jpg',
     icon: Clock,
   },
   {
     id: 'qibla',
     stepAr: '٠٥',
     stepEn: '05',
+    shortNameAr: 'بوصلة القبلة',
+    shortNameEn: 'Qibla Compass',
     tagAr: 'بوصلة القبلة',
     tagEn: 'Qibla Compass',
     titleAr: 'بوصلة القبلة بمستشعرات الجهاز',
@@ -106,12 +121,15 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'Find the direction of the Holy Kaaba using your device\'s built-in magnetometer, along with the direct distance from your location.',
     image: 'assets/images/projects/ufuq/ufuq-screen-qibla.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-qibla.png',
     icon: Compass,
   },
   {
     id: 'athkar',
     stepAr: '٠٦',
     stepEn: '06',
+    shortNameAr: 'الأذكار اليومية',
+    shortNameEn: 'Daily Athkar',
     tagAr: 'الأذكار اليومية',
     tagEn: 'Daily Athkar',
     titleAr: 'أذكار اليوم والليلة من حصن المسلم',
@@ -121,13 +139,14 @@ const FEATURES: FeatureItem[] = [
     descEn:
       'Diacritized morning, evening, and post-prayer supplications from Hisn al-Muslim, each paired with an individual counter.',
     image: 'assets/images/projects/ufuq/ufuq-screen-athkar.webp',
+    fallbackImage: 'assets/images/projects/ufuq/ufuq-real-athkar.png',
     icon: Heart,
   },
 ];
 
 /**
  * Pure CSS/SVG Real iPhone Device Frame
- * Guaranteed explicit width & height to prevent zero-dimension collapse.
+ * Locked explicit pixel dimensions (295px width, 630px height) ensuring it can never collapse.
  */
 interface PhoneMockupProps {
   activeScreenIndex?: number;
@@ -143,22 +162,22 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
   const isSingle = typeof singleScreenIndex === 'number';
 
   return (
-    <div className={`relative mx-auto select-none ${className}`}>
+    <div className={`relative select-none shrink-0 ${className}`}>
       {/* Soft Ambient Radial Backlight behind Phone */}
-      <div className="absolute -inset-6 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -inset-8 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Physical Hardware Outer Chassis */}
-      <div className="relative w-[285px] sm:w-[310px] md:w-[320px] rounded-[50px] p-[10px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-950 border border-white/20 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.1),0_0_0_6px_#18191c]">
-        {/* Hardware side button accents (CSS) */}
+      {/* Physical Hardware Outer Chassis - Explicit Width & Height */}
+      <div className="relative w-[280px] h-[585px] sm:w-[300px] sm:h-[630px] rounded-[48px] p-[10px] sm:p-[11px] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-950 border border-white/20 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.1),0_0_0_6px_#18191c]">
+        {/* Hardware side buttons */}
         <div className="absolute -left-[9px] top-24 w-[3px] h-8 bg-zinc-500 rounded-l-sm" />
         <div className="absolute -left-[9px] top-36 w-[3px] h-12 bg-zinc-500 rounded-l-sm" />
         <div className="absolute -left-[9px] top-52 w-[3px] h-12 bg-zinc-500 rounded-l-sm" />
         <div className="absolute -right-[9px] top-32 w-[3px] h-16 bg-zinc-500 rounded-r-sm" />
 
-        {/* Screen Bezel & Container */}
-        <div className="relative w-full rounded-[40px] overflow-hidden bg-black aspect-[470/1024] shadow-inner ring-1 ring-white/10">
+        {/* Screen Bezel & Container - Explicit Height */}
+        <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-black shadow-inner ring-1 ring-white/10">
           {/* Top Dynamic Island */}
-          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-[90px] h-[22px] bg-black rounded-full z-30 shadow-md flex items-center justify-end px-2 pointer-events-none">
+          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-[85px] h-[22px] bg-black rounded-full z-30 shadow-md flex items-center justify-end px-2 pointer-events-none">
             <span className="w-2.5 h-2.5 rounded-full bg-[#0a0f1d] ring-1 ring-white/15" />
           </div>
 
@@ -171,6 +190,13 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
               height={1024}
               loading="lazy"
               className="w-full h-full object-cover object-top block"
+              onError={(e) => {
+                const target = e.currentTarget;
+                const fallback = FEATURES[singleScreenIndex].fallbackImage;
+                if (fallback && target.src !== getAssetUrl(fallback)) {
+                  target.src = getAssetUrl(fallback);
+                }
+              }}
             />
           ) : (
             FEATURES.map((item, idx) => (
@@ -180,12 +206,19 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
                 alt={item.titleAr}
                 width={470}
                 height={1024}
-                loading={idx === 0 ? 'eager' : 'lazy'}
+                loading={idx <= 1 ? 'eager' : 'lazy'}
                 className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300 ease-out block"
                 style={{
                   opacity: idx === activeScreenIndex ? 1 : 0,
                   zIndex: idx === activeScreenIndex ? 10 : 1,
                   pointerEvents: idx === activeScreenIndex ? 'auto' : 'none',
+                }}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const fallback = item.fallbackImage;
+                  if (fallback && target.src !== getAssetUrl(fallback)) {
+                    target.src = getAssetUrl(fallback);
+                  }
                 }}
               />
             ))
@@ -205,24 +238,7 @@ export const UfuqShowcasePage: React.FC = () => {
   const isAr = lang === 'ar';
 
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
-  const storyContainerRef = useRef<HTMLDivElement>(null);
   const chapterRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const prefersReducedMotion = useReducedMotion();
-
-  // Scroll Progress for 3D tilt & smooth scaling
-  const { scrollYProgress } = useScroll({
-    target: storyContainerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const rotateY = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    isAr ? [-3, 2, -2, 3, -2, 0] : [3, -2, 2, -3, 2, 0]
-  );
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [2, -1, 0]);
-  const phoneScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.02, 1]);
 
   // Set document language and direction
   useEffect(() => {
@@ -241,48 +257,72 @@ export const UfuqShowcasePage: React.FC = () => {
     };
   }, [isAr]);
 
-  // Track active chapter during desktop scroll
+  // Track active chapter during scrolling on desktop with IntersectionObserver
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (typeof window === 'undefined') return;
 
-    const observers: IntersectionObserver[] = [];
-    chapterRefs.current.forEach((el, index) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveFeatureIndex(index);
-            }
-          });
-        },
-        {
-          rootMargin: '-20% 0px -30% 0px',
-          threshold: 0.3,
-        }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+    if ('IntersectionObserver' in window) {
+      const observers: IntersectionObserver[] = [];
+      chapterRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setActiveFeatureIndex(index);
+              }
+            });
+          },
+          {
+            rootMargin: '-20% 0px -20% 0px',
+            threshold: 0.3,
+          }
+        );
+        observer.observe(el);
+        observers.push(observer);
+      });
 
-    return () => {
-      observers.forEach((o) => o.disconnect());
-    };
-  }, [prefersReducedMotion]);
+      return () => {
+        observers.forEach((obs) => obs.disconnect());
+      };
+    } else {
+      // Fallback scroll listener
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY + window.innerHeight * 0.45;
+        chapterRefs.current.forEach((el, index) => {
+          if (!el) return;
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveFeatureIndex(index);
+          }
+        });
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const scrollToFeature = (index: number) => {
+    setActiveFeatureIndex(index);
+    const targetEl = chapterRefs.current[index];
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
   return (
     <div
-      className={`min-h-screen bg-[#070b09] text-zinc-100 selection:bg-emerald-500 selection:text-black antialiased ${
-        isAr ? 'font-sans' : 'font-sans'
-      }`}
+      className="min-h-screen bg-[#070b09] text-zinc-100 selection:bg-emerald-500 selection:text-black antialiased font-sans"
       style={{ direction: isAr ? 'rtl' : 'ltr' }}
     >
       {/* ------------------------------------------------------------- */}
-      {/* 1. TOP BAR / NAVIGATION (Clean, minimal, unbloated)            */}
+      {/* 1. TOP BAR / NAVIGATION (Clean, human, unbloated)              */}
       {/* ------------------------------------------------------------- */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#070b09]/90 border-b border-white/[0.07]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          {/* Logo & App Name (No tags, no AI badges) */}
+          {/* Logo & App Name */}
           <Link to="/ufuq" className="flex items-center gap-2.5 group">
             <img
               src={ufuqIcon}
@@ -307,7 +347,7 @@ export const UfuqShowcasePage: React.FC = () => {
               {isAr ? 'English' : 'العربية'}
             </button>
 
-            {/* App Store Download Button */}
+            {/* Direct App Store Download Button */}
             <a
               href={APP_STORE_URL}
               target="_blank"
@@ -315,7 +355,7 @@ export const UfuqShowcasePage: React.FC = () => {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white hover:bg-zinc-100 text-black font-semibold text-xs transition-colors shadow-sm active:scale-95"
             >
               <Apple className="w-3.5 h-3.5 fill-black" />
-              <span>{isAr ? 'App Store' : 'App Store'}</span>
+              <span>App Store</span>
             </a>
           </div>
         </div>
@@ -324,7 +364,7 @@ export const UfuqShowcasePage: React.FC = () => {
       {/* ------------------------------------------------------------- */}
       {/* 2. HERO SECTION                                               */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative pt-16 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-white/[0.07]">
+      <section className="relative pt-16 pb-16 md:pt-20 md:pb-20 overflow-hidden border-b border-white/[0.07]">
         {/* Ambient Radial Glow */}
         <div className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-emerald-600/10 blur-[130px] rounded-full" />
 
@@ -353,7 +393,7 @@ export const UfuqShowcasePage: React.FC = () => {
           </p>
 
           {/* Store Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-14">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {/* App Store Download Badge */}
             <a
               href={APP_STORE_URL}
@@ -386,139 +426,140 @@ export const UfuqShowcasePage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Hero Phone Preview */}
-          <div className="pt-2 flex justify-center">
-            <PhoneMockup singleScreenIndex={0} />
-          </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 3. SCROLL STORY (PHONE PINNED)                                */}
+      {/* 3. SCROLL STORY (2-COLUMN SPLIT PRESENTATION)                  */}
       {/* ------------------------------------------------------------- */}
 
-      {/* DESKTOP PINNED STORY (Shown on md+ when reduced motion is NOT requested) */}
-      {!prefersReducedMotion && (
-        <section
-          ref={storyContainerRef}
-          className="relative hidden md:block border-b border-white/[0.07]"
-          style={{ height: `${FEATURES.length * 75}vh` }}
-        >
-          {/* Sticky Centered Stage */}
-          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-            <div className="max-w-5xl w-full mx-auto px-6 grid grid-cols-12 gap-10 items-center">
-              {/* Text Side (6 columns) */}
-              <div className="col-span-6 z-10 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-800/50 text-emerald-300 text-xs font-mono">
-                  <span>
-                    {isAr
-                      ? `${FEATURES[activeFeatureIndex].stepAr} / ٠٦ · ${FEATURES[activeFeatureIndex].tagAr}`
-                      : `${FEATURES[activeFeatureIndex].stepEn} / 06 · ${FEATURES[activeFeatureIndex].tagEn}`}
-                  </span>
-                </div>
-
-                <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug">
-                  {isAr
-                    ? FEATURES[activeFeatureIndex].titleAr
-                    : FEATURES[activeFeatureIndex].titleEn}
-                </h2>
-
-                <p className="text-base text-zinc-300 leading-relaxed max-w-md">
-                  {isAr
-                    ? FEATURES[activeFeatureIndex].descAr
-                    : FEATURES[activeFeatureIndex].descEn}
-                </p>
-
-                {/* Step Indicators / Quick Jump */}
-                <div className="pt-3 flex items-center gap-2">
-                  {FEATURES.map((feat, idx) => (
-                    <button
-                      key={feat.id}
-                      onClick={() => {
-                        setActiveFeatureIndex(idx);
-                        const targetEl = chapterRefs.current[idx];
-                        if (targetEl) {
-                          targetEl.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
-                      aria-label={`Jump to ${feat.titleEn}`}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        idx === activeFeatureIndex
-                          ? 'w-8 bg-emerald-400'
-                          : 'w-2 bg-zinc-700 hover:bg-zinc-500'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Phone Mockup Side with 3D Tilt & Scale (6 columns) */}
-              <div className="col-span-6 flex items-center justify-center z-10" style={{ perspective: 1200 }}>
-                <motion.div
-                  style={{
-                    rotateY,
-                    rotateX,
-                    scale: phoneScale,
-                    transformStyle: 'preserve-3d',
-                  }}
-                  className="w-[320px] flex justify-center"
-                >
-                  <PhoneMockup activeScreenIndex={activeFeatureIndex} />
-                </motion.div>
-              </div>
-            </div>
-          </div>
-
-          {/* Invisible Scroll Track Markers */}
-          <div className="absolute inset-0 pointer-events-none">
-            {FEATURES.map((feat, idx) => (
-              <div
+      {/* DESKTOP SPLIT STORY (md+) */}
+      <section className="relative hidden md:block py-16 px-6 max-w-6xl mx-auto border-b border-white/[0.07]">
+        {/* Quick-Jump Feature Filter Pills at Top */}
+        <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
+          {FEATURES.map((feat, idx) => {
+            const Icon = feat.icon;
+            const isActive = idx === activeFeatureIndex;
+            return (
+              <button
                 key={feat.id}
-                ref={(el) => {
-                  chapterRefs.current[idx] = el;
-                }}
-                className="h-[75vh]"
-              />
-            ))}
-          </div>
-        </section>
-      )}
+                onClick={() => scrollToFeature(idx)}
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  isActive
+                    ? 'bg-emerald-500 text-black font-semibold shadow-md ring-1 ring-emerald-400'
+                    : 'bg-zinc-900/80 text-zinc-400 hover:text-white border border-white/10'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{isAr ? feat.shortNameAr : feat.shortNameEn}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      {/* MOBILE & REDUCED MOTION STATIC STACKED STORY */}
-      {/* (Mobile: no pinning; phone appears inline per section) */}
-      <section
-        className={`${
-          prefersReducedMotion ? 'block' : 'block md:hidden'
-        } py-16 px-4 sm:px-6 divide-y divide-white/[0.07] border-b border-white/[0.07]`}
-      >
-        <div className="max-w-xl mx-auto space-y-16">
-          {FEATURES.map((feat, idx) => (
-            <div key={feat.id} className="pt-12 first:pt-0 space-y-6">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-800/50 text-emerald-300 text-xs font-mono">
-                  <span>
-                    {isAr
-                      ? `${feat.stepAr} / ٠٦ · ${feat.tagAr}`
-                      : `${feat.stepEn} / 06 · ${feat.tagEn}`}
-                  </span>
+        {/* 2-Column Split: Sticky Phone on One Side, Scrolling Chapters on the Other */}
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start relative">
+          {/* Scrolling Text Chapters (7 columns) */}
+          <div className="col-span-7 space-y-6">
+            {FEATURES.map((feat, idx) => {
+              const Icon = feat.icon;
+              const isActive = idx === activeFeatureIndex;
+              return (
+                <div
+                  key={feat.id}
+                  id={feat.id}
+                  ref={(el) => {
+                    chapterRefs.current[idx] = el;
+                  }}
+                  onClick={() => scrollToFeature(idx)}
+                  className={`p-8 lg:p-10 rounded-3xl transition-all duration-300 cursor-pointer min-h-[380px] flex flex-col justify-center border ${
+                    isActive
+                      ? 'bg-zinc-900/90 border-emerald-500/40 shadow-2xl shadow-emerald-950/40 ring-1 ring-emerald-500/20'
+                      : 'bg-zinc-950/40 border-white/[0.06] hover:border-white/15 opacity-60 hover:opacity-90'
+                  }`}
+                >
+                  <div className="space-y-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-800/40 text-emerald-300 text-xs font-mono w-fit">
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>
+                        {isAr
+                          ? `${feat.stepAr} / ٠٦ · ${feat.tagAr}`
+                          : `${feat.stepEn} / 06 · ${feat.tagEn}`}
+                      </span>
+                    </div>
+
+                    <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+                      {isAr ? feat.titleAr : feat.titleEn}
+                    </h2>
+
+                    <p className="text-base text-zinc-300 leading-relaxed max-w-xl">
+                      {isAr ? feat.descAr : feat.descEn}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Sticky Phone Column (5 columns, pinned in viewport alongside chapters) */}
+          <div className="col-span-5 sticky top-28 flex flex-col items-center justify-center py-2">
+            <PhoneMockup activeScreenIndex={activeFeatureIndex} />
+
+            {/* Quick-Jump Step Dots under the Phone */}
+            <div className="mt-6 flex items-center gap-2">
+              {FEATURES.map((feat, idx) => {
+                const isActive = idx === activeFeatureIndex;
+                return (
+                  <button
+                    key={feat.id}
+                    onClick={() => scrollToFeature(idx)}
+                    aria-label={`Jump to ${feat.titleEn}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      isActive
+                        ? 'w-7 bg-emerald-400'
+                        : 'w-2 bg-zinc-700 hover:bg-zinc-500'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MOBILE STORY (< md) */}
+      <section className="block md:hidden py-12 px-4 sm:px-6 divide-y divide-white/[0.07] border-b border-white/[0.07]">
+        <div className="max-w-xl mx-auto space-y-14">
+          {FEATURES.map((feat, idx) => {
+            const Icon = feat.icon;
+            return (
+              <div key={feat.id} className="pt-10 first:pt-0 space-y-5">
+                <div className="space-y-2.5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-800/40 text-emerald-300 text-xs font-mono">
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>
+                      {isAr
+                        ? `${feat.stepAr} / ٠٦ · ${feat.tagAr}`
+                        : `${feat.stepEn} / 06 · ${feat.tagEn}`}
+                    </span>
+                  </div>
+
+                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    {isAr ? feat.titleAr : feat.titleEn}
+                  </h2>
+
+                  <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                    {isAr ? feat.descAr : feat.descEn}
+                  </p>
                 </div>
 
-                <h2 className="text-2xl font-bold text-white tracking-tight">
-                  {isAr ? feat.titleAr : feat.titleEn}
-                </h2>
-
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-                  {isAr ? feat.descAr : feat.descEn}
-                </p>
+                {/* Mobile Inline Phone Mockup */}
+                <div className="pt-2 flex justify-center">
+                  <PhoneMockup singleScreenIndex={idx} />
+                </div>
               </div>
-
-              {/* Mobile Inline Phone Mockup */}
-              <div className="pt-2 flex justify-center">
-                <PhoneMockup singleScreenIndex={idx} />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
