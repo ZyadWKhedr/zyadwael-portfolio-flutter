@@ -38,3 +38,4 @@ Thumbs.db
 # Temporary test/audit dumps
 .tempmediaStorage/
 *.tsbuildinfo
+.source_cache/
