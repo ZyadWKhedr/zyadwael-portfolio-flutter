@@ -1,144 +1,103 @@
 import React from 'react';
-import { Terminal, Users, CheckCircle, Smartphone, Award, Cpu } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { GraduationCap, Users, Terminal, Cpu } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
-  const { t } = useTranslation();
-
   return (
-    <section id="about" className="scroll-mt-24 py-20 md:py-28 border-b border-border-subtle bg-surface/30">
-      <div className="container max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-start">
-          <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-3">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            <span>{t('about.badge', 'Background & Philosophy')}</span>
-          </div>
-          <h2 className="font-serif fluid-3xl font-bold tracking-tight text-ink">
-            {t('about.title', 'Software craftsmanship with deep cross-platform mobile rigor.')}
-          </h2>
-        </div>
+    <section id="about" className="scroll-mt-20 py-20 md:py-28 border-b border-border-subtle bg-surface/20">
+      <div className="container max-w-site mx-auto px-5 sm:px-7 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start text-start">
+          {/* Main Content Column (7 cols) */}
+          <div className="lg:col-span-7 space-y-6 max-w-reading">
+            <div className="type-overline text-accent font-mono mb-3">
+              BACKGROUND &amp; INTERESTS
+            </div>
 
-        {/* 2-Column Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start text-start">
-          {/* Left Column: Narrative & Focus (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="space-y-5 text-ink-muted text-base leading-relaxed font-sans">
-              <p className="text-lg text-ink font-medium leading-relaxed">
-                {t(
-                  'about.p1',
-                  'Based in Alexandria, Egypt, I am a mobile software engineer dedicated to building resilient client systems with Flutter & Dart. I focus on domain separation, deterministic state, and buttery 60 FPS rendering.'
-                )}
+            <h2 className="type-h2 font-display text-ink mb-6 tracking-tight">
+              A little about me
+            </h2>
+
+            <div className="space-y-4 type-body text-ink-secondary leading-relaxed">
+              <p>
+                I'm a Data Science student who started building Flutter applications and gradually became interested in the engineering behind them.
               </p>
               <p>
-                {t(
-                  'about.p2',
-                  'Over the past several years, I have architected and deployed high-demand commercial mobile applications across logistics, e-commerce, and FinTech—serving thousands of daily active users with stringent requirements for offline durability, sub-second socket telemetry, and smooth transitions.'
-                )}
+                Outside mobile development, I enjoy exploring machine learning, algorithms, computer vision, and building tools that solve problems I encounter.
               </p>
               <p>
-                {t(
-                  'about.p3',
-                  'I actively mentor aspiring engineers in the Flutter Committee at HackerRank Campus Club, leading sessions on Clean Architecture, BLoC state management, dependency injection, and test-driven mobile development.'
-                )}
-              </p>
-              <p>
-                {t(
-                  'about.p4',
-                  'My engineering approach is grounded in three principles: strict separation of business logic from UI rendering, bulletproof offline caching with SQLite, and relentless performance profiling.'
-                )}
+                I like understanding how things work, experimenting with unfamiliar technologies, and sharing what I learn along the way.
               </p>
             </div>
 
-            {/* Specialization & Leadership Highlight Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-border-subtle">
-              <div className="p-5 rounded-xl bg-surface border border-border-subtle btn-tactile">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider mb-2">
-                  <Smartphone className="w-4 h-4" />
-                  <span>Core Specialization</span>
+            {/* Verified Education & Community Points */}
+            <div className="pt-6 border-t border-border-subtle grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-md bg-surface border border-border space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono font-semibold text-accent">
+                  <GraduationCap className="w-4 h-4" />
+                  <span>Education</span>
                 </div>
-                <div className="text-base font-bold text-ink">Flutter &amp; Mobile Systems</div>
-                <div className="text-xs text-ink-muted mt-1 font-mono">Clean Architecture · BLoC · SQLite</div>
-                <div className="text-[11px] font-mono text-ink-faint mt-3 pt-2 border-t border-border-subtle/60">
-                  Offline-first production architecture
+                <div className="text-sm font-semibold text-ink">Data Science Student</div>
+                <div className="text-xs text-ink-muted">
+                  Focusing on statistical modeling, algorithms, and practical machine learning applications.
                 </div>
               </div>
 
-              <div className="p-5 rounded-xl bg-surface border border-border-subtle btn-tactile">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider mb-2">
+              <div className="p-4 rounded-md bg-surface border border-border space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono font-semibold text-accent">
                   <Users className="w-4 h-4" />
                   <span>Community Mentorship</span>
                 </div>
-                <div className="text-base font-bold text-ink">HackerRank Campus Club</div>
-                <div className="text-xs text-ink-muted mt-1 font-mono">Flutter Committee Mentor</div>
-                <div className="text-[11px] font-mono text-ink-faint mt-3 pt-2 border-t border-border-subtle/60">
-                  Architecture workshops &amp; code reviews
+                <div className="text-sm font-semibold text-ink">HackerRank Campus Club</div>
+                <div className="text-xs text-ink-muted">
+                  Flutter Committee mentor, sharing Clean Architecture patterns and state management practices.
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Engineering Manifesto & Principles (5 cols) */}
-          <div className="lg:col-span-5 spec-card p-6 md:p-8 rounded-2xl bg-surface border border-border-subtle shadow-card">
-            <div className="font-mono text-xs uppercase tracking-wider text-accent font-semibold mb-6 flex items-center justify-between border-b border-border-subtle pb-3">
-              <span className="flex items-center gap-2">
-                <Terminal className="w-4 h-4" />
-                <span>Engineering Standards</span>
-              </span>
-              <span className="text-[11px] font-mono text-ink-faint">Pillars</span>
-            </div>
-
-            <div className="space-y-6 text-sm text-ink-muted">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-ink font-semibold block text-base mb-1">
-                    {t('about.pillar1Title', 'Clean Architecture & Separation of Concerns')}
-                  </strong>
-                  <span className="leading-relaxed">
-                    {t(
-                      'about.pillar1Desc',
-                      'Strict boundary isolation between presentation, domain, and data layers. UI widgets remain dumb consumers of immutable state streams.'
-                    )}
-                  </span>
-                </div>
+          {/* Side Column: What I Value / Focus Areas (5 cols) */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="spec-card p-6 rounded-lg bg-surface border border-border space-y-5">
+              <div className="type-overline text-ink-muted pb-3 border-b border-border-subtle">
+                Technical Focus &amp; Curiosity
               </div>
 
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-ink font-semibold block text-base mb-1">
-                    {t('about.pillar2Title', 'Real-time & Cross-platform Reliability')}
-                  </strong>
-                  <span className="leading-relaxed">
-                    {t(
-                      'about.pillar2Desc',
-                      'Fault-tolerant WebSocket streams, background sync, and offline-first SQLite caching designed for hostile network conditions.'
-                    )}
-                  </span>
+              <div className="space-y-4 text-xs">
+                <div className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded bg-elevated text-accent flex items-center justify-center shrink-0 mt-0.5">
+                    <Terminal className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="font-semibold text-ink block text-sm mb-0.5">Mobile Engineering</span>
+                    <span className="text-ink-secondary leading-relaxed">
+                      Building production Flutter applications with Clean Architecture, dependable state handling, and offline caching.
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded bg-elevated text-accent flex items-center justify-center shrink-0 mt-0.5">
+                    <Cpu className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="font-semibold text-ink block text-sm mb-0.5">On-Device Machine Learning</span>
+                    <span className="text-ink-secondary leading-relaxed">
+                      Exploring lightweight model deployment with ONNX Runtime, OpenCV pipelines, and edge inference.
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded bg-elevated text-accent flex items-center justify-center shrink-0 mt-0.5">
+                    <Users className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="font-semibold text-ink block text-sm mb-0.5">Knowledge Sharing</span>
+                    <span className="text-ink-secondary leading-relaxed">
+                      Writing clear technical breakdowns of real engineering patterns rather than buzzword tutorials.
+                    </span>
+                  </div>
                 </div>
               </div>
-
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-ink font-semibold block text-base mb-1">
-                    {t('about.pillar3Title', 'Custom Rendering & Motion Physics')}
-                  </strong>
-                  <span className="leading-relaxed">
-                    {t(
-                      'about.pillar3Desc',
-                      'Custom canvas shaders, spring physics curves, and platform channels bridging hardware sensors and telemetry.'
-                    )}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Performance Ledger Bar */}
-            <div className="mt-8 pt-4 border-t border-border-subtle flex items-center justify-between text-xs font-mono text-ink-faint">
-              <span>Profiling Benchmark</span>
-              <span className="text-accent font-bold">60 FPS · &lt;80MB Heap</span>
             </div>
           </div>
         </div>

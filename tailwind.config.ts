@@ -12,58 +12,75 @@ export default {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '1rem',
-				sm: '1.5rem',
-				lg: '2rem',
-				xl: '2.5rem',
+				DEFAULT: '1.25rem', // 20px on mobile
+				md: '1.75rem',      // 28px on tablet
+				lg: '2.5rem',       // 40px on desktop
 			},
 			screens: {
 				sm: '640px',
 				md: '768px',
 				lg: '1024px',
-				xl: '1280px',
-				'2xl': '1380px',
+				xl: '1160px',
 			}
 		},
 		extend: {
 			fontFamily: {
-				serif: ['Fraunces', 'Georgia', 'serif'],
-				sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-				mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+				sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				display: ['Manrope', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				serif: ['Manrope', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+				arabic: ['Cairo', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				canvas: 'var(--bg-canvas)',
 				surface: 'var(--bg-surface)',
 				elevated: 'var(--bg-elevated)',
+				'surface-hover': 'var(--bg-hover)',
 				'border-subtle': 'var(--border-subtle)',
-				'border-strong': 'var(--border-strong)',
-				ink: 'var(--text-ink)',
+				'border-strong': 'var(--border)',
+				border: 'var(--border-subtle)',
+				ink: 'var(--text-primary)',
+				'ink-secondary': 'var(--text-secondary)',
 				'ink-muted': 'var(--text-muted)',
-				'ink-faint': 'var(--text-faint)',
+				'ink-faint': 'var(--text-muted)',
 				accent: {
 					DEFAULT: 'var(--accent)',
 					hover: 'var(--accent-hover)',
-					subtle: 'var(--accent-subtle)',
+					muted: 'var(--accent-muted)',
+					subtle: 'var(--accent-muted)',
 					fg: 'var(--accent-fg)',
 				},
-				// Retain standard semantic tokens for compatibility
-				border: 'var(--border-subtle)',
-				input: 'var(--border-strong)',
-				ring: 'var(--accent)',
+				success: 'var(--success)',
+				error: 'var(--error)',
 				background: 'var(--bg-canvas)',
-				foreground: 'var(--text-ink)',
+				foreground: 'var(--text-primary)',
+			},
+			maxWidth: {
+				site: '1160px',
+				reading: '720px',
+			},
+			borderRadius: {
+				sm: 'var(--radius-sm)',
+				md: 'var(--radius-md)',
+				lg: 'var(--radius-lg)',
+				xl: 'var(--radius-xl)',
+				pill: 'var(--radius-pill)',
 			},
 			boxShadow: {
-				'subtle': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)',
-				'card': '0 4px 16px -2px rgba(0,0,0,0.06), 0 2px 6px -1px rgba(0,0,0,0.03)',
-				'card-hover': '0 12px 28px -4px rgba(0,0,0,0.1), 0 4px 10px -2px rgba(0,0,0,0.04)',
+				subtle: '0 1px 2px rgba(0,0,0,0.05)',
+				card: '0 2px 8px -1px rgba(0,0,0,0.06), 0 1px 3px -1px rgba(0,0,0,0.04)',
 			},
 			transitionTimingFunction: {
-				'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+				standard: 'cubic-bezier(0.2, 0, 0, 1)',
+				enter: 'cubic-bezier(0, 0, 0.2, 1)',
+				exit: 'cubic-bezier(0.4, 0, 1, 1)',
 			},
 			transitionDuration: {
-				'200': '200ms',
-				'240': '240ms',
+				instant: '100ms',
+				fast: '150ms',
+				normal: '220ms',
+				medium: '320ms',
+				slow: '450ms',
 			}
 		}
 	},

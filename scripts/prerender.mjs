@@ -15,13 +15,13 @@ if (typeof global.localStorage === 'undefined') {
   };
 }
 if (typeof global.navigator === 'undefined') {
-  global.navigator = { language: 'en', languages: ['en'] };
+  global.navigator = { language: 'ar', languages: ['ar', 'en'] };
 }
 if (typeof global.document === 'undefined') {
   global.document = {
     documentElement: {
       setAttribute: () => {},
-      classList: { toggle: () => {} },
+      classList: { toggle: () => {}, contains: () => false, add: () => {}, remove: () => {} },
     },
     getElementsByTagName: () => [],
     createElement: () => ({ setAttribute: () => {}, appendChild: () => {}, style: {} }),
@@ -47,18 +47,56 @@ async function prerender() {
   }
 
   const { render } = await import('file:///' + ssrEntryPath.replace(/\\/g, '/'));
-  const { html } = render();
 
+  // 1. Pre-render Portfolio Homepage (/)
+  const { html: homeHtml } = render('/');
   let template = fs.readFileSync(indexHtmlPath, 'utf-8');
 
   // Inject rendered HTML into root container
-  template = template.replace(
+  const homeOutput = template.replace(
     '<div id="root"></div>',
-    `<div id="root">${html}</div>`
+    `<div id="root">${homeHtml}</div>`
   );
 
-  fs.writeFileSync(indexHtmlPath, template, 'utf-8');
-  console.log(`[Success] Pre-rendered ${html.length} chars of HTML directly into dist/index.html`);
+  fs.writeFileSync(indexHtmlPath, homeOutput, 'utf-8');
+  console.log(`[Success] Pre-rendered ${homeHtml.length} chars of HTML directly into dist/index.html`);
+
+  // 2. Pre-render Ufuq Product Landing Page (/ufuq)
+  const { html: ufuqHtml } = render('/ufuq');
+  let ufuqTemplate = template.replace(
+    '<div id="root"></div>',
+    `<div id="root">${ufuqHtml}</div>`
+  );
+
+  // Customize title & meta description for Ufuq static HTML
+  ufuqTemplate = ufuqTemplate
+    .replace(
+      /<title>.*?<\/title>/,
+      '<title>أُفُق — كل ما تحتاجه ليومك في مكان واحد | Ufuq Islamic App</title>'
+    )
+    .replace(
+      /<meta name="description" content=".*?" \/>/,
+      '<meta name="description" content="القرآن الكريم، مواقيت الصلاة، الأذكار، والمزيد من الأدوات اليومية في تطبيق واحد، بتجربة بسيطة وهادئة." />'
+    )
+    .replace(
+      /<meta property="og:title" content=".*?" \/>/,
+      '<meta property="og:title" content="أُفُق — كل ما تحتاجه ليومك في مكان واحد" />'
+    )
+    .replace(
+      /<meta property="og:description" content=".*?" \/>/,
+      '<meta property="og:description" content="القرآن الكريم، مواقيت الصلاة، الأذكار، والمزيد من الأدوات اليومية في تطبيق واحد، بتجربة بسيطة وهادئة." />'
+    );
+
+  const ufuqDir = path.join(distDir, 'ufuq');
+  if (!fs.existsSync(ufuqDir)) {
+    fs.mkdirSync(ufuqDir, { recursive: true });
+  }
+  fs.writeFileSync(path.join(ufuqDir, 'index.html'), ufuqTemplate, 'utf-8');
+  console.log(`[Success] Pre-rendered ${ufuqHtml.length} chars of HTML directly into dist/ufuq/index.html`);
+
+  // 3. Create 404.html fallback for GitHub Pages SPA routing
+  fs.copyFileSync(indexHtmlPath, path.join(distDir, '404.html'));
+  console.log('[Success] Created dist/404.html fallback for GitHub Pages.');
 
   // Clean up ssr directory so GitHub Pages artifact is clean
   fs.rmSync(path.join(distDir, 'ssr'), { recursive: true, force: true });
