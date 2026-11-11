@@ -1,0 +1,259 @@
+[
+  {
+    "id": "freerasp-security",
+    "title": "Your Flutter App Is Lying to You — And You Don’t Even Know It",
+    "date": "2026-07-31",
+    "displayDate": {
+      "en": "Jul 31, 2026",
+      "ar": "٣١ يوليو ٢٠٢٦"
+    },
+    "publication": "Stackademic",
+    "url": "https://blog.stackademic.com/your-flutter-app-is-lying-to-you-and-you-dont-even-know-it-1c50ee4b17ef",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "crop-diseases-ml",
+    "title": "Detecting Crop Diseases at Scale: Building a Lightweight ML Pipeline from Training to Mobile",
+    "date": "2026-04-22",
+    "displayDate": {
+      "en": "Apr 22, 2026",
+      "ar": "٢٢ أبريل ٢٠٢٦"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/detecting-crop-diseases-at-scale-building-a-lightweight-ml-pipeline-from-training-to-mobile-8c764b8b9cb9",
+    "topic": "AI & ML",
+    "topicLabel": {
+      "en": "AI & ML",
+      "ar": "ذكاء اصطناعي"
+    }
+  },
+  {
+    "id": "unmasking-pca",
+    "title": "Unmasking PCA: From Linear Algebra to Predictive Modeling",
+    "date": "2026-04-10",
+    "displayDate": {
+      "en": "Apr 10, 2026",
+      "ar": "١٠ أبريل ٢٠٢٦"
+    },
+    "publication": "Stackademic",
+    "url": "https://medium.com/stackademic/unmasking-pca-from-linear-algebra-to-predictive-modeling-f4a470129033",
+    "topic": "Algorithms & math",
+    "topicLabel": {
+      "en": "Algorithms & Math",
+      "ar": "خوارزميات ورياضيات"
+    }
+  },
+  {
+    "id": "software-craftsmanship-patterns",
+    "title": "Software Craftsmanship: A Guide to Design Patterns in Dart & Flutter",
+    "date": "2026-02-09",
+    "displayDate": {
+      "en": "Feb 09, 2026",
+      "ar": "٠٩ فبراير ٢٠٢٦"
+    },
+    "publication": "Stackademic",
+    "url": "https://medium.com/stackademic/software-craftsmanship-a-guide-to-design-patterns-in-dart-flutter-6011cb0f1b12",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "minimax-algorithm-flutter",
+    "title": "Minimax Algorithm: From Core Theory to Practical Use in Flutter",
+    "date": "2026-01-03",
+    "displayDate": {
+      "en": "Jan 03, 2026",
+      "ar": "٠٣ يناير ٢٠٢٦"
+    },
+    "publication": "Stackademic",
+    "url": "https://medium.com/stackademic/minimax-algorithm-from-core-theory-to-practical-use-in-flutter-b29c99ec164e",
+    "topic": "Algorithms & math",
+    "topicLabel": {
+      "en": "Algorithms & Math",
+      "ar": "خوارزميات ورياضيات"
+    }
+  },
+  {
+    "id": "ab-testing-statistics",
+    "title": "A/B Testing: The Bridge Between Statistics and Flutter Apps",
+    "date": "2025-11-09",
+    "displayDate": {
+      "en": "Nov 09, 2025",
+      "ar": "٠٩ نوفمبر ٢٠٢٥"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/a-b-testing-the-bridge-between-statistics-and-flutter-apps-56a943793df6",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "socket-io-riverpod",
+    "title": "Demystifying Socket.IO: Real-Time Communication with Flutter & Riverpod",
+    "date": "2025-09-19",
+    "displayDate": {
+      "en": "Sep 19, 2025",
+      "ar": "١٩ سبتمبر ٢٠٢٥"
+    },
+    "publication": "Stackademic",
+    "url": "https://medium.com/stackademic/demystifying-socket-io-real-time-communication-with-flutter-riverpod-ad942fec44c2",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "real-time-asl-cv",
+    "title": "Building a Real-Time ASL Detection App with Computer Vision and Machine Learning",
+    "date": "2025-07-14",
+    "displayDate": {
+      "en": "Jul 14, 2025",
+      "ar": "١٤ يوليو ٢٠٢٥"
+    },
+    "publication": "AI in Plain English",
+    "url": "https://medium.com/ai-in-plain-english/building-a-real-time-asl-detection-app-with-computer-vision-and-machine-learning-a5f93416b87f",
+    "topic": "AI & ML",
+    "topicLabel": {
+      "en": "AI & ML",
+      "ar": "ذكاء اصطناعي"
+    }
+  },
+  {
+    "id": "gestures-volume-cv",
+    "title": "From Gestures to Volume Control: My First Computer Vision Project in Python + Flutter",
+    "date": "2025-06-28",
+    "displayDate": {
+      "en": "Jun 28, 2025",
+      "ar": "٢٨ يونيو ٢٠٢٥"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/from-gestures-to-volume-control-my-first-computer-vision-project-in-python-flutter-8ecbfb8ad177",
+    "topic": "AI & ML",
+    "topicLabel": {
+      "en": "AI & ML",
+      "ar": "ذكاء اصطناعي"
+    }
+  },
+  {
+    "id": "flutter-localization",
+    "title": "Flutter Localization: How to Build Apps That Speak Everyone’s Language",
+    "date": "2025-06-15",
+    "displayDate": {
+      "en": "Jun 15, 2025",
+      "ar": "١٥ يونيو ٢٠٢٥"
+    },
+    "publication": "Cubed",
+    "url": "https://medium.com/cubed/flutter-localization-how-to-build-apps-that-speak-everyones-language-0dfc3776269b",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "clean-architecture-flutter",
+    "title": "Clean Architecture in Flutter — Why Your Code Needs to Be Organized",
+    "date": "2024-12-10",
+    "displayDate": {
+      "en": "Dec 10, 2024",
+      "ar": "١٠ ديسمبر ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/clean-architecture-in-flutter-why-your-code-needs-to-be-organized-089de26b71a5",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "dependency-injection-riverpod",
+    "title": "Dependency Injection in Flutter Using Riverpod",
+    "date": "2024-11-28",
+    "displayDate": {
+      "en": "Nov 28, 2024",
+      "ar": "٢٨ نوفمبر ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/dependency-injection-in-flutter-using-riverpod-1118b7784893",
+    "topic": "Flutter",
+    "topicLabel": {
+      "en": "Flutter",
+      "ar": "فلاتر"
+    }
+  },
+  {
+    "id": "oop-simple-terms",
+    "title": "Understanding Object-Oriented Programming (OOP) in Simple Terms",
+    "date": "2024-11-01",
+    "displayDate": {
+      "en": "Nov 01, 2024",
+      "ar": "٠١ نوفمبر ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr",
+    "topic": "Algorithms & math",
+    "topicLabel": {
+      "en": "Algorithms & Math",
+      "ar": "خوارزميات ورياضيات"
+    }
+  },
+  {
+    "id": "linear-logistic-regression",
+    "title": "Linear vs. Logistic Regression Explained with Code, Visuals, and Real-World Examples",
+    "date": "2024-10-15",
+    "displayDate": {
+      "en": "Oct 15, 2024",
+      "ar": "١٥ أكتوبر ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr/linear-vs-logistic-regression-explained-with-code-visuals-and-real-world-examples-124ce74c6576",
+    "topic": "Algorithms & math",
+    "topicLabel": {
+      "en": "Algorithms & Math",
+      "ar": "خوارزميات ورياضيات"
+    }
+  },
+  {
+    "id": "gemini-ai-flutter",
+    "title": "Integrating Gemini AI Chat with Flutter using Riverpod & Clean Architecture",
+    "date": "2024-09-20",
+    "displayDate": {
+      "en": "Sep 20, 2024",
+      "ar": "٢٠ سبتمبر ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr",
+    "topic": "AI & ML",
+    "topicLabel": {
+      "en": "AI & ML",
+      "ar": "ذكاء اصطناعي"
+    }
+  },
+  {
+    "id": "data-structures-java",
+    "title": "Understanding Data Structures with Java",
+    "date": "2024-08-12",
+    "displayDate": {
+      "en": "Aug 12, 2024",
+      "ar": "١٢ أغسطس ٢٠٢٤"
+    },
+    "publication": "Medium",
+    "url": "https://medium.com/@ziad.w.khedr",
+    "topic": "Algorithms & math",
+    "topicLabel": {
+      "en": "Algorithms & Math",
+      "ar": "خوارزميات ورياضيات"
+    }
+  }
+]
+

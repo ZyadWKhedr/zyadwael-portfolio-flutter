@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUp, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 
 const SOCIAL_LINKS = [
@@ -82,8 +83,15 @@ export const Footer: React.FC = () => {
           <MapPin className="w-3 h-3 text-accent" />
           <span>Alexandria, Egypt</span>
         </div>
-        <div>
-          © {new Date().getFullYear()} Zyad Wael. All rights reserved.
+        <div className="flex items-center gap-3">
+          <Link
+            to="/ufuq"
+            className="hover:text-accent transition-colors underline-offset-4 hover:underline"
+          >
+            Ufuq (أُفُق) App Page
+          </Link>
+          <span>·</span>
+          <span>© {new Date().getFullYear()} Zyad Wael. All rights reserved.</span>
         </div>
       </div>
     </footer>

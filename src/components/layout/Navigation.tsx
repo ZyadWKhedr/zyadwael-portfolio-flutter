@@ -78,6 +78,7 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-colors duration-200 ${

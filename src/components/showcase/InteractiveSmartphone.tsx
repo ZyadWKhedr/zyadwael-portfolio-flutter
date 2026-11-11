@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { MobileAppItem } from '@/types/mobileShowcase';
+import { getAssetUrl } from '@/lib/utils';
 
 interface InteractiveSmartphoneProps {
   apps: MobileAppItem[];
@@ -33,6 +34,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
   onSelectApp,
 }) => {
   const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState('9:41');
 
@@ -83,7 +85,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
   };
 
   // 4 Primary apps for the bottom dock
-  const dockApps = apps.filter((a) => ['amoomy', 'raval', 'wofoodi', 'contact'].includes(a.id));
+  const dockApps = apps.filter((a) => ['amoomy', 'ufuq', 'wofoodi', 'raval'].includes(a.id));
 
   return (
     <div className="relative mx-auto select-none transition-all duration-300">
@@ -186,7 +188,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
 
                       {/* App Name Label */}
                       <span className="text-[10px] font-sans font-medium text-zinc-200 group-hover:text-white truncate max-w-[62px] text-center tracking-tight">
-                        {app.title}
+                        {isAr && app.arabicTitle ? app.arabicTitle.split(' - ')[0] : app.title}
                       </span>
                     </button>
                   ))}
@@ -230,20 +232,20 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                     aria-label="Return to phone home screen"
                   >
                     <ChevronLeft className="w-3.5 h-3.5" />
-                    <span>Home</span>
+                    <span>{isAr ? 'الرئيسية' : 'Home'}</span>
                   </button>
 
                   <div className="text-center truncate px-2">
                     <span className="text-xs font-bold text-white block truncate">
-                      {activeApp.title}
+                      {isAr && activeApp.arabicTitle ? activeApp.arabicTitle : activeApp.title}
                     </span>
                     <span className="text-[9px] font-mono text-zinc-400 block truncate">
-                      {activeApp.category}
+                      {isAr && activeApp.arabicCategory ? activeApp.arabicCategory : activeApp.category}
                     </span>
                   </div>
 
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent/20 text-accent font-semibold border border-accent/30">
-                    Live
+                    {isAr ? 'حي' : 'Live'}
                   </span>
                 </div>
 
@@ -264,7 +266,7 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
                             : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
                         }`}
                       >
-                        {scr.title}
+                        {isAr && scr.arabicTitle ? scr.arabicTitle : scr.title}
                       </button>
                     ))}
                   </div>
@@ -272,205 +274,248 @@ export const InteractiveSmartphone: React.FC<InteractiveSmartphoneProps> = ({
 
                 {/* Current Screen Preview Card */}
                 {activeApp.screens[activeScreenIndex] && (
-                  <div className="flex-1 my-1 p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex flex-col justify-between overflow-y-auto shadow-inner text-start">
-                    <div>
-                      {/* Screen Title & Subtitle */}
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono text-accent font-semibold uppercase tracking-wider">
-                          Screen 0{activeScreenIndex + 1}
+                  activeApp.screens[activeScreenIndex].image ? (
+                    <div className="relative flex-1 my-1 rounded-2xl overflow-hidden border border-zinc-800 bg-black flex flex-col justify-between shadow-2xl group animate-fade-in">
+                      {/* Real App Screenshot */}
+                      <img
+                        src={getAssetUrl(activeApp.screens[activeScreenIndex].image)}
+                        alt={activeApp.screens[activeScreenIndex].title}
+                        className="absolute inset-0 w-full h-full object-cover object-top"
+                        loading="lazy"
+                      />
+                      {/* Gradient vignette */}
+                      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/75 to-transparent pointer-events-none" />
+
+                      {/* Top Action Pill */}
+                      <div className="relative z-10 p-2.5 flex items-center justify-between">
+                        <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-emerald-400 font-bold border border-white/10 shadow">
+                          Live iOS Screen
                         </span>
-                        <span className="text-[10px] font-mono text-zinc-400">
-                          {activeApp.screens[activeScreenIndex].subtitle}
-                        </span>
-                      </div>
-
-                      <h5 className="font-serif text-base font-bold text-white mb-1.5">
-                        {activeApp.screens[activeScreenIndex].title}
-                      </h5>
-
-                      <p className="text-xs text-zinc-300 leading-relaxed font-sans mb-3">
-                        {activeApp.screens[activeScreenIndex].flow}
-                      </p>
-
-                      {/* Interactive Micro-Demos inside preview */}
-                      {activeApp.id === 'wofoodi' && (
-                        <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 space-y-2">
-                          <span className="text-[10px] font-mono text-zinc-400 block">
-                            Select Grade to Simulate Radar:
-                          </span>
-                          <div className="grid grid-cols-3 gap-1.5">
-                            {(['91', '95', 'diesel'] as const).map((g) => (
-                              <button
-                                key={g}
-                                type="button"
-                                onClick={() => setWofoodiGrade(g)}
-                                className={`py-1 text-[10px] font-mono rounded uppercase font-semibold transition-colors ${
-                                  wofoodiGrade === g
-                                    ? 'bg-teal-600 text-white'
-                                    : 'bg-zinc-800 text-zinc-400 hover:text-white'
-                                }`}
-                              >
-                                {g}
-                              </button>
-                            ))}
-                          </div>
-                          <div className="text-[11px] font-mono text-teal-400 flex items-center justify-between pt-1">
-                            <span>Aramco Station ({wofoodiGrade})</span>
-                            <span>{wofoodiGrade === '91' ? '2.18 SAR/L' : wofoodiGrade === '95' ? '2.33 SAR/L' : '1.15 SAR/L'}</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {activeApp.id === 'amoomy' && (
-                        <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 space-y-2">
-                          <span className="text-[10px] font-mono text-zinc-400 block">
-                            Heavy Equipment Dispatch Queue:
-                          </span>
-                          <div className="grid grid-cols-3 gap-1.5">
-                            {(['heavy', 'flatbed', 'crane'] as const).map((c) => (
-                              <button
-                                key={c}
-                                type="button"
-                                onClick={() => setAmoomyCategory(c)}
-                                className={`py-1 text-[9px] font-mono rounded capitalize transition-colors ${
-                                  amoomyCategory === c
-                                    ? 'bg-orange-600 text-white font-semibold'
-                                    : 'bg-zinc-800 text-zinc-400 hover:text-white'
-                                }`}
-                              >
-                                {c}
-                              </button>
-                            ))}
-                          </div>
-                          <div className="text-[10px] font-mono text-orange-400 flex items-center justify-between pt-1">
-                            <span>Bids Received: 4 Carriers</span>
-                            <span>Verified Fleet</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {activeApp.id === 'raval' && (
-                        <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 flex items-center justify-between">
-                          <div>
-                            <span className="text-[10px] font-mono text-zinc-400 block">
-                              Reactive Cart State
-                            </span>
-                            <span className="text-xs font-bold text-white">
-                              Total: ${(ravalQty * 48).toFixed(2)}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => setRavalQty((q) => Math.max(1, q - 1))}
-                              className="w-6 h-6 rounded bg-zinc-800 text-white font-bold text-xs"
-                            >
-                              -
-                            </button>
-                            <span className="font-mono text-xs text-white">{ravalQty}</span>
-                            <button
-                              type="button"
-                              onClick={() => setRavalQty((q) => q + 1)}
-                              className="w-6 h-6 rounded bg-zinc-800 text-white font-bold text-xs"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      )}
-
-                      {activeApp.id === 'ufuq' && (
-                        <div className="p-2.5 rounded-xl bg-black/60 border border-emerald-900/40 mb-3 space-y-2">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-mono text-emerald-400">Digital Subha & Radio</span>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                triggerHaptic();
-                                setUfuqCounter((c) => (c >= 99 ? 0 : c + 1));
-                              }}
-                              className="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-colors"
-                            >
-                              Tap Tasbih ({ufuqCounter}/99)
-                            </button>
-                          </div>
-                          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-300">
-                            <span className="truncate">📻 Cairo Quran Live Radio</span>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                triggerHaptic();
-                                setUfuqRadioPlaying(!ufuqRadioPlaying);
-                              }}
-                              className={`text-[9px] font-mono px-2 py-0.5 rounded transition-colors ${
-                                ufuqRadioPlaying
-                                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                                  : 'bg-zinc-800 text-zinc-400'
-                              }`}
-                            >
-                              {ufuqRadioPlaying ? '▶ Live 128kbps' : '❚❚ Muted'}
-                            </button>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Feature Highlights Checklist */}
-                      <div className="space-y-1.5 pt-1">
-                        {activeApp.screens[activeScreenIndex].features.map((feat) => (
-                          <div
-                            key={feat}
-                            className="flex items-center gap-2 text-[11px] font-mono text-zinc-300"
+                        {activeApp.id === 'ufuq' && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              triggerHaptic();
+                              setUfuqRadioPlaying(!ufuqRadioPlaying);
+                            }}
+                            className={`text-[9px] font-mono px-2 py-0.5 rounded-full backdrop-blur-md transition-colors ${
+                              ufuqRadioPlaying
+                                ? 'bg-emerald-600/90 text-white font-bold'
+                                : 'bg-black/70 text-zinc-300'
+                            }`}
                           >
-                            <CheckCircle2 className="w-3 h-3 text-accent shrink-0" />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
+                            {ufuqRadioPlaying ? '▶ Live FM 94.7' : '❚❚ Radio Muted'}
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Bottom Floating Info Pill */}
+                      <div className="relative z-10 p-3 pt-0 text-start flex items-end justify-between gap-2">
+                        <div className="truncate">
+                          <span className="text-xs font-serif font-bold text-white block truncate">
+                            {isAr && activeApp.screens[activeScreenIndex].arabicTitle
+                              ? activeApp.screens[activeScreenIndex].arabicTitle
+                              : activeApp.screens[activeScreenIndex].title}
+                          </span>
+                          <span className="text-[10px] font-mono text-emerald-400 block truncate">
+                            {isAr && activeApp.screens[activeScreenIndex].arabicSubtitle
+                              ? activeApp.screens[activeScreenIndex].arabicSubtitle
+                              : activeApp.screens[activeScreenIndex].subtitle}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {activeApp.links.appStore && (
+                            <a
+                              href={activeApp.links.appStore}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors shadow"
+                            >
+                              <Apple className="w-3 h-3" />
+                              <span>Store</span>
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
+                  ) : (
+                    <div className="flex-1 my-1 p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex flex-col justify-between overflow-y-auto shadow-inner text-start">
+                      <div>
+                        {/* Screen Title & Subtitle */}
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[10px] font-mono text-accent font-semibold uppercase tracking-wider">
+                            {isAr ? `شاشة 0${activeScreenIndex + 1}` : `Screen 0${activeScreenIndex + 1}`}
+                          </span>
+                          <span className="text-[10px] font-mono text-zinc-400">
+                            {isAr && activeApp.screens[activeScreenIndex].arabicSubtitle
+                              ? activeApp.screens[activeScreenIndex].arabicSubtitle
+                              : activeApp.screens[activeScreenIndex].subtitle}
+                          </span>
+                        </div>
 
-                    {/* Direct Store / Repository Action inside phone */}
-                    <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2 mt-2">
-                      <span className="text-[10px] font-mono text-zinc-400">
-                        {activeApp.metrics[0]}
-                      </span>
+                        <h5 className="font-serif text-base font-bold text-white mb-1.5">
+                          {isAr && activeApp.screens[activeScreenIndex].arabicTitle
+                            ? activeApp.screens[activeScreenIndex].arabicTitle
+                            : activeApp.screens[activeScreenIndex].title}
+                        </h5>
 
-                      {activeApp.links.appStore && (
-                        <a
-                          href={activeApp.links.appStore}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
-                        >
-                          <Apple className="w-3 h-3" />
-                          <span>App Store</span>
-                        </a>
-                      )}
+                        <p className="text-xs text-zinc-300 leading-relaxed font-sans mb-3">
+                          {isAr && activeApp.screens[activeScreenIndex].arabicFlow
+                            ? activeApp.screens[activeScreenIndex].arabicFlow
+                            : activeApp.screens[activeScreenIndex].flow}
+                        </p>
 
-                      {activeApp.links.playStore && (
-                        <a
-                          href={activeApp.links.playStore}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
-                        >
-                          <Play className="w-3 h-3" />
-                          <span>Google Play</span>
-                        </a>
-                      )}
+                        {/* Interactive Micro-Demos inside preview */}
+                        {activeApp.id === 'wofoodi' && (
+                          <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 space-y-2">
+                            <span className="text-[10px] font-mono text-zinc-400 block">
+                              Select Grade to Simulate Radar:
+                            </span>
+                            <div className="grid grid-cols-3 gap-1.5">
+                              {(['91', '95', 'diesel'] as const).map((g) => (
+                                <button
+                                  key={g}
+                                  type="button"
+                                  onClick={() => setWofoodiGrade(g)}
+                                  className={`py-1 text-[10px] font-mono rounded uppercase font-semibold transition-colors ${
+                                    wofoodiGrade === g
+                                      ? 'bg-teal-600 text-white'
+                                      : 'bg-zinc-800 text-zinc-400 hover:text-white'
+                                  }`}
+                                >
+                                  {g}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="text-[11px] font-mono text-teal-400 flex items-center justify-between pt-1">
+                              <span>Aramco Station ({wofoodiGrade})</span>
+                              <span>{wofoodiGrade === '91' ? '2.18 SAR/L' : wofoodiGrade === '95' ? '2.33 SAR/L' : '1.15 SAR/L'}</span>
+                            </div>
+                          </div>
+                        )}
 
-                      {activeApp.links.github && (
-                        <a
-                          href={activeApp.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
-                        >
-                          <Code2 className="w-3 h-3" />
-                          <span>Source</span>
-                        </a>
-                      )}
+                        {activeApp.id === 'amoomy' && (
+                          <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 space-y-2">
+                            <span className="text-[10px] font-mono text-zinc-400 block">
+                              Heavy Equipment Dispatch Queue:
+                            </span>
+                            <div className="grid grid-cols-3 gap-1.5">
+                              {(['heavy', 'flatbed', 'crane'] as const).map((c) => (
+                                <button
+                                  key={c}
+                                  type="button"
+                                  onClick={() => setAmoomyCategory(c)}
+                                  className={`py-1 text-[9px] font-mono rounded capitalize transition-colors ${
+                                    amoomyCategory === c
+                                      ? 'bg-orange-600 text-white font-semibold'
+                                      : 'bg-zinc-800 text-zinc-400 hover:text-white'
+                                  }`}
+                                >
+                                  {c}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="text-[10px] font-mono text-orange-400 flex items-center justify-between pt-1">
+                              <span>Bids Received: 4 Carriers</span>
+                              <span>Verified Fleet</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {activeApp.id === 'raval' && (
+                          <div className="p-2.5 rounded-xl bg-black/60 border border-zinc-800 mb-3 flex items-center justify-between">
+                            <div>
+                              <span className="text-[10px] font-mono text-zinc-400 block">
+                                Reactive Cart State
+                              </span>
+                              <span className="text-xs font-bold text-white">
+                                Total: ${(ravalQty * 48).toFixed(2)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => setRavalQty((q) => Math.max(1, q - 1))}
+                                className="w-6 h-6 rounded bg-zinc-800 text-white font-bold text-xs"
+                              >
+                                -
+                              </button>
+                              <span className="font-mono text-xs text-white">{ravalQty}</span>
+                              <button
+                                type="button"
+                                onClick={() => setRavalQty((q) => q + 1)}
+                                className="w-6 h-6 rounded bg-zinc-800 text-white font-bold text-xs"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Feature Highlights Checklist */}
+                        <div className="space-y-1.5 pt-1">
+                          {(isAr && activeApp.screens[activeScreenIndex].arabicFeatures
+                            ? activeApp.screens[activeScreenIndex].arabicFeatures
+                            : activeApp.screens[activeScreenIndex].features
+                          ).map((feat) => (
+                            <div
+                              key={feat}
+                              className="flex items-center gap-2 text-[11px] font-mono text-zinc-300"
+                            >
+                              <CheckCircle2 className="w-3 h-3 text-accent shrink-0" />
+                              <span>{feat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Direct Store / Repository Action inside phone */}
+                      <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2 mt-2">
+                        <span className="text-[10px] font-mono text-zinc-400">
+                          {isAr && activeApp.arabicMetrics ? activeApp.arabicMetrics[0] : activeApp.metrics[0]}
+                        </span>
+
+                        {activeApp.links.appStore && (
+                          <a
+                            href={activeApp.links.appStore}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
+                          >
+                            <Apple className="w-3 h-3" />
+                            <span>App Store</span>
+                          </a>
+                        )}
+
+                        {activeApp.links.playStore && (
+                          <a
+                            href={activeApp.links.playStore}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
+                          >
+                            <Play className="w-3 h-3" />
+                            <span>Google Play</span>
+                          </a>
+                        )}
+
+                        {activeApp.links.github &&
+                          activeApp.links.github !== 'https://github.com/ZyadWKhedr' &&
+                          !activeApp.links.github.endsWith('/ZyadWKhedr') && (
+                            <a
+                              href={activeApp.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="touch-target inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono rounded bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
+                            >
+                              <Code2 className="w-3 h-3" />
+                              <span>{isAr ? 'الكود' : 'Source'}</span>
+                            </a>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )
                 )}
               </div>
             )}

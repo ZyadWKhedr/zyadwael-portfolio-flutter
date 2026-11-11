@@ -94,7 +94,7 @@ export const SelectedWork: React.FC = () => {
                         {project.stack.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2 py-0.5 text-[11px] font-mono rounded bg-elevated text-ink-muted border border-border-subtle"
+                            className="px-2.5 py-1 text-xs font-mono rounded bg-elevated border border-border-subtle text-ink-secondary"
                           >
                             {tech}
                           </span>
@@ -102,74 +102,79 @@ export const SelectedWork: React.FC = () => {
                       </div>
 
                       {/* Store Links */}
-                      {project.links && (
-                        <div className="flex items-center gap-2">
-                          {project.links.appStore && (
-                            <a
-                              href={project.links.appStore}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-surface-hover text-ink transition-colors"
-                              aria-label={`View ${project.title} on Apple App Store`}
-                            >
-                              <Apple className="w-3.5 h-3.5" />
-                              <span>App Store</span>
-                              <ExternalLink className="w-3 h-3 text-ink-muted" />
-                            </a>
-                          )}
-                          {project.links.playStore && (
-                            <a
-                              href={project.links.playStore}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-surface-hover text-ink transition-colors"
-                              aria-label={`View ${project.title} on Google Play`}
-                            >
-                              <Play className="w-3.5 h-3.5 fill-current" />
-                              <span>Google Play</span>
-                              <ExternalLink className="w-3 h-3 text-ink-muted" />
-                            </a>
-                          )}
-                        </div>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {project.links?.playStore && (
+                          <a
+                            href={project.links.playStore}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
+                            aria-label={`${project.title} on Google Play`}
+                          >
+                            <Play className="w-3.5 h-3.5" />
+                            <span>Google Play</span>
+                          </a>
+                        )}
+
+                        {project.links?.appStore && (
+                          <a
+                            href={project.links.appStore}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
+                            aria-label={`${project.title} on App Store`}
+                          >
+                            <Apple className="w-3.5 h-3.5" />
+                            <span>App Store</span>
+                          </a>
+                        )}
+
+                        {project.links?.github && (
+                          <a
+                            href={project.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
+                            aria-label={`${project.title} GitHub repository`}
+                          >
+                            <span>GitHub</span>
+                            <ArrowUpRight className="w-3 h-3 text-ink-muted" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Visual Specimen Column (5 cols) */}
+                  {/* Architecture / Structure Column (5 cols) */}
                   <div className={`lg:col-span-5 ${isEven ? 'order-2' : 'order-2 lg:order-1'}`}>
-                    <div className="p-4 sm:p-5 rounded-lg bg-canvas border border-border-subtle space-y-4">
-                      <div className="flex items-center justify-between text-xs font-mono text-ink-muted pb-2 border-b border-border-subtle">
-                        <span className="font-semibold text-ink uppercase tracking-wider">Feature Specimen</span>
-                        <span className="text-[11px]">Flutter Client</span>
+                    <div className="p-5 sm:p-6 rounded-md bg-elevated/70 border border-border-subtle space-y-4">
+                      <div className="flex items-center justify-between border-b border-border-subtle pb-3">
+                        <span className="type-overline text-ink-muted">Application Context</span>
+                        <span className="text-xs font-mono text-accent">Shipped</span>
                       </div>
 
-                      {/* Tailored Visual Specimen by Project */}
                       {project.id === 'wofoodi' && (
                         <div className="space-y-3 font-mono text-xs">
                           <div className="p-3 rounded bg-surface border border-border-subtle space-y-2">
                             <div className="flex items-center justify-between text-[11px] text-ink-muted">
                               <span className="flex items-center gap-1 text-accent">
-                                <MapPin className="w-3 h-3" />
-                                Geospatial Station Clustering
+                                <Fuel className="w-3 h-3" />
+                                Fuel Station Directory
                               </span>
-                              <span>GCC Corridor</span>
+                              <span>GCC Region</span>
                             </div>
                             <div className="text-ink font-sans text-xs">
-                              Dynamic map marker layer clustering verified fuel stations with real-time 91, 95 & diesel grades.
+                              Dynamic radius querying and spatial clustering of fuel locations with local caching for offline resilience.
                             </div>
                           </div>
-                          <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
+                          <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
                             <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Grade 91</span>
-                              <span className="text-ink font-semibold">Verified</span>
+                              <span className="text-ink-muted block text-[10px]">Filter Mode</span>
+                              <span className="text-ink font-semibold">Fuel Grade</span>
                             </div>
                             <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Grade 95</span>
-                              <span className="text-ink font-semibold">Verified</span>
-                            </div>
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Diesel</span>
-                              <span className="text-ink font-semibold">Available</span>
+                              <span className="text-ink-muted block text-[10px]">Mapping</span>
+                              <span className="text-ink font-semibold">Google Maps SDK</span>
                             </div>
                           </div>
                         </div>
@@ -181,22 +186,22 @@ export const SelectedWork: React.FC = () => {
                             <div className="flex items-center justify-between text-[11px] text-ink-muted">
                               <span className="flex items-center gap-1 text-accent">
                                 <Truck className="w-3 h-3" />
-                                Multi-Role Dispatch
+                                Dual-Role Hauler Platform
                               </span>
-                              <span>Saudi Logistics</span>
+                              <span>Saudi Arabia</span>
                             </div>
                             <div className="text-ink font-sans text-xs">
-                              Dual client/provider role routing with structured quotation negotiations and transit corridor route buffering.
+                              Tailored dispatcher and customer flows coordinating transport orders across 100+ vehicle &amp; equipment categories.
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
                             <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Client Flow</span>
-                              <span className="text-ink font-semibold">Order Dispatch</span>
+                              <span className="text-ink-muted block text-[10px]">Architecture</span>
+                              <span className="text-ink font-semibold">Clean Architecture</span>
                             </div>
                             <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Hauler Flow</span>
-                              <span className="text-ink font-semibold">Quotation Bids</span>
+                              <span className="text-ink-muted block text-[10px]">Categories</span>
+                              <span className="text-ink font-semibold">100+ Vehicle Types</span>
                             </div>
                           </div>
                         </div>

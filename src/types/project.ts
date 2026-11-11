@@ -17,14 +17,21 @@ export interface FeaturedProject {
   title: string;
   arabicTitle?: string;
   category: string;
+  arabicCategory?: string;
   tagline: string;
+  arabicTagline?: string;
   icon: string;
   problem: string;
+  arabicProblem?: string;
   role: string;
+  arabicRole?: string;
   architecture: string;
+  arabicArchitecture?: string;
   decisions: string[];
+  arabicDecisions?: string[];
   stack: string[];
   outcome: string;
+  arabicOutcome?: string;
   metrics: string[];
   links: {
     appStore?: string;
@@ -41,15 +48,21 @@ export interface SecondaryProject {
   title: string;
   arabicTitle?: string;
   category: 'Mobile' | 'Mobile Systems' | 'Data & Analytics' | 'Wearable & Games';
+  arabicCategory?: string;
   tagline: string;
+  arabicTagline?: string;
   problem: string;
+  arabicProblem?: string;
   role: string;
+  arabicRole?: string;
   stack: string[];
   icon?: string;
   image?: string;
   features?: string[];
+  arabicFeatures?: string[];
   metrics?: string[];
   detailedDescription?: string;
+  arabicDetailedDescription?: string;
   links: {
     github?: string;
     live?: string;
@@ -59,6 +72,7 @@ export interface SecondaryProject {
     article?: string;
   };
   evidence: string;
+  arabicEvidence?: string;
   statusNotes?: string;
 }
 

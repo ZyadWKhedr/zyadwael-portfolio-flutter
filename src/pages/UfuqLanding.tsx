@@ -31,7 +31,8 @@ const getAssetUrl = (path: string) => {
   return `${cleanBase}${cleanPath}`;
 };
 
-const APP_STORE_URL = 'https://apps.apple.com/us/app/ufuq/id6821979552';
+const APP_STORE_URL = 'https://apps.apple.com/id/app/ufuq/id6821979552';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.ziad.ufuq';
 
 interface FeatureItem {
   id: string;
@@ -55,7 +56,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Read the Holy Quran in authentic Uthmani script with complete offline availability.',
     tagAr: 'الرسم العثماني · متاح بدون إنترنت',
     tagEn: 'Uthmani Script · Offline Reader',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-1.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-quran.webp'),
   },
   {
     id: 'prayer',
@@ -66,7 +67,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Track the five daily prayers and effortlessly know the exact countdown to the upcoming prayer.',
     tagAr: 'حساب فلكي دقيق · عداد تنازلي',
     tagEn: 'Precise Astronomical GPS · Next Prayer',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-2.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-prayer.webp'),
   },
   {
     id: 'tasbeeh',
@@ -77,7 +78,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Maintain your daily remembrance with an intuitive digital Tasbeeh counter and customizable supplications.',
     tagAr: 'اهتزاز لمسي · خيارات متعددة',
     tagEn: 'Haptic Feedback · Multiple Presets',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-3.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-tasbeeh.webp'),
   },
   {
     id: 'qibla',
@@ -88,7 +89,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Find the exact direction of the Kaaba wherever you are using your device compass.',
     tagAr: 'بوصلة رقمية دقيقة · تحديد تلقائي',
     tagEn: 'Digital Magnetometer · Auto Calibration',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-4.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-qibla.webp'),
   },
   {
     id: 'athkar',
@@ -99,7 +100,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Morning, evening, and post-prayer supplications with an interactive repetition counter.',
     tagAr: 'حصن المسلم · عداد التكرار',
     tagEn: 'Hisn al-Muslim · Repetition Tracker',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-5.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-athkar.webp'),
   },
   {
     id: 'radio',
@@ -110,7 +111,7 @@ const FEATURES: FeatureItem[] = [
     descEn: 'Stream the official Holy Quran recitation radio broadcast directly from Cairo 24/7.',
     tagAr: 'بث مباشر 24/7 · تلاوات خاشعة',
     tagEn: 'Live Cairo Radio · 24/7 Streaming',
-    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-6.jpg'),
+    image: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-home.webp'),
   },
 ];
 
@@ -405,9 +406,10 @@ export const UfuqLanding: React.FC = () => {
                 </a>
 
                 {/* Google Play Store Button */}
-                <button
-                  type="button"
-                  onClick={() => setShowPlayModal(true)}
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#E9E5D9] text-[#292D27] hover:bg-[#F3EFE4] hover:border-[#B5A36A] transition-all shadow-sm hover:shadow active:scale-[0.98]"
                   aria-label="Download Ufuq on Google Play"
                 >
@@ -422,7 +424,7 @@ export const UfuqLanding: React.FC = () => {
                       Google Play
                     </div>
                   </div>
-                </button>
+                </a>
               </div>
 
               {/* Subtle Trust Indicators */}
@@ -451,14 +453,14 @@ export const UfuqLanding: React.FC = () => {
                 <div className="relative rounded-[46px] p-3 bg-[#164A3A]/10 border-4 border-[#164A3A]/20 shadow-2xl shadow-[#164A3A]/15 backdrop-blur-sm">
                   <div className="relative aspect-[9/19] rounded-[36px] overflow-hidden bg-white shadow-inner border border-[#E9E5D9]">
                     <img
-                      src={getAssetUrl('assets/images/projects/ufuq/ufuq-hero.jpg')}
+                      src={getAssetUrl('assets/images/projects/ufuq/ufuq-screen-home.webp')}
                       alt="Ufuq App Home Screen"
                       width="340"
                       height="718"
                       className="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
                       onClick={() =>
                         setActiveImageModal({
-                          src: getAssetUrl('assets/images/projects/ufuq/ufuq-hero.jpg'),
+                          src: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-home.webp'),
                           caption: isRtl ? 'الشاشة الرئيسية لتطبيق أُفُق' : 'Ufuq App Home Screen',
                         })
                       }
@@ -469,7 +471,7 @@ export const UfuqLanding: React.FC = () => {
                       type="button"
                       onClick={() =>
                         setActiveImageModal({
-                          src: getAssetUrl('assets/images/projects/ufuq/ufuq-hero.jpg'),
+                          src: getAssetUrl('assets/images/projects/ufuq/ufuq-screen-home.webp'),
                           caption: isRtl ? 'الشاشة الرئيسية لتطبيق أُفُق' : 'Ufuq App Home Screen',
                         })
                       }
@@ -774,9 +776,10 @@ export const UfuqLanding: React.FC = () => {
               </a>
 
               {/* Google Play Button */}
-              <button
-                type="button"
-                onClick={() => setShowPlayModal(true)}
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#F8F6EF] border border-[#E9E5D9] text-[#292D27] hover:bg-[#F3EFE4] hover:border-[#B5A36A] transition-all shadow-sm active:scale-[0.98]"
               >
                 <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current text-[#164A3A] shrink-0" aria-hidden="true">
@@ -788,7 +791,7 @@ export const UfuqLanding: React.FC = () => {
                   </div>
                   <div className="text-base font-bold font-sans text-[#164A3A] leading-tight">Google Play</div>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
         </div>
