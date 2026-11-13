@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUp, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const SOCIAL_LINKS = [
   {
@@ -34,6 +35,8 @@ const SOCIAL_LINKS = [
 ];
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -44,7 +47,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-start">
           <span className="font-display font-semibold text-ink text-sm">Zyad Wael</span>
           <span className="text-border-subtle hidden sm:inline">·</span>
-          <span>Flutter Developer &amp; Data Science Student</span>
+          <span>{t('footer.tagline', 'Flutter Developer & Data Science Student')}</span>
         </div>
 
         {/* Social Channels & Back to Top */}
@@ -69,9 +72,9 @@ export const Footer: React.FC = () => {
           <button
             type="button"
             onClick={scrollToTop}
-            className="btn-tactile touch-target p-2 rounded-md border border-border-subtle bg-surface text-ink-muted hover:text-accent hover:border-accent transition-colors ml-2"
-            aria-label="Back to top of page"
-            title="Back to top"
+            className="btn-tactile touch-target p-2 rounded-md border border-border-subtle bg-surface text-ink-muted hover:text-accent hover:border-accent transition-colors ms-2"
+            aria-label={t('footer.backToTop', 'Back to top of page')}
+            title={t('footer.backToTop', 'Back to top')}
           >
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
@@ -81,7 +84,7 @@ export const Footer: React.FC = () => {
       <div className="container max-w-site mx-auto px-5 sm:px-7 lg:px-10 mt-6 pt-6 border-t border-border-subtle/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-ink-muted">
         <div className="flex items-center gap-1.5">
           <MapPin className="w-3 h-3 text-accent" />
-          <span>Alexandria, Egypt</span>
+          <span>{t('footer.location', 'Alexandria, Egypt')}</span>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -91,7 +94,7 @@ export const Footer: React.FC = () => {
             Ufuq (أُفُق) App Page
           </Link>
           <span>·</span>
-          <span>© {new Date().getFullYear()} Zyad Wael. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Zyad Wael. {t('footer.rights', 'All rights reserved.')}</span>
         </div>
       </div>
     </footer>

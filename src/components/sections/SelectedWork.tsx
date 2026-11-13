@@ -1,291 +1,280 @@
 import React from 'react';
-import { ExternalLink, Apple, Play, MapPin, Check, Layers, ShoppingBag, Truck, Fuel, QrCode, ArrowUpRight } from 'lucide-react';
-import { COMMERCIAL_PROJECTS, CommercialProject } from '@/data/projects';
-import ufuqIcon from '@/assets/ufuq-icon.png';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { COMMERCIAL_PROJECTS } from '@/data/projects';
+import { ProjectCard } from '@/components/ui/ProjectCard';
+import { getAssetUrl } from '@/lib/utils';
 
 export const SelectedWork: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
+  const isArabic = i18n.language === 'ar';
+
   return (
-    <section id="work" className="scroll-mt-20 py-20 md:py-28 border-b border-border-subtle">
+    <section id="work" className="scroll-mt-20 py-14 md:py-18 border-b border-border-subtle">
       <div className="container max-w-site mx-auto px-5 sm:px-7 lg:px-10">
         {/* Section Header */}
-        <div className="max-w-reading mb-14 md:mb-18 text-start">
-          <div className="type-overline text-accent font-mono mb-3">
-            COMMERCIAL MOBILE APPLICATIONS
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="max-w-reading mb-10 md:mb-12 text-start"
+        >
+          <div className="type-overline text-accent font-mono mb-2.5">
+            {t('work.eyebrow', 'PRODUCTION APPLICATIONS')}
           </div>
-          <h2 className="type-h2 font-display text-ink mb-4 tracking-tight">
-            Selected work
+          <h2 className="type-h2 font-display text-ink mb-3 tracking-tight">
+            {t('work.title', 'Selected work')}
           </h2>
           <p className="type-body text-ink-secondary leading-relaxed">
-            A selection of applications I've worked on, from commercial mobile products to independent developer tools.
+            {t('work.subtitle', "A selection of production mobile applications I've engineered — spanning offline-first Islamic tools, on-device neural inference, enterprise logistics dispatch, and reactive commerce.")}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Project Layouts List */}
-        <div className="space-y-16 md:space-y-20">
+        {/* Unified Project Cards List */}
+        <div className="space-y-8 md:space-y-10">
           {COMMERCIAL_PROJECTS.map((project, idx) => {
-            const isEven = idx % 2 === 0;
+            const isReversed = idx % 2 !== 0;
+
+            // Localized project content
+            const title = t(`work.${project.id}.title`, project.title);
+            const category = t(`work.${project.id}.category`, project.category);
+            const summary = t(`work.${project.id}.summary`, project.summary);
+            const contribution = t(`work.${project.id}.contribution`, project.contribution);
+            const contributionDetails = [
+              t(`work.${project.id}.h1`, project.contributionDetails[0]),
+              t(`work.${project.id}.h2`, project.contributionDetails[1]),
+              t(`work.${project.id}.h3`, project.contributionDetails[2]),
+              t(`work.${project.id}.h4`, project.contributionDetails[3]),
+            ];
+
+            // Render project-specific visual media inside consistent container
+            const renderMedia = () => {
+              if (project.id === 'ufuq') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-canvas border border-border-subtle group">
+                      <img
+                        src={getAssetUrl('assets/images/projects/ufuq/ufuq-screen-home.webp')}
+                        alt="Ufuq App Interface"
+                        width="600"
+                        height="338"
+                        className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                        <span className="text-[11px] text-white font-sans font-medium text-start">
+                          {t('work.ufuq.mediaLabel', 'Ufuq Home Screen · Cairo Radio Live & Prayer Times')}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
+                      <div className="p-2 rounded bg-surface border border-border-subtle">
+                        <span className="text-ink-muted block text-[10px]">
+                          {t('work.ufuq.stat1Label', 'Quran Reading')}
+                        </span>
+                        <span className="text-ink font-semibold">
+                          {t('work.ufuq.stat1Val', '100% Offline Uthmani')}
+                        </span>
+                      </div>
+                      <div className="p-2 rounded bg-surface border border-border-subtle">
+                        <span className="text-ink-muted block text-[10px]">
+                          {t('work.ufuq.stat2Label', 'Audio Stream')}
+                        </span>
+                        <span className="text-ink font-semibold">
+                          {t('work.ufuq.stat2Val', 'Live Cairo 24/7')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (project.id === 'tashkeel') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-canvas border border-border-subtle group">
+                      <img
+                        src={getAssetUrl('assets/images/projects/tashkeel/tashkeel-preview.webp')}
+                        alt="Tashkeel App Interface"
+                        width="600"
+                        height="338"
+                        className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                        <span className="text-[11px] text-white font-sans font-medium text-start">
+                          {t('work.tashkeel.mediaLabel', 'Tashkeel Mobile Interface · On-Device ONNX Diacritization')}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
+                      <div className="p-2 rounded bg-surface border border-border-subtle">
+                        <span className="text-ink-muted block text-[10px]">
+                          {t('work.tashkeel.stat1Label', 'Model Integration')}
+                        </span>
+                        <span className="text-ink font-semibold">
+                          {t('work.tashkeel.stat1Val', 'ShakkalV3 Pretrained')}
+                        </span>
+                      </div>
+                      <div className="p-2 rounded bg-surface border border-border-subtle">
+                        <span className="text-ink-muted block text-[10px]">
+                          {t('work.tashkeel.stat2Label', 'Execution')}
+                        </span>
+                        <span className="text-ink font-semibold">
+                          {t('work.tashkeel.stat2Val', 'ONNX Runtime Local')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (project.id === 'wofoodi') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="p-4 rounded bg-surface border border-border-subtle space-y-2.5 text-start">
+                      <div className="flex items-center justify-between text-[11px] text-ink-muted">
+                        <span className="flex items-center gap-1.5 text-accent font-semibold">
+                          <span>{isArabic ? 'خريطة المحطات اللحظية' : 'Live Station Mapping'}</span>
+                        </span>
+                        <span>{isArabic ? 'السعودية والخليج' : 'KSA / GCC'}</span>
+                      </div>
+                      <div className="p-3 rounded bg-canvas border border-border-subtle space-y-1">
+                        <div className="text-ink font-medium">{isArabic ? 'الموقع الأقرب: طريق الملك فهد' : 'Nearest: King Fahd Rd Station'}</div>
+                        <div className="text-[11px] text-ink-secondary">{isArabic ? 'بنزين 91، بنزين 95، ديزل متوفر' : 'Gasoline 91, 95 & Diesel Available'}</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'المزامنة' : 'Sync'}</span>
+                          <span className="text-ink font-medium">{isArabic ? 'تخزين SQLite محلي' : 'SQLite Local Buffer'}</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'الخريطة' : 'Map'}</span>
+                          <span className="text-ink font-medium">Google Maps SDK</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (project.id === 'amoomy') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="p-4 rounded bg-surface border border-border-subtle space-y-2.5 text-start">
+                      <div className="flex items-center justify-between text-[11px] text-ink-muted">
+                        <span className="flex items-center gap-1.5 text-accent font-semibold">
+                          <span>{isArabic ? 'نظام الشحن الثقيل' : 'Heavy Dispatch Flow'}</span>
+                        </span>
+                        <span>100+ {isArabic ? 'فئة' : 'Categories'}</span>
+                      </div>
+                      <div className="p-3 rounded bg-canvas border border-border-subtle space-y-1">
+                        <div className="text-ink font-medium">{isArabic ? 'حالة الطلب: مسار الرياض - الدمام' : 'Corridor: Riyadh - Dammam'}</div>
+                        <div className="text-[11px] text-ink-secondary">{isArabic ? 'مفاوضة الأسعار والعروض لحظياً' : 'Live Multi-Carrier Bidding'}</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'المعمارية' : 'Architecture'}</span>
+                          <span className="text-ink font-medium">Clean Architecture</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'الأمان' : 'Auth'}</span>
+                          <span className="text-ink font-medium">Role-Based OAuth</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (project.id === 'raval') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="p-4 rounded bg-surface border border-border-subtle space-y-2.5 text-start">
+                      <div className="flex items-center justify-between text-[11px] text-ink-muted">
+                        <span className="flex items-center gap-1.5 text-accent font-semibold">
+                          <span>{isArabic ? 'محرك التجارة والتسوق' : 'E-Commerce Engine'}</span>
+                        </span>
+                        <span>{isArabic ? 'سلة تفاعلية' : 'Reactive Cart'}</span>
+                      </div>
+                      <div className="p-3 rounded bg-canvas border border-border-subtle space-y-1">
+                        <div className="text-ink font-medium">{isArabic ? 'تتبع مسار وحالة الطلب' : 'Multi-Step Order Lifecycle'}</div>
+                        <div className="text-[11px] text-ink-secondary">{isArabic ? 'مقبول -> قيد التجهيز -> تم الشحن' : 'Placed -> Packing -> Out for Delivery'}</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'الصور' : 'Image Loader'}</span>
+                          <span className="text-ink font-medium">{isArabic ? 'تخزين مؤقت بالقرص' : 'Disk Cached'}</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-elevated border border-border-subtle">
+                          <span className="text-ink-muted block">{isArabic ? 'الحالة' : 'State'}</span>
+                          <span className="text-ink font-medium">Provider / Clean Arch</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (project.id === 'payss') {
+                return (
+                  <div className="space-y-3 font-mono text-xs">
+                    <div className="p-4 rounded bg-surface border border-border-subtle space-y-2.5 text-start">
+                      <div className="flex items-center justify-between text-[11px] text-ink-muted">
+                        <span className="flex items-center gap-1.5 text-accent font-semibold">
+                          <span>{isArabic ? 'مسح QR ونقاط الولاء' : 'QR Scanner & Loyalty'}</span>
+                        </span>
+                        <span>{isArabic ? 'واجهة التاجر' : 'Merchant View'}</span>
+                      </div>
+                      <div className="p-3 rounded bg-canvas border border-border-subtle space-y-1">
+                        <div className="text-ink font-medium">{isArabic ? 'تحقق لحظي وسجل المعاملات' : 'Instant Counter Verification'}</div>
+                        <div className="text-[11px] text-ink-secondary">{isArabic ? 'مسح سريع بنقاط فورية عبر الكاميرا' : 'Hardware Camera Scanner Pipeline'}</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
+                        <div className="p-2 rounded bg-surface border border-border-subtle">
+                          <span className="text-ink-muted block text-[10px]">{isArabic ? 'التحقق' : 'Verification'}</span>
+                          <span className="text-ink font-semibold">{isArabic ? 'مسح QR فوري' : 'Instant QR Read'}</span>
+                        </div>
+                        <div className="p-2 rounded bg-surface border border-border-subtle">
+                          <span className="text-ink-muted block text-[10px]">{isArabic ? 'واجهة التاجر' : 'Merchant View'}</span>
+                          <span className="text-ink font-semibold">{isArabic ? 'سجل النقاط' : 'Points Ledger'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              return null;
+            };
 
             return (
-              <article
+              <motion.div
                 key={project.id}
-                className="spec-card p-6 sm:p-8 md:p-10 rounded-lg bg-surface border border-border transition-colors hover:border-border-strong text-start"
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.45, delay: idx * 0.05, ease: 'easeOut' }}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                  {/* Content Column (7 cols) */}
-                  <div className={`lg:col-span-7 space-y-6 ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}>
-                    {/* Header Row: Icon + Title + Category */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-elevated border border-border-subtle p-1.5 shrink-0 flex items-center justify-center shadow-subtle">
-                        <img
-                          src={project.icon}
-                          alt={`${project.title} app icon`}
-                          width="56"
-                          height="56"
-                          className="w-full h-full object-contain rounded-lg"
-                        />
-                      </div>
-                      <div>
-                        <div className="flex items-baseline gap-2.5">
-                          <h3 className="type-h3 font-display font-bold text-ink">
-                            {project.title}
-                          </h3>
-                          {project.arabicTitle && (
-                            <span className="text-xs font-arabic text-ink-muted" dir="rtl">
-                              {project.arabicTitle}
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-xs font-mono text-accent mt-0.5">
-                          {project.category}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Summary */}
-                    <p className="type-body text-ink-secondary leading-relaxed">
-                      {project.summary}
-                    </p>
-
-                    {/* Role & Contribution Statement */}
-                    <div className="p-4 rounded-md bg-elevated border-l-2 border-accent text-xs leading-relaxed">
-                      <span className="font-semibold text-ink block mb-1">My contribution:</span>
-                      <span className="text-ink-secondary">{project.contribution}</span>
-                    </div>
-
-                    {/* Verified Contribution Details */}
-                    <div>
-                      <div className="type-overline text-ink-muted mb-2.5">
-                        Key implementation areas
-                      </div>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-ink-secondary">
-                        {project.contributionDetails.map((detail) => (
-                          <li key={detail} className="flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Tech Stack & Store Links */}
-                    <div className="pt-4 border-t border-border-subtle flex flex-wrap items-center justify-between gap-4">
-                      {/* Stack Tags */}
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        {project.stack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 py-1 text-xs font-mono rounded bg-elevated border border-border-subtle text-ink-secondary"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Store Links */}
-                      <div className="flex items-center gap-2">
-                        {project.links?.playStore && (
-                          <a
-                            href={project.links.playStore}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
-                            aria-label={`${project.title} on Google Play`}
-                          >
-                            <Play className="w-3.5 h-3.5" />
-                            <span>Google Play</span>
-                          </a>
-                        )}
-
-                        {project.links?.appStore && (
-                          <a
-                            href={project.links.appStore}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
-                            aria-label={`${project.title} on App Store`}
-                          >
-                            <Apple className="w-3.5 h-3.5" />
-                            <span>App Store</span>
-                          </a>
-                        )}
-
-                        {project.links?.github && (
-                          <a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border-strong bg-surface hover:bg-elevated text-ink hover:text-accent transition-colors"
-                            aria-label={`${project.title} GitHub repository`}
-                          >
-                            <span>GitHub</span>
-                            <ArrowUpRight className="w-3 h-3 text-ink-muted" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Architecture / Structure Column (5 cols) */}
-                  <div className={`lg:col-span-5 ${isEven ? 'order-2' : 'order-2 lg:order-1'}`}>
-                    <div className="p-5 sm:p-6 rounded-md bg-elevated/70 border border-border-subtle space-y-4">
-                      <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-                        <span className="type-overline text-ink-muted">Application Context</span>
-                        <span className="text-xs font-mono text-accent">Shipped</span>
-                      </div>
-
-                      {project.id === 'wofoodi' && (
-                        <div className="space-y-3 font-mono text-xs">
-                          <div className="p-3 rounded bg-surface border border-border-subtle space-y-2">
-                            <div className="flex items-center justify-between text-[11px] text-ink-muted">
-                              <span className="flex items-center gap-1 text-accent">
-                                <Fuel className="w-3 h-3" />
-                                Fuel Station Directory
-                              </span>
-                              <span>GCC Region</span>
-                            </div>
-                            <div className="text-ink font-sans text-xs">
-                              Dynamic radius querying and spatial clustering of fuel locations with local caching for offline resilience.
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Filter Mode</span>
-                              <span className="text-ink font-semibold">Fuel Grade</span>
-                            </div>
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Mapping</span>
-                              <span className="text-ink font-semibold">Google Maps SDK</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {project.id === 'amoomy' && (
-                        <div className="space-y-3 font-mono text-xs">
-                          <div className="p-3 rounded bg-surface border border-border-subtle space-y-2">
-                            <div className="flex items-center justify-between text-[11px] text-ink-muted">
-                              <span className="flex items-center gap-1 text-accent">
-                                <Truck className="w-3 h-3" />
-                                Dual-Role Hauler Platform
-                              </span>
-                              <span>Saudi Arabia</span>
-                            </div>
-                            <div className="text-ink font-sans text-xs">
-                              Tailored dispatcher and customer flows coordinating transport orders across 100+ vehicle &amp; equipment categories.
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Architecture</span>
-                              <span className="text-ink font-semibold">Clean Architecture</span>
-                            </div>
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Categories</span>
-                              <span className="text-ink font-semibold">100+ Vehicle Types</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {project.id === 'raval' && (
-                        <div className="space-y-3 font-mono text-xs">
-                          <div className="p-3 rounded bg-surface border border-border-subtle space-y-2">
-                            <div className="flex items-center justify-between text-[11px] text-ink-muted">
-                              <span className="flex items-center gap-1 text-accent">
-                                <ShoppingBag className="w-3 h-3" />
-                                Reactive Commerce
-                              </span>
-                              <span>Retail Mobile</span>
-                            </div>
-                            <div className="text-ink font-sans text-xs">
-                              Optimistic local cart state calculations with structured step-by-step dispatch order tracking.
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-between p-2 rounded bg-surface border border-border-subtle text-[11px]">
-                            <span className="text-ink-muted">Order Flow:</span>
-                            <span className="text-ink font-semibold">Browse → Cart → Checkout → Track</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {project.id === 'payss' && (
-                        <div className="space-y-3 font-mono text-xs">
-                          <div className="p-3 rounded bg-surface border border-border-subtle space-y-2">
-                            <div className="flex items-center justify-between text-[11px] text-ink-muted">
-                              <span className="flex items-center gap-1 text-accent">
-                                <QrCode className="w-3 h-3" />
-                                Merchant Terminal
-                              </span>
-                              <span>Loyalty Pipeline</span>
-                            </div>
-                            <div className="text-ink font-sans text-xs">
-                              Camera-driven QR scanning paired with customer loyalty ledger and counter activity review.
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Verification</span>
-                              <span className="text-ink font-semibold">Instant QR Read</span>
-                            </div>
-                            <div className="p-2 rounded bg-surface border border-border-subtle">
-                              <span className="text-ink-muted block text-[10px]">Merchant View</span>
-                              <span className="text-ink font-semibold">Points Ledger</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </article>
+                <ProjectCard
+                  id={project.id}
+                  title={title}
+                  arabicTitle={project.arabicTitle}
+                  category={category}
+                  summary={summary}
+                  contribution={contribution}
+                  contributionDetails={contributionDetails}
+                  stack={project.stack}
+                  icon={project.icon}
+                  links={project.links}
+                  media={renderMedia()}
+                  reversed={isReversed}
+                />
+              </motion.div>
             );
           })}
-        </div>
-
-        {/* Standalone Product Spotlight: Ufuq */}
-        <div className="mt-14 sm:mt-18 p-6 sm:p-8 rounded-lg bg-surface border border-border flex flex-col md:flex-row md:items-center justify-between gap-6 text-start">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl overflow-hidden bg-elevated border border-border-subtle p-1 shrink-0 flex items-center justify-center">
-              <img src={ufuqIcon} alt="Ufuq App Icon" width="48" height="48" className="w-full h-full object-contain rounded-lg" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-base text-ink">Ufuq (أُفُق)</span>
-                <span className="px-2 py-0.5 rounded bg-accent/15 text-accent font-mono text-[10px] uppercase font-semibold">Product Release</span>
-              </div>
-              <p className="text-xs text-ink-secondary mt-1">
-                A calm Arabic Islamic companion featuring offline Quran reading, prayer times, daily Athkar, and live Cairo radio stream.
-              </p>
-            </div>
-          </div>
-
-          <a
-            href="/zyadwael-portfolio-flutter/ufuq/"
-            className="btn-tactile touch-target inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-md bg-accent text-accent-fg hover:bg-accent-hover transition-colors shrink-0"
-          >
-            <span>Visit Ufuq Website</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
         </div>
       </div>
     </section>

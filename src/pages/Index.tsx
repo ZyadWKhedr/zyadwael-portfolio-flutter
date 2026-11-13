@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
+import TopBar from '@/components/layout/TopBar';
+import AiAssistant from '@/components/AiAssistant';
 import HeroSection from '@/components/sections/HeroSection';
 import SelectedWork from '@/components/sections/SelectedWork';
 import ThingsIveBuilt from '@/components/sections/ThingsIveBuilt';
@@ -12,6 +14,9 @@ import ContactSection from '@/components/sections/ContactSection';
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-canvas text-ink transition-colors duration-200 relative selection:bg-accent selection:text-accent-fg">
+      {/* Live Alexandria/Cairo Time & Availability Top Bar */}
+      <TopBar />
+
       {/* Unobtrusive, Accessible Header Navigation */}
       <Navigation />
 
@@ -20,10 +25,10 @@ const Index: React.FC = () => {
         {/* 6.1 Hero */}
         <HeroSection />
 
-        {/* 6.2 Selected work (Commercial mobile products) */}
+        {/* 6.2 Selected work (Commercial & Production mobile products) */}
         <SelectedWork />
 
-        {/* 6.3 Things I've built (Independent engineering projects) */}
+        {/* 6.3 Things I've built (Independent engineering projects & applied AI) */}
         <ThingsIveBuilt />
 
         {/* 6.4 Notes from building things (Technical writing) */}
@@ -41,6 +46,9 @@ const Index: React.FC = () => {
 
       {/* Semantic Editorial Footer */}
       <Footer />
+
+      {/* Grounded Floating Portfolio AI Assistant */}
+      <AiAssistant />
     </div>
   );
 };
