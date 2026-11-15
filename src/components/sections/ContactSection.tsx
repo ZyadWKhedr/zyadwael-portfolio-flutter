@@ -8,7 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 const EMAIL = 'ziad.w.khedr@gmail.com';
 const GITHUB_URL = 'https://github.com/ZyadWKhedr';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/zyad-wael-a9035a275/';
-const CV_URL = '/zyadwael-portfolio-flutter/Zyad_Wael_CV.pdf';
+const CV_URL = 'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
 
 export const ContactSection: React.FC = () => {
   const { t } = useTranslation();
