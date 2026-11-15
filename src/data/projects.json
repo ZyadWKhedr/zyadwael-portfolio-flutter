@@ -50,7 +50,8 @@
     "icon": "assets/images/projects/tashkeel/tashkeel-icon.webp",
     "preview": "assets/images/projects/tashkeel/tashkeel-preview.webp",
     "links": {
-      "appStore": "https://apps.apple.com/br/app/tashkeel-%D8%AA-%D8%B4-%D9%83-%D9%8A%D9%84/id6827159466"
+      "appStore": "https://apps.apple.com/us/app/tashkeel-%D8%AA-%D8%B4-%D9%83-%D9%8A%D9%84/id6827159466",
+      "landingPage": "/tashkeel"
     }
   },
   {

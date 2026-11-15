@@ -217,6 +217,66 @@ async function prerender() {
   fs.writeFileSync(path.join(ufuqDir, 'index.html'), ufuqRendered, 'utf-8');
   console.log(`[Success] Pre-rendered ${ufuqHtml.length} chars of HTML directly into dist/ufuq/index.html`);
 
+  // 4. Pre-render dist/tashkeel/index.html with TashkeelLanding content & meta
+  const tashkeelDir = path.join(distDir, 'tashkeel');
+  if (!fs.existsSync(tashkeelDir)) {
+    fs.mkdirSync(tashkeelDir, { recursive: true });
+  }
+
+  const { html: tashkeelHtml } = render('/zyadwael-portfolio-flutter/tashkeel');
+  let tashkeelRendered = rawBaseTemplate.replace(
+    '<div id="root"></div>',
+    `<div id="root">${tashkeelHtml}</div>`
+  );
+
+  // Set HTML lang="ar" and dir="rtl" for Arabic-first landing page
+  tashkeelRendered = tashkeelRendered.replace('<html lang="en">', '<html lang="ar" dir="rtl">');
+
+  // Customize Title and Meta Description for Tashkeel
+  tashkeelRendered = tashkeelRendered.replace(
+    /<title>.*?<\/title>/,
+    '<title>تَشْكِيل — تشكيل النصوص العربية بالذكاء الاصطناعي المحلي | Tashkeel</title>'
+  );
+  tashkeelRendered = tashkeelRendered.replace(
+    /<meta name="description" content=".*?" \/>/,
+    '<meta name="description" content="تشكيل النصوص العربية بالذكاء الاصطناعي على جهازك. يعمل بدون إنترنت بالكامل، بدون رفع للبيانات، وبخصوصية تامة عبر نموذج Shakkala v3." />'
+  );
+
+  // Set Canonical link to /tashkeel
+  tashkeelRendered = tashkeelRendered.replace(
+    /<link rel="canonical" href=".*?" \/>/,
+    '<link rel="canonical" href="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/tashkeel" />'
+  );
+
+  // Set Open Graph & Twitter share images for Tashkeel
+  tashkeelRendered = tashkeelRendered.replace(
+    /<meta property="og:image" content=".*?" \/>/,
+    '<meta property="og:image" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/assets/images/projects/tashkeel/tashkeel-preview.webp" />'
+  );
+  tashkeelRendered = tashkeelRendered.replace(
+    /<meta name="twitter:image" content=".*?" \/>/,
+    '<meta name="twitter:image" content="https://zyadwkhedr.github.io/zyadwael-portfolio-flutter/assets/images/projects/tashkeel/tashkeel-preview.webp" />'
+  );
+  tashkeelRendered = tashkeelRendered.replace(
+    /<meta property="og:title" content=".*?" \/>/,
+    '<meta property="og:title" content="تَشْكِيل — تشكيل النصوص العربية بالذكاء الاصطناعي المحلي" />'
+  );
+  tashkeelRendered = tashkeelRendered.replace(
+    /<meta property="og:description" content=".*?" \/>/,
+    '<meta property="og:description" content="تشكيل النصوص العربية بالذكاء الاصطناعي على جهازك. يعمل بدون إنترنت بالكامل، بدون رفع للبيانات، وبخصوصية تامة." />'
+  );
+
+  // Add Apple Smart App Banner meta tag for Tashkeel
+  if (!tashkeelRendered.includes('apple-itunes-app')) {
+    tashkeelRendered = tashkeelRendered.replace(
+      '</head>',
+      '  <meta name="apple-itunes-app" content="app-id=6827159466">\n  </head>'
+    );
+  }
+
+  fs.writeFileSync(path.join(tashkeelDir, 'index.html'), tashkeelRendered, 'utf-8');
+  console.log(`[Success] Pre-rendered ${tashkeelHtml.length} chars of HTML directly into dist/tashkeel/index.html`);
+
   // Clean up ssr directory so GitHub Pages artifact is clean
   fs.rmSync(path.join(distDir, 'ssr'), { recursive: true, force: true });
   console.log('Cleaned up temporary SSR build directory.');
