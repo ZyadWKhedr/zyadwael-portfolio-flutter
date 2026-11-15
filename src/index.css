@@ -4,22 +4,22 @@
 
 @layer base {
   :root {
-    /* Light Theme (Specification 3.2) */
-    --bg-canvas: #F7F7F2;
+    /* Light Theme — Clean Technical Editorial */
+    --bg-canvas: #F8F9FA;
     --bg-surface: #FFFFFF;
-    --bg-elevated: #FFFFFF;
-    --bg-hover: #EFEFE7;
-    --border: #E2E2D8;
-    --border-subtle: #ECECE5;
-    --text-primary: #20221D;
-    --text-secondary: #55594E;
-    --text-muted: #797D72;
-    --accent: #74771E;
-    --accent-hover: #626519;
-    --accent-muted: #EFF0D9;
+    --bg-elevated: #F1F3F5;
+    --bg-hover: #E9ECEF;
+    --border: #DDE1E6;
+    --border-subtle: #EBEFF3;
+    --text-primary: #12151B;
+    --text-secondary: #495057;
+    --text-muted: #6C757D;
+    --accent: #3B5BDB;
+    --accent-hover: #2F4AC7;
+    --accent-muted: #E8EEFF;
     --accent-fg: #FFFFFF;
-    --success: #347C45;
-    --error: #B94D44;
+    --success: #2B8A3E;
+    --error: #C92A2A;
 
     /* Semantic Aliases */
     --text-ink: var(--text-primary);
@@ -69,22 +69,22 @@
   }
 
   .dark {
-    /* Dark Theme (Specification 3.1) */
-    --bg-canvas: #10110F;
-    --bg-surface: #181A17;
-    --bg-elevated: #20231E;
-    --bg-hover: #272A24;
-    --border: #30332D;
-    --border-subtle: #252821;
-    --text-primary: #F1F0E9;
-    --text-secondary: #B0B2A8;
-    --text-muted: #81857A;
-    --accent: #B5B730;
-    --accent-hover: #C6C94B;
-    --accent-muted: #34361C;
-    --accent-fg: #10110F;
-    --success: #82B58A;
-    --error: #D77E73;
+    /* Dark Theme — Editorial Engineering */
+    --bg-canvas: #101319;
+    --bg-surface: #191F29;
+    --bg-elevated: #202733;
+    --bg-hover: #262F3D;
+    --border: #303744;
+    --border-subtle: #242B37;
+    --text-primary: #F1F0EB;
+    --text-secondary: #A1A6B0;
+    --text-muted: #737A87;
+    --accent: #A6B8FF;
+    --accent-hover: #BFCCFF;
+    --accent-muted: #1E2840;
+    --accent-fg: #0D1322;
+    --success: #6EE7B7;
+    --error: #F87171;
 
     /* Semantic Aliases */
     --text-ink: var(--text-primary);
