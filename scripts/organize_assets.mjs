@@ -54,7 +54,6 @@ copyFileSafe('src/assets/clipflow-icon.png', 'public/assets/images/projects/clip
 // 3. General & documents
 copyFileSafe('public/og-image.png', 'public/assets/images/general/og-image.png');
 copyFileSafe('public/placeholder.svg', 'public/assets/images/general/placeholder.svg');
-copyFileSafe('public/Zyad_Wael_CV.pdf', 'public/assets/docs/Zyad_Wael_CV.pdf');
 
 // 4. Archive App Store research JSON files into docs/research/app-store-data/
 const researchFiles = ['amoomy.json', 'clipflow.json', 'raval.json', 'wofoodi.json'];

@@ -3,7 +3,7 @@ import { Sun, Moon, Menu, X, ArrowUpRight, FileText, Globe, Check } from 'lucide
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from '@/i18n';
 
-const CV_URL = '/zyadwael-portfolio-flutter/Zyad_Wael_CV.pdf';
+const CV_URL = 'https://drive.google.com/file/d/1ICEIF6wW4eFgZpv2FzKn0ev8zo6XWMgi/view?usp=drive_link';
 
 export const Navigation: React.FC = () => {
   const { t, i18n } = useTranslation();
