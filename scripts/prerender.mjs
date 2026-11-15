@@ -282,7 +282,12 @@ async function prerender() {
   console.log('Cleaned up temporary SSR build directory.');
 }
 
-prerender().catch((err) => {
-  console.error('Error during prerender:', err);
-  process.exit(1);
-});
+prerender()
+  .then(() => {
+    console.log('[Done] Static pre-rendering completed successfully.');
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error('Error during prerender:', err);
+    process.exit(1);
+  });
