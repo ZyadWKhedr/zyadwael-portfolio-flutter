@@ -91,7 +91,14 @@ export const Footer: React.FC = () => {
             to="/ufuq"
             className="hover:text-accent transition-colors underline-offset-4 hover:underline"
           >
-            Ufuq (أُفُق) App Page
+            Ufuq (أُفُق)
+          </Link>
+          <span>·</span>
+          <Link
+            to="/tashkeel"
+            className="hover:text-accent transition-colors underline-offset-4 hover:underline"
+          >
+            Tashkeel (تَشْكِيل)
           </Link>
           <span>·</span>
           <span>© {new Date().getFullYear()} Zyad Wael. {t('footer.rights', 'All rights reserved.')}</span>

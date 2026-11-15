@@ -5,6 +5,7 @@ import TopBar from '@/components/layout/TopBar';
 import AiAssistant from '@/components/AiAssistant';
 import HeroSection from '@/components/sections/HeroSection';
 import SelectedWork from '@/components/sections/SelectedWork';
+import UfuqShowcase from '@/components/sections/UfuqShowcase';
 import ThingsIveBuilt from '@/components/sections/ThingsIveBuilt';
 import WritingSection from '@/components/sections/WritingSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -27,6 +28,9 @@ const Index: React.FC = () => {
 
         {/* 6.2 Selected work (Commercial & Production mobile products) */}
         <SelectedWork />
+
+        {/* 6.2.1 Dedicated Ufuq Product Showcase */}
+        <UfuqShowcase />
 
         {/* 6.3 Things I've built (Independent engineering projects & applied AI) */}
         <ThingsIveBuilt />
